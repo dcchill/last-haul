@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_def.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/ammo/rifle_round.tres" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "rifle"
+display_name = "Utility rifle"
+ammo = ExtResource("2")
+magazine_size = 12
+starter_reserve = 48
+fire_interval = 0.2
+reload_seconds = 1.5
+range_meters = 100.0

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MaterialDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "steel"
+impact_color = Color(1, 0.7, 0.2, 1)
+damage_multiplier = 1.0

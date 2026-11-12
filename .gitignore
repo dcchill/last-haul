@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+builds/
+*.tmp
+*.log
+*.bak
+graphify-out/
+export_credentials.cfg
+.DS_Store
+Thumbs.db
