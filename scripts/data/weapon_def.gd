@@ -9,3 +9,9 @@ extends Resource
 @export_range(0.05, 5.0) var fire_interval: float = 0.2
 @export_range(0.1, 10.0) var reload_seconds: float = 1.5
 @export_range(1.0, 500.0) var range_meters: float = 100.0
+@export_range(1.0, 2000.0) var muzzle_velocity: float = 715.0
+@export_range(0.0, 2.0) var vertical_recoil: float = 0.12
+@export_range(0.0, 2.0) var horizontal_recoil: float = 0.04
+@export_range(0.05, 5.0) var ads_time: float = 1.0
+@export_range(0.0, 2.0) var sway: float = 0.02
+@export_range(0.0, 1.0) var hipfire_spread: float = 0.025

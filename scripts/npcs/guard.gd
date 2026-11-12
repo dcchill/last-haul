@@ -9,10 +9,13 @@ var health: float
 var state: State = State.IDLE
 var last_heard: Vector3
 var attack_left: float = 0.0
+var armor_plates: ArmorPlates
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
 
 func _ready() -> void:
 	health = archetype.health
+	if archetype.armor != null:
+		armor_plates = ArmorPlates.new(archetype.armor)
 	last_heard = global_position
 
 func can_see(player: RaidPlayer, ballistics: Ballistics) -> bool:
@@ -49,7 +52,8 @@ func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) ->
 	elif state == State.ATTACK or state == State.CHASE:
 		state = State.INVESTIGATE
 	if state == State.INVESTIGATE or state == State.CHASE:
-		navigation.target_position = last_heard
+		if navigation.target_position.distance_to(last_heard) > 0.2:
+			navigation.target_position = last_heard
 		if global_position.distance_to(last_heard) < 1.0:
 			state = State.IDLE
 		elif NavigationServer3D.map_get_iteration_id(navigation.get_navigation_map()) > 0:
@@ -57,8 +61,9 @@ func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) ->
 			var direction := (next - global_position)
 			direction.y = 0
 			direction = direction.normalized()
-			velocity.x = direction.x * archetype.speed
-			velocity.z = direction.z * archetype.speed
+			var speed_scale := armor_plates.movement_multiplier() if armor_plates != null else 1.0
+			velocity.x = direction.x * archetype.speed * speed_scale
+			velocity.z = direction.z * archetype.speed * speed_scale
 			if direction.length() > 0.1:
 				rotation.y = atan2(-direction.x, -direction.z)
 	if state == State.ATTACK or state == State.IDLE:

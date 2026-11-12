@@ -1,0 +1,32 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {"loop": true},
+    "fire": {
+      "animation_length": 0.8,
+      "loop": false,
+      "bones": {
+        "trigger": {"rotation": {"0.0": {"vector": [0, 0, 0]}, "0.05": {"vector": [20, 0, 0]}, "0.8": {"vector": [0, 0, 0]}}},
+        "pump": {"position": {"0.0": {"vector": [0, 0, 0]}, "0.22": {"vector": [0, 0, 0]}, "0.4": {"vector": [0, 0, 4]}, "0.65": {"vector": [0, 0, 0]}, "0.8": {"vector": [0, 0, 0]}}}
+      }
+    },
+    "reload": {
+      "animation_length": 1.0,
+      "loop": false,
+      "bones": {
+        "left_hand_socket": {"position": {"0.0": {"vector": [0, 0, 0]}, "0.25": {"vector": [3.6875, -0.5625, 14.3125]}, "0.6": {"vector": [1.6875, 1.4375, 11.3125]}, "1.0": {"vector": [0, 0, 0]}}},
+        "shell1": {"position": {"0.0": {"vector": [2, -3, 4]}, "0.25": {"vector": [2, -3, 4]}, "0.6": {"vector": [0, -1, 1]}, "0.8": {"vector": [0, 0, 0]}, "1.0": {"vector": [0, 0, 0]}}}
+      }
+    },
+    "equip": {
+      "animation_length": 0.3,
+      "loop": false,
+      "bones": {"pump": {"position": {"0.0": {"vector": [0, 0, 2]}, "0.3": {"vector": [0, 0, 0]}}}}
+    },
+    "reset": {
+      "animation_length": 0.2,
+      "loop": false,
+      "bones": {"pump": {"position": {"0.0": {"vector": [0, 0, 0]}, "0.2": {"vector": [0, 0, 0]}}}}
+    }
+  }
+}

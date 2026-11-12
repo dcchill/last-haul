@@ -26,5 +26,5 @@ material_override = SubResource("mat")
 position = Vector3(0, 0.55, -0.37)
 mesh = SubResource("visor")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 0.4
+path_desired_distance = 0.75
 target_desired_distance = 0.8

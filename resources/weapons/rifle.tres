@@ -6,10 +6,16 @@
 [resource]
 script = ExtResource("1")
 id = "rifle"
-display_name = "Utility rifle"
+display_name = "Kalashnikov"
 ammo = ExtResource("2")
 magazine_size = 12
 starter_reserve = 48
 fire_interval = 0.2
 reload_seconds = 1.5
 range_meters = 100.0
+muzzle_velocity = 715.0
+vertical_recoil = 0.12
+horizontal_recoil = 0.04
+ads_time = 1.0
+sway = 0.02
+hipfire_spread = 0.025

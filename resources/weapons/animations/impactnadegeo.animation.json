@@ -1,0 +1,24 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true
+		},
+		"pin": {
+			"animation_length": 0.25,
+			"bones": {
+				"pin": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [-45, 0, 0],
+							"easing": "easeOutQuint"
+						}
+					}
+				}
+			}
+		}
+	}
+}

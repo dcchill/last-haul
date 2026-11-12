@@ -7,3 +7,6 @@ script = ExtResource("1")
 id = "concrete"
 impact_color = Color(0.75, 0.8, 0.85, 1)
 damage_multiplier = 0.8
+resistance = 2500.0
+thickness_meters = 0.2
+ricochet = 0.05

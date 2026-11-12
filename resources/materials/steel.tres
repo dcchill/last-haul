@@ -7,3 +7,6 @@ script = ExtResource("1")
 id = "steel"
 impact_color = Color(1, 0.7, 0.2, 1)
 damage_multiplier = 1.0
+resistance = 20000.0
+thickness_meters = 0.05
+ricochet = 0.35

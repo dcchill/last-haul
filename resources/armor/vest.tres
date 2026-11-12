@@ -5,4 +5,10 @@
 [resource]
 script = ExtResource("1")
 id = "vest"
-damage_reduction = 0.2
+resistance = 20.0
+ricochet = 0.19
+plate_durability = 90.0
+plate_weight = 1.5
+carrier_weight = 0.5
+durability_loss = 1.1
+side_plates = false

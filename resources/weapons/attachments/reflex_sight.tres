@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AttachmentDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attachment_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "reflex_sight"
+display_name = "Reflex sight"
+slot = "optic"
+compatible_weapons = PackedStringArray("rifle")
+ads_time = 0.9
+sway = 0.9

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttachmentDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attachment_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "precision_stock"
+display_name = "Precision stock"
+slot = "stock"
+compatible_weapons = PackedStringArray("rifle")
+vertical_recoil = 0.85
+horizontal_recoil = 0.85
+ads_time = 1.15
+sway = 0.75

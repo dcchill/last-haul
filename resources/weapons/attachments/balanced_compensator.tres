@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttachmentDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/attachment_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "balanced_compensator"
+display_name = "Balanced compensator"
+slot = "muzzle"
+compatible_weapons = PackedStringArray("rifle")
+vertical_recoil = 0.85
+horizontal_recoil = 0.85
+ads_time = 1.05
