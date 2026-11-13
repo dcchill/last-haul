@@ -33,6 +33,8 @@ var maska_open := false
 var maska_view: Node3D
 var requires_release := true
 var previous_position := Vector3.ZERO
+var footstep_distance := 0.0
+var footstep_audio: AudioStreamPlayer3D
 var hand_rig: WeaponHands
 
 func _ready() -> void:
@@ -44,6 +46,13 @@ func _ready() -> void:
 	hand_rig.name = "Hands"
 	camera.add_child(hand_rig)
 	hand_rig.visible = false
+	var robot := preload("res://scripts/player/robot_body.gd").new()
+	robot.name = "RobotBody"
+	add_child(robot)
+	footstep_audio = AudioStreamPlayer3D.new()
+	footstep_audio.stream = ArmoryAudio.make_sound("footstep")
+	footstep_audio.volume_db = -20
+	add_child(footstep_audio)
 
 func eye_position() -> Vector3:
 	return global_position + Vector3.UP * (1.27 if crouching else 1.62)
@@ -286,6 +295,16 @@ func drive_movement(input: Vector2, jump: bool, sprint: bool, _delta: float) -> 
 				authority._apply_damage(self, ceilf(fall_distance - 3), null, true)
 		fall_distance = 0
 	velocity = (global_position - before_position) * 20
+	if grounded and authority != null and authority.is_active():
+		footstep_distance += Vector2(global_position.x - before_position.x, global_position.z - before_position.z).length()
+		if footstep_distance >= 1.6:
+			footstep_distance = 0
+			var floor_hit := Ballistics.new().trace(get_world_3d(), global_position + Vector3.UP * 0.2, Vector3.DOWN, 0.6, [get_rid()])
+			var surface: MaterialDef = floor_hit.collider.get("material") if not floor_hit.is_empty() else null
+			footstep_audio.pitch_scale = surface.footstep_pitch if surface != null else 1.0
+			footstep_audio.play()
+			for npc in authority.npcs:
+				if npc.global_position.distance_to(global_position) < npc.archetype.hearing_range * (0.5 if sprinting else 0.25): npc.hear(global_position)
 
 func _set_crouching(value: bool) -> void:
 	if value == crouching:

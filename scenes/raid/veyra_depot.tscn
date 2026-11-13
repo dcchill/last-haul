@@ -1,0 +1,571 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/raid/raid_authority.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/guard.tscn" id="3"]
+[ext_resource type="Script" path="res://scripts/rendering/signal_decay.gd" id="3_2a6q8"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="3_pw2ml"]
+[ext_resource type="Script" path="res://scripts/world/raid_entity.gd" id="4"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="5"]
+[ext_resource type="Script" path="res://scripts/npcs/guard.gd" id="5_74jf8"]
+[ext_resource type="Resource" path="res://resources/loot/crate.tres" id="6"]
+[ext_resource type="Resource" path="res://resources/npcs/guard.tres" id="6_4aank"]
+[ext_resource type="Script" path="res://scripts/world/extraction_zone.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/combat/impact_presenter.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/world/voxel_destructible.gd" id="9"]
+[ext_resource type="Script" path="res://scripts/world/voxel_debris_manager.gd" id="10"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="11"]
+[ext_resource type="Resource" path="res://resources/materials/medical_partition.tres" id="medical"]
+[ext_resource type="PackedScene" path="res://scenes/rendering/signal_decay.tscn" id="signal"]
+[ext_resource type="Resource" path="res://resources/npcs/zombie.tres" id="zombie"]
+
+[sub_resource type="Environment" id="Environment_2a6q8"]
+background_mode = 1
+background_color = Color(0.055, 0.09, 0.13, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.65, 0.78, 0.9, 1)
+ambient_light_energy = 0.7
+reflected_light_source = 2
+
+[sub_resource type="NavigationMesh" id="navigation"]
+vertices = PackedVector3Array(-9, 0.5, -9, -8.75, 0.5, -7.5, -8, 0.5, -7.5, -7.75, 0.5, -9, -4.25, 0.5, -17, -14, 0.5, -6.75, -11, 0.5, -6.75, -10.75, 0.5, -9, -14, 0.5, -17, -4.25, 0.5, -9, -3.75, 0.5, -8.75, -3.75, 0.5, -8, 2.25, 0.5, -8, 2.25, 0.5, -16.25, 14, 0.5, -16.25, 14, 0.5, -1.75, 14.25, 0.5, -1.5, 14.25, 0.5, -17, 13.5, 0.5, -16.75, 2.75, 0.5, -16.75, 3.25, 4, -15.75, 3.25, 4, -2.25, 12.75, 4, -2.25, 12.75, 4, -15.75, 9, 0.75, -12.75, 9, 0.75, -13, 7.5, 0.75, -13.25, 5, 0.75, -12.5, 7.5, 0.75, -14.5, 9, 0.75, -14.75, 9, 0.75, -15, 4, 0.75, -15, 5.25, 0.75, -11, 4, 0.75, -2.75, 6, 0.75, -2.75, 6.25, 0.5, -2, 9, 0.5, -1.75, 9.25, 0.75, -2.75, 12.25, 0.75, -11, 12.25, 0.75, -2.75, 10.25, 0.75, -13, 12.25, 0.75, -12.75, 10.75, 0.75, -14.5, 12.25, 0.75, -15, -7.75, 0.5, -6.75, -8.75, 0.75, -5.25, -4.25, 0.5, -6.75, -4, 0.5, 1.5, -3.75, 0.5, 1, 0, 0.5, 1, 0.25, 0.5, 1.5, 3, 0.5, -1, 2.25, 0.5, -1.5, -10.75, 0.5, -4.75, -14, 0.5, 2.25, -9.25, 0.75, -4.75, -4, 0.5, 2.25, 13.25, 0.5, -1, 4, 0.5, 14.5, 4, 0.5, 15.5, 14.25, 0.5, 17.25, 3, 0.5, 16, 3, 0.5, 17.25, 9.25, 0.5, -1, 5.75, 0.5, -1, 0.25, 0.5, 2.5, 2.75, 0.5, 14.25, -3, 0.5, 17.25, -3, 0.5, 16, -3.75, 0.5, 15.75, -14, 0.5, 17.25, -4, 0.5, 3, -3, 0.5, 3.25, -3.75, 0.5, 14.5, -3, 0.5, 14.25, 2.25, 0.5, 15.75, -2, 0.5, 15.5, 2.25, 0.5, 14.5, -2, 0.5, 14.5, -0.25, 0.5, 3.25, -3, 4.25, 10.5, -3, 4.25, 15.5, 3, 4.25, 15.5, 3, 4.25, 10.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(4, 3, 0), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 8), PackedInt32Array(7, 8, 0), PackedInt32Array(0, 8, 4), PackedInt32Array(4, 9, 3), PackedInt32Array(12, 11, 10), PackedInt32Array(10, 9, 12), PackedInt32Array(12, 9, 13), PackedInt32Array(13, 9, 4), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(14, 18, 17), PackedInt32Array(4, 19, 13), PackedInt32Array(18, 19, 17), PackedInt32Array(17, 19, 4), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 27), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(27, 32, 31), PackedInt32Array(31, 32, 33), PackedInt32Array(33, 32, 34), PackedInt32Array(37, 36, 35), PackedInt32Array(26, 27, 28), PackedInt32Array(28, 27, 31), PackedInt32Array(35, 34, 37), PackedInt32Array(37, 34, 32), PackedInt32Array(37, 32, 38), PackedInt32Array(38, 39, 37), PackedInt32Array(25, 40, 24), PackedInt32Array(24, 40, 41), PackedInt32Array(29, 30, 42), PackedInt32Array(42, 30, 43), PackedInt32Array(40, 42, 41), PackedInt32Array(41, 42, 43), PackedInt32Array(2, 44, 1), PackedInt32Array(1, 44, 45), PackedInt32Array(44, 46, 45), PackedInt32Array(45, 46, 48), PackedInt32Array(45, 48, 47), PackedInt32Array(49, 52, 50), PackedInt32Array(50, 52, 51), PackedInt32Array(49, 48, 52), PackedInt32Array(52, 48, 46), PackedInt32Array(52, 46, 11), PackedInt32Array(52, 11, 12), PackedInt32Array(6, 53, 5), PackedInt32Array(5, 53, 54), PackedInt32Array(47, 56, 55), PackedInt32Array(55, 56, 53), PackedInt32Array(53, 56, 54), PackedInt32Array(55, 45, 47), PackedInt32Array(15, 16, 57), PackedInt32Array(57, 16, 60), PackedInt32Array(57, 60, 58), PackedInt32Array(58, 60, 59), PackedInt32Array(61, 59, 62), PackedInt32Array(62, 59, 60), PackedInt32Array(36, 63, 35), PackedInt32Array(35, 63, 64), PackedInt32Array(65, 64, 63), PackedInt32Array(50, 51, 65), PackedInt32Array(65, 51, 64), PackedInt32Array(66, 65, 58), PackedInt32Array(58, 65, 63), PackedInt32Array(58, 63, 57), PackedInt32Array(68, 67, 69), PackedInt32Array(69, 67, 70), PackedInt32Array(54, 56, 71), PackedInt32Array(71, 72, 54), PackedInt32Array(54, 72, 74), PackedInt32Array(54, 74, 73), PackedInt32Array(54, 73, 70), PackedInt32Array(73, 69, 70), PackedInt32Array(61, 62, 75), PackedInt32Array(75, 62, 76), PackedInt32Array(76, 62, 68), PackedInt32Array(68, 62, 67), PackedInt32Array(78, 77, 76), PackedInt32Array(76, 77, 75), PackedInt32Array(77, 78, 66), PackedInt32Array(66, 78, 74), PackedInt32Array(66, 74, 79), PackedInt32Array(66, 79, 65), PackedInt32Array(74, 72, 79), PackedInt32Array(83, 82, 80), PackedInt32Array(80, 82, 81)]
+geometry_parsed_geometry_type = 1
+agent_height = 1.8
+agent_radius = 0.45
+
+[sub_resource type="BoxShape3D" id="salvagecrate_shape"]
+size = Vector3(1.6, 1, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="salvagecrate_mat"]
+albedo_color = Color(0.95, 0.4, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="salvagecrate_mesh"]
+size = Vector3(1.6, 1, 1.4)
+
+[sub_resource type="BoxShape3D" id="extract_shape"]
+size = Vector3(5, 3, 5)
+
+[sub_resource type="StandardMaterial3D" id="extract_mat"]
+albedo_color = Color(0.1, 0.8, 0.4, 1)
+emission_enabled = true
+emission = Color(0.05, 0.3, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="extract_mesh"]
+size = Vector3(5, 0.08, 5)
+
+[node name="VeyraDepot" type="Node3D" unique_id=2061911795]
+script = ExtResource("1")
+depot = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1735409959]
+environment = SubResource("Environment_2a6q8")
+
+[node name="SignalDecay" type="CanvasLayer" parent="." unique_id=1265990439 instance=ExtResource("signal")]
+layer = -1
+script = ExtResource("3_2a6q8")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=514749137]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 0, 0)
+light_color = Color(1, 0.9, 0.72, 1)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1223079211 instance=ExtResource("2")]
+physics_interpolation_mode = 2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 13)
+script = ExtResource("3_pw2ml")
+
+[node name="Guard" type="CharacterBody3D" parent="." unique_id=1988921964 instance=ExtResource("3")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 0.1, -5)
+script = ExtResource("5_74jf8")
+archetype = ExtResource("6_4aank")
+material = ExtResource("5")
+patrol_points = PackedVector3Array(-5, 0, -5, -10, 0, -3, -10, 0, -11)
+cover_points = PackedVector3Array(-7, 0, -7, -11, 0, -10)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=955026057]
+navigation_mesh = SubResource("navigation")
+
+[node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1928529734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(120, 2, 144)
+material = ExtResource("11")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground" unique_id=659505948]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=1687916256]
+
+[node name="North" type="StaticBody3D" parent="NavigationRegion3D" unique_id=128643676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -18)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(120, 16, 2)
+material = ExtResource("11")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/North" unique_id=646135319]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/North" unique_id=1261410058]
+
+[node name="South" type="StaticBody3D" parent="NavigationRegion3D" unique_id=100931527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 18)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(120, 16, 2)
+material = ExtResource("11")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/South" unique_id=698687583]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/South" unique_id=1936387792]
+
+[node name="West" type="StaticBody3D" parent="NavigationRegion3D" unique_id=582788654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, 0)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 16, 144)
+material = ExtResource("11")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/West" unique_id=2066091584]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/West" unique_id=1390632541]
+
+[node name="East" type="StaticBody3D" parent="NavigationRegion3D" unique_id=2029858263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2, 0)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 16, 144)
+material = ExtResource("11")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/East" unique_id=329050547]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/East" unique_id=1217705478]
+
+[node name="InsertionRoof" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1932273947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 13)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(28, 2, 24)
+material = ExtResource("5")
+surface_color = Color(0.22, 0.29, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 9.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/InsertionRoof" unique_id=457723861]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/InsertionRoof" unique_id=1600826114]
+
+[node name="CanopyPost-3" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1343222911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.75, 15)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 14, 2)
+material = ExtResource("5")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 9.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CanopyPost-3" unique_id=1902521286]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/CanopyPost-3" unique_id=1640141739]
+
+[node name="CanopyPost3" type="StaticBody3D" parent="NavigationRegion3D" unique_id=656284630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.75, 15)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 14, 2)
+material = ExtResource("5")
+surface_color = Color(0.26, 0.3, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 9.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/CanopyPost3" unique_id=1471237778]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/CanopyPost3" unique_id=854145290]
+
+[node name="MedicalWest" type="StaticBody3D" parent="NavigationRegion3D" unique_id=872916794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.5, -9)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 12, 56)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalWest" unique_id=1771856677]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalWest" unique_id=338355138]
+
+[node name="MedicalEast" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1531120129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.5, -9)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(2, 12, 56)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalEast" unique_id=1436468378]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalEast" unique_id=845938308]
+
+[node name="MedicalNorth" type="StaticBody3D" parent="NavigationRegion3D" unique_id=963958034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.5, -16)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(40, 12, 2)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalNorth" unique_id=959630321]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalNorth" unique_id=859751193]
+
+[node name="MedicalFrontA" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1351480241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 1.5, -2)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(10, 12, 2)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalFrontA" unique_id=2117069085]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalFrontA" unique_id=1882335690]
+
+[node name="MedicalFrontB" type="StaticBody3D" parent="NavigationRegion3D" unique_id=454666895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.25, 1.5, -2)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(14, 12, 2)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalFrontB" unique_id=466821263]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalFrontB" unique_id=1346177461]
+
+[node name="StorePartition" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1652755133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25, 1.5, -12)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(30, 12, 2)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StorePartition" unique_id=1455109434]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StorePartition" unique_id=24146771]
+
+[node name="MedicalRoof" type="StaticBody3D" parent="NavigationRegion3D" unique_id=701832274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3.25, -9)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(42, 2, 58)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalRoof" unique_id=1269874984]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalRoof" unique_id=614544760]
+
+[node name="MedicalTiles" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1451737296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.125, -9)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(38, 1, 54)
+material = ExtResource("medical")
+surface_color = Color(0.35, 0.4, 0.34, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MedicalTiles" unique_id=1519549836]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MedicalTiles" unique_id=1316974610]
+
+[node name="LoadingPlate" type="StaticBody3D" parent="NavigationRegion3D" unique_id=2109447350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.125, -4)
+script = ExtResource("9")
+destructible = false
+dimensions = Vector3i(24, 1, 16)
+material = ExtResource("5")
+surface_color = Color(0.23, 0.29, 0.29, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 9.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/LoadingPlate" unique_id=1443417644]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/LoadingPlate" unique_id=1093426068]
+
+[node name="YardCover" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1740294788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.75, -8)
+script = ExtResource("9")
+dimensions = Vector3i(12, 6, 4)
+material = ExtResource("11")
+surface_color = Color(0.32, 0.34, 0.28, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/YardCover" unique_id=55324242]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/YardCover" unique_id=1653825194]
+
+[node name="LoadingCover" type="StaticBody3D" parent="NavigationRegion3D" unique_id=288175112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.75, -7)
+script = ExtResource("9")
+dimensions = Vector3i(4, 6, 12)
+material = ExtResource("5")
+surface_color = Color(0.28, 0.35, 0.34, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 9.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/LoadingCover" unique_id=384375102]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/LoadingCover" unique_id=1420484835]
+
+[node name="PartitionCover" type="StaticBody3D" parent="NavigationRegion3D" unique_id=258596764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.75, -14)
+script = ExtResource("9")
+dimensions = Vector3i(8, 6, 2)
+material = ExtResource("medical")
+surface_color = Color(0.48, 0.52, 0.42, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+blast_resistance = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/PartitionCover" unique_id=1959306446]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/PartitionCover" unique_id=719962956]
+
+[node name="RoadBarrier" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1033923998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.75, 2)
+script = ExtResource("9")
+dimensions = Vector3i(12, 6, 4)
+material = ExtResource("11")
+surface_color = Color(0.34, 0.32, 0.25, 1)
+debris_manager_path = NodePath("../../VoxelDebris")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RoadBarrier" unique_id=1407930084]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/RoadBarrier" unique_id=1262110240]
+
+[node name="SalvageCrate" type="StaticBody3D" parent="." unique_id=822730188 groups=["raid_entities"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.5, -10)
+script = ExtResource("4")
+entity_id = "crate-01"
+kind = "container"
+material = ExtResource("5")
+loot = ExtResource("6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalvageCrate" unique_id=510841815]
+shape = SubResource("salvagecrate_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SalvageCrate" unique_id=1281085076]
+material_override = SubResource("salvagecrate_mat")
+mesh = SubResource("salvagecrate_mesh")
+
+[node name="Extraction" type="Area3D" parent="." unique_id=1183414655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 11)
+collision_layer = 0
+script = ExtResource("7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Extraction" unique_id=1908064723]
+shape = SubResource("extract_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Extraction" unique_id=2002841103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45, 0)
+material_override = SubResource("extract_mat")
+mesh = SubResource("extract_mesh")
+
+[node name="ExtractSign" type="Label3D" parent="." unique_id=1610185192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, 11)
+billboard = 1
+text = "EXTRACTION
+STAY INSIDE 15 SECONDS"
+font_size = 48
+outline_size = 8
+
+[node name="ImpactPresenter" type="Node3D" parent="." unique_id=126924323]
+script = ExtResource("8")
+
+[node name="VoxelDebris" type="Node3D" parent="." unique_id=1815181467]
+script = ExtResource("10")
+
+[node name="LoadingCrate" type="StaticBody3D" parent="." unique_id=1526319347 groups=["raid_entities"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -12)
+script = ExtResource("4")
+entity_id = "crate-02"
+kind = "container"
+material = ExtResource("5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoadingCrate" unique_id=1698563136]
+shape = SubResource("salvagecrate_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LoadingCrate" unique_id=1980343155]
+material_override = SubResource("salvagecrate_mat")
+mesh = SubResource("salvagecrate_mesh")
+
+[node name="LoadingCrateLabel" type="Label3D" parent="." unique_id=400740962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.8, -12)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "VEYRA / SUPPLIES / [E]"
+font_size = 34
+outline_size = 7
+
+[node name="RearCrate" type="StaticBody3D" parent="." unique_id=1497289840 groups=["raid_entities"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.75, -14)
+script = ExtResource("4")
+entity_id = "crate-03"
+kind = "container"
+material = ExtResource("5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RearCrate" unique_id=1767802918]
+shape = SubResource("salvagecrate_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RearCrate" unique_id=1004424188]
+material_override = SubResource("salvagecrate_mat")
+mesh = SubResource("salvagecrate_mesh")
+
+[node name="RearCrateLabel" type="Label3D" parent="." unique_id=2096138709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.05, -14)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "VEYRA / SUPPLIES / [E]"
+font_size = 34
+outline_size = 7
+
+[node name="PowerLockerA" type="StaticBody3D" parent="." unique_id=1546881119 groups=["raid_entities"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 9)
+script = ExtResource("4")
+entity_id = "battery-0"
+kind = "container"
+material = ExtResource("5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PowerLockerA" unique_id=1934493317]
+shape = SubResource("salvagecrate_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PowerLockerA" unique_id=1929650035]
+material_override = SubResource("salvagecrate_mat")
+mesh = SubResource("salvagecrate_mesh")
+
+[node name="PowerLockerALabel" type="Label3D" parent="." unique_id=1064161548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.8, 9)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "POWER CELL / [E]"
+font_size = 34
+outline_size = 7
+
+[node name="PowerLockerB" type="StaticBody3D" parent="." unique_id=1607044442 groups=["raid_entities"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.75, -14)
+script = ExtResource("4")
+entity_id = "battery-1"
+kind = "container"
+material = ExtResource("5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PowerLockerB" unique_id=96002740]
+shape = SubResource("salvagecrate_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PowerLockerB" unique_id=804522582]
+material_override = SubResource("salvagecrate_mat")
+mesh = SubResource("salvagecrate_mesh")
+
+[node name="PowerLockerBLabel" type="Label3D" parent="." unique_id=1720578625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.05, -14)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "POWER CELL / [E]"
+font_size = 34
+outline_size = 7
+
+[node name="DepotSign" type="Label3D" parent="." unique_id=599477360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -2)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "VEYRA / MEDICAL RECOVERY DEPOT"
+font_size = 34
+outline_size = 7
+
+[node name="InsertionSign" type="Label3D" parent="." unique_id=2035841728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 15)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "SYSTEM REBOOT / 08:00 POWER / I: INVENTORY"
+font_size = 34
+outline_size = 7
+
+[node name="StoreSign" type="Label3D" parent="." unique_id=1665971280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.8, -1.5)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "MEDICAL STORE / REAR STOCKROOM"
+font_size = 34
+outline_size = 7
+
+[node name="YardSign" type="Label3D" parent="." unique_id=624498703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.8, -4)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "LOADING YARD"
+font_size = 34
+outline_size = 7
+
+[node name="SalvageSign" type="Label3D" parent="." unique_id=1811358439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, -10)
+billboard = 1
+modulate = Color(0.73, 0.79, 0.57, 1)
+text = "SALVAGE / [E]"
+font_size = 34
+outline_size = 7
+
+[node name="Scav02" type="CharacterBody3D" parent="." unique_id=1872411179 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -13)
+script = ExtResource("5_74jf8")
+entity_id = "scav-02"
+appearance_variant = 1
+archetype = ExtResource("6_4aank")
+material = ExtResource("5")
+patrol_points = PackedVector3Array(-11, 0, -13, -4, 0, -13, -4, 0, -9)
+cover_points = PackedVector3Array(-11, 0, -10, -7, 0, -7)
+
+[node name="Zombie01" type="CharacterBody3D" parent="." unique_id=870674211 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.25, -6)
+script = ExtResource("5_74jf8")
+entity_id = "zombie-01"
+appearance_variant = 0
+archetype = ExtResource("zombie")
+material = ExtResource("5")
+patrol_points = PackedVector3Array(8, 0.25, -6, 11, 0.25, -9)
+cover_points = PackedVector3Array(-11, 0, -10, -7, 0, -7)
+
+[node name="Zombie02" type="CharacterBody3D" parent="." unique_id=1373080543 instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.25, -14)
+script = ExtResource("5_74jf8")
+entity_id = "zombie-02"
+appearance_variant = 1
+archetype = ExtResource("zombie")
+material = ExtResource("5")
+patrol_points = PackedVector3Array(7, 0.25, -14, 11, 0.25, -14)
+cover_points = PackedVector3Array(-11, 0, -10, -7, 0, -7)

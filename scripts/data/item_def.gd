@@ -18,6 +18,7 @@ extends Resource
 @export var metadata: Dictionary = {}
 @export var container: ContainerDef
 @export var world_scene: PackedScene
+@export var battery_amount := 0.0
 @export var heal_amount := 0.0
 @export var stamina_amount := 0.0
 @export var melee_damage := 0.0

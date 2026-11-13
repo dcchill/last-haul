@@ -313,7 +313,7 @@ outline_size = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, 11)
 billboard = 1
 text = "EXTRACTION
-SECURE SALVAGE FIRST"
+STAY INSIDE 15 SECONDS"
 font_size = 48
 outline_size = 8
 

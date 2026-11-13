@@ -418,17 +418,18 @@ func _raid_outcomes() -> void:
 	state.inventory.capacity = 0
 	check(not raid.request_claim(id, "crate-01", 1) and raid.containers["crate-01"].count("salvage") == 3, "full pack rejects loot atomically")
 	state.inventory.capacity = -1
-	check(raid.request_claim(id, "crate-01", 3) and raid.objective_complete(id), "salvage objective accepted through authority")
+	check(raid.request_claim(id, "crate-01", 3) and state.inventory.count("salvage") > 0, "salvage looted through authority")
 	check(not raid.request_claim(id, "crate-01", 1), "empty container cannot duplicate loot")
 	# Grab a stateful gun from a deterministic armory crate, preserving its identity.
-	var crate_id := "armory-crate-0"
+	var crate_id := "crate-02"
 	raid.player.global_position = raid.entities[crate_id].global_position + Vector3(0, 0.02, 2)
 	_aim_at(raid.player, raid.entities[crate_id].global_position + Vector3.UP * 0.4)
 	for frame in range(3): await physics_frame
 	check(raid.request_interact(id, crate_id), "opens deterministic combat loot")
 	var content: RaidInventory = raid.containers[crate_id]
-	var identity: String = content.slots[0].state.instance_id
-	check(raid.request_transfer(id, crate_id, 0) and state.inventory.find_instance(identity) >= 0, "combat loot preserves instance identity")
+	var gun_index := content.find_uid(content.slots.filter(func(entry): return entry.id == "m_four")[0].uid)
+	var identity: String = content.slots[gun_index].state.instance_id
+	check(raid.request_transfer(id, crate_id, gun_index) and state.inventory.find_instance(identity) >= 0, "combat loot preserves instance identity")
 	# Loaded weapon, installed optic and armor wear must survive an actual extraction.
 	state.weapon.data.magazine = {"id": "stanag_magazine", "quantity": 1, "state": ArmoryInstance.fresh("stanag_magazine", catalog.items)}
 	state.weapon.data.magazine.state.rounds = 7
@@ -439,14 +440,14 @@ func _raid_outcomes() -> void:
 	raid.player.global_position = Vector3(-10, 0.02, 11)
 	for frame in range(5): await physics_frame
 	raid._update_extraction(id, 1)
-	check(state.extracting and is_equal_approx(state.extraction_left, 2), "extraction countdown starts")
+	check(state.extracting and is_equal_approx(state.extraction_left, 14), "extraction countdown starts")
 	raid.player.global_position = Vector3(0, 0.02, 11)
 	for frame in range(4): await physics_frame
 	raid._update_extraction(id, 1)
-	check(not state.extracting and state.extraction_left == 3, "leaving extraction resets countdown")
+	check(not state.extracting and state.extraction_left == 15, "leaving extraction resets countdown")
 	raid.player.global_position = Vector3(-10, 0.02, 11)
 	for frame in range(4): await physics_frame
-	raid._update_extraction(id, 3)
+	raid._update_extraction(id, 15)
 	check(raid.phase == RaidAuthority.Phase.SUCCESS and not app.pending_save, "actual extraction saves result")
 	var saved_gun := false
 	var saved_armor := false

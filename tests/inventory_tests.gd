@@ -190,7 +190,7 @@ func run(t: SceneTree) -> void:
 	raid.player.set_physics_process(false)
 	var id: String = app.profile.profile.player_id
 	var state: RaidParticipant = raid.participants[id]
-	check.call(raid.npcs.size() == 2 and raid.npcs[1].archetype.melee, "normal yard includes playable zombie encounter")
+	check.call(raid.npcs.size() == 4 and raid.npcs.filter(func(npc): return npc.archetype.melee).size() == 2, "depot includes two scavs and two zombies")
 	for npc in raid.npcs:
 		var npc_items := npc.inventory.snapshot()
 		raid._apply_damage(npc, 10000, null, true)
@@ -198,7 +198,7 @@ func run(t: SceneTree) -> void:
 		var corpse_id: String = npc.corpse_id
 		raid._apply_damage(npc, 10000, null, true)
 		check.call(npc.corpse_id == corpse_id, "repeated NPC death cannot regenerate corpse loot")
-	for npc in raid.npcs:
+	for npc in [raid.guard, raid.npcs.filter(func(actor): return actor.archetype.melee)[0]]:
 		var target: RaidInventory = npc.inventory
 		raid.player.global_position = raid.entities[npc.corpse_id].global_position + Vector3(0, 0.02, 2)
 		var offset: Vector3 = raid.entities[npc.corpse_id].global_position - raid.player.eye_position()
@@ -210,6 +210,10 @@ func run(t: SceneTree) -> void:
 		for tick in range(31): raid.gameplay_step()
 		var corpse_item: String = target.slots[0].uid
 		check.call(target.searched and raid.request_transfer(id, npc.corpse_id, 0) and state.owner_of(corpse_item) != null, "timed corpse search transfers surviving original item")
+	raid.player.global_position = Vector3(-5, 0.02, 10)
+	raid.player.rotation.y = 0
+	raid.player.look_pitch = 0
+	for frame in range(3): await t.physics_frame
 	state.inventory.add("small_pack", 1)
 	var bag: Dictionary = state.inventory.slots.back()
 	bag.storage.add("food", 2)
@@ -250,7 +254,7 @@ func run(t: SceneTree) -> void:
 	state.inventory.add("salvage", 1)
 	raid.player.global_position = Vector3(-10, 0.02, 11)
 	for frame in range(5): await t.physics_frame
-	raid._update_extraction(id, 3.0)
+	raid._update_extraction(id, 15.0)
 	check.call(raid.phase == RaidAuthority.Phase.SUCCESS and not app.pending_save, "nested mixed-ammo loadout extracts through actual zone")
 	var disk := ProfileStore.new(catalog, app.test_profile_path)
 	check.call(disk.load_profile(), "extracted inventory reloads from disk")

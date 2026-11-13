@@ -2,6 +2,7 @@ class_name MaterialDef
 extends Resource
 
 @export var id: String = ""
+@export_range(0.25, 3.0) var footstep_pitch := 1.0
 @export var impact_color: Color = Color.ORANGE
 @export_range(0.0, 2.0) var damage_multiplier: float = 1.0
 @export_range(0.0, 100000.0) var resistance: float = 1200.0

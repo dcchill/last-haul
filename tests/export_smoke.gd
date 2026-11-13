@@ -41,6 +41,15 @@ func _run() -> void:
 			quit(1)
 			return
 	print("EXPORTED ARMORY: 12 weapons and mounted practice stations loaded from PCK")
+	app.raid.request_abandon(id)
+	app.home()
+	await process_frame
+	app.deploy(false)
+	if app.raid == null or not app.raid.depot or app.raid.npcs.size() != 4 or app.raid.containers["battery-0"].count("battery_cell") != 1:
+		push_error("Export cannot deploy Veyra Depot")
+		quit(1)
+		return
+	print("EXPORTED DEPOT: four enemies, voxel map, robot and power cells loaded from PCK")
 	app.free()
 	for frame in range(3):
 		await process_frame

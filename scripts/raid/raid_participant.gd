@@ -10,7 +10,11 @@ var pockets: RaidInventory
 var transactions: InventoryTransactions
 var stamina := 100.0
 var health := 20.0
-var extraction_left := 3.0
+const EXTRACTION_SECONDS := 15.0
+const BATTERY_CAPACITY := 480.0
+var battery := BATTERY_CAPACITY
+var battery_warning := 0
+var extraction_left := EXTRACTION_SECONDS
 var extracting := false
 var opened_container := ""
 var found_salvage := 0

@@ -151,7 +151,7 @@ func deploy(practice_mode: bool = false) -> void:
 		if catalog.definitions.get(entry.id) is WeaponDef and catalog.definitions[entry.id].armory:
 			weapon = entry.id
 			break
-	raid = preload("res://scenes/raid/test_yard.tscn").instantiate()
+	raid = (preload("res://scenes/raid/test_yard.tscn") if practice_mode else preload("res://scenes/raid/veyra_depot.tscn")).instantiate()
 	add_child(raid)
 	var raid_loadout := {"pack": pack, "weapon": weapon, "practice": practice_mode}
 	if not practice_mode:
@@ -204,6 +204,19 @@ func home() -> void:
 	if not was_practice:
 		prepare_loadout()
 	ui.show_home()
+
+func reset_character() -> bool:
+	if raid != null:
+		ui.show_notice("Reset character is only available from main menu settings")
+		return false
+	if not profile.reset_character():
+		ui.show_notice("Could not save character reset; character unchanged")
+		return false
+	pending_save = false
+	prepare_loadout()
+	ui.show_home()
+	ui.show_notice("Character reset to the starter kit")
+	return true
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

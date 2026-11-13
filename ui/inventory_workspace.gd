@@ -268,7 +268,7 @@ func action(kind: String, source: RaidInventory, identity: String, at: Vector2) 
 				menu("Unload", func(): submit(app.inventory_service().request("unload", source, null, identity)))
 			if in_raid:
 				if item.kind in ["weapon", "grenade", "mount", "magazine"]: menu("Assign quick slot...", func(): assign_quick_slot(identity))
-				if item.heal_amount > 0 or item.stamina_amount > 0: menu("Use", func(): submit(app.inventory_service().request("use", source, null, identity)))
+				if item.heal_amount > 0 or item.stamina_amount > 0 or item.battery_amount > 0: menu("Use", func(): submit(app.inventory_service().request("use", source, null, identity)))
 				if item.kind == "weapon" and ui.state().weapon != null and ui.state().weapon.instance_id == identity:
 					menu("Reload", func(): app.raid.request_reload(app.profile.profile.player_id))
 					menu("Eject magazine", func(): app.raid.request_reload(app.profile.profile.player_id, "eject"))
@@ -364,6 +364,8 @@ func _process(_delta: float) -> void:
 		positions[drag_window.get_meta("storage")] = drag_window.position
 	if summary != null:
 		summary.text = "  %.2f kg%s" % [ui.state().total_weight() if in_raid else pack.total_weight() + pockets.total_weight() + gear.total_weight(), " | Stamina %d" % int(ui.state().stamina) if in_raid else ""]
+		if in_raid and not app.raid.practice:
+			summary.text += " | POWER %d%% (%ds)" % [ceili(ui.state().battery / 4.8), ceili(ui.state().battery)]
 	if loot != null and in_raid and ui.state().opened_container.is_empty(): close()
 	for window in windows.duplicate():
 		if is_instance_valid(window) and not app.inventory_service().grids().has(window.get_meta("storage")):

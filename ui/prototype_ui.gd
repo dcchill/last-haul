@@ -150,9 +150,9 @@ func _root_text(value: String, at: Vector2) -> void:
 func show_home() -> void:
 	_clear("home")
 	_text("LAST HAUL", 40)
-	_text("CREATE ARMORY  /  EXTRACTION", 21)
-	_text("Stage gear in the raid pack. Surviving equipment returns on extraction; death loses it.")
-	_button("Deploy to yard", app.deploy, not app.profile.writable or not app.loadout_ready())
+	_text("VEYRA DEPOT  /  SALVAGE RUN", 21)
+	_text("Stage gear for an eight-minute raid. Death, shutdown or abandonment loses carried gear. Extract by staying in the green zone for 15 seconds.")
+	_button("Enter raid — Veyra Depot", app.deploy, not app.profile.writable or not app.loadout_ready())
 	_button("Practice armory — all equipment", func(): app.deploy(true))
 	_button("Inventory / stage loadout", show_inventory)
 	_button("Save stash layout", app._save_stash_layout, not app.profile.writable)
@@ -318,6 +318,11 @@ func show_result() -> void:
 	_clear("result")
 	_text("PRACTICE ENDED" if app.raid.practice else "EXTRACTED" if app.raid.result.success else "RAID FAILED", 36)
 	_text(app.raid.result.reason)
+	if app.raid.result.success:
+		var recovered := state().recovered_items()
+		_text("Recovered: nothing" if recovered.is_empty() else "Recovered equipment and loot:")
+		for entry in recovered:
+			_text("%s x%d" % [app.catalog.items[entry.id].display_name, entry.quantity])
 	if app.pending_save:
 		_text("Result not saved. Retry before leaving.")
 		_button("Manage stash", app.open_recovery, app.profile.profile.pending_result.is_empty())
@@ -399,7 +404,20 @@ func show_settings(from_raid: bool) -> void:
 		if app.raid != null:
 			app.raid.signal_decay.configure(app.settings)
 		show_notice("Settings saved" if app.settings.save_settings() == OK else "Could not save settings"))
+	if not from_raid and app.raid == null:
+		_button("Reset character", _confirm_reset_character, not app.profile.writable)
 	_button("Back", show_pause if from_raid else show_home)
+
+func _confirm_reset_character() -> void:
+	if app.raid != null or mode != "settings": return
+	var dialog := ConfirmationDialog.new()
+	dialog.title = "Reset character?"
+	dialog.dialog_text = "Erase all character progress, stash, staged gear and pending raid rewards?\nYou will receive a fresh starter kit. Game settings will be kept."
+	dialog.ok_button_text = "Reset character"
+	dialog.confirmed.connect(func(): app.reset_character(); dialog.queue_free())
+	dialog.canceled.connect(dialog.queue_free)
+	screen.add_child(dialog)
+	dialog.popup_centered(Vector2i(540, 180))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -447,7 +465,7 @@ func _process(_delta: float) -> void:
 	var ammo := ""
 	if gun != null:
 		ammo = "%s  %d/%d  %s" % [gun.definition.display_name, gun.magazine, gun.definition.magazine_size, "RELOADING" if gun.reload_left > 0 else ""]
-	var objective := "Practice · [B] all equipment / reset" if app.raid.practice else "Collect salvage → green extraction" if not app.raid.objective_complete(app.profile.profile.player_id) else "Extract at green zone"
+	var objective := "Practice / [B] all equipment / reset" if app.raid.practice else "Scavenge or extract / stay in green zone for 15 seconds"
 	var prompt := "[E] Interact" if not app.raid.player.interaction_id().is_empty() else ""
 	if participant.extracting:
 		prompt = "EXTRACTING %.1fs" % participant.extraction_left
@@ -456,7 +474,9 @@ func _process(_delta: float) -> void:
 		var entry := participant.entry_for(participant.quickbar[index])
 		var name: String = entry.id if not entry.is_empty() else "-"
 		bar += "%s%d %s%s  " % ["[" if index == participant.selected else "", index + 1, name, "]" if index == participant.selected else ""]
-	hud.text = "LAST HAUL / CREATE ARMORY\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
+	var seconds := ceili(participant.battery / (1.5 if app.raid.player.sprinting else 1.0))
+	var power := "PRACTICE / unlimited power" if app.raid.practice else "POWER %d%% / %d:%02d%s" % [ceili(participant.battery / 4.8), int(seconds / 60.0), seconds % 60, " / LOW" if participant.battery <= 120 else ""]
+	hud.text = power + "\nLAST HAUL / VEYRA DEPOT\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
 	hud.add_theme_font_size_override("font_size", 15)
 	crosshair.visible = app.raid.player.aim_blend < 0.7
 

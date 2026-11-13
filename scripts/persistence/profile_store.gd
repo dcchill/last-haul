@@ -153,21 +153,29 @@ func load_profile(_starter_loadout: String = "standard") -> bool:
 		problem.emit(load_error)
 		return true
 	if not FileAccess.file_exists(path) and not FileAccess.file_exists(path + ".bak"):
-		var inventory := RaidInventory.new(catalog.items, STASH_DEF.dimensions.x, STASH_DEF.dimensions.y)
-		inventory.add("m_four", 1)
-		inventory.add("patrol", 1)
-		inventory.add("five_five_six", 60)
-		for rounds in [30, 30]:
-			var state := ArmoryInstance.fresh("stanag_magazine", catalog.items)
-			state.rounds = rounds
-			inventory.add("stanag_magazine", 1, state)
-		profile = _empty_profile()
-		profile.stash = inventory.snapshot()
-		profile.starter_seeded = true
-		if _write(profile):
+		if _write(_starter_profile()):
 			return true
 		return _fail("Could not save starter stash; deployment is disabled.")
 	return _fail("Stash is unreadable or unsupported. Original files preserved; deployment is disabled.")
+
+func _starter_profile() -> Dictionary:
+	var inventory := RaidInventory.new(catalog.items, STASH_DEF.dimensions.x, STASH_DEF.dimensions.y)
+	inventory.add("m_four", 1)
+	inventory.add("patrol", 1)
+	inventory.add("five_five_six", 60)
+	for rounds in [30, 30]:
+		var state := ArmoryInstance.fresh("stanag_magazine", catalog.items)
+		state.rounds = rounds
+		inventory.add("stanag_magazine", 1, state)
+	var candidate := _empty_profile()
+	candidate.stash = inventory.snapshot()
+	candidate.starter_seeded = true
+	return candidate
+
+func reset_character() -> bool:
+	if not _write(_starter_profile()): return false
+	load_error = ""
+	return true
 
 func _migrate(value: Dictionary) -> bool:
 	if FileAccess.file_exists(path):

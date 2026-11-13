@@ -1,16 +1,11 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=6 format=3]
 [ext_resource type="Script" path="res://scripts/npcs/guard.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/npcs/guard.tres" id="2"]
 [ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3"]
+[ext_resource type="Script" path="res://scripts/npcs/npc_body.gd" id="4"]
 [sub_resource type="CapsuleShape3D" id="shape"]
 radius = 0.4
 height = 1.8
-[sub_resource type="BoxMesh" id="mesh"]
-size = Vector3(0.8, 1.8, 0.7)
-[sub_resource type="StandardMaterial3D" id="mat"]
-albedo_color = Color(0.8, 0.18, 0.12, 1)
-[sub_resource type="BoxMesh" id="visor"]
-size = Vector3(0.6, 0.18, 0.1)
 [node name="Guard" type="CharacterBody3D"]
 script = ExtResource("1")
 archetype = ExtResource("2")
@@ -18,13 +13,8 @@ material = ExtResource("3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)
 shape = SubResource("shape")
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-position = Vector3(0, 0.9, 0)
-mesh = SubResource("mesh")
-material_override = SubResource("mat")
-[node name="Visor" type="MeshInstance3D" parent="MeshInstance3D"]
-position = Vector3(0, 0.55, -0.37)
-mesh = SubResource("visor")
+[node name="Visual" type="Node3D" parent="."]
+script = ExtResource("4")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.75
 target_desired_distance = 0.8

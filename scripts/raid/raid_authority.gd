@@ -7,6 +7,7 @@ signal finished(result: Dictionary)
 signal health_changed(player_id: String, health: float)
 signal shot_fired(player_id: String, position: Vector3)
 enum Phase { DEPLOYING, ACTIVE, SUCCESS, FAILURE }
+@export var depot := false
 var phase := Phase.DEPLOYING
 var raid_id := ""
 var player: RaidPlayer
@@ -57,15 +58,18 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 		pack.add("stanag_magazine", 1, mag)
 	participants[player_id] = RaidParticipant.new(player, catalog, pack, loadout.get("weapon", "m_four"), loadout.get("armor", ""), [], loadout)
 	npcs = [guard]
-	if not practice:
+	if depot:
+		for node in get_children():
+			if node is RaidGuard and node != guard:
+				npcs.append(node)
+				if entities.has(node.entity_id): return "Duplicate NPC ID: " + node.entity_id
+				entities[node.entity_id] = node
+	if not practice and not depot:
 		var zombie: RaidGuard = preload("res://scenes/npcs/guard.tscn").instantiate()
 		zombie.entity_id = "zombie-01"
 		zombie.archetype = catalog.definitions.zombie
 		add_child(zombie)
 		zombie.global_position = Vector3(5, 0.1, -8)
-		var skin := StandardMaterial3D.new()
-		skin.albedo_color = Color("67744c")
-		zombie.get_node("MeshInstance3D").material_override = skin
 		npcs.append(zombie)
 		entities[zombie.entity_id] = zombie
 	for npc in npcs: _initialize_npc(npc)
@@ -76,7 +80,7 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	for npc in npcs: shot_fired.connect(npc.hear_shot)
 	shot_fired.connect(player.shot_fired)
 	_build_loot()
-	if not practice:
+	if not practice and not depot:
 		for contents: RaidInventory in containers.values():
 			for id in ["small_pack", "field_rig", "food", "medkit", "field_knife", "face_cover", "field_glasses", "maska", "five_five_six_ap"]:
 				contents.add(id, 8 if id == "five_five_six_ap" else 1)
@@ -90,7 +94,7 @@ func is_active() -> bool:
 	return phase == Phase.ACTIVE
 
 func _allowed(player_id: String) -> bool:
-	return is_active() and participants.has(player_id) and participants[player_id].health > 0
+	return is_active() and participants.has(player_id) and participants[player_id].health > 0 and (practice or participants[player_id].battery > 0)
 
 func request_input(player_id: String, trigger: bool, aim: bool, customizing: bool = false) -> bool:
 	if not _allowed(player_id):
@@ -257,11 +261,13 @@ func request_use(player_id: String, identity: String) -> bool:
 	var entry := state.entry_for(identity)
 	if entry.is_empty(): return false
 	var definition: ItemDef = catalog.items[entry.id]
-	if definition.heal_amount <= 0 and definition.stamina_amount <= 0: return false
+	if definition.heal_amount <= 0 and definition.stamina_amount <= 0 and definition.battery_amount <= 0: return false
+	if definition.battery_amount > 0 and state.battery >= RaidParticipant.BATTERY_CAPACITY: return false
 	if state.health >= 20 and definition.heal_amount > 0: return false
 	var source := state.owner_of(identity)
 	var service := inventory_service(player_id)
 	if not service.submit(service.request("consume", source, null, identity, Vector2i(-1, -1), false, 1)).ok: return false
+	state.battery = minf(RaidParticipant.BATTERY_CAPACITY, state.battery + definition.battery_amount)
 	state.health = minf(20.0, state.health + definition.heal_amount)
 	state.stamina = minf(100.0, state.stamina + definition.stamina_amount)
 	return true
@@ -379,7 +385,8 @@ func _step_projectile(projectile: Dictionary, _delta: float = 0.05) -> bool:
 			_smoke_contact(projectile, hit)
 		else:
 			_apply_projectile_hit(hit.collider, projectile, hit)
-			ballistics.impact.emit(hit.position, hit.normal, "steel", "")
+			var surface: MaterialDef = hit.collider.get("material")
+			ballistics.impact.emit(hit.position, hit.normal, surface.id if surface != null else "steel", "")
 		return false
 	Ballistics.advance(projectile)
 	if projectile.age > 100:
@@ -392,6 +399,10 @@ func _step_projectile(projectile: Dictionary, _delta: float = 0.05) -> bool:
 
 func _apply_projectile_hit(target: Node, projectile: Dictionary, hit: Dictionary) -> Dictionary:
 	var damage: float = projectile.damage
+	if target is VoxelDestructible:
+		var surface: MaterialDef = target.material
+		var scaled := damage * surface.damage_multiplier * 600.0 / maxf(1.0, surface.resistance)
+		target.damage_at(hit.position - hit.normal * 0.01, scaled, projectile.velocity.normalized())
 	if (target is RaidPlayer or target is RaidGuard) and Ballistics.headshot(target, hit.position):
 		damage *= float(projectile.head_multiplier)
 	var ammunition: AmmoDef = catalog.definitions.get(projectile.get("ammo_id", ""))
@@ -575,10 +586,23 @@ func _drop_item(id: String, origin: Vector3) -> void:
 
 func _build_loot() -> void:
 	for entity in entities.values():
-		if entity is RaidEntity and entity.kind == "container":
+		if entity is RaidEntity and entity.kind == "container" and not entity.entity_id.begins_with("battery-"):
 			var contents := RaidInventory.new(catalog.items, 10, 6)
 			contents.add("salvage", 3)
 			containers[entity.entity_id] = contents
+	if depot:
+		containers["crate-01"].add("medkit", 1)
+		containers["crate-02"].add("m_four", 1)
+		var magazine := ArmoryInstance.fresh("stanag_magazine", catalog.items)
+		magazine.rounds = 24
+		containers["crate-02"].add("stanag_magazine", 1, magazine)
+		containers["crate-03"].add("tool", 2)
+		for index in range(2):
+			var identity := "battery-%d" % index
+			var contents := RaidInventory.new(catalog.items, 1, 2)
+			contents.add("battery_cell", 1)
+			containers[identity] = contents
+		return
 	# Six fixed crates partition the complete roster; resets are deterministic.
 	for index in range(6):
 		var crate := RaidEntity.new()
@@ -669,14 +693,6 @@ func request_claim(player_id: String, container_id: String, quantity: int) -> bo
 func request_claim_at(player_id: String, container_id: String, quantity: int, _x: int, _y: int, _rotated: bool = false) -> bool:
 	return request_claim(player_id, container_id, quantity)
 
-func objective_complete(player_id: String) -> bool:
-	if not participants.has(player_id): return false
-	var state: RaidParticipant = participants[player_id]
-	for root in [state.inventory, state.pockets] + state.equipment.roots():
-		for grid in root.all_grids():
-			if grid.count("salvage") > 0: return true
-	return false
-
 func request_abandon(player_id: String) -> bool:
 	if not _allowed(player_id):
 		return false
@@ -686,7 +702,7 @@ func request_abandon(player_id: String) -> bool:
 func request_extract(player_id: String, zone_id: String = "extraction-01") -> bool:
 	if practice or not _allowed(player_id) or zone_id != extraction.entity_id:
 		return false
-	if not extraction.overlaps_body(participants[player_id].actor) or not objective_complete(player_id):
+	if not extraction.overlaps_body(participants[player_id].actor):
 		return false
 	participants[player_id].extracting = true
 	return true
@@ -695,11 +711,11 @@ func _update_extraction(player_id: String, delta: float) -> void:
 	var state: RaidParticipant = participants[player_id]
 	if not request_extract(player_id):
 		state.extracting = false
-		state.extraction_left = 3
+		state.extraction_left = RaidParticipant.EXTRACTION_SECONDS
 		return
 	state.extraction_left = maxf(0, state.extraction_left - delta)
 	if state.extraction_left < 0.00001:
-		_finish(true, "Salvage extracted")
+		_finish(true, "Extraction complete")
 
 func _finish(success: bool, reason: String) -> void:
 	if not is_active():
@@ -720,10 +736,15 @@ func _physics_process(delta: float) -> void:
 		gameplay_step()
 
 func gameplay_step() -> void:
+	if not is_active(): return
 	gameplay_tick += 1
 	for state in participants.values():
 		state.clock = gameplay_tick
 		state.actor.authority_movement_tick()
+		if not is_active(): return
+		if not practice:
+			_update_battery(state, 0.05)
+			if not is_active(): return
 		if state.weapon != null:
 			state.weapon.advance_tick()
 			if gameplay_tick - state.last_input > 15:
@@ -737,6 +758,7 @@ func gameplay_step() -> void:
 		var previous: Vector3 = projectile.position
 		if not _step_projectile(projectile):
 			projectiles.remove_at(index)
+		if not is_active(): return
 		_show_projectile_tracer(previous, projectile.position, (projectile.position - previous).normalized())
 	projectiles.append_array(grenade_uses)
 	grenade_uses.clear()
@@ -758,6 +780,7 @@ func gameplay_step() -> void:
 				if weapon.magazine == 0:
 					weapon.reload()
 				elif weapon.fire():
+					shot_fired.emit(npc.entity_id, npc.global_position)
 					var gun := weapon.definition
 					_spawn_projectile(npc.global_position + Vector3.UP * 1.45, player.eye_position() - (npc.global_position + Vector3.UP * 1.45), gun.projectile_speed, gun.spread, gun.damage, gun.head_multiplier, npc.get_rid())
 	for container_id: String in containers:
@@ -773,8 +796,20 @@ func gameplay_step() -> void:
 	for state: RaidParticipant in participants.values():
 		if not state.opened_container.is_empty() and not _container_reachable(state.actor.entity_id, state.opened_container):
 			state.opened_container = ""
+	if not is_active(): return
 	for id in participants:
 		_update_extraction(id, 0.05)
+
+func _update_battery(state: RaidParticipant, delta: float) -> void:
+	state.battery = maxf(0.0, state.battery - delta * (1.5 if state.actor.sprinting else 1.0))
+	if state.battery <= 0:
+		_finish(false, "Battery depleted - robot shutdown | gear and loot lost")
+	elif state.battery <= 60 and state.battery_warning < 2:
+		state.battery_warning = 2
+		notice.emit("CRITICAL POWER - less than one minute. Extract or use a battery cell.")
+	elif state.battery <= 120 and state.battery_warning < 1:
+		state.battery_warning = 1
+		notice.emit("LOW POWER - two minutes remaining.")
 
 func catalog_material(id: String) -> MaterialDef:
 	return catalog.definitions[id]
@@ -887,8 +922,7 @@ func practice_reset(player_id: String) -> bool:
 	guard.armor_plates = ArmorPlates.new(catalog.definitions.vest)
 	guard.state = RaidGuard.State.IDLE
 	guard.collision_layer = 1
-	guard.get_node("MeshInstance3D").rotation.z = 0
-	guard.get_node("MeshInstance3D").position.y = 0.9
+	guard.reset_visual()
 	var state: RaidParticipant = participants[player_id]
 	if state.weapon != null: state.weapon.cancel_reload()
 	for root in [state.inventory, state.pockets] + state.equipment.roots():
@@ -930,6 +964,7 @@ func _initialize_npc(npc: RaidGuard) -> void:
 		Ammunition.normalize(gun, catalog.items)
 		npc.weapon_state = WeaponState.new(catalog.definitions.m_four)
 		npc.weapon_state.bind(npc.inventory, gun)
+		npc.body.equip(npc.weapon_state)
 		npc.inventory.add("five_five_six", 20)
 		npc.armor_plates = ArmorPlates.new()
 		npc.armor_plates.definitions = catalog.definitions

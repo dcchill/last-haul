@@ -1,16 +1,16 @@
 # Last Haul
 
-A small **Godot 4.7.2 stable** framework for a voxel-style PvE extraction shooter. This milestone provides a playable first-person block-built yard, editable gameplay resources, our own destructible voxel cover, and explicit authority boundaries for future co-op. Networking is not implemented. See [voxel optimizations](docs/voxels.md) for batching, greedy meshing and current limits.
+A small **Godot 4.7.2 stable** single-player extraction-shooter prototype. **Enter raid — Veyra Depot** launches an eight-minute robot salvage run with two scavs, two zombies, power cells, and automatic 15-second extraction. See [the playable raid guide](docs/raid-prototype.md) for routes, battery rules, and limitations. This milestone provides a playable first-person block-built yard, editable gameplay resources, our own destructible voxel cover, and explicit authority boundaries for future co-op. Networking is not implemented. See [voxel optimizations](docs/voxels.md) for batching, greedy meshing and current limits.
 
 ## Run
 
 1. Install the standard Godot **4.7.2 stable** editor; .NET and external voxel plugins are unnecessary.
 2. Import `project.godot`, allow the first asset import to finish, and press **F6** only when editing an individual scene, or **F5** to run the complete game.
 3. Open **Inventory / stage loadout**. New profiles receive the current one-time rifle, armor, loose ammunition and magazine kit. Existing possessions are migrated without extra grants.
-4. Equip gear and stage ammunition. **Deploy to yard** also permits an unarmed loadout.
+4. Equip gear and stage ammunition. **Enter raid — Veyra Depot** also permits an unarmed loadout.
 5. Press **R** to insert a loaded compatible magazine from pockets or an equipped rig. Manage magazines and loose rounds through inventory context actions.
-6. Loot crates, the guard or the zombie with **E**. Inventory and looting do not pause combat.
-7. Carry salvage into the green extraction zone for three seconds. Surviving gear and nested contents return to the persistent stash. Death and abandonment lose everything carried; there is no secure container.
+6. Loot crates, power lockers, and defeated scavs or zombies with **E**. Inventory and looting do not pause combat.
+7. Stay in the green extraction zone for **15 continuous seconds**. No loot, objective, equipment, or activation is required; leaving resets the timer. Surviving gear and nested contents return to the persistent stash. Death, battery shutdown, and abandonment lose everything carried; there is no secure container.
 8. Use **Practice armory** for isolated equipment grants and reset. Practice items never enter your persistent stash.
 
 Command line, with Godot on `PATH`:
@@ -39,13 +39,17 @@ The yard includes an enabled sensor-decay treatment: 2×2 pixelation, ordered di
 | Pause / close crate / resume | Escape |
 | Navigate menus | Tab or arrow keys; Enter/Space activates buttons |
 
-Menus release the mouse and show keyboard focus. Pause stops simulation; the loot panel does **not** stop the guard. Settings include mouse sensitivity, master volume, and fullscreen. Placeholder combat currently has visual/text feedback and no sound assets.
+The robot starts each normal raid with **480 seconds** of charge. Sprinting drains at 1.5×; two power lockers each contain a cell restoring 90 seconds (up to 480). Right-click a carried cell in inventory and choose **Use**. Inventory, looting, and extraction keep draining power; pause freezes it.
+
+Main menu **Settings ? Reset character** asks for confirmation, then clears character history, pending rewards, stash and staged inventory and restores the original starter kit. It keeps your game settings and is unavailable from raid or practice settings.
+
+Menus release the mouse and show keyboard focus. Pause stops simulation; the loot panel does **not** stop the guard. Settings include mouse sensitivity, master volume, and fullscreen. Placeholder combat currently has visual/text feedback and procedural combat and material footstep sounds.
 
 ## Organization and configuration
 
 | Folder | Purpose |
 | --- | --- |
-| `scenes/` | Main entry, editable player/guard scenes, and baked test yard |
+| `scenes/` | Main entry, editable player/guard scenes, and baked practice yard and Veyra Depot |
 | `scripts/data/` | Typed custom Resource definitions and catalog validation |
 | `scripts/raid/` | Raid phase, authoritative requests, and per-player runtime state |
 | `scripts/player/`, `scripts/npcs/` | Movement/interaction and guard perception/behavior |
@@ -61,10 +65,12 @@ Open `.tres` assets in the Inspector to change rifle capacity/timing/range, roun
 
 Scene entities use explicit `entity_id` values, including the extraction zone. Duplicates or missing references block deployment. The player's stable ID is generated once in the profile. Targets and containers reset each deployment; the stash does not.
 
-After editing static yard geometry, rebake and save navigation with the NavigationRegion3D editor tools, or:
+After editing static raid geometry, rebake and save navigation with the NavigationRegion3D editor tools, or:
 
 ```powershell
 godot --headless --path . --script res://tests/bake_navigation.gd
+# Depot (omit the scene argument for the practice yard):
+godot --headless --path . --script res://tests/bake_navigation.gd -- res://scenes/raid/veyra_depot.tscn
 ```
 
 The bake command intentionally updates the yard scene. Ordinary tests do not rewrite source files.

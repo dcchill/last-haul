@@ -2,6 +2,7 @@ class_name Catalog
 extends RefCounted
 
 const PATHS: Array[String] = [
+	"res://resources/items/battery_cell.tres", "res://resources/materials/medical_partition.tres",
 	"res://resources/items/field_knife.tres", "res://resources/items/face_cover.tres", "res://resources/items/field_glasses.tres",
 	"res://resources/items/small_pack.tres",
 "res://resources/items/large_pack.tres",
@@ -51,6 +52,8 @@ func load_all() -> String:
 		if item.weight == 0:
 			item.weight = 3.0 if item.kind == "weapon" else 2.0 if item.kind == "armor" else 0.01 if item.kind == "ammo" else 0.25
 	for definition in definitions.values():
+		if definition is ItemDef and (not is_finite(definition.battery_amount) or definition.battery_amount < 0):
+			return "Invalid battery restoration amount"
 		if definition is ItemDef and definition.stack_limit < 1:
 			return "Item stack limit must be positive"
 		if definition is AmmoDef and (not is_finite(definition.damage) or definition.damage < 0):
@@ -84,6 +87,8 @@ func load_all() -> String:
 			if definition.resistance <= 0.0 or definition.plate_durability <= 0.0 or definition.durability_loss <= 0.0 or definition.ricochet > 1.0:
 				return "Armor resistance, durability, wear, and ricochet must be valid"
 		if definition is MaterialDef:
+			if not is_finite(definition.footstep_pitch) or definition.footstep_pitch <= 0:
+				return "Invalid footstep pitch"
 			for value in [definition.resistance, definition.thickness_meters, definition.ricochet]:
 				if not is_finite(value) or value < 0:
 					return "Invalid material ballistic property"

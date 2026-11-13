@@ -14,6 +14,7 @@ const FACE_CORNERS := [
 	[Vector3(1,-1,1), Vector3(1,1,1), Vector3(-1,1,1), Vector3(-1,-1,1)],
 	[Vector3(-1,-1,-1), Vector3(-1,1,-1), Vector3(1,1,-1), Vector3(1,-1,-1)]]
 
+@export var destructible := true
 @export var dimensions := Vector3i(8, 4, 4)
 @export var material: MaterialDef
 @export var surface_color := Color(0.32, 0.4, 0.43)
@@ -25,7 +26,7 @@ var cell_health := PackedFloat32Array()
 @export var blast_resistance: float = 6.0
 
 func blast(origin: Vector3, power: float) -> void:
-	if power <= 0.0:
+	if not destructible or power <= 0.0:
 		return
 	var hits: Array[Vector3i] = []
 	for z in range(dimensions.z):
@@ -61,6 +62,7 @@ func _ready() -> void:
 	_rebuild()
 
 func damage_at(world_position: Vector3, damage: float, impulse_direction: Vector3 = Vector3.FORWARD) -> bool:
+	if not destructible: return false
 	var local := to_local(world_position) + Vector3(dimensions) * CELL_SIZE * 0.5
 	var cell := Vector3i(floori(local.x / CELL_SIZE), floori(local.y / CELL_SIZE), floori(local.z / CELL_SIZE))
 	cell = Vector3i(clampi(cell.x, 0, dimensions.x - 1), clampi(cell.y, 0, dimensions.y - 1), clampi(cell.z, 0, dimensions.z - 1))
@@ -142,7 +144,13 @@ func _rebuild() -> void:
 					has_faces = true
 	var mesh := tool.commit() if has_faces else null
 	surface.mesh = mesh
-	var shape := mesh.create_trimesh_shape() if mesh != null else null
+	var shape: Shape3D
+	if not destructible:
+		var box := BoxShape3D.new()
+		box.size = Vector3(dimensions) * CELL_SIZE
+		shape = box
+	else:
+		shape = mesh.create_trimesh_shape() if mesh != null else null
 	if is_inside_tree():
 		collision.set_deferred("shape", shape)
 	else:

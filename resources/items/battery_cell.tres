@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "battery_cell"
+display_name = "Veyra power cell"
+description = "Use from inventory to restore 90 seconds of robot power."
+stack_limit = 1
+width = 1
+height = 2
+weight = 0.8
+value = 35
+battery_amount = 90.0

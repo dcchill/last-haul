@@ -16,9 +16,9 @@ var prop_return: Dictionary = {}
 
 func _ready() -> void:
 	var glove := StandardMaterial3D.new()
-	glove.albedo_color = Color(0.25, 0.22, 0.16)
+	glove.albedo_color = Color("303c3c")
 	var sleeve := StandardMaterial3D.new()
-	sleeve.albedo_color = Color(0.19, 0.24, 0.17)
+	sleeve.albedo_color = Color("d5ac3e")
 	for side in ["right", "left"]:
 		var parts: Dictionary = {}
 		for kind in ["glove", "sleeve"]:
