@@ -101,7 +101,7 @@ func request_fire(player_id: String) -> bool:
 	shot_fired.emit(player_id, state.actor.global_position)
 	for pellet in range(gun.definition.pellets):
 		var kind := "rocket" if gun.definition.feed == "ROCKET" else "bullet"
-		var origin := state.actor.eye_position() - Vector3.UP * 0.05
+		var origin: Vector3 = state.actor.rifle.bones.muzzle_socket.global_position
 		var bullet := _spawn_projectile(origin, state.actor.aim_direction(), gun.definition.projectile_speed,
 			gun.definition.spread * (0.35 if gun.aiming else 1.0), gun.definition.damage, gun.definition.head_multiplier, state.actor.get_rid(), kind)
 		bullet.velocity += Vector3(state.actor.movement.velocity.x, 0.0 if state.actor.grounded else state.actor.movement.velocity.y, state.actor.movement.velocity.z)

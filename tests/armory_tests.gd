@@ -316,7 +316,9 @@ func _integration() -> void:
 		state.inventory.slots.clear()
 		check(raid.practice_grant(state.actor.entity_id, source.id), source.id + " available in practice")
 		check(not raid.player.rifle.bones.is_empty() and raid.player.rifle.clips.has("fire"), source.id + " rendered hierarchy and clips")
+		var muzzle: Vector3 = raid.player.rifle.bones.muzzle_socket.global_position
 		check(raid.request_fire(state.actor.entity_id), source.id + " fires through authority")
+		check(not raid.projectiles.is_empty() and raid.projectiles[0].position.is_equal_approx(muzzle), source.id + " projectile starts at muzzle")
 		raid.projectiles.clear()
 		state.next_shot = 0
 		state.weapon.next_shot = 0

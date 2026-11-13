@@ -4,7 +4,7 @@ extends CanvasLayer
 var app: Node
 var root: Control
 var screen: Control
-var panel: VBoxContainer
+var panel: Container
 var hud: Label
 var notice_label: Label
 var crosshair: Label
@@ -14,12 +14,19 @@ var notice_until := 0
 var container_id := ""
 var container_contents: RaidInventory
 var selected_container_index := -1
+var selected_loot_pack_index := -1
 var inventory_from_raid := false
 var selected_inventory_index := -1
 var assign_slot := 0
 var practice_filter := "weapon"
 var transient: Array[Node] = []
 var focus_scheduled := false
+var inventory_flow: Container
+var preview_box: VBoxContainer
+var container_weight: Label
+var loot_container_grid: Control
+var loot_pack_grid: Control
+var loot_transfer_button: Button
 const InventoryGridScript = preload("res://scripts/inventory/inventory_grid.gd")
 
 func _ready() -> void:
@@ -38,6 +45,7 @@ func _ready() -> void:
 	root.add_child(hud)
 	notice_label = Label.new()
 	notice_label.position = Vector2(24, 676)
+	notice_label.z_index = 1
 	notice_label.add_theme_color_override("font_shadow_color", Color.BLACK)
 	notice_label.add_theme_constant_override("shadow_outline_size", 5)
 	root.add_child(notice_label)
@@ -59,6 +67,9 @@ func _clear(new_mode: String) -> void:
 			node.queue_free()
 	transient.clear()
 	panel = null
+	inventory_flow = null
+	preview_box = null
+	container_weight = null
 	var gameplay := new_mode == "hud"
 	hud.visible = gameplay
 	crosshair.visible = gameplay
@@ -74,6 +85,9 @@ func _clear(new_mode: String) -> void:
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shade.color = Color(0.025, 0.04, 0.055, 0.92)
 	screen.add_child(shade)
+	if new_mode in ["inventory", "raid_inventory", "container"]:
+		_inventory_layout()
+		return
 	var scroll := ScrollContainer.new()
 	scroll.position = Vector2(28, 24)
 	scroll.size = Vector2(470, 630)
@@ -83,11 +97,87 @@ func _clear(new_mode: String) -> void:
 	panel.add_theme_constant_override("separation", 9)
 	scroll.add_child(panel)
 
+func _inventory_layout() -> void:
+	screen.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.offset_left = 24
+	scroll.offset_top = 24
+	scroll.offset_right = -24
+	scroll.offset_bottom = -24
+	screen.add_child(scroll)
+	if mode == "container":
+		inventory_flow = VBoxContainer.new()
+		inventory_flow.add_theme_constant_override("separation", 4)
+	else:
+		inventory_flow = HFlowContainer.new()
+		inventory_flow.add_theme_constant_override("h_separation", 12)
+		inventory_flow.add_theme_constant_override("v_separation", 12)
+	inventory_flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(inventory_flow)
+	if mode == "container":
+		return
+	var frame := _inventory_frame()
+	frame.custom_minimum_size.x = 360
+	inventory_flow.add_child(frame)
+	var margins := MarginContainer.new()
+	margins.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	margins.add_theme_constant_override("margin_left", 12)
+	margins.add_theme_constant_override("margin_top", 24)
+	margins.add_theme_constant_override("margin_right", 12)
+	margins.add_theme_constant_override("margin_bottom", 24)
+	frame.add_child(margins)
+	panel = VBoxContainer.new()
+	panel.custom_minimum_size.x = 336
+	panel.add_theme_constant_override("separation", 9)
+	margins.add_child(panel)
+	panel.minimum_size_changed.connect(func(): frame.custom_minimum_size.y = panel.get_combined_minimum_size().y + 48)
+
+func _inventory_frame() -> Panel:
+	var frame := Panel.new()
+	frame.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	var close := Button.new()
+	close.text = "×"
+	close.tooltip_text = "Close inventory"
+	close.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	close.offset_left = -20
+	close.offset_top = 1
+	close.offset_right = -1
+	close.offset_bottom = 20
+	close.pressed.connect(func():
+		if mode == "container": _close_container()
+		elif mode == "raid_inventory": _close_inventory()
+		else: show_home())
+	frame.add_child(close)
+	return frame
+
+func _inventory_grid(inventory: RaidInventory, title: String, handler: Callable = Callable()) -> Control:
+	var frame := _inventory_frame()
+	frame.name = "InventoryFrame"
+	frame.set_meta("inventory_grid", true)
+	frame.custom_minimum_size = Vector2(maxi(228, inventory.width * 18 + 18), inventory.height * 18 + 44)
+	if mode == "container":
+		frame.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	inventory_flow.add_child(frame)
+	var label := Label.new()
+	label.text = title
+	label.position = Vector2(9, 1)
+	label.add_theme_font_size_override("font_size", 12)
+	frame.add_child(label)
+	var grid: Control = InventoryGridScript.new()
+	grid.name = "Grid"
+	grid.position = Vector2(9, 21)
+	grid.cell_size = 18
+	grid.plain_slots = true
+	frame.add_child(grid)
+	grid.setup(inventory, handler)
+	return grid
+
 func _text(value: String, size: int = 17) -> Label:
 	var label := Label.new()
 	label.text = value
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.custom_minimum_size.x = 420
+	label.custom_minimum_size.x = 336 if inventory_flow != null else 420
 	label.add_theme_font_size_override("font_size", size)
 	panel.add_child(label)
 	return label
@@ -96,7 +186,16 @@ func _button(value: String, callback: Callable, disabled: bool = false) -> Butto
 	var button := Button.new()
 	button.text = value
 	button.disabled = disabled
-	button.custom_minimum_size.y = 34
+	if inventory_flow != null and mode != "container":
+		for state_name in ["normal", "hover", "pressed", "focus", "disabled"]:
+			var style := StyleBoxFlat.new()
+			style.bg_color = Color("292628") if state_name in ["hover", "focus"] else Color("161516")
+			style.border_color = Color("706366") if state_name in ["hover", "focus"] else Color("51494b")
+			style.set_border_width_all(1)
+			button.add_theme_stylebox_override(state_name, style)
+	button.custom_minimum_size.y = 24 if mode == "container" else 34
+	if mode == "container":
+		button.add_theme_font_size_override("font_size", 11)
 	button.pressed.connect(callback)
 	panel.add_child(button)
 	if not disabled and not focus_scheduled:
@@ -112,6 +211,7 @@ func _grid(inventory: RaidInventory, at: Vector2, handler: Callable = Callable()
 	var grid: Control = InventoryGridScript.new()
 	grid.position = at
 	grid.cell_size = cell_size
+	grid.plain_slots = true
 	screen.add_child(grid)
 	grid.setup(inventory, handler)
 	return grid
@@ -157,8 +257,7 @@ func show_inventory(from_raid: bool = false, selected: int = -1) -> void:
 	_clear("raid_inventory" if from_raid else "inventory")
 	_text("FIELD INVENTORY" if from_raid else "STAGE LOADOUT", 30)
 	var pack: RaidInventory = state().inventory if from_raid else app.loadout.pack
-	_root_text("RAID PACK" if from_raid else "STAGED RAID PACK", Vector2(850, 24))
-	var pack_grid := _grid(pack, Vector2(850, 54), Callable(), 28)
+	var pack_grid := _inventory_grid(pack, "RAID PACK" if from_raid else "STAGED RAID PACK")
 	pack_grid.slot_selected.connect(func(index): show_inventory(from_raid, index))
 	if from_raid:
 		if state().weapon != null and state().weapon.reload_end > 0:
@@ -179,8 +278,7 @@ func show_inventory(from_raid: bool = false, selected: int = -1) -> void:
 		bar.item_selected.connect(func(index): assign_slot = index)
 		panel.add_child(bar)
 	else:
-		_root_text("STASH", Vector2(530, 24))
-		_grid(app.stash_view, Vector2(530, 54), Callable(), 28)
+		_inventory_grid(app.stash_view, "STASH")
 		_text("Drag equipment and ammo into the raid pack. Hold R while dropping to rotate.")
 	if selected >= 0 and selected < pack.slots.size():
 		var entry: Dictionary = pack.slots[selected]
@@ -302,47 +400,152 @@ func show_customization() -> void:
 func open_container(_player_id: String, id: String) -> void:
 	container_id = id
 	selected_container_index = -1
+	selected_loot_pack_index = -1
 	_redraw_container()
 
 func _redraw_container() -> void:
 	_clear("container")
 	container_contents = app.raid.containers[container_id]
-	_text("FIELD CONTAINER", 30)
-	_text("Select an item to transfer. The raid continues while looting.")
-	_root_text("CONTENTS", Vector2(530, 24))
-	var grid := _grid(container_contents, Vector2(530, 54), _claim_drop, 28)
-	grid.slot_selected.connect(func(index): selected_container_index = index; _redraw_container())
-	_root_text("YOUR PACK", Vector2(850, 24))
-	_grid(state().inventory, Vector2(850, 54), _claim_drop, 28)
-	if selected_container_index >= 0 and selected_container_index < container_contents.slots.size():
-		var entry: Dictionary = container_contents.slots[selected_container_index]
-		_text(app.catalog.items[entry.id].display_name, 22)
-		_text(_item_details(entry))
-		_add_preview(entry.id, Vector2(535, 410))
-	_button("Transfer selected [R]", _transfer_selected, selected_container_index < 0)
+	var box := PanelContainer.new()
+	box.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	inventory_flow.add_child(box)
+	var column := VBoxContainer.new()
+	box.add_child(column)
+	var title := Label.new()
+	title.text = "CONTAINER"
+	column.add_child(title)
+	var container_row := HBoxContainer.new()
+	column.add_child(container_row)
+	var equipment_space := Control.new()
+	container_row.add_child(equipment_space)
+	loot_container_grid = _loot_grid(container_contents, container_row)
+	loot_container_grid.selected_index = selected_container_index
+	loot_container_grid.slot_selected.connect(func(index): _select_loot(true, index))
+	var footer := HBoxContainer.new()
+	footer.name = "ContainerActions"
+	column.add_child(footer)
+	panel = footer
 	_button("Take all [F]", _take_all)
-	_button("Sort pack [S]", _sort_pack)
+	loot_transfer_button = _button("Transfer [R]", _transfer_selected, selected_container_index < 0)
+	_button("Sort [S]", _sort_pack)
+	container_weight = Label.new()
+	container_weight.add_theme_font_size_override("font_size", 11)
+	footer.add_child(container_weight)
+	_update_container_weight()
+	var player_title := Label.new()
+	player_title.text = "YOUR INVENTORY  •  Select an item or drag it to a slot"
+	column.add_child(player_title)
+	var player_row := HBoxContainer.new()
+	column.add_child(player_row)
+	var equipment := VBoxContainer.new()
+	equipment.name = "Equipment"
+	player_row.add_child(equipment)
+	for slot in ["helmet", "chestplate", "leggings", "boots", "held"]:
+		var button = preload("res://ui/equipment_slot.gd").new()
+		button.name = slot.capitalize()
+		var entry: Dictionary = state().held_entry() if slot == "held" else state().armor.entries.get(slot, {})
+		button.text = slot.capitalize() + ": " + (str(app.catalog.items[entry.id].display_name) if not entry.is_empty() else "Empty")
+		button.custom_minimum_size = Vector2(150, 28)
+		button.accepts_drop = func(data): return _can_equip_loot(data, slot)
+		button.drop_item = func(data): _equip_loot(data, slot)
+		button.pressed.connect(func(): _equip_selected_loot(slot))
+		equipment.add_child(button)
+	equipment_space.custom_minimum_size.x = equipment.get_combined_minimum_size().x
+	equipment.minimum_size_changed.connect(func(): equipment_space.custom_minimum_size.x = equipment.get_combined_minimum_size().x)
+	loot_pack_grid = _loot_grid(state().inventory, player_row)
+	loot_pack_grid.selected_index = selected_loot_pack_index
+	loot_pack_grid.slot_selected.connect(func(index): _select_loot(false, index))
+	panel = footer
 	_button("Close [Esc]", _close_container)
+
+func _loot_grid(inventory: RaidInventory, parent: Container) -> Control:
+	var grid: Control = InventoryGridScript.new()
+	grid.name = "Grid"
+	grid.cell_size = 28
+	grid.plain_slots = true
+	parent.add_child(grid)
+	grid.setup(inventory, _claim_drop)
+	return grid
+
+func _select_loot(from_container: bool, index: int) -> void:
+	selected_container_index = index if from_container else -1
+	selected_loot_pack_index = -1 if from_container else index
+	loot_container_grid.selected_index = selected_container_index
+	loot_pack_grid.selected_index = selected_loot_pack_index
+	loot_container_grid.queue_redraw()
+	loot_pack_grid.queue_redraw()
+	loot_transfer_button.disabled = selected_container_index < 0
+
+func _can_equip_loot(data: Variant, slot: String) -> bool:
+	if not data is Dictionary or data.get("inventory") not in [container_contents, state().inventory]:
+		return false
+	var source: RaidInventory = data.inventory
+	var index := int(data.get("index", -1))
+	if index < 0 or index >= source.slots.size():
+		return false
+	var definition: Resource = app.catalog.definitions.get(source.slots[index].id)
+	return definition is WeaponDef if slot == "held" else definition is ArmorDef and definition.slot == slot
+
+func _equip_selected_loot(slot: String) -> void:
+	var source := container_contents if selected_container_index >= 0 else state().inventory
+	var index := selected_container_index if selected_container_index >= 0 else selected_loot_pack_index
+	if index < 0 and slot != "held":
+		app.raid.request_unequip_armor(app.profile.profile.player_id, slot)
+		_redraw_container()
+		return
+	_equip_loot({"inventory": source, "index": index}, slot)
+
+func _equip_loot(data: Dictionary, slot: String) -> void:
+	if not _can_equip_loot(data, slot):
+		show_notice("Select compatible equipment first")
+		return
+	var source: RaidInventory = data.inventory
+	var index := int(data.index)
+	var instance_id: String = source.slots[index].get("state", {}).get("instance_id", "")
+	var player_id: String = app.profile.profile.player_id
+	if source == container_contents and not app.raid.request_transfer(player_id, container_id, index):
+		show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
+		return
+	var equipped: bool = app.raid.request_assign(player_id, state().selected, instance_id) if slot == "held" else app.raid.request_equip_armor(player_id, instance_id)
+	if not equipped:
+		show_notice("Cannot equip item")
+	selected_container_index = -1
+	selected_loot_pack_index = -1
+	_redraw_container()
+
+func _update_container_weight() -> void:
+	var limit := "--"
+	if container_contents.config != null and container_contents.config.weight_limit > 0:
+		limit = "%.2f" % container_contents.config.weight_limit
+	container_weight.text = "%.2f / %s kg" % [container_contents.total_weight(), limit]
 
 func _claim_drop(data: Dictionary, target: RaidInventory, _cell: Vector2i, _rotated: bool) -> void:
 	if target == state().inventory and data.inventory == container_contents:
-		app.raid.request_transfer(app.profile.profile.player_id, container_id, int(data.index))
+		if not app.raid.request_transfer(app.profile.profile.player_id, container_id, int(data.index)):
+			show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
+	elif target == state().inventory and data.inventory == target:
+		target.move(int(data.index), _cell.x, _cell.y, _rotated)
+	selected_container_index = -1
+	selected_loot_pack_index = -1
 	_redraw_container()
 
 func _transfer_selected() -> void:
 	if not app.raid.request_transfer(app.profile.profile.player_id, container_id, selected_container_index):
 		show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
 	selected_container_index = -1
+	selected_loot_pack_index = -1
 	_redraw_container()
 
 func _take_all() -> void:
 	for index in range(container_contents.slots.size() - 1, -1, -1):
 		app.raid.request_transfer(app.profile.profile.player_id, container_id, index)
 	selected_container_index = -1
+	selected_loot_pack_index = -1
 	_redraw_container()
 
 func _sort_pack() -> void:
 	state().inventory.sort()
+	selected_loot_pack_index = -1
 	_redraw_container()
 
 func _close_container() -> void:
@@ -440,6 +643,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	notice_label.text = message if Time.get_ticks_msec() < notice_until else ""
+	if mode == "container" and is_instance_valid(container_weight):
+		_update_container_weight()
 	if mode == "customize" and not Input.is_physical_key_pressed(KEY_T):
 		if state().weapon != null:
 			state().weapon.customizing = false
@@ -512,10 +717,18 @@ func _preview_stage(at: Vector2) -> Node3D:
 	var image := TextureRect.new()
 	image.name = "PreviewImage"
 	image.texture = viewport.get_texture()
-	image.position = at
-	image.size = Vector2(400, 250)
+	image.custom_minimum_size = Vector2(400, 250)
 	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	screen.add_child(image)
+	if inventory_flow != null:
+		if is_instance_valid(preview_box):
+			preview_box.queue_free()
+		preview_box = VBoxContainer.new()
+		inventory_flow.add_child(preview_box)
+		preview_box.add_child(image)
+	else:
+		image.position = at
+		image.size = Vector2(400, 250)
+		screen.add_child(image)
 	return stage
 
 func _preview(model: String, texture: String, animation: String, at: Vector2) -> void:
@@ -548,4 +761,7 @@ func _preview(model: String, texture: String, animation: String, at: Vector2) ->
 	clips.item_selected.connect(func(index):
 		if is_instance_valid(view):
 			view.play_clip(names[index]))
-	screen.add_child(clips)
+	if inventory_flow != null:
+		preview_box.add_child(clips)
+	else:
+		screen.add_child(clips)

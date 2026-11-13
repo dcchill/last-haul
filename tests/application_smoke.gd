@@ -13,6 +13,8 @@ func check(ok: bool, title: String) -> void:
 func settle(frames: int = 5) -> void:
 	for frame in range(frames): await physics_frame
 	await process_frame
+func inventory_frames() -> Array[Node]:
+	return app.ui.inventory_flow.get_children().filter(func(node): return node.has_meta("inventory_grid"))
 func capture(name: String) -> void:
 	if not captures: return
 	await RenderingServer.frame_post_draw
@@ -25,6 +27,43 @@ func run() -> void:
 	await settle()
 	check(app.ui.mode == "home", "home screen")
 	await capture("home")
+	app.ui.show_inventory()
+	await settle()
+	var frames := inventory_frames()
+	check(frames.size() == 2, "staging shows pack and stash")
+	if frames.size() == 2:
+		check(frames[0].custom_minimum_size.y == app.loadout.pack.height * 18 + 44, "pack frame fits its grid")
+		check(frames[1].custom_minimum_size.y == app.stash_view.height * 18 + 44, "stash frame fits its grid")
+		check(frames[0].get_node("Grid").cell_size == 18, "inventory uses native pixel slots")
+		var grid = frames[0].get_node("Grid")
+		var pack: RaidInventory = app.loadout.pack
+		if not pack.slots.is_empty():
+			var item: Dictionary = pack.slots[0]
+			var origin := Vector2i(int(item.x), int(item.y))
+			check(grid._slot_at(Vector2(origin * 18) + Vector2.ONE) == 0, "slot selection maps to native pixels")
+			for y in range(pack.height):
+				var moved := false
+				for x in range(pack.width):
+					if Vector2i(x, y) != origin and pack.can_place(item.id, x, y, bool(item.get("rotated", false)), 0):
+						var data := {"inventory": pack, "index": 0}
+						var target := Vector2(x * 18 + 1, y * 18 + 1)
+						check(grid._can_drop_data(target, data), "grid accepts valid drag target")
+						grid._drop_data(target, data)
+						var moved_index := pack._slot_at(x, y)
+						check(moved_index >= 0 and pack.slots[moved_index].id == item.id, "grid moves dragged item")
+						moved = true
+						break
+				if moved: break
+	await capture("staging")
+	if DisplayServer.get_name() != "headless":
+		var original_size := root.size
+		root.size = Vector2i(1600, 900)
+		await settle()
+		await capture("staging-large")
+		check(inventory_frames().size() == 2, "staging survives window resize")
+		root.size = original_size
+		await settle()
+	app.ui.show_home()
 	app.deploy(true)
 	await settle()
 	var raid: RaidAuthority = app.raid
@@ -95,6 +134,52 @@ func run() -> void:
 	await settle()
 	await capture("inventory")
 	check(app.ui.mode == "raid_inventory", "raid inventory controls")
+	check(inventory_frames().size() == 1, "field inventory shows pack")
+	if not raid.containers.is_empty():
+		app.ui.open_container(id, raid.containers.keys()[0])
+		await settle()
+		check(app.ui.mode == "container", "loot container opens")
+		check(app.ui.loot_pack_grid.global_position.y > app.ui.loot_container_grid.global_position.y, "loot grid is above player inventory")
+		check(app.ui.loot_container_grid.plain_slots and app.ui.loot_pack_grid.plain_slots, "loot grids use plain slots")
+		check(app.ui.container_weight.text.begins_with("%.2f" % app.ui.container_contents.total_weight()), "loot footer shows container weight")
+		if not app.ui.container_contents.slots.is_empty():
+			app.ui.loot_container_grid.slot_selected.emit(0)
+			check(app.ui.loot_container_grid.selected_index == 0, "loot selection stays visible")
+		check(state.inventory.add("patrol", 1), "add armor for loot equipment test")
+		var armor_index := state.inventory.find_instance(state.inventory.slots.back().state.instance_id)
+		var armor_id: String = state.inventory.slots[armor_index].state.instance_id
+		app.ui._equip_loot({"inventory": state.inventory, "index": armor_index}, "chestplate")
+		check(state.armor_slots.get("chestplate") == armor_id, "equip armor from player grid")
+		check(not app.ui._can_equip_loot({"inventory": state.inventory, "index": state.inventory.find_instance(armor_id)}, "helmet"), "reject armor in wrong slot")
+		var crate_id := "armory-crate-0"
+		check(raid.containers.has(crate_id), "practice armor crate exists")
+		if raid.containers.has(crate_id):
+			raid.player.set_physics_process(false)
+			raid.player.global_position = raid.entities[crate_id].global_position + Vector3(0, 0.02, 2)
+			await settle()
+			state.opened_container = crate_id
+			app.ui.open_container(id, crate_id)
+			var contents: RaidInventory = raid.containers[crate_id]
+			var crate_armor := -1
+			for index in range(contents.slots.size()):
+				var definition: Resource = app.catalog.definitions.get(contents.slots[index].id)
+				if definition is ArmorDef and definition.slot == "chestplate":
+					crate_armor = index
+					break
+			check(crate_armor >= 0, "practice crate contains compatible armor")
+			if crate_armor >= 0:
+				var replacement_id: String = contents.slots[crate_armor].state.instance_id
+				state.inventory.capacity = 0
+				app.ui._equip_loot({"inventory": contents, "index": crate_armor}, "chestplate")
+				check(state.armor_slots.get("chestplate") == armor_id and contents.find_instance(replacement_id) >= 0, "full pack leaves crate armor and equipment unchanged")
+				state.inventory.capacity = -1
+				app.ui._equip_loot({"inventory": contents, "index": crate_armor}, "chestplate")
+				check(state.armor_slots.get("chestplate") == replacement_id and state.inventory.find_instance(armor_id) >= 0, "crate armor replaces equipped armor without losing the old item")
+			raid.player.set_physics_process(true)
+		await capture("container")
+		app.ui._sort_pack()
+		app.ui._close_container()
+		check(app.ui.mode == "hud", "loot container closes")
 	app.ui.show_practice()
 	await settle()
 	await capture("armory")

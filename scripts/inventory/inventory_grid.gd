@@ -7,6 +7,7 @@ var inventory: RaidInventory
 var drop_handler: Callable
 var cell_size: float = RaidInventory.CELL_SIZE
 var selected_index: int = -1
+var plain_slots := false
 
 func setup(value: RaidInventory, handler: Callable = Callable()) -> void:
 	inventory = value
@@ -22,7 +23,13 @@ func _draw() -> void:
 		return
 	for y in range(inventory.height):
 		for x in range(inventory.width):
-			draw_texture_rect(SLOT_TEXTURE, Rect2(Vector2(x, y) * cell_size, Vector2.ONE * cell_size), false)
+			var cell := Rect2(Vector2(x, y) * cell_size, Vector2.ONE * cell_size)
+			if plain_slots:
+				draw_rect(cell, Color("383838"))
+				draw_rect(cell.grow(-1), Color("8b8b8b"))
+				draw_rect(cell.grow(-3), Color("555555"))
+			else:
+				draw_texture_rect(SLOT_TEXTURE, cell, false)
 	for index in range(inventory.slots.size()):
 		var slot: Dictionary = inventory.slots[index]
 		var item: ItemDef = inventory.items[slot.id]
