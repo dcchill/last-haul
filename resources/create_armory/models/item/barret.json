@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/barret.item",
+  "textures": {
+    "layer0": "createarmory:item/barrettexture"
+  }
+}

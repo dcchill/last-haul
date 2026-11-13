@@ -1,0 +1,7 @@
+{
+  "parent": "createarmory:custom/rocketitem",
+  "textures": {
+    "0": "createarmory:block/rockettexture",
+    "particle": "createarmory:item/test"
+  }
+}

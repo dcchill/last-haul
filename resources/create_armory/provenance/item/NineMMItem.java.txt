@@ -1,0 +1,11 @@
+
+package net.createarmory.item;
+
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Item;
+
+public class NineMMItem extends Item {
+	public NineMMItem() {
+		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+	}
+}

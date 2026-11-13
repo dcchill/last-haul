@@ -1,0 +1,285 @@
+package net.createarmory.client.weapon;
+
+import java.util.Map;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.createarmory.CreatearmoryMod;
+import net.createarmory.network.WeaponPackets;
+import net.createarmory.weapon.*;
+import net.minecraft.client.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.settings.*;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.lwjgl.glfw.GLFW;
+
+@Mod.EventBusSubscriber(modid = CreatearmoryMod.MODID, value = Dist.CLIENT)
+public final class ClientWeapons {
+    public static final KeyMapping RELOAD = new KeyMapping("key.createarmory.reload", KeyConflictContext.IN_GAME,
+        InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.categories.createarmory");
+    public static final KeyMapping PLUS = new KeyMapping("key.createarmory.plus", KeyConflictContext.IN_GAME,
+        InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_T, "key.categories.createarmory");
+    private static final Map<Entity, Visual> VISUALS = new java.util.WeakHashMap<>();
+    private static net.minecraft.client.multiplayer.ClientLevel lastLevel;
+    private static ItemStack lastGun = ItemStack.EMPTY;
+    private static int lastSlot = -1, sentInput = -1, heartbeat;
+    private static float aim;
+    static final WeaponMotion MOTION = new WeaponMotion();
+    private static long lastFrame;
+    private static long lastStackId = -1;
+    private static float lastYaw, lastPitch, fallingSpeed;
+    private static boolean requireRelease, motionActive, wasGrounded;
+
+    public static final class Visual {
+        public boolean aiming;
+        public long firedAt, reloadStart, reloadEnd;
+        ItemStack reloadGun = ItemStack.EMPTY;
+        String reloadAnimation = "reload";
+    }
+
+    public static Visual visual(Entity entity) { return VISUALS.computeIfAbsent(entity, key -> new Visual()); }
+    public static float aim() { return aim; }
+    public static void animate(WeaponPackets.Animation message) {
+        if (!(net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(message.item()) instanceof GunItem gun)) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null && software.bernie.geckolib.animatable.GeoItem.getId(mc.player.getMainHandItem()) == message.stackId()
+            && (message.name().startsWith("reload") || message.name().equals("unload")))
+            visual(mc.player).reloadAnimation = message.name();
+        var controller = gun.getAnimatableInstanceCache().getManagerForId(message.stackId()).getAnimationControllers().get("action");
+        // A running GeckoLib trigger does not restart itself when the next shot arrives.
+        controller.stop();
+        controller.forceAnimationReset();
+        controller.setTransitionLength(message.name().equals("equip") ? 1 : 0);
+        controller.tryTriggerAnimation(message.name());
+    }
+
+    private static void resetAction(ItemStack stack) {
+        if (!(stack.getItem() instanceof GunItem gun)) return;
+        long id = software.bernie.geckolib.animatable.GeoItem.getId(stack);
+        if (id < 0) return;
+        var controller = gun.getAnimatableInstanceCache().getManagerForId(id).getAnimationControllers().get("action");
+        controller.stop();
+        controller.forceAnimationReset();
+        controller.setTransitionLength(1);
+        controller.tryTriggerAnimation("reset");
+    }
+    public static double mouseScale() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.screen != null || !(mc.player.getMainHandItem().getItem() instanceof GunItem)) return 1;
+        return 1 + aim * (WeaponClientConfig.ADS_SENSITIVITY.get() / GunData.magnification(mc.player.getMainHandItem()) - 1);
+    }
+
+    public static void receive(WeaponPackets.Effect effect) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return;
+        Entity player = mc.level.getEntity(effect.entityId());
+        if (player == null) return;
+        Visual state = visual(player);
+        long now = mc.level.getGameTime();
+        switch (effect.effect()) {
+            case WeaponPackets.AIM -> state.aiming = effect.value() == 1;
+            case WeaponPackets.RELOADING -> {
+                state.reloadStart = now; state.reloadEnd = now + effect.value();
+                if (player instanceof net.minecraft.world.entity.LivingEntity living) state.reloadGun = living.getMainHandItem();
+                if (player == mc.player) {
+                    AmmoHud.reloading(true);
+                    MOTION.reload(effect.value() / 20f);
+                }
+            }
+            case WeaponPackets.CANCEL -> {
+                if (state.reloadEnd != 0) resetAction(state.reloadGun);
+                state.reloadEnd = 0;
+                state.reloadGun = ItemStack.EMPTY;
+                if (player == mc.player) {
+                    AmmoHud.reloading(false);
+                    MOTION.cancelReload();
+                }
+            }
+            case WeaponPackets.FIRE -> {
+                state.firedAt = now;
+                if (player == mc.player && mc.player.getMainHandItem().getItem() instanceof GunItem gun) {
+                    if (!mc.isPaused()) AmmoHud.fire();
+                    float recoil = gun.definition.recoil;
+                    if (!GunData.attachment(mc.player.getMainHandItem(), AttachmentItem.Slot.GRIP).isEmpty()) recoil *= .7f;
+                    mc.player.setXRot(Math.max(-90, mc.player.getXRot() - recoil));
+                    float weight = switch (gun.definition) {
+                        case BARRET, BOLT_ACTION_SNIPER, DOUBLE_BARREL -> 1.6f;
+                        case RPG -> 1.35f;
+                        case PIPE, JUNK -> 1.1f;
+                        case MINIGUN, UPGRADED_MINIGUN -> .38f;
+                        case MAC10 -> .65f;
+                        default -> .8f;
+                    };
+                    if (motionActive && !mc.isPaused()) MOTION.fire(weight * recoil / gun.definition.recoil);
+                }
+            }
+            default -> { }
+        }
+    }
+
+    public static boolean physicalKey(KeyMapping key) {
+        return key.getKey().getType() == InputConstants.Type.KEYSYM
+            ? InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), key.getKey().getValue())
+            : GLFW.glfwGetMouseButton(Minecraft.getInstance().getWindow().getWindow(), key.getKey().getValue()) == GLFW.GLFW_PRESS;
+    }
+
+    @SubscribeEvent public static void keys(InputEvent.Key event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.screen != null || !(mc.player.getMainHandItem().getItem() instanceof GunItem)) return;
+        if (event.getAction() != GLFW.GLFW_REPEAT) {
+            if (mc.options.keyAttack.matches(event.getKey(),event.getScanCode())) inputEdge(true,event.getAction() == GLFW.GLFW_PRESS);
+            else if (mc.options.keyUse.matches(event.getKey(),event.getScanCode())) inputEdge(false,event.getAction() == GLFW.GLFW_PRESS);
+        }
+        if (event.getAction() == GLFW.GLFW_PRESS && event.getKey() == PLUS.getKey().getValue()) {
+            mc.options.keyChat.setDown(false);
+            while (mc.options.keyChat.consumeClick()) { }
+            mc.setScreen(new PlusScreen());
+            WeaponPackets.send(WeaponPackets.INPUT, 4, 0);
+            sentInput = 4;
+        } else if (event.getAction() == GLFW.GLFW_PRESS && event.getKey() == GLFW.GLFW_KEY_ENTER) {
+            mc.setScreen(new net.minecraft.client.gui.screens.ChatScreen(""));
+        }
+    }
+
+    @SubscribeEvent public static void mouse(InputEvent.MouseButton.Pre event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.options.keyAttack.matchesMouse(event.getButton())) inputEdge(true,event.getAction() == GLFW.GLFW_PRESS);
+        else if (mc.options.keyUse.matchesMouse(event.getButton())) inputEdge(false,event.getAction() == GLFW.GLFW_PRESS);
+    }
+
+    private static void inputEdge(boolean attack,boolean pressed) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.screen != null || !mc.isWindowActive() || !mc.mouseHandler.isMouseGrabbed()
+            || requireRelease || !(mc.player.getMainHandItem().getItem() instanceof GunItem)) return;
+        boolean fire = attack ? pressed : mc.options.keyAttack.isDown();
+        boolean aiming = ((GunItem)mc.player.getMainHandItem().getItem()).definition.canAim() && (attack ? mc.options.keyUse.isDown() : pressed);
+        int input = (fire ? 1 : 0) | (aiming ? 2 : 0);
+        WeaponPackets.send(WeaponPackets.INPUT,input,0);
+        sentInput = input; heartbeat = 0;
+    }
+
+    @SubscribeEvent public static void interaction(InputEvent.InteractionKeyMappingTriggered event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null && mc.player.getMainHandItem().getItem() instanceof GunItem) {
+            event.setCanceled(true);
+            event.setSwingHand(false);
+        }
+    }
+
+    @SubscribeEvent public static void tick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != lastLevel) {
+            resetAction(lastGun);
+            lastLevel = mc.level; VISUALS.clear(); ScopeRenderer.close();
+            aim = 0; lastGun = ItemStack.EMPTY; lastSlot = -1; sentInput = -1;
+            MOTION.clear(); motionActive = false; lastStackId = -1;
+            AmmoHud.reset();
+        }
+        if (mc.player == null) return;
+        ItemStack gun = mc.player.getMainHandItem();
+        long stackId = software.bernie.geckolib.animatable.GeoItem.getId(gun);
+        if (lastSlot != mc.player.getInventory().selected || gun.getItem() != lastGun.getItem()
+            || lastStackId >= 0 && stackId >= 0 && stackId != lastStackId) {
+            resetAction(lastGun);
+            requireRelease = true;
+            aim = 0;
+            MOTION.clear(); motionActive = false;
+            AmmoHud.reset();
+        }
+        lastGun = gun; lastSlot = mc.player.getInventory().selected; lastStackId = stackId;
+        boolean fireHeld = mc.options.keyAttack.isDown(), aimHeld = mc.options.keyUse.isDown();
+        boolean canAim = gun.getItem() instanceof GunItem item && item.definition.canAim();
+        if (!fireHeld && !aimHeld) requireRelease = false;
+        boolean active = mc.isWindowActive() && mc.player.isAlive() && !mc.player.isSpectator()
+            && gun.getItem() instanceof GunItem;
+        boolean plus = active && mc.screen instanceof PlusScreen;
+        int input = plus ? 4 : active && mc.screen == null && !requireRelease
+            ? (fireHeld ? 1 : 0) | (aimHeld && canAim ? 2 : 0) : 0;
+        if (!active || mc.screen != null && !plus) requireRelease = true;
+        if (mc.getConnection() != null && (input != sentInput || ++heartbeat >= 5)) {
+            WeaponPackets.send(WeaponPackets.INPUT, input, 0); sentInput = input; heartbeat = 0;
+        }
+        while (RELOAD.consumeClick()) if (active && mc.screen == null) WeaponPackets.send(WeaponPackets.RELOAD, -1, 0);
+        while (PLUS.consumeClick()) { }
+    }
+
+    @SubscribeEvent public static void renderTick(TickEvent.RenderTickEvent event) {
+        if (event.phase != TickEvent.Phase.START) return;
+        Minecraft mc = Minecraft.getInstance();
+        long now = System.nanoTime();
+        float delta = lastFrame == 0 ? 0 : (now - lastFrame) / 1_000_000_000f;
+        lastFrame = now;
+        if (mc.isPaused()) return;
+        if (mc.player != null && mc.player.getMainHandItem().getItem() instanceof GunItem) AmmoHud.update(delta);
+        boolean active = mc.player != null && mc.player.isAlive() && !mc.player.isSpectator()
+            && mc.screen == null && mc.isWindowActive() && mc.options.getCameraType().isFirstPerson()
+            && mc.player.getMainHandItem().getItem() instanceof GunItem;
+        if (!active) {
+            if (motionActive && (mc.player == null || !mc.player.isAlive())) resetAction(lastGun);
+            MOTION.clear(); aim = 0; motionActive = false;
+            return;
+        }
+        GunItem gun = (GunItem)mc.player.getMainHandItem().getItem();
+        float yaw = mc.player.getViewYRot(event.renderTickTime), pitch = mc.player.getViewXRot(event.renderTickTime);
+        if (!motionActive || delta > .25f) {
+            delta = 0; lastYaw = yaw; lastPitch = pitch;
+            wasGrounded = mc.player.onGround(); fallingSpeed = 0;
+        }
+        motionActive = true;
+        float lookX = delta == 0 ? 0 : net.minecraft.util.Mth.wrapDegrees(yaw - lastYaw) / delta * .008f;
+        float lookY = delta == 0 ? 0 : (pitch - lastPitch) / delta * .008f;
+        lastYaw = yaw; lastPitch = pitch;
+        if (!wasGrounded && mc.player.onGround()) MOTION.land(fallingSpeed);
+        wasGrounded = mc.player.onGround();
+        fallingSpeed = wasGrounded ? 0 : Math.max(fallingSpeed, (float)-mc.player.getDeltaMovement().y);
+        boolean reloading = visual(mc.player).reloadEnd != 0;
+        boolean aiming = !requireRelease && gun.definition.canAim() && mc.options.keyUse.isDown() && !reloading;
+        MOTION.update(delta, aiming, WeaponClientConfig.ADS_TRANSITION_SECONDS.get().floatValue(), lookX, lookY,
+            (float)mc.player.getDeltaMovement().horizontalDistance() * 4, mc.player.isSprinting(), !gun.definition.canAim(), reloading);
+        aim = MOTION.aim;
+        ScopeRenderer.render(event.renderTickTime);
+    }
+
+    @SubscribeEvent public static void camera(ViewportEvent.ComputeCameraAngles event) {
+        if (!motionActive) return;
+        event.setPitch(event.getPitch() + MOTION.cameraPitch);
+        event.setRoll(event.getRoll() + MOTION.cameraRoll);
+    }
+
+    @SubscribeEvent public static void fov(ViewportEvent.ComputeFov event) {
+        if (ScopeRenderer.rendering()) {
+            event.setFOV(ScopeRenderer.scopeFov(event.getFOV()));
+        } else if (Minecraft.getInstance().options.getCameraType().isFirstPerson()) {
+            event.setFOV(event.getFOV() * (1 - aim * .12));
+        }
+    }
+
+    @SubscribeEvent public static void overlay(RenderGuiOverlayEvent.Pre event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || !(mc.player.getMainHandItem().getItem() instanceof GunItem gun)) return;
+        if (event.getOverlay().id().getPath().equals("crosshair") && aim > .1) event.setCanceled(true);
+        if (!event.getOverlay().id().getPath().equals("hotbar")) return;
+        int width = event.getWindow().getGuiScaledWidth(), height = event.getWindow().getGuiScaledHeight();
+        var state = visual(mc.player);
+        Component text = state.reloadEnd > 0 ? Component.translatable("hud.createarmory.reloading")
+            : Component.literal(GunData.rounds(mc.player.getMainHandItem()) + " / " + gun.definition.feed.capacity);
+        AmmoHud.render(event.getGuiGraphics(), width, height, text);
+    }
+
+    @Mod.EventBusSubscriber(modid = CreatearmoryMod.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static final class Registration {
+        @SubscribeEvent public static void keys(RegisterKeyMappingsEvent event) { event.register(RELOAD); event.register(PLUS); }
+        @SubscribeEvent public static void setup(net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent event) {
+            event.enqueueWork(() -> net.minecraft.client.gui.screens.MenuScreens.register(
+                net.createarmory.init.CreatearmoryModMenus.MAGAZINE.get(), MagazineScreen::new));
+        }
+        @SubscribeEvent public static void resources(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener) manager -> ScopeRenderer.close());
+        }
+    }
+}

@@ -1,0 +1,11 @@
+
+package net.createarmory.item;
+
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.Item;
+
+public class UnfinishedFiveFiveSixCasingItem extends Item {
+	public UnfinishedFiveFiveSixCasingItem() {
+		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+	}
+}

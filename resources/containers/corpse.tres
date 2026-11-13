@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ContainerDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "corpse"
+display_name = "Fallen guard"
+dimensions = Vector2i(6, 6)
+searchable = true
+progressive_discovery = false

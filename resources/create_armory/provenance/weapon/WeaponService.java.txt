@@ -1,0 +1,196 @@
+package net.createarmory.weapon;
+
+import java.util.HashMap;
+import java.util.Map;
+import net.createarmory.CreatearmoryMod;
+import net.createarmory.entity.BulletEntity;
+import net.createarmory.entity.RocketDebugEntity;
+import net.createarmory.init.CreatearmoryModEntities;
+import net.createarmory.network.WeaponPackets;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = CreatearmoryMod.MODID)
+public final class WeaponService {
+    private static final Map<ServerPlayer, State> STATES = new HashMap<>();
+    private static final class State {
+        ItemStack gun = ItemStack.EMPTY, magazine = ItemStack.EMPTY;
+        int slot, magazineSlot = -1;
+        long nextShot, reloadEnd, lastInput;
+        boolean trigger, aiming, plus;
+    }
+
+    private static State state(ServerPlayer player) {
+        State state = STATES.computeIfAbsent(player, key -> new State());
+        ItemStack held = player.getMainHandItem();
+        if (held != state.gun || state.slot != player.getInventory().selected) {
+            reset(player, state);
+            state.gun = held;
+            state.slot = player.getInventory().selected;
+            if (held.getItem() instanceof GunItem) WeaponPackets.animate(player,held,"equip");
+        }
+        return state;
+    }
+
+    private static void reset(ServerPlayer player, State state) {
+        if (state.aiming) WeaponPackets.broadcast(player, WeaponPackets.AIM, 0);
+        if (state.reloadEnd != 0) WeaponPackets.broadcast(player, WeaponPackets.CANCEL, 0);
+        state.trigger = state.aiming = state.plus = false;
+        state.reloadEnd = 0;
+        state.magazine = ItemStack.EMPTY;
+    }
+
+    public static void action(ServerPlayer player, WeaponPackets.Action message) {
+        State state = state(player);
+        if (!(state.gun.getItem() instanceof GunItem gun) || player.containerMenu != player.inventoryMenu) return;
+        long now = player.serverLevel().getGameTime();
+        switch (message.action()) {
+            case WeaponPackets.INPUT -> {
+                if (message.value() < 0 || message.value() > 7) return;
+                state.lastInput = now;
+                boolean plus = (message.value() & 4) != 0;
+                boolean aim = gun.definition.canAim() && (message.value() & 2) != 0 && !plus && state.reloadEnd == 0;
+                boolean trigger = (message.value() & 1) != 0 && !plus;
+                if (aim != state.aiming) WeaponPackets.broadcast(player, WeaponPackets.AIM, aim ? 1 : 0);
+                state.aiming = aim;
+                state.plus = plus;
+                if (trigger && !state.trigger) fire(player, state, gun);
+                state.trigger = trigger;
+            }
+            case WeaponPackets.RELOAD -> startReload(player, state, gun, message.value());
+            case WeaponPackets.ATTACH -> {
+                if (!state.plus || now - state.lastInput > 15 || state.reloadEnd != 0
+                    || cyclingBolt(state, gun, now)
+                    || message.extra() < 0 || message.extra() >= AttachmentItem.Slot.values().length
+                    || message.value() < -1 || message.value() >= 36) return;
+                if (WeaponInventory.swapAttachment(state.gun, player.getInventory(),
+                    AttachmentItem.Slot.values()[message.extra()], message.value())) player.inventoryMenu.broadcastChanges();
+                else player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.createarmory.no_room"),true);
+            }
+            default -> { }
+        }
+    }
+
+    private static void startReload(ServerPlayer player, State state, GunItem gun, int chosenSlot) {
+        if (state.reloadEnd != 0 || chosenSlot < -2 || chosenSlot >= 36
+            || cyclingBolt(state, gun, player.serverLevel().getGameTime())) return;
+        if (gun.definition.feed.detachable()) {
+            if (chosenSlot == -1 && WeaponInventory.selectMagazine(player.getInventory(),gun.definition.feed) < 0) chosenSlot = -2;
+            if (chosenSlot == -2) {
+                if (GunData.magazine(state.gun).isEmpty()) return;
+                if (player.getInventory().getFreeSlot() < 0) {
+                    player.displayClientMessage(net.minecraft.network.chat.Component.translatable("message.createarmory.magazine_room"),true);
+                    return;
+                }
+                state.magazineSlot = -2;
+                state.magazine = ItemStack.EMPTY;
+            } else {
+            int slot = chosenSlot == -1 ? WeaponInventory.selectMagazine(player.getInventory(), gun.definition.feed) : chosenSlot;
+            if (slot < 0) return;
+            ItemStack magazine = player.getInventory().getItem(slot);
+            if (!(magazine.getItem() instanceof MagazineItem mag) || mag.feed != gun.definition.feed
+                || magazine.getCount() != 1 || GunData.rounds(magazine) == 0) return;
+            state.magazineSlot = slot;
+            state.magazine = magazine;
+            }
+        } else if (GunData.rounds(state.gun) >= gun.definition.directCapacity
+            || !player.getInventory().contains(new ItemStack(gun.definition.feed.ammo()))) return;
+        state.trigger = false;
+        state.aiming = false;
+        WeaponPackets.broadcast(player, WeaponPackets.AIM, 0);
+        state.reloadEnd = player.serverLevel().getGameTime() + gun.definition.reloadTicks;
+        String animation = "reload";
+        if (gun.definition.feed.detachable()) {
+            if (chosenSlot == -2) animation = "unload";
+            else if (GunData.magazine(state.gun).isEmpty()) animation = "reload_insert";
+            else if (GunData.rounds(state.gun) == 0) animation = "reload_empty";
+        }
+        WeaponPackets.animate(player,state.gun,animation);
+        WeaponPackets.broadcast(player, WeaponPackets.RELOADING, gun.definition.reloadTicks);
+    }
+
+    private static void fire(ServerPlayer player, State state, GunItem gun) {
+        long now = player.serverLevel().getGameTime();
+        if (state.reloadEnd != 0 || state.plus || now < state.nextShot || GunData.rounds(state.gun) <= 0) return;
+        state.nextShot = now + gun.definition.interval;
+        GunData.setRounds(state.gun, GunData.rounds(state.gun) - 1);
+        WeaponDefinition def = gun.definition;
+        if (def == WeaponDefinition.RPG) {
+            RocketDebugEntity rocket = new RocketDebugEntity(CreatearmoryModEntities.ROCKET_DEBUG.get(), player, player.level());
+            rocket.setOwner(player);
+            rocket.setBaseDamage(0);
+            rocket.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, def.speed, def.spread);
+            player.serverLevel().addFreshEntity(rocket);
+        } else for (int i = 0; i < def.pellets; i++) {
+            BulletEntity bullet = new BulletEntity(CreatearmoryModEntities.BULLET.get(), player.level());
+            bullet.setOwner(player);
+            bullet.setPos(player.getX(), player.getEyeY() - .05, player.getZ());
+            bullet.configure(def.damage, def.feed == WeaponDefinition.Feed.BARRET ? 2 : 1.5f);
+            bullet.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, def.speed,
+                def.spread * (state.aiming ? .35f : 1));
+            player.serverLevel().addFreshEntity(bullet);
+        }
+        boolean suppressed = GunData.suppressed(state.gun);
+        var sound = def == WeaponDefinition.MAC10 ? net.createarmory.init.CreatearmoryModSounds.MAC10_FIRE.get()
+            : def == WeaponDefinition.M16 ? net.createarmory.init.CreatearmoryModSounds.M16_FIRE.get()
+            : net.createarmory.init.CreatearmoryModSounds.M4_FIRE.get();
+        player.level().playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS,
+            suppressed ? .2f : 2, def.feed == WeaponDefinition.Feed.BARRET ? .7f : 1.8f);
+        if (def.feed != WeaponDefinition.Feed.SHELL && def.feed != WeaponDefinition.Feed.ROCKET) {
+            var casing = def.feed == WeaponDefinition.Feed.STANAG ? net.createarmory.init.CreatearmoryModItems.FIVE_FIVE_SIX_CASING.get()
+                : def.feed == WeaponDefinition.Feed.BARRET ? net.createarmory.init.CreatearmoryModItems.FIFTY_CAL_CASING.get()
+                : net.createarmory.init.CreatearmoryModItems.NINE_MM_CASING.get();
+            ItemStack spent = new ItemStack(casing);
+            if (!player.getInventory().add(spent)) player.drop(spent,false);
+        }
+        WeaponPackets.animate(player,state.gun,"fire");
+        WeaponPackets.broadcast(player, WeaponPackets.FIRE, suppressed ? 1 : 0);
+        player.getInventory().setChanged();
+        player.inventoryMenu.broadcastChanges();
+    }
+
+    private static boolean cyclingBolt(State state, GunItem gun, long now) {
+        // nextShot survives held-item resets, including switching away and back during a cycle.
+        return gun.definition == WeaponDefinition.BOLT_ACTION_SNIPER && now < state.nextShot;
+    }
+
+    @SubscribeEvent public static void tick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player)) return;
+        State state = STATES.get(player);
+        if (state == null) return;
+        state = state(player);
+        long now = player.serverLevel().getGameTime();
+        if (!player.isAlive() || player.isSpectator() || player.containerMenu != player.inventoryMenu
+            || !(state.gun.getItem() instanceof GunItem)) { reset(player, state); return; }
+        if (now - state.lastInput > 15 && (state.trigger || state.aiming || state.plus)) {
+            state.trigger = state.plus = state.aiming = false;
+            WeaponPackets.broadcast(player, WeaponPackets.AIM, 0);
+        }
+        GunItem gun = (GunItem) state.gun.getItem();
+        if (state.reloadEnd != 0) {
+            if (gun.definition.feed.detachable() && state.magazineSlot >= 0 && player.getInventory().getItem(state.magazineSlot) != state.magazine) {
+                reset(player, state);
+            } else if (now >= state.reloadEnd) {
+                if (state.magazineSlot == -2 && gun.definition.feed.detachable()) WeaponInventory.ejectMagazine(state.gun,player.getInventory());
+                else if (gun.definition.feed.detachable()) WeaponInventory.swapMagazine(state.gun, player.getInventory(), state.magazineSlot, state.magazine);
+                else WeaponInventory.loadDirect(state.gun, player.getInventory());
+                state.reloadEnd = 0;
+                state.magazine = ItemStack.EMPTY;
+                WeaponPackets.broadcast(player, WeaponPackets.CANCEL, 0);
+                player.inventoryMenu.broadcastChanges();
+            }
+        } else if (state.trigger && gun.definition.automatic) fire(player, state, gun);
+    }
+
+    @SubscribeEvent public static void logout(PlayerEvent.PlayerLoggedOutEvent event) { STATES.remove(event.getEntity()); }
+    @SubscribeEvent public static void clone(PlayerEvent.Clone event) { STATES.remove(event.getOriginal()); }
+    @SubscribeEvent public static void dimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player && STATES.containsKey(player)) reset(player,STATES.get(player));
+    }
+    @SubscribeEvent public static void stopping(net.minecraftforge.event.server.ServerStoppedEvent event) { STATES.clear(); }
+}

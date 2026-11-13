@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "createarmory:custom/gun_mount_particle"
+    },
+    "facing=east": {
+      "model": "createarmory:custom/gun_mount_particle",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "createarmory:custom/gun_mount_particle",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "createarmory:custom/gun_mount_particle",
+      "y": 270
+    }
+  }
+}

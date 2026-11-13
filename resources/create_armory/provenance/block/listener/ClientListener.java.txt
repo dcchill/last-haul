@@ -1,0 +1,24 @@
+package net.createarmory.block.listener;
+
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+
+import net.createarmory.init.CreatearmoryModBlockEntities;
+import net.createarmory.block.renderer.MountedRpgTileRenderer;
+import net.createarmory.block.renderer.MountedMinigunTileRenderer;
+import net.createarmory.block.renderer.GunMountTileRenderer;
+import net.createarmory.CreatearmoryMod;
+
+@Mod.EventBusSubscriber(modid = CreatearmoryMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class ClientListener {
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerBlockEntityRenderer(CreatearmoryModBlockEntities.GUN_MOUNT.get(), context -> new GunMountTileRenderer());
+		event.registerBlockEntityRenderer(CreatearmoryModBlockEntities.MOUNTED_MINIGUN.get(), context -> new MountedMinigunTileRenderer());
+		event.registerBlockEntityRenderer(CreatearmoryModBlockEntities.MOUNTED_RPG.get(), context -> new MountedRpgTileRenderer());
+	}
+}

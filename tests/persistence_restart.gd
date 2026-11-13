@@ -1,18 +1,32 @@
-extends SceneTree
+﻿extends SceneTree
 
-# Run twice in separate processes: -- --write, followed by -- --read.
+const PATH := "res://.godot/restart_probe_armory.json"
 func _initialize() -> void:
 	var catalog := Catalog.new()
 	if not catalog.load_all().is_empty():
 		quit(1)
 		return
-	var store := ProfileStore.new(catalog, "res://.godot/restart_probe.json")
+	var store := ProfileStore.new(catalog, PATH)
+	var passed := false
 	if "--write" in OS.get_cmdline_user_args():
-		var loot: Array[Dictionary] = [{"id": "salvage", "quantity": 2}]
-		var saved := store.commit_result({"raid_id": "restart-probe", "success": true, "reason": "restart test"}, loot)
-		print("RESTART WRITE: ", saved)
-		quit(0 if saved else 1)
+		# Only this fixed, test-owned path is reset; real profiles are never opened.
+		for suffix in ["", ".bak"]:
+			if FileAccess.file_exists(PATH + suffix): DirAccess.remove_absolute(PATH + suffix)
+		passed = store.load_profile()
+		var state := ArmoryInstance.fresh("bolt_action_sniper", catalog.items)
+		var mag := ArmoryInstance.fresh("barret_magazine", catalog.items)
+		mag.rounds = 4
+		state.magazine = {"id": "barret_magazine", "quantity": 1, "state": mag}
+		state.attachments.optic = {"id": "sniper_scope", "quantity": 1, "state": ArmoryInstance.fresh("sniper_scope", catalog.items)}
+		var loot: Array[Dictionary] = [{"id": "bolt_action_sniper", "quantity": 1, "state": state}]
+		passed = passed and store.commit_result({"raid_id": "restart-probe", "success": true, "reason": "restart test"}, loot)
+		print("RESTART WRITE: ", passed)
 	else:
-		var passed := store.load_profile() and store.profile.stash.size() == 1 and store.profile.stash[0].quantity == 2 and store.profile.committed_raids.has("restart-probe")
+		passed = store.load_profile() and store.profile.committed_raids.has("restart-probe")
+		var found := false
+		for entry in store.profile.stash:
+			if entry.id == "bolt_action_sniper":
+				found = entry.state.magazine.state.rounds == 4 and entry.state.attachments.optic.id == "sniper_scope"
+		passed = passed and found
 		print("RESTART READ: ", passed)
-		quit(0 if passed else 1)
+	quit(0 if passed else 1)

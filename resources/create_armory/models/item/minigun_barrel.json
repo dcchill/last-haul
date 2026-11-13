@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/minipart.item",
+  "textures": {
+    "layer0": "createarmory:item/mguntexture"
+  }
+}

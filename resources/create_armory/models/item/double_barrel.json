@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/db.item",
+  "textures": {
+    "layer0": "createarmory:item/dbtexture"
+  }
+}

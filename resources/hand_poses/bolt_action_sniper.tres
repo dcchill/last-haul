@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="WeaponHandProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_hand_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+weapon_id = "bolt_action_sniper"
+right_bone = "frame"
+right_point = Vector3(1.7, 0.8, 4.5)
+left_bone = "frame"
+left_point = Vector3(-1.7, 2.3, -5)
+magazine_bone = "mag"
+magazine_point = Vector3(-1.65, 0.8, 2.1)
+loading_bone = "bolt"
+loading_point = Vector3(2.8, 2.7, 3.4)
+bolt_bone = "bolt"
+bolt_point = Vector3(2.8, 2.7, 3.4)
+scope_distance = 0.3
+withdraw_offset = Vector3(-0.09, -0.16, 0.05)
+insert_offset = Vector3(-0.08, -0.16, 0.04)
+reach_clearance = Vector3(-0.10, -0.06, 0.04)

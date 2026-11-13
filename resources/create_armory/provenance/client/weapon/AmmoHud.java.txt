@@ -1,0 +1,96 @@
+package net.createarmory.client.weapon;
+
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.simibubi.create.AllBlocks;
+import net.createmod.catnip.gui.element.GuiGameElement;
+import net.minecraft.client.AttackIndicatorStatus;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL14;
+
+final class AmmoHud {
+    private static final float IDLE_SPEED = 6, RELOAD_SPEED = 240, SHOT_BOOST = 90, MAX_BOOST = 360, DECAY_SECONDS = .25f;
+    private static float angle, boost;
+    private static boolean reloading;
+
+    private AmmoHud() {}
+
+    static void reset() { angle = 0; boost = 0; reloading = false; }
+
+    static void reloading(boolean value) { reloading = value; }
+
+    static void fire() { boost = Math.min(MAX_BOOST, boost + SHOT_BOOST); }
+
+    static void update(float elapsed) {
+        elapsed = Math.max(0, Math.min(.25f, elapsed));
+        float decay = (float)Math.exp(-elapsed / DECAY_SECONDS);
+        // Integrate the decaying speed so a shot adds the same rotation at every frame rate.
+        angle = (angle + (reloading ? RELOAD_SPEED : IDLE_SPEED) * elapsed
+            + boost * DECAY_SECONDS * (1 - decay)) % 360;
+        boost *= decay;
+    }
+
+    static void render(GuiGraphics graphics, int width, int height, Component text) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.options.hideGui || mc.player == null || !mc.player.isAlive() || mc.player.isSpectator()) return;
+        int hotbarRight = width / 2 + 91;
+        if (mc.player.getMainArm() == HumanoidArm.LEFT && !mc.player.getOffhandItem().isEmpty()) hotbarRight += 29;
+        if (mc.player.getMainArm() == HumanoidArm.RIGHT && mc.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR)
+            hotbarRight += 24;
+        float radius = Math.min(80, Math.min(height * .35f, width - hotbarRight - 8));
+        if (radius <= 0) return;
+
+        boolean depth = GL11.glIsEnabled(GL11.GL_DEPTH_TEST), blend = GL11.glIsEnabled(GL11.GL_BLEND);
+        boolean depthMask = GL11.glGetBoolean(GL11.GL_DEPTH_WRITEMASK);
+        int srcRgb = GL11.glGetInteger(GL14.GL_BLEND_SRC_RGB), dstRgb = GL11.glGetInteger(GL14.GL_BLEND_DST_RGB);
+        int srcAlpha = GL11.glGetInteger(GL14.GL_BLEND_SRC_ALPHA), dstAlpha = GL11.glGetInteger(GL14.GL_BLEND_DST_ALPHA);
+        float[] color = RenderSystem.getShaderColor().clone();
+        int texture = RenderSystem.getShaderTexture(0);
+        var shader = RenderSystem.getShader();
+        graphics.flush();
+        graphics.enableScissor((int)Math.floor(width - radius), (int)Math.floor(height - radius), width, height);
+        try {
+            graphics.pose().pushPose();
+            try {
+                graphics.pose().translate(width, height, 100);
+                // The large cog's teeth extend about .95 blocks from its center.
+                float scale = radius / .95f;
+                graphics.pose().scale(scale, scale, scale);
+                graphics.pose().translate(-.5, .5, -.5);
+                GuiGameElement.of(AllBlocks.LARGE_COGWHEEL.getDefaultState()
+                        .setValue(BlockStateProperties.AXIS, Direction.Axis.Y))
+                    .rotateBlock(67.5, angle, 0).render(graphics);
+            } finally {
+                graphics.pose().popPose();
+            }
+
+            graphics.pose().pushPose();
+            try {
+                float textWidth = mc.font.width(text);
+                float textScale = Math.min(1.5f, radius * .8f / Math.max(1, textWidth + 1));
+                graphics.pose().translate(width - radius * .46f, height - radius * .32f, 200);
+                graphics.pose().scale(textScale, textScale, 1);
+                graphics.drawString(mc.font, text, -Math.round(textWidth / 2), -mc.font.lineHeight / 2, 0xffd5b675, true);
+            } finally {
+                graphics.pose().popPose();
+            }
+        } finally {
+            graphics.flush();
+            graphics.disableScissor();
+            Lighting.setupFor3DItems();
+            RenderSystem.setShaderColor(color[0], color[1], color[2], color[3]);
+            RenderSystem.setShaderTexture(0, texture);
+            RenderSystem.setShader(() -> shader);
+            RenderSystem.blendFuncSeparate(srcRgb, dstRgb, srcAlpha, dstAlpha);
+            RenderSystem.depthMask(depthMask);
+            if (blend) RenderSystem.enableBlend(); else RenderSystem.disableBlend();
+            if (depth) RenderSystem.enableDepthTest(); else RenderSystem.disableDepthTest();
+        }
+    }
+}

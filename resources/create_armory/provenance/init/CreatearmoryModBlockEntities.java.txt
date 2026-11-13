@@ -1,0 +1,26 @@
+
+package net.createarmory.init;
+
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
+
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.Block;
+
+import net.createarmory.block.entity.MountedRpgTileEntity;
+import net.createarmory.block.entity.MountedMinigunTileEntity;
+import net.createarmory.block.entity.GunMountTileEntity;
+import net.createarmory.CreatearmoryMod;
+
+public class CreatearmoryModBlockEntities {
+	public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CreatearmoryMod.MODID);
+	public static final RegistryObject<BlockEntityType<GunMountTileEntity>> GUN_MOUNT = REGISTRY.register("gun_mount", () -> BlockEntityType.Builder.of(GunMountTileEntity::new, CreatearmoryModBlocks.GUN_MOUNT.get()).build(null));
+	public static final RegistryObject<BlockEntityType<MountedMinigunTileEntity>> MOUNTED_MINIGUN = REGISTRY.register("mounted_minigun",
+			() -> BlockEntityType.Builder.of(MountedMinigunTileEntity::new, CreatearmoryModBlocks.MOUNTED_MINIGUN.get()).build(null));
+	public static final RegistryObject<BlockEntityType<MountedRpgTileEntity>> MOUNTED_RPG = REGISTRY.register("mounted_rpg", () -> BlockEntityType.Builder.of(MountedRpgTileEntity::new, CreatearmoryModBlocks.MOUNTED_RPG.get()).build(null));
+
+	private static RegistryObject<BlockEntityType<?>> register(String registryname, RegistryObject<Block> block, BlockEntityType.BlockEntitySupplier<?> supplier) {
+		return REGISTRY.register(registryname, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));
+	}
+}

@@ -1,0 +1,74 @@
+package net.createarmory.weapon;
+
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+
+public final class WeaponInventory {
+    private WeaponInventory() {}
+
+    public static int selectMagazine(Inventory inventory, WeaponDefinition.Feed feed) {
+        int best = -1, rounds = 0;
+        for (int i = 0; i < 36; i++) {
+            ItemStack stack = inventory.getItem(i);
+            if (stack.getItem() instanceof MagazineItem mag && mag.feed == feed && GunData.rounds(stack) > rounds) {
+                best = i;
+                rounds = GunData.rounds(stack);
+            }
+        }
+        return best;
+    }
+
+    public static boolean swapMagazine(ItemStack gun, Inventory inventory, int slot, ItemStack expected) {
+        if (!(gun.getItem() instanceof GunItem item) || slot < 0 || slot >= 36
+            || inventory.getItem(slot) != expected || expected.getCount() != 1
+            || !(expected.getItem() instanceof MagazineItem mag) || mag.feed != item.definition.feed
+            || GunData.rounds(expected) == 0) return false;
+        ItemStack outgoing = GunData.magazine(gun);
+        GunData.setMagazine(gun, expected.copy());
+        inventory.setItem(slot, outgoing);
+        inventory.setChanged();
+        return true;
+    }
+
+    public static boolean swapAttachment(ItemStack gun, Inventory inventory, AttachmentItem.Slot type, int slot) {
+        if (!(gun.getItem() instanceof GunItem item)) return false;
+        ItemStack incoming = slot >= 0 && slot < 36 ? inventory.getItem(slot) : ItemStack.EMPTY;
+        if (slot != -1 && (incoming.getCount() != 1 || !(incoming.getItem() instanceof AttachmentItem attachment)
+            || attachment.slot != type || !item.definition.supports(attachment))) return false;
+        ItemStack outgoing = GunData.attachment(gun, type);
+        if (slot == -1 && !outgoing.isEmpty()) {
+            slot = inventory.getFreeSlot();
+            if (slot == -1) return false;
+        }
+        GunData.setAttachment(gun, type, incoming.copy());
+        if (slot >= 0) inventory.setItem(slot, outgoing);
+        inventory.setChanged();
+        return true;
+    }
+
+    public static boolean ejectMagazine(ItemStack gun, Inventory inventory) {
+        ItemStack magazine = GunData.magazine(gun);
+        int free = inventory.getFreeSlot();
+        if (magazine.isEmpty() || free < 0) return false;
+        inventory.setItem(free, magazine);
+        GunData.setMagazine(gun, ItemStack.EMPTY);
+        inventory.setChanged();
+        return true;
+    }
+
+    public static int loadDirect(ItemStack gun, Inventory inventory) {
+        if (!(gun.getItem() instanceof GunItem item) || item.definition.feed.detachable()) return 0;
+        int missing = item.definition.directCapacity - GunData.rounds(gun), loaded = 0;
+        for (int i = 0; i < 36 && loaded < missing; i++) {
+            ItemStack ammo = inventory.getItem(i);
+            if (ammo.is(item.definition.feed.ammo())) {
+                int take = Math.min(ammo.getCount(), missing - loaded);
+                ammo.shrink(take);
+                loaded += take;
+            }
+        }
+        GunData.setRounds(gun, GunData.rounds(gun) + loaded);
+        inventory.setChanged();
+        return loaded;
+    }
+}

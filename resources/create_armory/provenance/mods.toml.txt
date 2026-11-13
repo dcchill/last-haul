@@ -1,0 +1,38 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Academic Free License v3.0"
+
+[[mods]]
+modId="createarmory"
+version="0.6.0-dev"
+displayName="Create Armory"
+authors="dcchill"
+description="Create-powered firearms, magazines and attachments."
+
+[[dependencies.createarmory]]
+modId="forge"
+mandatory=true
+versionRange="[47.4,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.createarmory]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.createarmory]]
+modId="geckolib"
+mandatory=true
+versionRange="[4.4.9,4.5)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.createarmory]]
+modId="create"
+mandatory=true
+versionRange="[6.0.8,6.1)"
+ordering="AFTER"
+side="BOTH"

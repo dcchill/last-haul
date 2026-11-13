@@ -1,0 +1,8 @@
+{
+  "parent": "createarmory:custom/barrelpart",
+  "textures": {
+    "0": "createarmory:block/axis",
+    "1": "createarmory:block/axis_top",
+    "particle": "createarmory:item/axis"
+  }
+}

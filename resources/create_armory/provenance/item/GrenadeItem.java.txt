@@ -1,0 +1,44 @@
+package net.createarmory.item;
+
+import net.createarmory.CreatearmoryMod;
+import net.createarmory.entity.*;
+import net.createarmory.init.CreatearmoryModEntities;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import software.bernie.geckolib.animatable.GeoItem;
+
+public class GrenadeItem extends AnimatedPartItem {
+    private final boolean smoke;
+    public GrenadeItem(boolean smoke) {
+        super(smoke ? "smokenadegeo" : "impactnadegeo", smoke ? "smoketexture" : "impactnade");
+        this.smoke = smoke;
+    }
+    @Override public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (player.getCooldowns().isOnCooldown(this)) return InteractionResultHolder.fail(stack);
+        if (level instanceof ServerLevel server) {
+            player.getCooldowns().addCooldown(this,12);
+            if (smoke) triggerAnim(player,GeoItem.getOrAssignId(stack,server),"action","pin");
+            Runnable throwGrenade = () -> {
+                if (!player.isAlive() || player.getItemInHand(hand) != stack || stack.isEmpty() || player.level() != server) return;
+                AbstractArrow grenade = smoke
+                    ? new SmokeDebugEntity(CreatearmoryModEntities.SMOKE_DEBUG.get(),player,server)
+                    : new ImpactNadeDebugEntity(CreatearmoryModEntities.IMPACT_NADE_DEBUG.get(),player,server);
+                grenade.setOwner(player);
+                grenade.setBaseDamage(0);
+                grenade.setSilent(true);
+                grenade.shootFromRotation(player,player.getXRot(),player.getYRot(),0,smoke ? 1.5f : 1.3f,2);
+                server.addFreshEntity(grenade);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+                server.playSound(null,player.blockPosition(),SoundEvents.SNOWBALL_THROW,SoundSource.PLAYERS,.8f,1);
+            };
+            if (smoke) CreatearmoryMod.queueServerWork(10,throwGrenade); else throwGrenade.run();
+        }
+        return InteractionResultHolder.sidedSuccess(stack,level.isClientSide);
+    }
+}

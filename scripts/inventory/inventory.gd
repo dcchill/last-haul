@@ -2,190 +2,238 @@ class_name RaidInventory
 extends RefCounted
 
 signal changed
-
 const CELL_SIZE := 18
+var uid: String = ProfileStore._new_id()
 var slots: Array[Dictionary] = []
 var width: int
 var height: int
 var items: Dictionary
+var display_name: String = "Storage"
+var config: ContainerDef
+var capacity: int = -1
+var equipment_slot: String = ""
+var parent_inventory: WeakRef
+var accessible: bool = true
+var searched: bool = true
+var searching: bool = false
+var search_elapsed: float = 0.0
+var discovered: int = 0
+var loot_generated: bool = false
+var is_open: bool = false
 
-func _init(item_definitions: Dictionary = {}, grid_width: int = 10, grid_height: int = 6) -> void:
-	items = item_definitions
+func _init(definitions: Dictionary = {}, grid_width: int = 10, grid_height: int = 6) -> void:
+	items = definitions
 	width = grid_width
 	height = grid_height
 
+func configure(value: ContainerDef) -> void:
+	config = value
+	width = value.dimensions.x
+	height = value.dimensions.y
+	display_name = value.display_name
+	accessible = value.accessible
+	searched = not value.searchable
+
 func count(item_id: String) -> int:
 	var total := 0
-	for slot in slots:
-		if slot.id == item_id:
-			total += int(slot.quantity)
+	for entry in slots:
+		if entry.id == item_id:
+			total += int(entry.quantity)
 	return total
 
+func find_uid(item_uid: String) -> int:
+	for i in range(slots.size()):
+		if slots[i].get("uid", "") == item_uid:
+			return i
+	return -1
+
+func dimensions(item_id: String, rotated: bool = false) -> Vector2i:
+	var definition: ItemDef = items[item_id]
+	return Vector2i(definition.height, definition.width) if rotated else Vector2i(definition.width, definition.height)
+
+func accepts(entry: Dictionary) -> bool:
+	if not items.has(entry.id) or not is_accessible():
+		return false
+	var definition: ItemDef = items[entry.id]
+	if not equipment_slot.is_empty() and not definition.equipment_slots.has(equipment_slot):
+		return false
+	if config != null:
+		if not config.allowed_categories.is_empty() and not config.allowed_categories.has(definition.kind):
+			return false
+		if config.prohibited_categories.has(definition.kind):
+			return false
+	return not ItemInstance.contains(entry, self)
+
+func is_accessible() -> bool:
+	if not accessible:
+		return false
+	var ancestor: RaidInventory = parent_inventory.get_ref() if parent_inventory != null else null
+	return ancestor == null or ancestor.is_accessible()
+
+func visible_item(index: int) -> bool:
+	return index >= 0 and index < slots.size() and (searched or (config != null and config.progressive_discovery and index < discovered))
+
 func can_place(item_id: String, x: int, y: int, rotated: bool = false, ignore_slot: int = -1) -> bool:
-	if not items.has(item_id):
+	return _can_place_in(slots, item_id, x, y, rotated, ignore_slot)
+
+func _can_place_in(entries: Array[Dictionary], item_id: String, x: int, y: int, rotated: bool = false, ignore: int = -1) -> bool:
+	if not items.has(item_id) or capacity == 0:
 		return false
-	var item: ItemDef = items[item_id]
-	var item_width := item.height if rotated else item.width
-	var item_height := item.width if rotated else item.height
-	if x < 0 or y < 0 or x + item_width > width or y + item_height > height:
+	var footprint := dimensions(item_id, rotated)
+	if x < 0 or y < 0 or x + footprint.x > width or y + footprint.y > height:
 		return false
-	for index in range(slots.size()):
-		if index == ignore_slot:
+	if ignore < 0 and ((capacity > 0 and entries.size() >= capacity) or (config != null and config.item_limit > 0 and entries.size() >= config.item_limit)):
+		return false
+	var rect := Rect2i(Vector2i(x, y), footprint)
+	for i in range(entries.size()):
+		if i == ignore:
 			continue
-		var slot: Dictionary = slots[index]
-		var other: ItemDef = items[slot.id]
-		var other_width := other.height if bool(slot.get("rotated", false)) else other.width
-		var other_height := other.width if bool(slot.get("rotated", false)) else other.height
-		if x < int(slot.x) + other_width and x + item_width > int(slot.x) and y < int(slot.y) + other_height and y + item_height > int(slot.y):
+		var other: Dictionary = entries[i]
+		if rect.intersects(Rect2i(Vector2i(int(other.x), int(other.y)), dimensions(other.id, bool(other.get("rotated", false))))):
 			return false
 	return true
 
-func add(item_id: String, quantity: int) -> bool:
-	if not items.has(item_id) or quantity <= 0:
-		return false
-	var candidate := slots.duplicate(true)
-	var limit: int = items[item_id].stack_limit
-	var remaining := quantity
-	for slot in candidate:
-		if slot.id == item_id and int(slot.quantity) < limit:
-			var moved: int = mini(remaining, limit - int(slot.quantity))
-			slot.quantity += moved
-			remaining -= moved
-			if remaining == 0:
-				slots = candidate
-				changed.emit()
-				return true
-	while remaining > 0:
-		var position := _first_space(item_id, candidate)
-		if position.x < 0:
+func first_space(item_id: String, rotated: bool = false, ignore: int = -1) -> Vector2i:
+	for y in range(height):
+		for x in range(width):
+			if can_place(item_id, x, y, rotated, ignore):
+				return Vector2i(x, y)
+	return Vector2i(-1, -1)
+
+func _slot_at(x: int, y: int) -> int:
+	for i in range(slots.size()):
+		var entry := slots[i]
+		if Rect2i(Vector2i(int(entry.x), int(entry.y)), dimensions(entry.id, bool(entry.get("rotated", false)))).has_point(Vector2i(x, y)):
+			return i
+	return -1
+
+func add(item_id: String, quantity: int, state: Dictionary = {}) -> bool:
+	if not state.is_empty():
+		if quantity != 1 or not items.has(item_id):
 			return false
-		var moved: int = mini(remaining, limit)
-		candidate.append({"id": item_id, "quantity": moved, "x": position.x, "y": position.y, "rotated": false})
-		remaining -= moved
-	slots = candidate
-	changed.emit()
+		var entry := ItemInstance.create(items[item_id], items)
+		entry.state = state.duplicate(true)
+		return insert_instance(entry)
+	return InventoryManager.add_new(self, item_id, quantity)
+
+func add_at(item_id: String, quantity: int, x: int, y: int, rotated: bool = false, state: Dictionary = {}) -> bool:
+	if not state.is_empty():
+		if quantity != 1 or not items.has(item_id):
+			return false
+		var entry := ItemInstance.create(items[item_id], items)
+		entry.state = state.duplicate(true)
+		entry.rotated = rotated
+		return insert_instance(entry, Vector2i(x, y))
+	return InventoryManager.add_new(self, item_id, quantity, Vector2i(x, y), rotated)
+
+func find_instance(instance_id: String) -> int:
+	for index in range(slots.size()):
+		if slots[index].get("state", {}).get("instance_id", slots[index].get("uid", "")) == instance_id:
+			return index
+	return -1
+
+func add_entry(entry: Dictionary) -> bool:
+	return insert_instance(entry)
+
+func remove_entry(entry: Dictionary) -> bool:
+	var instance_id: String = entry.get("state", {}).get("instance_id", "")
+	if instance_id.is_empty():
+		return remove(entry.id, int(entry.quantity))
+	var index := find_instance(instance_id)
+	if index < 0 or slots[index].id != entry.id:
+		return false
+	slots.remove_at(index)
+	_notify()
 	return true
 
-func add_at(item_id: String, quantity: int, x: int, y: int, rotated: bool = false) -> bool:
-	if not items.has(item_id) or quantity <= 0 or quantity > items[item_id].stack_limit:
-		return false
-	var index := _slot_at(x, y)
-	if index >= 0 and slots[index].id == item_id:
-		if int(slots[index].quantity) + quantity > items[item_id].stack_limit:
-			return false
-		slots[index].quantity += quantity
-	else:
-		if not can_place(item_id, x, y, rotated):
-			return false
-		slots.append({"id": item_id, "quantity": quantity, "x": x, "y": y, "rotated": rotated})
-	changed.emit()
-	return true
+func insert_instance(entry: Dictionary, at: Vector2i = Vector2i(-1, -1)) -> bool:
+	return InventoryManager.insert(self, entry, at)
 
 func remove(item_id: String, quantity: int) -> bool:
 	if quantity <= 0 or count(item_id) < quantity:
 		return false
+	for entry in slots:
+		if entry.id == item_id and entry.has("storage") and not entry.storage.slots.is_empty():
+			return false
 	var remaining := quantity
-	for index in range(slots.size() - 1, -1, -1):
-		if slots[index].id != item_id:
-			continue
-		var moved := mini(remaining, int(slots[index].quantity))
-		slots[index].quantity -= moved
-		remaining -= moved
-		if slots[index].quantity == 0:
-			slots.remove_at(index)
-		if remaining == 0:
-			break
-	changed.emit()
+	for i in range(slots.size() - 1, -1, -1):
+		if slots[i].id == item_id:
+			var amount := mini(remaining, int(slots[i].quantity))
+			slots[i].quantity -= amount
+			remaining -= amount
+			if slots[i].quantity == 0:
+				slots.remove_at(i)
+			if remaining == 0:
+				break
+	_notify()
 	return true
 
 func transfer_to(index: int, target: RaidInventory, x: int, y: int, rotated: bool = false) -> bool:
-	if index < 0 or index >= slots.size() or target == self:
-		return false
-	var slot: Dictionary = slots[index]
-	var target_index := target._slot_at(x, y)
-	if target_index >= 0 and target.slots[target_index].id == slot.id:
-		var limit: int = target.items[slot.id].stack_limit
-		if int(target.slots[target_index].quantity) + int(slot.quantity) > limit:
-			return false
-		target.slots[target_index].quantity += int(slot.quantity)
-	else:
-		if not target.can_place(slot.id, x, y, rotated):
-			return false
-		target.slots.append({"id": slot.id, "quantity": int(slot.quantity), "x": x, "y": y, "rotated": rotated})
-	slots.remove_at(index)
-	target.changed.emit()
-	changed.emit()
-	return true
+	return InventoryManager.move(self, index, target, Vector2i(x, y), rotated)
 
 func move(index: int, x: int, y: int, rotated: bool = false) -> bool:
-	if index < 0 or index >= slots.size():
-		return false
-	var slot: Dictionary = slots[index]
-	if not can_place(slot.id, x, y, rotated, index):
-		return false
-	slot.x = x
-	slot.y = y
-	slot.rotated = rotated
-	changed.emit()
-	return true
+	return InventoryManager.move(self, index, self, Vector2i(x, y), rotated)
 
 func sort() -> bool:
-	var ordered := slots.duplicate(true)
-	ordered.sort_custom(func(a: Dictionary, b: Dictionary):
-		var item_a: ItemDef = items[a.id]
-		var item_b: ItemDef = items[b.id]
-		if item_a.width * item_a.height != item_b.width * item_b.height:
-			return item_a.width * item_a.height > item_b.width * item_b.height
-		return a.id < b.id
-	)
-	var sorted := RaidInventory.new(items, width, height)
-	for slot in ordered:
-		if sorted.add(slot.id, int(slot.quantity)):
-			continue
-		var item: ItemDef = items[slot.id]
-		var placed := false
-		if item.width != item.height:
-			for y in range(height):
-				for x in range(width):
-					if sorted.can_place(slot.id, x, y, true) and sorted.add_at(slot.id, int(slot.quantity), x, y, true):
-						placed = true
-						break
-				if placed:
-					break
-		if not placed:
-			return false
-	slots = sorted.slots
+	return InventoryManager.sort_grid(self)
+
+func total_weight() -> float:
+	var total := 0.0
+	for entry in slots:
+		total += ItemInstance.weight(entry, items)
+	return total
+
+func _notify() -> void:
 	changed.emit()
-	return true
+	var ancestor: RaidInventory = parent_inventory.get_ref() if parent_inventory != null else null
+	if ancestor != null:
+		ancestor._notify()
 
-func _first_space(item_id: String, candidate: Array[Dictionary]) -> Vector2i:
-	for y in range(height):
-		for x in range(width):
-			if _can_place_in(candidate, item_id, x, y):
-				return Vector2i(x, y)
-	return Vector2i(-1, -1)
+func _adopt(entry: Dictionary) -> void:
+	if entry.has("storage"):
+		entry.storage.parent_inventory = weakref(self)
 
-func _can_place_in(candidate: Array[Dictionary], item_id: String, x: int, y: int) -> bool:
-	var item: ItemDef = items[item_id]
-	if x + item.width > width or y + item.height > height:
+func begin_search() -> bool:
+	if not is_accessible():
 		return false
-	for slot in candidate:
-		var other: ItemDef = items[slot.id]
-		var other_width := other.height if bool(slot.get("rotated", false)) else other.width
-		var other_height := other.width if bool(slot.get("rotated", false)) else other.height
-		if x < int(slot.x) + other_width and x + item.width > int(slot.x) and y < int(slot.y) + other_height and y + item.height > int(slot.y):
-			return false
+	is_open = true
+	searching = not searched
+	if config == null or config.search_seconds <= 0:
+		searched = true
+		searching = false
+	_notify()
 	return true
 
-func _slot_at(x: int, y: int) -> int:
-	for index in range(slots.size()):
-		var slot: Dictionary = slots[index]
-		var item: ItemDef = items[slot.id]
-		var item_width := item.height if bool(slot.get("rotated", false)) else item.width
-		var item_height := item.width if bool(slot.get("rotated", false)) else item.height
-		if x >= int(slot.x) and x < int(slot.x) + item_width and y >= int(slot.y) and y < int(slot.y) + item_height:
-			return index
-	return -1
+func tick_search(delta: float) -> void:
+	if not searching or config == null:
+		return
+	search_elapsed = minf(config.search_seconds, search_elapsed + maxf(0, delta))
+	discovered = floori(slots.size() * search_elapsed / maxf(0.001, config.search_seconds))
+	if search_elapsed >= config.search_seconds:
+		searched = true
+		searching = false
+	_notify()
+
+func search_state() -> String:
+	if not is_open:
+		return "Closed"
+	if searching:
+		return "Searching"
+	if not searched:
+		return "Unsearched"
+	return "Empty" if slots.is_empty() else "Searched"
 
 func snapshot() -> Array[Dictionary]:
-	return slots.duplicate(true)
+	var result: Array[Dictionary] = []
+	for entry in slots:
+		var encoded := entry.duplicate(true)
+		if entry.has("storage"):
+			encoded.storage = entry.storage.serialize()
+		result.append(encoded)
+	return result
+
+func serialize() -> Dictionary:
+	return {"uid": uid, "width": width, "height": height, "name": display_name,
+		"config": config.resource_path if config != null else "", "equipment_slot": equipment_slot,
+		"accessible": accessible, "searched": searched, "search_elapsed": search_elapsed,
+		"discovered": discovered, "loot_generated": loot_generated, "slots": snapshot()}

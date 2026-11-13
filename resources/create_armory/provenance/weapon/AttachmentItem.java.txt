@@ -1,0 +1,15 @@
+package net.createarmory.weapon;
+
+import net.minecraft.world.item.Item;
+
+public class AttachmentItem extends Item {
+    public enum Slot { OPTIC, MUZZLE, GRIP }
+    public final Slot slot;
+    public final int magnification;
+
+    public AttachmentItem(Slot slot, int magnification) {
+        super(new Properties().stacksTo(1));
+        this.slot = slot;
+        this.magnification = magnification;
+    }
+}

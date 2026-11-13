@@ -1,0 +1,59 @@
+package net.createarmory.weapon;
+
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+
+public final class GunData {
+    private GunData() {}
+
+    public static int rounds(ItemStack stack) {
+        if (stack.getItem() instanceof MagazineItem magazine)
+            return Math.max(0, Math.min(magazine.feed.capacity, stack.getOrCreateTag().getInt("Rounds")));
+        if (!(stack.getItem() instanceof GunItem gun)) return 0;
+        return gun.definition.feed.detachable() ? rounds(magazine(stack))
+            : Math.max(0, Math.min(gun.definition.directCapacity, stack.getOrCreateTag().getInt("Rounds")));
+    }
+
+    public static void setRounds(ItemStack stack, int rounds) {
+        if (stack.getItem() instanceof GunItem gun && gun.definition.feed.detachable()) {
+            ItemStack magazine = magazine(stack);
+            setRounds(magazine, rounds);
+            setMagazine(stack, magazine);
+        } else {
+            int capacity = stack.getItem() instanceof MagazineItem mag ? mag.feed.capacity
+                : stack.getItem() instanceof GunItem gun ? gun.definition.directCapacity : 0;
+            stack.getOrCreateTag().putInt("Rounds", Math.max(0, Math.min(capacity, rounds)));
+        }
+    }
+
+    public static ItemStack magazine(ItemStack gun) {
+        ItemStack mag = ItemStack.of(gun.getOrCreateTag().getCompound("Magazine"));
+        if (!(gun.getItem() instanceof GunItem item) || !(mag.getItem() instanceof MagazineItem m)
+            || m.feed != item.definition.feed) return ItemStack.EMPTY;
+        mag.setCount(1);
+        return mag;
+    }
+
+    public static void setMagazine(ItemStack gun, ItemStack mag) {
+        gun.getOrCreateTag().put("Magazine", mag.save(new CompoundTag()));
+    }
+
+    public static ItemStack attachment(ItemStack gun, AttachmentItem.Slot slot) {
+        return ItemStack.of(gun.getOrCreateTag().getCompound("Attachments").getCompound(slot.name()));
+    }
+
+    public static void setAttachment(ItemStack gun, AttachmentItem.Slot slot, ItemStack attachment) {
+        CompoundTag tags = gun.getOrCreateTag().getCompound("Attachments");
+        tags.put(slot.name(), attachment.save(new CompoundTag()));
+        gun.getOrCreateTag().put("Attachments", tags);
+    }
+
+    public static int magnification(ItemStack gun) {
+        ItemStack optic = attachment(gun, AttachmentItem.Slot.OPTIC);
+        return optic.getItem() instanceof AttachmentItem item ? item.magnification : 1;
+    }
+
+    public static boolean suppressed(ItemStack gun) {
+        return attachment(gun, AttachmentItem.Slot.MUZZLE).getItem() instanceof AttachmentItem;
+    }
+}

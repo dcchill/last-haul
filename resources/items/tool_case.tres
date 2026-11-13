@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/containers/case.tres" id="2"]
+[resource]
+script = ExtResource("1")
+id = "tool_case"
+display_name = "Tool case"
+description = "Field equipment recovered in the salvage yard."
+kind = "case"
+width = 2
+height = 2
+weight = 0.6
+stack_limit = 1
+container = ExtResource("2")

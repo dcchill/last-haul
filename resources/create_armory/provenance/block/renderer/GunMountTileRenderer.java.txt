@@ -1,0 +1,21 @@
+package net.createarmory.block.renderer;
+
+import software.bernie.geckolib.renderer.GeoBlockRenderer;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
+
+import net.createarmory.block.model.GunMountBlockModel;
+import net.createarmory.block.entity.GunMountTileEntity;
+
+public class GunMountTileRenderer extends GeoBlockRenderer<GunMountTileEntity> {
+	public GunMountTileRenderer() {
+		super(new GunMountBlockModel());
+	}
+
+	@Override
+	public RenderType getRenderType(GunMountTileEntity animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
+}

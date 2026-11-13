@@ -12,3 +12,10 @@ plate_weight = 0.5
 carrier_weight = 0.5
 durability_loss = 1.2
 side_plates = false
+
+display_name = "Patrol vest"
+slot = "chestplate"
+points = 3.0
+toughness = 0.0
+max_durability = 60
+color = Color(0.39216, 0.44706, 0.32941, 1)

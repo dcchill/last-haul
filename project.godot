@@ -28,6 +28,12 @@ window/size/min_height=720
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
+
+[editor]
+
+; Preserve typed resource arrays in exports (covered by tests/export_smoke.gd).
+export/convert_text_resources_to_binary=false
 
 [rendering]
 

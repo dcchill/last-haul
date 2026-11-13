@@ -1,0 +1,124 @@
+package net.createarmory.client.weapon;
+
+import com.mojang.blaze3d.pipeline.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import java.io.IOException;
+import net.createarmory.weapon.GunData;
+import net.createarmory.weapon.GunItem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import org.joml.Matrix4f;
+
+public final class ScopeRenderer {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("createarmory", "scope_view");
+    static RenderTarget target;
+    private static boolean rendering;
+    private static boolean imageReady;
+    private static int magnification = 1;
+    public static boolean rendering() { return rendering; }
+    static boolean hasImage() { return target != null && imageReady; }
+    public static double scopeFov(double normal) {
+        return Math.toDegrees(2 * Math.atan((.17 * .25 * .7 / .14) / magnification));
+    }
+
+    public static void render(float partialTick) {
+        Minecraft mc = Minecraft.getInstance();
+        if (rendering || mc.player == null || mc.level == null || mc.screen != null || !mc.isWindowActive()
+            || mc.getWindow().getWidth() < 1 || mc.getWindow().getHeight() < 1
+            || !mc.options.getCameraType().isFirstPerson() || ClientWeapons.aim() < .7
+            || !(mc.player.getMainHandItem().getItem() instanceof GunItem)) return;
+        magnification = GunData.magnification(mc.player.getMainHandItem());
+        if (magnification <= 1) return;
+        int width = Math.min(1024, mc.getWindow().getWidth());
+        int height = Math.max(1, width * mc.getWindow().getHeight() / Math.max(1, mc.getWindow().getWidth()));
+        if (target == null || target.width != width || target.height != height) {
+            close();
+            target = new TextureTarget(width, height, true, Minecraft.ON_OSX) {
+                // Outline/particle targets can change the viewport before vanilla rebinds the main target with false.
+                @Override public void bindWrite(boolean setViewport) { super.bindWrite(true); }
+            };
+            mc.getTextureManager().register(TEXTURE, new AbstractTexture() {
+                @Override public void load(ResourceManager manager) throws IOException { }
+                @Override public int getId() { return target == null ? 0 : target.getColorTextureId(); }
+                @Override public void releaseId() { }
+            });
+        }
+        RenderTarget original = mc.getMainRenderTarget();
+        boolean renderHand = mc.gameRenderer.renderHand;
+        var hit = mc.hitResult;
+        var picked = mc.crosshairPickEntity;
+        mc.renderBuffers().bufferSource().endBatch();
+        rendering = true;
+        RenderSystem.backupProjectionMatrix();
+        RenderSystem.getModelViewStack().pushPose();
+        // RenderTick.START can retain GUI transforms; terrain sets its own matrix, entity batches do not.
+        RenderSystem.getModelViewStack().setIdentity();
+        RenderSystem.applyModelViewMatrix();
+        RenderSystem.enableDepthTest();
+        RenderSystem.depthMask(true);
+        RenderSystem.setShaderColor(1,1,1,1);
+        mc.getProfiler().push("createarmory_scope");
+        try {
+            mc.mainRenderTarget = target;
+            mc.gameRenderer.renderHand = false;
+            target.clear(Minecraft.ON_OSX);
+            target.bindWrite(true);
+            mc.gameRenderer.renderLevel(partialTick, System.nanoTime(), new PoseStack());
+            mc.renderBuffers().bufferSource().endBatch();
+            imageReady = true;
+        } finally {
+            mc.mainRenderTarget = original;
+            mc.gameRenderer.renderHand = renderHand;
+            mc.hitResult = hit;
+            mc.crosshairPickEntity = picked;
+            original.bindWrite(true);
+            RenderSystem.getModelViewStack().popPose();
+            RenderSystem.applyModelViewMatrix();
+            RenderSystem.restoreProjectionMatrix();
+            mc.getProfiler().pop();
+            rendering = false;
+        }
+    }
+
+    public static void lens(PoseStack poses, MultiBufferSource buffers, int light) {
+        if (!hasImage() || rendering || ClientWeapons.aim() < .7) return;
+        // The world framebuffer's alpha is not lens transparency: the lens must occlude the main view.
+        VertexConsumer vertices = buffers.getBuffer(RenderType.entitySolid(TEXTURE));
+        Matrix4f matrix = poses.last().pose();
+        float radius = .17f, aspect = (float) target.width / target.height;
+        float winding = matrix.determinant() < 0 ? -1 : 1;
+        for (int segment = 0; segment < 32; segment++) {
+            float a = (float) (segment * Math.PI / 16) * winding, b = (float) ((segment + 1) * Math.PI / 16) * winding;
+            lensVertex(vertices, matrix, 0, 0, .5f, .5f, light);
+            lensVertex(vertices, matrix, (float) Math.cos(a) * radius, (float) Math.sin(a) * radius,
+                .5f + (float) Math.cos(a) / (2 * aspect), .5f + (float) Math.sin(a) / 2, light);
+            lensVertex(vertices, matrix, (float) Math.cos(b) * radius, (float) Math.sin(b) * radius,
+                .5f + (float) Math.cos(b) / (2 * aspect), .5f + (float) Math.sin(b) / 2, light);
+            lensVertex(vertices, matrix, 0, 0, .5f, .5f, light);
+        }
+        var reticle = buffers.getBuffer(RenderType.entityTranslucent(new ResourceLocation("minecraft", "textures/block/black_concrete.png")));
+        rectangle(reticle, matrix, -.002f, -.08f, .002f, .08f, .002f, light);
+        rectangle(reticle, matrix, -.08f, -.002f, .08f, .002f, .002f, light);
+    }
+
+    private static void lensVertex(VertexConsumer v, Matrix4f matrix, float x, float y, float u, float w, int light) {
+        v.vertex(matrix, x, y, 0).color(255,255,255,255).uv(u,w).overlayCoords(net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY).uv2(light).normal(0,0,1).endVertex();
+    }
+    private static void rectangle(VertexConsumer v, Matrix4f m, float x, float y, float right, float top, float z, int light) {
+        for (float[] p : new float[][]{{x,y},{right,y},{right,top},{x,top}})
+            v.vertex(m,p[0],p[1],z).color(0,0,0,255).uv(0,0).overlayCoords(net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY).uv2(light).normal(0,0,1).endVertex();
+    }
+    public static void close() {
+        if (target != null) {
+            Minecraft.getInstance().getTextureManager().release(TEXTURE);
+            target.destroyBuffers();
+            target = null;
+            imageReady = false;
+        }
+    }
+}

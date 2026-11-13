@@ -1,0 +1,40 @@
+package net.createarmory.procedures;
+
+import net.createarmory.block.MountedMinigunBlock;
+import net.createarmory.entity.BulletEntity;
+import net.createarmory.init.CreatearmoryModEntities;
+import net.createarmory.init.CreatearmoryModItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.*;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+
+public class MountedMinigunUpdateTickProcedure {
+    public static void execute(LevelAccessor world, double x, double y, double z) {
+        if (!(world instanceof ServerLevel level)) return;
+        BlockPos pos = BlockPos.containing(x, y, z);
+        var state = level.getBlockState(pos);
+        if (!(state.getBlock() instanceof MountedMinigunBlock) || level.getGameTime() % 2 != 0) return;
+        var blockEntity = level.getBlockEntity(pos);
+        boolean powered = level.hasNeighborSignal(pos);
+        if (blockEntity == null) return;
+        blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).ifPresent(inventory -> {
+            boolean firing = powered && inventory.getStackInSlot(0).is(CreatearmoryModItems.NINE_MM.get());
+            if (state.getValue(MountedMinigunBlock.ANIMATION) != (firing ? 1 : 0))
+                level.setBlock(pos, state.setValue(MountedMinigunBlock.ANIMATION, firing ? 1 : 0), 3);
+            if (!firing || inventory.extractItem(0, 1, false).isEmpty()) return;
+            Direction direction = state.getValue(MountedMinigunBlock.FACING);
+            BulletEntity bullet = new BulletEntity(CreatearmoryModEntities.BULLET.get(), level);
+            bullet.configure(4, 1.5f);
+            bullet.setPos(x + .5 + direction.getStepX() * 1.1, y + .65, z + .5 + direction.getStepZ() * 1.1);
+            bullet.shoot(direction.getStepX(), .01, direction.getStepZ(), 8, 2);
+            level.addFreshEntity(bullet);
+            Containers.dropItemStack(level, x + .5, y + .5, z + .5, new ItemStack(CreatearmoryModItems.NINE_MM_CASING.get()));
+            level.playSound(null, pos, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1, 1.8f);
+        });
+    }
+}

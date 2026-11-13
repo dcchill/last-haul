@@ -1,0 +1,77 @@
+package net.createarmory.entity;
+
+import net.createarmory.CreatearmoryMod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.*;
+import net.minecraftforge.network.NetworkHooks;
+
+public class BulletEntity extends Projectile {
+    public static final ResourceKey<DamageType> DAMAGE = ResourceKey.create(Registries.DAMAGE_TYPE,
+        new ResourceLocation(CreatearmoryMod.MODID, "bullet"));
+    private float damage = 4, headMultiplier = 1.5f;
+    private int age;
+
+    public BulletEntity(EntityType<? extends BulletEntity> type, Level level) { super(type, level); }
+    public void configure(float damage, float headMultiplier) { this.damage = damage; this.headMultiplier = headMultiplier; }
+    @Override protected void defineSynchedData() {}
+    @Override public Packet<ClientGamePacketListener> getAddEntityPacket() { return NetworkHooks.getEntitySpawningPacket(this); }
+
+    @Override public void tick() {
+        super.tick();
+        if (++age > 100 || !level().hasChunkAt(blockPosition())) { discard(); return; }
+        Vec3 start = position(), movement = getDeltaMovement();
+        if (!level().isClientSide) {
+            HitResult hit = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+            // Vanilla's projectile helper reports an entity's feet rather than the swept contact point.
+            if (hit instanceof EntityHitResult entityHit) {
+                Vec3 point = entityHit.getEntity().getBoundingBox().inflate(.3).clip(start,start.add(movement)).orElse(start);
+                hit = new EntityHitResult(entityHit.getEntity(),point);
+            }
+            trace(start,hit.getType() == HitResult.Type.MISS ? start.add(movement) : hit.getLocation());
+            if (hit.getType() != HitResult.Type.MISS) { onHit(hit); discard(); return; }
+        }
+        setPos(start.add(movement));
+        updateRotation();
+        setDeltaMovement(movement.scale(.999).add(0, -.015, 0));
+    }
+
+    protected void trace(Vec3 start, Vec3 end) { net.createarmory.network.WeaponPackets.trace(this,start,end); }
+
+    @Override protected void onHitEntity(EntityHitResult hit) {
+        Entity target = hit.getEntity(), owner = getOwner();
+        if (owner instanceof Player shooter && target instanceof Player victim && !shooter.canHarmPlayer(victim)) return;
+        boolean humanoid = target instanceof Player || target instanceof Zombie || target instanceof AbstractSkeleton
+            || target instanceof AbstractPiglin || target instanceof AbstractVillager;
+        boolean head = humanoid && target instanceof LivingEntity living && hit.getLocation().y >= living.getEyeY() - .18;
+        DamageSource source = new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
+            .getHolderOrThrow(DAMAGE), this, owner);
+        target.hurt(source, damage * (head ? headMultiplier : 1));
+    }
+
+    @Override protected void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        damage = Math.max(0, Math.min(100, tag.getFloat("Damage")));
+        headMultiplier = Math.max(1, Math.min(3, tag.getFloat("HeadMultiplier")));
+        age = tag.getInt("Age");
+    }
+    @Override protected void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putFloat("Damage", damage); tag.putFloat("HeadMultiplier", headMultiplier); tag.putInt("Age", age);
+    }
+}

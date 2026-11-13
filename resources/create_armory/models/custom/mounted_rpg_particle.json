@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/mountedminigun.item",
+  "textures": {
+    "particle": "createarmory:block/mountedrpgtexture"
+  }
+}

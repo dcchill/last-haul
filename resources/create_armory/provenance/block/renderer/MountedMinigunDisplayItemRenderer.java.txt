@@ -1,0 +1,21 @@
+package net.createarmory.block.renderer;
+
+import software.bernie.geckolib.renderer.GeoItemRenderer;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
+
+import net.createarmory.block.model.MountedMinigunDisplayModel;
+import net.createarmory.block.display.MountedMinigunDisplayItem;
+
+public class MountedMinigunDisplayItemRenderer extends GeoItemRenderer<MountedMinigunDisplayItem> {
+	public MountedMinigunDisplayItemRenderer() {
+		super(new MountedMinigunDisplayModel());
+	}
+
+	@Override
+	public RenderType getRenderType(MountedMinigunDisplayItem animatable, ResourceLocation texture, MultiBufferSource bufferSource, float partialTick) {
+		return RenderType.entityTranslucent(getTextureLocation(animatable));
+	}
+}

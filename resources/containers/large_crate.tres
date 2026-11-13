@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ContainerDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "large_crate"
+display_name = "Large supply crate"
+dimensions = Vector2i(10, 8)
+searchable = true
+progressive_discovery = true

@@ -1,0 +1,42 @@
+package net.createarmory.client.weapon;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.*;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public class WeaponSettingsScreen extends Screen {
+    public WeaponSettingsScreen() { super(Component.translatable("menu.createarmory.settings")); }
+    @Override protected void init() {
+        addRenderableWidget(new Setting(width / 2 - 110,height / 2 - 34,"menu.createarmory.sensitivity",
+            WeaponClientConfig.ADS_SENSITIVITY,.05,1.5));
+        addRenderableWidget(new Setting(width / 2 - 110,height / 2 - 6,"menu.createarmory.transition",
+            WeaponClientConfig.ADS_TRANSITION_SECONDS,.05,1));
+        addRenderableWidget(Button.builder(Component.translatable("gui.done"),button -> onClose())
+            .bounds(width / 2 - 110,height / 2 + 36,220,20).build());
+    }
+    @Override public void render(GuiGraphics graphics,int mouseX,int mouseY,float partialTick) {
+        renderBackground(graphics);
+        ArmoryGui.panel(graphics,width / 2 - 120,height / 2 - 74,240,142);
+        graphics.drawString(font,title,width / 2 - font.width(title) / 2,height / 2 - 62,0xff404040,false);
+        super.render(graphics,mouseX,mouseY,partialTick);
+    }
+    private static final class Setting extends AbstractSliderButton {
+        private final ForgeConfigSpec.DoubleValue setting;
+        private final String label;
+        private final double min,max;
+        Setting(int x,int y,String label,ForgeConfigSpec.DoubleValue setting,double min,double max) {
+            super(x,y,220,20,Component.empty(),(setting.get() - min) / (max - min));
+            this.setting = setting; this.label = label; this.min = min; this.max = max;
+            updateMessage();
+        }
+        @Override protected void updateMessage() {
+            setMessage(Component.translatable(label,String.format(java.util.Locale.ROOT,"%.2f",min + value * (max - min))));
+        }
+        @Override protected void applyValue() {
+            setting.set(min + value * (max - min));
+            setting.save();
+        }
+    }
+}

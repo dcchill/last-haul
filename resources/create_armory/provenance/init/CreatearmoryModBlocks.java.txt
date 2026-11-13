@@ -1,0 +1,22 @@
+
+package net.createarmory.init;
+
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
+
+import net.minecraft.world.level.block.Block;
+
+import net.createarmory.block.MountedRpgBlock;
+import net.createarmory.block.MountedMinigunBlock;
+import net.createarmory.block.MoltenBrassBlock;
+import net.createarmory.block.GunMountBlock;
+import net.createarmory.CreatearmoryMod;
+
+public class CreatearmoryModBlocks {
+	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, CreatearmoryMod.MODID);
+	public static final RegistryObject<Block> MOLTEN_BRASS = REGISTRY.register("molten_brass", () -> new MoltenBrassBlock());
+	public static final RegistryObject<Block> GUN_MOUNT = REGISTRY.register("gun_mount", () -> new GunMountBlock());
+	public static final RegistryObject<Block> MOUNTED_MINIGUN = REGISTRY.register("mounted_minigun", () -> new MountedMinigunBlock());
+	public static final RegistryObject<Block> MOUNTED_RPG = REGISTRY.register("mounted_rpg", () -> new MountedRpgBlock());
+}

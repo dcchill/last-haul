@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/impactnadegeo.item",
+  "textures": {
+    "layer0": "createarmory:item/impactnade"
+  }
+}

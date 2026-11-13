@@ -1,0 +1,236 @@
+package net.createarmory.client.weapon;
+
+import java.util.*;
+import com.mojang.math.Axis;
+import com.simibubi.create.AllBlocks;
+import net.createmod.catnip.gui.element.GuiGameElement;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.createarmory.network.WeaponPackets;
+import net.createarmory.weapon.*;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.lwjgl.glfw.GLFW;
+
+public class PlusScreen extends Screen {
+    private final Map<Integer,Integer> selected = new HashMap<>();
+    private final int[] pages = new int[4];
+    private int openCategory = -1;
+    private ItemStack gun;
+    private int heldSlot;
+    private boolean committed;
+    private float cogAngle, cogTarget;
+    private long lastFrame;
+
+    public PlusScreen() { super(Component.translatable("menu.createarmory.plus")); }
+    @Override public boolean isPauseScreen() { return false; }
+    @Override protected void init() {
+        if (gun == null) { gun = minecraft.player.getMainHandItem(); heldSlot = minecraft.player.getInventory().selected; }
+        clearWidgets();
+        if (!(gun.getItem() instanceof GunItem item)) return;
+        int top = (height - panelHeight()) / 2;
+        addRenderableWidget(Button.builder(Component.literal("..."), button -> {
+            WeaponPackets.send(WeaponPackets.INPUT,0,0);
+            minecraft.setScreen(new WeaponSettingsScreen());
+        }).bounds(width / 2 - 10,top + 4,20,18)
+            .tooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("menu.createarmory.settings"))).build());
+        for (int kind = 0; kind < 4; kind++) {
+            if (!supports(item,kind)) continue;
+            int category = kind;
+            ItemStack installed = selection(kind);
+            Component name = Component.translatable("menu.createarmory.slot." + new String[]{"optic","muzzle","grip","magazine"}[kind]);
+            var slot = new AttachmentButton(slotX(kind),slotY(kind),installed,name,openCategory == kind,clicked -> {
+                openCategory = openCategory == category ? -1 : category;
+                init();
+            });
+            slot.setTooltip(net.minecraft.client.gui.components.Tooltip.create(name));
+            addRenderableWidget(slot);
+        }
+        if (openCategory < 0 || !supports(item,openCategory)) return;
+        int kind = openCategory;
+        List<Integer> options = options(kind);
+        int pageCount = Math.max(1,(options.size() + 3) / 4);
+        pages[kind] %= pageCount;
+        int x = pickerX(), y = pickerY();
+        for (int index = pages[kind] * 4; index < Math.min(options.size(),pages[kind] * 4 + 4); index++) {
+            int inventorySlot = options.get(index);
+            ItemStack stack = choice(kind,inventorySlot);
+            boolean chosen = selected.getOrDefault(kind,-3) == inventorySlot || inventorySlot == -1 && selection(kind).isEmpty();
+            Component label = inventorySlot == -2 ? Component.translatable("menu.createarmory.eject")
+                : inventorySlot == -1 ? Component.translatable("menu.createarmory.remove") : stack.getHoverName();
+            String effect = kind == 3 ? "reload" : kind == 1 ? "suppressor" : kind == 2 ? "grip" : "optic";
+            Component tooltip = label.copy().append("\n").append(kind == 3 && !stack.isEmpty()
+                ? Component.literal(GunData.rounds(stack) + " / " + ((MagazineItem)stack.getItem()).feed.capacity)
+                : Component.translatable("menu.createarmory." + effect + "_effect"));
+            var button = new AttachmentButton(x + (index % 4) * 22,y,stack,label,chosen,clicked -> {
+                if (selected.getOrDefault(kind,-3) != inventorySlot) cogTarget += 60;
+                if (inventorySlot == -3) selected.remove(kind);
+                else selected.put(kind,inventorySlot);
+                openCategory = -1;
+                init();
+            });
+            button.setTooltip(net.minecraft.client.gui.components.Tooltip.create(tooltip));
+            addRenderableWidget(button);
+        }
+        if (pageCount > 1) {
+            addRenderableWidget(Button.builder(Component.literal("<"), button -> { pages[kind] = (pages[kind] + pageCount - 1) % pageCount; init(); })
+                .bounds(x,y + 24,18,16).build());
+            addRenderableWidget(Button.builder(Component.literal(">"), button -> { pages[kind]++; init(); })
+                .bounds(x + 68,y + 24,18,16).build());
+        }
+    }
+
+    private int panelWidth() { return Math.min(380,width - 12); }
+    private int panelHeight() { return Math.min(254,height - 12); }
+    private int slotX(int kind) {
+        return width / 2 + (kind == 1 || kind == 2 ? -panelWidth() / 2 + 18 : panelWidth() / 2 - 38);
+    }
+    private int slotY(int kind) {
+        return height / 2 + (kind == 0 || kind == 1 ? -panelHeight() / 2 + 20 : panelHeight() / 2 - 40);
+    }
+    private int pickerX() { return Mth.clamp(slotX(openCategory) - 33,6,Math.max(6,width - 92)); }
+    private int pickerY() {
+        int y = slotY(openCategory);
+        return Mth.clamp(y < height / 2 ? y + 28 : y - pickerHeight(),6,Math.max(6,height - pickerHeight()));
+    }
+    private int pickerHeight() { return options(openCategory).size() > 4 ? 48 : 28; }
+    private ItemStack choice(int kind,int slot) {
+        return slot == -3 ? kind == 3 ? GunData.magazine(gun) : GunData.attachment(gun,AttachmentItem.Slot.values()[kind])
+            : slot < 0 ? ItemStack.EMPTY : minecraft.player.getInventory().getItem(slot);
+    }
+    private ItemStack selection(int kind) { return choice(kind,selected.getOrDefault(kind,-3)); }
+    private boolean supports(GunItem item,int kind) {
+        return kind == 3 ? item.definition.feed.detachable() : (item.definition.slots & (1 << kind)) != 0;
+    }
+    private static final class AttachmentButton extends Button {
+        private final ItemStack stack;
+        private final boolean chosen;
+        AttachmentButton(int x,int y,ItemStack stack,Component label,boolean chosen,OnPress press) {
+            super(x,y,20,20,label,press,DEFAULT_NARRATION);
+            this.stack = stack; this.chosen = chosen;
+        }
+        @Override protected void renderWidget(GuiGraphics g,int mouseX,int mouseY,float partialTick) {
+            g.fill(getX(),getY(),getX() + 20,getY() + 20,0xff238a91);
+            g.fill(getX() + 1,getY() + 1,getX() + 19,getY() + 19,0xff182526);
+            if (chosen || isHoveredOrFocused()) {
+                int color = chosen ? 0xffffd987 : 0xffd3b783;
+                g.fill(getX() + 1,getY() + 1,getX() + 19,getY() + 2,color);
+                g.fill(getX() + 1,getY() + 18,getX() + 19,getY() + 19,color);
+            }
+            if (!stack.isEmpty()) {
+                g.renderItem(stack,getX() + 2,getY() + 2);
+                if (stack.getItem() instanceof MagazineItem) {
+                    String rounds = Integer.toString(GunData.rounds(stack));
+                    var font = net.minecraft.client.Minecraft.getInstance().font;
+                    g.drawString(font,rounds,getX() + 19 - font.width(rounds),getY() + 12,0xffffd987);
+                }
+            } else {
+                g.drawCenteredString(net.minecraft.client.Minecraft.getInstance().font,"x",getX() + 10,getY() + 6,0xffb7aaa0);
+            }
+        }
+    }
+
+    private List<Integer> options(int kind) {
+        List<Integer> slots = new ArrayList<>();
+        Set<Item> seen = new HashSet<>();
+        ItemStack installed = kind == 3 ? GunData.magazine(gun) : GunData.attachment(gun,AttachmentItem.Slot.values()[kind]);
+        if (!installed.isEmpty()) {
+            slots.add(-3);
+            if (kind < 3) seen.add(installed.getItem());
+        }
+        if (kind != 3) slots.add(-1);
+        else if (!GunData.magazine(gun).isEmpty()) slots.add(-2);
+        for (int slot = 0; slot < 36; slot++) {
+            ItemStack stack = minecraft.player.getInventory().getItem(slot);
+            if (kind < 3 && stack.getItem() instanceof AttachmentItem attachment && attachment.slot.ordinal() == kind
+                && ((GunItem)gun.getItem()).definition.supports(attachment) && seen.add(stack.getItem())) slots.add(slot);
+            if (kind == 3 && stack.getItem() instanceof MagazineItem magazine
+                && magazine.feed == ((GunItem)gun.getItem()).definition.feed && GunData.rounds(stack) > 0) slots.add(slot);
+        }
+        if (kind == 3) slots.sort(Comparator.comparingInt((Integer slot) -> slot < 0 ? 1000 - slot : GunData.rounds(minecraft.player.getInventory().getItem(slot))).reversed());
+        return slots;
+    }
+
+    @Override public void tick() {
+        if (minecraft.player == null || !minecraft.player.isAlive() || !minecraft.isWindowActive()
+            || minecraft.player.getInventory().selected != heldSlot || minecraft.player.getMainHandItem().getItem() != gun.getItem()) { onClose(); return; }
+        if (!ClientWeapons.physicalKey(ClientWeapons.PLUS)) commit();
+    }
+    private void commit() {
+        if (committed) return;
+        committed = true;
+        for (int kind = 0; kind < 3; kind++) if (selected.containsKey(kind))
+            WeaponPackets.send(WeaponPackets.ATTACH,selected.get(kind),kind);
+        if (selected.containsKey(3)) WeaponPackets.send(WeaponPackets.RELOAD,selected.get(3),0);
+        WeaponPackets.send(WeaponPackets.INPUT,0,0);
+        minecraft.setScreen(null);
+    }
+    @Override public void onClose() {
+        WeaponPackets.send(WeaponPackets.INPUT,0,0);
+        minecraft.setScreen(null);
+    }
+    @Override public boolean keyPressed(int key, int scan, int modifiers) {
+        if (key == GLFW.GLFW_KEY_ESCAPE) { onClose(); return true; }
+        return super.keyPressed(key,scan,modifiers);
+    }
+    private static void line(GuiGraphics g,int x1,int y1,int x2,int y2) {
+        double length = Math.hypot(x2 - x1,y2 - y1);
+        g.pose().pushPose();
+        g.pose().translate(x1,y1,0);
+        g.pose().mulPose(Axis.ZP.rotationDegrees((float)Math.toDegrees(Math.atan2(y2 - y1,x2 - x1))));
+        g.fill(0,0,(int)Math.ceil(length),1,0xff289fa5);
+        g.pose().popPose();
+    }
+    @Override public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        if (gun == null || !(gun.getItem() instanceof GunItem item)) { onClose(); return; }
+        renderBackground(graphics);
+        int center = width / 2, middle = height / 2;
+        int top = (height - panelHeight()) / 2;
+        long now = net.minecraft.Util.getMillis();
+        float elapsed = lastFrame == 0 ? 0 : Math.min(.1f,(now - lastFrame) / 1000f);
+        lastFrame = now;
+        cogAngle += (cogTarget - cogAngle) * (1 - (float)Math.exp(-elapsed * 10));
+        float cogSize = Math.min(panelWidth() * .30f,panelHeight() * .62f);
+        graphics.pose().pushPose();
+        graphics.pose().translate(center,middle,50);
+        graphics.pose().scale(cogSize,cogSize,1);
+        graphics.pose().translate(-.5,.5,0);
+        GuiGameElement.of(AllBlocks.LARGE_COGWHEEL.getDefaultState().setValue(BlockStateProperties.AXIS,Direction.Axis.Y))
+            .rotateBlock(22.5,cogAngle,22.5).render(graphics);
+        graphics.pose().popPose();
+        for (int kind = 0; kind < 4; kind++) if (supports(item,kind)) {
+            boolean leftSlot = kind == 1 || kind == 2, upper = kind == 0 || kind == 1;
+            int rootX = center + (leftSlot ? -16 : 16), rootY = middle + (upper ? -12 : 12);
+            int elbowX = center + (leftSlot ? -45 : 45), elbowY = slotY(kind) + 10;
+            line(graphics,rootX,rootY,elbowX,elbowY);
+            line(graphics,elbowX,elbowY,slotX(kind) + 10,elbowY);
+        }
+        ItemStack preview = gun.copy();
+        for (int kind = 0; kind < 3; kind++) if (selected.containsKey(kind)) {
+            int slot = selected.get(kind);
+            GunData.setAttachment(preview,AttachmentItem.Slot.values()[kind],slot < 0 ? ItemStack.EMPTY : minecraft.player.getInventory().getItem(slot));
+        }
+        if (selected.containsKey(3)) {
+            int slot = selected.get(3);
+            GunData.setMagazine(preview,slot < 0 ? ItemStack.EMPTY : minecraft.player.getInventory().getItem(slot));
+        }
+        graphics.pose().pushPose();
+        float gunScale = Math.min(7,panelWidth() / 48f);
+        graphics.pose().translate(center,middle,100);
+        graphics.pose().mulPose(Axis.ZP.rotationDegrees(25));
+        graphics.pose().scale(gunScale,gunScale,gunScale);
+        graphics.pose().translate(-8,-8,0);
+        graphics.renderItem(preview,0,0);
+        graphics.pose().popPose();
+        graphics.flush();
+        if (openCategory >= 0) ArmoryGui.machinePanel(graphics,pickerX() - 4,pickerY() - 4,94,pickerHeight());
+        graphics.drawCenteredString(font,Component.translatable("menu.createarmory.release_short",ClientWeapons.PLUS.getTranslatedKeyMessage()),
+            center,top + panelHeight() - 18,0xffa99e88);
+        super.render(graphics,mouseX,mouseY,partialTick);
+    }
+}

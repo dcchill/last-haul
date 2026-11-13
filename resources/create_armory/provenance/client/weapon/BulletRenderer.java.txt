@@ -1,0 +1,18 @@
+package net.createarmory.client.weapon;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.createarmory.entity.BulletEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.resources.ResourceLocation;
+
+public class BulletRenderer extends EntityRenderer<BulletEntity> {
+    public BulletRenderer(EntityRendererProvider.Context context) { super(context); }
+    @Override public ResourceLocation getTextureLocation(BulletEntity bullet) {
+        return new ResourceLocation("minecraft", "textures/block/iron_block.png");
+    }
+    @Override public void render(BulletEntity bullet, float yaw, float partialTick, PoseStack poses, MultiBufferSource buffer, int light) {
+        // Trails outlive the projectile and render in the world pass, including PiP scopes.
+        super.render(bullet, yaw, partialTick, poses, buffer, light);
+    }
+}

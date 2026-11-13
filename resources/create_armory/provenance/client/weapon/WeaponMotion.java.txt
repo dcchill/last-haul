@@ -1,0 +1,97 @@
+package net.createarmory.client.weapon;
+
+/** Frame-owned motion. Rendering (including the scope pass) only reads the resulting pose. */
+final class WeaponMotion {
+    private final Spring kick = new Spring(), swayX = new Spring(), swayY = new Spring(), landing = new Spring(), handling = new Spring();
+    private final Spring movement = new Spring(), sprint = new Spring();
+    private float aimProgress, phase, shotAge = 10, spinSpeed;
+    private float reloadProgress = -1, reloadDuration = 1;
+    float aim, x, y, z, pitch, yaw, roll, cameraPitch, cameraRoll, barrelAngle;
+    long frames;
+
+    void fire(float strength) {
+        kick.velocity = Math.min(32, kick.velocity + strength * 18);
+        shotAge = 0;
+    }
+
+    void land(float speed) { landing.velocity = Math.min(12, landing.velocity + Math.min(1, speed) * 10); }
+
+    void reload(float seconds) {
+        reloadProgress = 0;
+        reloadDuration = seconds;
+        kick.clear();
+    }
+
+    void cancelReload() { reloadProgress = -1; }
+
+    void update(float seconds, boolean aiming, float adsSeconds, float lookX, float lookY, float speed,
+                boolean sprinting, boolean minigun, boolean reloading) {
+        if (seconds <= 0) return;
+        float dt = seconds;
+        aimProgress = clamp(aimProgress + (aiming ? dt : -dt) / adsSeconds, 0, 1);
+        aim = aimProgress * aimProgress * (3 - 2 * aimProgress);
+        kick.update(dt, 0, 22);
+        if (kick.value > .7f) { kick.value = .7f; kick.velocity = Math.min(0, kick.velocity); }
+        swayX.update(dt, clamp(lookX, -1, 1), 14);
+        swayY.update(dt, clamp(lookY, -1, 1), 14);
+        landing.update(dt, 0, 18);
+        movement.update(dt, clamp(speed, 0, 1), 12);
+        sprint.update(dt, sprinting ? 1 : 0, 14);
+        phase = (phase + dt * (9 + sprint.value * 5)) % (float)(100 * Math.PI);
+        if (reloadProgress >= 0) reloadProgress = Math.min(1, reloadProgress + dt / reloadDuration);
+        if (!reloading) cancelReload();
+        // Hold the magwell steady during the exchange, then shoulder the weapon after the hand returns.
+        float present = reloadProgress < 0 ? 0 : smooth(reloadProgress / .16f) * (1 - smooth((reloadProgress - .8f) / .2f));
+        handling.update(dt, present, 18);
+        float tilt = handling.value;
+        float decorate = 1 - aim;
+        float walk = movement.value * decorate * (reloading ? .25f : 1);
+        float breath = (float)Math.sin(phase * .22f) * .0015f * decorate;
+        x = decorate * (-swayX.value * .025f - tilt * .14f) + (float)Math.sin(phase) * walk * .012f;
+        y = breath + decorate * (tilt * .30f - landing.value * .035f - sprint.value * .045f)
+            + (float)Math.cos(phase * 2) * walk * .008f;
+        z = kick.value * .09f + tilt * .035f * decorate;
+        pitch = -kick.value * (2.8f - aim * 2.4f) + decorate * (swayY.value * 2 + landing.value * 3 + tilt * 7);
+        yaw = decorate * (-swayX.value * 2 + tilt * 4);
+        roll = decorate * (-swayX.value * 2.5f - tilt * 17 + (float)Math.sin(phase) * walk * 1.5f);
+        cameraPitch = clamp(-kick.value * .65f + landing.value * .4f + tilt * .12f, -.75f, .75f) * decorate;
+        cameraRoll = clamp(-kick.value * .18f - tilt * .18f, -.35f, .35f) * decorate;
+        float spinning = minigun && !reloading ? clamp(.16f - shotAge, 0, dt) : 0;
+        spin(spinning, 1440);
+        spin(dt - spinning, 0);
+        shotAge += dt;
+        frames++;
+    }
+
+    private void spin(float dt, float targetSpin) {
+        // Integrate the exponential response exactly so spin-down covers the same angle at every FPS.
+        float decay = (float)Math.exp(-dt * (targetSpin == 0 ? 5 : 18));
+        float rate = targetSpin == 0 ? 5 : 18;
+        barrelAngle = (barrelAngle + targetSpin * dt + (spinSpeed - targetSpin) * (1 - decay) / rate) % 1440;
+        spinSpeed = targetSpin + (spinSpeed - targetSpin) * decay;
+    }
+
+    void clear() {
+        kick.clear(); swayX.clear(); swayY.clear(); landing.clear(); handling.clear();
+        movement.clear(); sprint.clear();
+        aimProgress = aim = phase = spinSpeed = barrelAngle = 0;
+        x = y = z = pitch = yaw = roll = cameraPitch = cameraRoll = 0;
+        shotAge = 10;
+        cancelReload();
+    }
+
+    private static float clamp(float value, float low, float high) { return Math.max(low, Math.min(high, value)); }
+    private static float smooth(float value) { float t = clamp(value, 0, 1); return t * t * (3 - 2 * t); }
+
+    private static final class Spring {
+        float value, velocity;
+        void update(float dt, float target, float frequency) {
+            float offset = value - target;
+            float decay = (float)Math.exp(-frequency * dt);
+            float travel = (velocity + frequency * offset) * dt;
+            value = target + (offset + travel) * decay;
+            velocity = (velocity - frequency * travel) * decay;
+        }
+        void clear() { value = velocity = 0; }
+    }
+}

@@ -1,0 +1,37 @@
+package net.createarmory.client.weapon;
+
+import com.mojang.blaze3d.vertex.*;
+import net.createarmory.item.AnimatedPartItem;
+import net.createarmory.weapon.*;
+import net.minecraft.client.renderer.*;
+import software.bernie.geckolib.cache.object.GeoBone;
+
+/** Reuses the gun's baked mesh and atlas, without inheriting its current animation or visibility. */
+public class MagazineRenderer extends PartRenderer {
+    @Override public void renderRecursively(PoseStack poses, AnimatedPartItem item, GeoBone bone, RenderType type,
+        MultiBufferSource buffers, VertexConsumer vertices, boolean reRender, float partialTick, int light,
+        int overlay, float red, float green, float blue, float alpha) {
+        MagazineItem magazine = (MagazineItem)item;
+        if (bone.getName().equals(magazine.feed == WeaponDefinition.Feed.DRUM ? "cogwheel" : "mag")) {
+            float scale = switch (magazine.feed) { case STANAG -> 4; case MAC -> 1.3f; case BARRET -> 4; default -> .65f; };
+            poses.pushPose();
+            poses.scale(scale,scale,scale);
+            switch (magazine.feed) {
+                case STANAG -> poses.translate(0,-1.21875 / 16,.25 / 16);
+                case MAC -> poses.translate(0,-1.375 / 16,0);
+                case BARRET -> poses.translate(0,-.875 / 16,-2.125 / 16);
+                case DRUM -> poses.translate(0,-8.5 / 16,-5.0 / 16);
+                default -> { }
+            }
+            boolean hidden = bone.isHidden();
+            try {
+                bone.setHidden(false);
+                renderCubesOfBone(poses,bone,buffers.getBuffer(type),light,overlay,red,green,blue,alpha);
+            } finally {
+                bone.setHidden(hidden);
+                poses.popPose();
+            }
+        }
+        for (GeoBone child : bone.getChildBones()) renderRecursively(poses,item,child,type,buffers,vertices,reRender,partialTick,light,overlay,red,green,blue,alpha);
+    }
+}

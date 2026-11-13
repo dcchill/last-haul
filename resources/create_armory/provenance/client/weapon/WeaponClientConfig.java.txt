@@ -1,0 +1,16 @@
+package net.createarmory.client.weapon;
+
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public final class WeaponClientConfig {
+    public static final ForgeConfigSpec SPEC;
+    public static final ForgeConfigSpec.DoubleValue ADS_SENSITIVITY, ADS_TRANSITION_SECONDS;
+    static {
+        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+        ADS_SENSITIVITY = builder.comment("Mouse sensitivity multiplier when aiming; scopes also scale by magnification.")
+            .defineInRange("adsSensitivity", .65, .05, 1.5);
+        ADS_TRANSITION_SECONDS = builder.comment("Seconds to fully aim down sights.")
+            .defineInRange("adsTransitionSeconds", .2, .05, 1);
+        SPEC = builder.build();
+    }
+}

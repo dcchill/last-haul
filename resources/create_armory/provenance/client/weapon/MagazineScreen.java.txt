@@ -1,0 +1,45 @@
+package net.createarmory.client.weapon;
+
+import net.createarmory.menu.MagazineMenu;
+import net.createarmory.weapon.GunData;
+import net.createarmory.weapon.MagazineItem;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+
+public class MagazineScreen extends AbstractContainerScreen<MagazineMenu> {
+    public MagazineScreen(MagazineMenu menu, Inventory inventory, Component title) {
+        super(menu, inventory, title);
+        imageHeight = 168;
+        inventoryLabelY = 74;
+    }
+    @Override protected void init() {
+        super.init();
+        addRenderableWidget(Button.builder(Component.translatable("menu.createarmory.load"), button -> transfer(0))
+            .bounds(leftPos + 8, topPos + 48, 76, 20).build());
+        addRenderableWidget(Button.builder(Component.translatable("menu.createarmory.unload"), button -> transfer(1))
+            .bounds(leftPos + 92, topPos + 48, 76, 20).build());
+    }
+    private void transfer(int button) {
+        if (minecraft.gameMode != null) minecraft.gameMode.handleInventoryButtonClick(menu.containerId, button);
+    }
+    @Override protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        ArmoryGui.panel(graphics,leftPos,topPos,imageWidth,imageHeight);
+        for (var slot : menu.slots) ArmoryGui.slot(graphics,leftPos + slot.x - 1,topPos + slot.y - 1);
+        if (menu.magazine().getItem() instanceof MagazineItem magazine)
+            graphics.drawString(font, GunData.rounds(menu.magazine()) + " / " + magazine.feed.capacity,
+                leftPos + 84,topPos + 28,0xff404040,false);
+        graphics.renderItem(menu.magazine(),leftPos + 56,topPos + 23);
+    }
+    @Override protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(font,title,8,8,0xff404040,false);
+        graphics.drawString(font,playerInventoryTitle,8,74,0xff404040,false);
+    }
+    @Override public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(graphics);
+        super.render(graphics,mouseX,mouseY,partialTick);
+        renderTooltip(graphics,mouseX,mouseY);
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/m4.item",
+  "textures": {
+    "layer0": "createarmory:item/m4texture"
+  }
+}

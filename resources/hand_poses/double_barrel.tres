@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="WeaponHandProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_hand_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+weapon_id = "double_barrel"
+right_bone = "stock"
+right_point = Vector3(1.75, 0.2, 4.5)
+left_bone = "barrel"
+left_point = Vector3(-1.8, 2.6, -6.5)
+magazine_bone = ""
+magazine_point = Vector3(-2, 4, 0)
+loading_bone = "shell1"
+loading_point = Vector3(-1.8, 5.5, 1.2)
+loading_prop_bone = "shell1"
+withdraw_offset = Vector3(-0.07, -0.13, 0.04)
+insert_offset = Vector3(-0.06, -0.15, 0.03)
+reach_clearance = Vector3(-0.10, -0.06, 0.03)

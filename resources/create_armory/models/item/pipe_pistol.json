@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/ppistol.item",
+  "textures": {
+    "layer0": "createarmory:item/ppistolfix"
+  }
+}

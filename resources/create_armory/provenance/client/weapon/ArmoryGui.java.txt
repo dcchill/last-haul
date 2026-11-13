@@ -1,0 +1,36 @@
+package net.createarmory.client.weapon;
+
+import net.minecraft.client.gui.GuiGraphics;
+
+final class ArmoryGui {
+    static void machinePanel(GuiGraphics g, int x, int y, int width, int height) {
+        g.fill(x,y,x + width,y + height,0xff252522);
+        g.fill(x + 1,y + 1,x + width - 1,y + height - 1,0xffa47c42);
+        g.fill(x + 2,y + 2,x + width - 2,y + height - 2,0xffd5b675);
+        g.fill(x + 3,y + 3,x + width - 3,y + height - 3,0xff514d43);
+        g.fill(x + 4,y + 4,x + width - 4,y + height - 4,0xff383b36);
+        if (width > 40 && height > 40) {
+            for (int sx : new int[]{x + 6,x + width - 9}) for (int sy : new int[]{y + 6,y + height - 9}) {
+                g.fill(sx,sy,sx + 3,sy + 3,0xffd5b675);
+                g.fill(sx + 1,sy + 1,sx + 3,sy + 2,0xff695033);
+            }
+            g.fill(x + 10,y + 23,x + width - 10,y + 24,0xff68614f);
+            g.fill(x + 10,y + height - 27,x + width - 10,y + height - 26,0xff68614f);
+        }
+    }
+    static void panel(GuiGraphics g, int x, int y, int width, int height) {
+        g.fill(x,y,x + width,y + height,0xff373737);
+        g.fill(x + 1,y + 1,x + width - 1,y + height - 1,0xffc6c6c6);
+        g.fill(x + 1,y + 1,x + width - 2,y + 3,0xffffffff);
+        g.fill(x + 1,y + 1,x + 3,y + height - 2,0xffffffff);
+        g.fill(x + 3,y + height - 3,x + width - 1,y + height - 1,0xff555555);
+        g.fill(x + width - 3,y + 3,x + width - 1,y + height - 1,0xff555555);
+    }
+
+    static void slot(GuiGraphics g, int x, int y) {
+        g.fill(x,y,x + 18,y + 18,0xffffffff);
+        g.fill(x,y,x + 17,y + 17,0xff373737);
+        g.fill(x + 1,y + 1,x + 17,y + 17,0xff8b8b8b);
+    }
+
+}

@@ -1,0 +1,24 @@
+package net.createarmory.block.model;
+
+import software.bernie.geckolib.model.GeoModel;
+
+import net.minecraft.resources.ResourceLocation;
+
+import net.createarmory.block.entity.MountedRpgTileEntity;
+
+public class MountedRpgBlockModel extends GeoModel<MountedRpgTileEntity> {
+	@Override
+	public ResourceLocation getAnimationResource(MountedRpgTileEntity animatable) {
+		return new ResourceLocation("createarmory", "animations/mountedrpg.animation.json");
+	}
+
+	@Override
+	public ResourceLocation getModelResource(MountedRpgTileEntity animatable) {
+		return new ResourceLocation("createarmory", "geo/mountedrpg.geo.json");
+	}
+
+	@Override
+	public ResourceLocation getTextureResource(MountedRpgTileEntity entity) {
+		return new ResourceLocation("createarmory", "textures/block/mountedrpgtexture.png");
+	}
+}

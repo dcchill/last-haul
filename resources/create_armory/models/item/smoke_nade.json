@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/smokenadegeo.item",
+  "textures": {
+    "layer0": "createarmory:item/smoketexture"
+  }
+}

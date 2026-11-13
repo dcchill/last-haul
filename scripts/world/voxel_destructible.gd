@@ -22,6 +22,27 @@ const FACE_CORNERS := [
 @onready var collision: CollisionShape3D = $CollisionShape3D
 @onready var surface: MeshInstance3D = $MeshInstance3D
 var cell_health := PackedFloat32Array()
+@export var blast_resistance: float = 6.0
+
+func blast(origin: Vector3, power: float) -> void:
+	# Adapter: source explosion pressure applied to the existing quarter-meter cells.
+	var hits: Array[Vector3] = []
+	for z in range(dimensions.z):
+		for y in range(dimensions.y):
+			for x in range(dimensions.x):
+				if cell_health[_index(Vector3i(x, y, z))] <= 0:
+					continue
+				var point: Vector3 = global_transform * ((Vector3(x, y, z) + Vector3.ONE * 0.5) * CELL_SIZE - Vector3(dimensions) * CELL_SIZE * 0.5)
+				var distance := point.distance_to(origin)
+				if distance > power:
+					continue
+				var query := PhysicsRayQueryParameters3D.create(origin, point, 1, [get_rid()])
+				if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():
+					continue
+				if power * 1.3 - distance * 0.75 > (blast_resistance + 0.3) * 0.3:
+					hits.append(point)
+	for point in hits:
+		damage_at(point, CELL_HEALTH, (point - origin).normalized())
 
 func _ready() -> void:
 	cell_health.resize(dimensions.x * dimensions.y * dimensions.z)

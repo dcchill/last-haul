@@ -28,7 +28,7 @@ func can_see(player: RaidPlayer, ballistics: Ballistics) -> bool:
 
 func clear_sight(player: RaidPlayer, ballistics: Ballistics) -> bool:
 	var origin := global_position + Vector3.UP * 1.45
-	var destination := player.camera.global_position
+	var destination := player.eye_position()
 	var hit := ballistics.trace(get_world_3d(), origin, destination - origin, origin.distance_to(destination) + 0.1, [get_rid()])
 	return not hit.is_empty() and hit.collider == player
 
@@ -72,8 +72,14 @@ func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) ->
 	if state == State.ATTACK:
 		var offset := player.global_position - global_position
 		rotation.y = atan2(-offset.x, -offset.z)
-	velocity.y = -2.0 if is_on_floor() else velocity.y - 18.0 * delta
-	move_and_slide()
+	velocity.y = -2.0 if test_move(global_transform, Vector3.DOWN * 0.03) else velocity.y - 18.0 * delta
+	var travel := velocity * delta
+	for _slide in range(3):
+		var collision := move_and_collide(travel)
+		if collision == null:
+			break
+		travel = collision.get_remainder().slide(collision.get_normal())
+		velocity = velocity.slide(collision.get_normal())
 	if state == State.ATTACK and sees and attack_left == 0.0:
 		attack_left = archetype.attack_interval
 		return true

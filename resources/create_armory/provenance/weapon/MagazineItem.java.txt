@@ -1,0 +1,50 @@
+package net.createarmory.weapon;
+
+import java.util.List;
+import net.createarmory.menu.MagazineMenu;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
+
+public class MagazineItem extends net.createarmory.item.AnimatedPartItem {
+    public final WeaponDefinition.Feed feed;
+    public MagazineItem(WeaponDefinition.Feed feed) {
+        super(switch (feed) { case STANAG -> "m4"; case MAC -> "macten"; case BARRET -> "barret"; case DRUM -> "mgun"; default -> throw new IllegalArgumentException("Not a magazine feed"); },
+            switch (feed) { case STANAG -> "m4texture"; case MAC -> "mazctexture"; case BARRET -> "barrettexture"; default -> "mguntexture"; });
+        this.feed = feed;
+    }
+
+    @Override public void registerControllers(software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar controllers) { }
+
+    @Override public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+        consumer.accept(new net.minecraftforge.client.extensions.common.IClientItemExtensions() {
+            private net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer renderer;
+            @Override public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) renderer = new net.createarmory.client.weapon.MagazineRenderer();
+                return renderer;
+            }
+        });
+    }
+
+    @Override public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (hand != InteractionHand.MAIN_HAND) return InteractionResultHolder.pass(player.getItemInHand(hand));
+        if (player instanceof ServerPlayer server)
+            NetworkHooks.openScreen(server, new SimpleMenuProvider((id, inventory, owner) ->
+                new MagazineMenu(id, inventory, player.getInventory().selected), getDescription()),
+                buffer -> buffer.writeVarInt(player.getInventory().selected));
+        return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide);
+    }
+
+    @Override public void appendHoverText(ItemStack stack, Level level, List<Component> lines, TooltipFlag flag) {
+        lines.add(Component.translatable("tooltip.createarmory.ammo", GunData.rounds(stack), feed.capacity));
+        lines.add(Component.translatable("tooltip.createarmory.magazine"));
+    }
+
+    @Override public boolean isBarVisible(ItemStack stack) { return true; }
+    @Override public int getBarWidth(ItemStack stack) { return Math.round(13f * GunData.rounds(stack) / feed.capacity); }
+    @Override public int getBarColor(ItemStack stack) { return 0x52d6c3; }
+}

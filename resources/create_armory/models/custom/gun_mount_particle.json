@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/gunmount.item",
+  "textures": {
+    "particle": "createarmory:block/mounttexture"
+  }
+}

@@ -1,0 +1,149 @@
+package net.createarmory.client.weapon;
+
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.Axis;
+import net.createarmory.weapon.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.*;
+import org.joml.Vector3f;
+import software.bernie.geckolib.cache.object.*;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
+import software.bernie.geckolib.util.RenderUtils;
+
+public class GunRenderer extends GeoItemRenderer<GunItem> {
+    private float reloadProgress = -1;
+    private boolean carryingMagazine, hidingSupportHand;
+    public GunRenderer() {
+        super(new GeoModel<>() {
+            @Override public ResourceLocation getModelResource(GunItem gun) { return asset("geo/" + gun.definition.model + ".geo.json"); }
+            @Override public ResourceLocation getTextureResource(GunItem gun) { return asset("textures/item/" + gun.definition.texture + ".png"); }
+            @Override public ResourceLocation getAnimationResource(GunItem gun) { return asset("animations/" + gun.definition.model + ".animation.json"); }
+        });
+    }
+    private static ResourceLocation asset(String path) { return new ResourceLocation("createarmory",path); }
+    private boolean firstPerson() {
+        return renderPerspective == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || renderPerspective == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND;
+    }
+
+    @Override public void preRender(PoseStack poses, GunItem gun, BakedGeoModel model, MultiBufferSource buffers,
+        VertexConsumer vertices, boolean reRender, float partialTick, int light, int overlay, float red, float green, float blue, float alpha) {
+        super.preRender(poses,gun,model,buffers,vertices,reRender,partialTick,light,overlay,red,green,blue,alpha);
+        Minecraft mc = Minecraft.getInstance();
+        var state = mc.player == null ? null : ClientWeapons.visual(mc.player);
+        reloadProgress = !firstPerson() || state == null || state.reloadEnd == 0
+            || software.bernie.geckolib.animatable.GeoItem.getId(currentItemStack) != software.bernie.geckolib.animatable.GeoItem.getId(state.reloadGun) ? -1
+            : (mc.level.getGameTime() + partialTick - state.reloadStart) / gun.definition.reloadTicks;
+        model.getBone("scope").ifPresent(bone -> bone.setHidden(true));
+        boolean hadMagazine = !GunData.magazine(currentItemStack).isEmpty();
+        boolean unloading = state != null && state.reloadAnimation.equals("unload");
+        boolean magazineReload = gun.definition.feed.detachable() && reloadProgress >= 0;
+        boolean visibleMagazine = magazineReload
+            ? reloadProgress < .36f && hadMagazine || reloadProgress >= .46f && !unloading : hadMagazine;
+        model.getBone("mag").ifPresent(bone -> bone.setHidden(!visibleMagazine));
+        model.getBone("cogwheel").ifPresent(bone -> bone.setHidden(!visibleMagazine));
+        carryingMagazine = magazineReload && visibleMagazine
+            && (reloadProgress >= .14f && reloadProgress < .36f || reloadProgress >= .46f && reloadProgress <= .79f);
+        hidingSupportHand = magazineReload && reloadProgress >= .36f && reloadProgress < .46f;
+        model.getBone("rocket").ifPresent(bone -> bone.setHidden(false));
+        for (String name : new String[]{"fx","firefx","muzzleflash"}) model.getBone(name).ifPresent(bone -> bone.setHidden(GunData.suppressed(currentItemStack)));
+        if (!firstPerson()) return;
+        model.getBone("rocket").ifPresent(bone -> {
+            boolean inserting = reloadProgress >= .28f;
+            bone.setHidden(GunData.rounds(currentItemStack) == 0 && !inserting);
+        });
+        float currentScale = poses.last().pose().getScale(new Vector3f()).x;
+        boolean keepScale = gun.definition == WeaponDefinition.MINIGUN
+            || gun.definition == WeaponDefinition.UPGRADED_MINIGUN
+            || gun.definition == WeaponDefinition.MAC10
+            || gun.definition == WeaponDefinition.DOUBLE_BARREL;
+        float viewScale = keepScale ? .8f : 1f;
+        float adsScale = (viewScale - ClientWeapons.aim() * .1f) / Math.abs(currentScale);
+        poses.scale(adsScale,adsScale,adsScale);
+        boolean optic = !GunData.attachment(currentItemStack,AttachmentItem.Slot.OPTIC).isEmpty();
+        model.getBone(optic ? "optic_socket" : "ads_socket").ifPresent(socket -> {
+            Vector3f local = new Vector3f(socket.getPivotX() / 16, socket.getPivotY() / 16, socket.getPivotZ() / 16);
+            boolean magnified = GunData.magnification(currentItemStack) > 1;
+            if (optic) local.y += (magnified ? .375f : .25f) * .25f;
+            if (magnified) local.z += .39f * .25f;
+            Vector3f camera = poses.last().pose().transformPosition(local);
+            Vector3f correction = new org.joml.Matrix4f(poses.last().pose()).invert()
+                .transformDirection(new Vector3f(-camera.x,-camera.y,(magnified ? -.14f : -.55f) - camera.z));
+            poses.translate(correction.x * ClientWeapons.aim(),correction.y * ClientWeapons.aim(),correction.z * ClientWeapons.aim());
+        });
+        WeaponMotion motion = ClientWeapons.MOTION;
+        // Apply after sight alignment, around the grip rather than the model's distant origin.
+        float hand = renderPerspective == ItemDisplayContext.FIRST_PERSON_LEFT_HAND ? -1 : 1;
+        poses.translate(motion.x * hand, motion.y, motion.z);
+        model.getBone("right_hand_socket").ifPresent(grip -> {
+            poses.translate(grip.getPivotX() / 16, grip.getPivotY() / 16, grip.getPivotZ() / 16);
+            poses.mulPose(Axis.XP.rotationDegrees(motion.pitch));
+            poses.mulPose(Axis.YP.rotationDegrees(motion.yaw * hand));
+            poses.mulPose(Axis.ZP.rotationDegrees(motion.roll * hand));
+            poses.translate(-grip.getPivotX() / 16, -grip.getPivotY() / 16, -grip.getPivotZ() / 16);
+        });
+    }
+
+    @Override public void renderRecursively(PoseStack poses, GunItem gun, GeoBone bone, RenderType type,
+        MultiBufferSource buffers, VertexConsumer vertices, boolean reRender, float partialTick, int light,
+        int overlay, float red, float green, float blue, float alpha) {
+        // Hands and vanilla items can end the shared builder and start it with another texture.
+        String name = bone.getName();
+        if (name.equals("reload_hand_socket") && !carryingMagazine) return;
+        float rotation = bone.getRotZ();
+        boolean spindle = firstPerson() && !gun.definition.canAim()
+            && (name.equals("barrel") || name.equals("cogwheel") && reloadProgress < 0);
+        if (spindle) bone.setRotZ((float)Math.toRadians(ClientWeapons.MOTION.barrelAngle * (name.equals("barrel") ? 1 : -.25f)));
+        vertices = buffers.getBuffer(type);
+        try {
+            super.renderRecursively(poses,gun,bone,type,buffers,vertices,reRender,partialTick,light,overlay,red,green,blue,alpha);
+        } finally {
+            if (spindle) bone.setRotZ(rotation);
+        }
+        if (!name.endsWith("_socket")) return;
+        Minecraft mc = Minecraft.getInstance();
+        poses.pushPose();
+        RenderUtils.prepMatrixForBone(poses,bone);
+        RenderUtils.translateToPivotPoint(poses,bone);
+        if ((name.equals("right_hand_socket") || name.equals("left_hand_socket") || name.equals("reload_hand_socket")) && firstPerson() && mc.player != null) {
+            if (name.equals("left_hand_socket") && (carryingMagazine || hidingSupportHand)) { poses.popPose(); return; }
+            boolean right = name.equals("right_hand_socket") == (renderPerspective == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND);
+            PlayerRenderer renderer = (PlayerRenderer)mc.getEntityRenderDispatcher().getRenderer(mc.player);
+            float armScale = .5f / Math.abs(poses.last().pose().getScale(new Vector3f()).x);
+            poses.scale(armScale,armScale,armScale);
+            poses.mulPose(Axis.ZP.rotationDegrees(right ? 20 : -20));
+            poses.mulPose(Axis.XP.rotationDegrees(-55));
+            poses.translate(right ? .3125 : -.3125,-.75,0);
+            if (right) renderer.renderRightHand(poses,buffers,light,mc.player);
+            else renderer.renderLeftHand(poses,buffers,light,mc.player);
+        } else {
+            AttachmentItem.Slot slot = switch (name) {
+                case "optic_socket" -> AttachmentItem.Slot.OPTIC;
+                case "muzzle_socket" -> AttachmentItem.Slot.MUZZLE;
+                case "grip_socket" -> AttachmentItem.Slot.GRIP;
+                default -> null;
+            };
+            if (slot != null) {
+                ItemStack attachment = GunData.attachment(currentItemStack,slot);
+                if (!attachment.isEmpty()) {
+                    float scale = slot == AttachmentItem.Slot.GRIP ? .18f : slot == AttachmentItem.Slot.MUZZLE ? .22f : .25f;
+                    poses.scale(scale,scale,scale);
+                    // Item meshes are centred at (8,8,8); seat their mounting faces on the sockets.
+                    if (slot == AttachmentItem.Slot.OPTIC) poses.translate(0,GunData.magnification(currentItemStack) > 1 ? .375 : .25,0);
+                    if (slot == AttachmentItem.Slot.GRIP) poses.translate(0,-.25,0);
+                    if (slot == AttachmentItem.Slot.MUZZLE) poses.translate(0,0,-.5);
+                    mc.getItemRenderer().renderStatic(attachment,ItemDisplayContext.FIXED,light,overlay,poses,buffers,mc.level,0);
+                    if (slot == AttachmentItem.Slot.OPTIC && firstPerson()) {
+                        poses.translate(0,0,.39);
+                        if (GunData.magnification(currentItemStack) > 1) ScopeRenderer.lens(poses,buffers,0xf000f0);
+                    }
+                }
+            }
+        }
+        poses.popPose();
+        buffers.getBuffer(type);
+    }
+}

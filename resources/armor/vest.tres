@@ -12,3 +12,10 @@ plate_weight = 1.5
 carrier_weight = 0.5
 durability_loss = 1.1
 side_plates = false
+
+display_name = "Field vest"
+slot = "chestplate"
+points = 5.0
+toughness = 0.0
+max_durability = 90
+color = Color(0.33725, 0.38039, 0.29412, 1)

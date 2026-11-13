@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponHandProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_hand_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+weapon_id = "mac_ten"
+right_bone = "body"
+right_point = Vector3(2, 2.8, 0)
+left_bone = "body"
+left_point = Vector3(-2.3, 5.7, -3.3)
+magazine_bone = "mag"
+magazine_point = Vector3(-2, 0, 0)
+loading_bone = "body"
+loading_point = Vector3(-2.2, 6, -1)
+withdraw_offset = Vector3(-0.07, -0.13, 0.04)
+insert_offset = Vector3(-0.06, -0.15, 0.03)
+reach_clearance = Vector3(-0.10, -0.06, 0.03)

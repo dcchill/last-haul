@@ -1,0 +1,133 @@
+package net.createarmory.client.weapon;
+
+import java.util.*;
+import com.mojang.blaze3d.vertex.*;
+import net.createarmory.CreatearmoryMod;
+import net.createarmory.network.WeaponPackets;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.joml.Matrix4f;
+
+@Mod.EventBusSubscriber(modid = CreatearmoryMod.MODID,value = Dist.CLIENT)
+public final class BulletTrails {
+    static final Store TRAILS = new Store();
+    private static ClientLevel world;
+    private BulletTrails() {}
+
+    static record Segment(Vec3 start, Vec3 end, long born) {
+        double length() { return start.distanceTo(end); }
+        float opacity(double now) { return (float)Math.max(0,1 - (now - born) / Store.LIFETIME); }
+    }
+
+    /** No render-side aging: the same history can be drawn by both world passes. */
+    static final class Store {
+        static final int LIFETIME = 6, LIMIT = 2048;
+        final Map<Integer,Deque<Segment>> trails = new LinkedHashMap<>();
+        long clock;
+        int count;
+
+        void add(int id,Vec3 start,Vec3 end) {
+            double distance = start.distanceTo(end);
+            if (!Double.isFinite(distance) || distance < .0001) return;
+            if (distance > 32) start = end.add(start.subtract(end).scale(32 / distance));
+            Deque<Segment> trail = trails.computeIfAbsent(id,key -> new ArrayDeque<>());
+            trail.addLast(new Segment(start,end,clock)); count++;
+            double excess = trail.stream().mapToDouble(Segment::length).sum() - 32;
+            while (excess > .00001 && !trail.isEmpty()) {
+                Segment oldest = trail.removeFirst(); count--;
+                double length = oldest.length();
+                if (length > excess) {
+                    trail.addFirst(new Segment(oldest.start.lerp(oldest.end,excess / length),oldest.end,oldest.born));
+                    count++;
+                }
+                excess -= length;
+            }
+            while (count > LIMIT) {
+                var iterator = trails.values().iterator();
+                count -= iterator.next().size(); iterator.remove();
+            }
+        }
+
+        void tick() {
+            clock++;
+            var iterator = trails.values().iterator();
+            while (iterator.hasNext()) {
+                Deque<Segment> trail = iterator.next();
+                while (!trail.isEmpty() && clock - trail.peekFirst().born >= LIFETIME) { trail.removeFirst(); count--; }
+                if (trail.isEmpty()) iterator.remove();
+            }
+        }
+
+        void clear() { trails.clear(); count = 0; clock = 0; }
+    }
+
+    private static void checkWorld() {
+        ClientLevel current = Minecraft.getInstance().level;
+        if (world != current) { TRAILS.clear(); world = current; }
+    }
+
+    public static void receive(WeaponPackets.Tracer message) {
+        checkWorld();
+        if (world != null) TRAILS.add(message.bulletId(),message.start(),message.end());
+    }
+
+    @SubscribeEvent public static void tick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        checkWorld();
+        if (world != null && !Minecraft.getInstance().isPaused()) TRAILS.tick();
+    }
+
+    @SubscribeEvent public static void unload(net.minecraftforge.event.level.LevelEvent.Unload event) {
+        if (event.getLevel() == world) { TRAILS.clear(); world = null; }
+    }
+
+    @SubscribeEvent public static void render(RenderLevelStageEvent event) {
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES || TRAILS.count == 0) return;
+        Minecraft mc = Minecraft.getInstance();
+        Vec3 camera = event.getCamera().getPosition();
+        PoseStack poses = event.getPoseStack();
+        poses.pushPose();
+        try {
+            poses.translate(-camera.x,-camera.y,-camera.z);
+            var buffers = mc.renderBuffers().bufferSource();
+            VertexConsumer vertices = buffers.getBuffer(Material.TYPE);
+            double now = TRAILS.clock + event.getPartialTick();
+            for (Deque<Segment> trail : TRAILS.trails.values()) for (Segment segment : trail) {
+                float alpha = segment.opacity(now);
+                if (alpha <= 0) continue;
+                Vec3 start = segment.start, end = segment.end;
+                if (start.distanceToSqr(camera) < 1) start = start.lerp(end,Math.min(1,1 / segment.length()));
+                Vec3 side = end.subtract(start).cross(start.add(end).scale(.5).subtract(camera)).normalize();
+                if (side.lengthSqr() < .001) side = new Vec3(event.getCamera().getLeftVector());
+                ribbon(vertices,poses.last().pose(),start,end,side,camera,.055,219,151,46,(int)(alpha * 100));
+                ribbon(vertices,poses.last().pose(),start,end,side,camera,.0175,255,225,132,(int)(alpha * 245));
+            }
+            buffers.endBatch(Material.TYPE);
+        } finally { poses.popPose(); }
+    }
+
+    private static void ribbon(VertexConsumer vertices,Matrix4f pose,Vec3 start,Vec3 end,Vec3 side,Vec3 camera,double width,int r,int g,int b,int a) {
+        // Limit apparent width near the eye so a muzzle segment cannot become a screen-sized fan.
+        Vec3 startSide = side.scale(Math.min(width,start.distanceTo(camera) * width * .08));
+        Vec3 endSide = side.scale(Math.min(width,end.distanceTo(camera) * width * .08));
+        for (Vec3 point : new Vec3[]{start.subtract(startSide),end.subtract(endSide),end.add(endSide),start.add(startSide)})
+            vertices.vertex(pose,(float)point.x,(float)point.y,(float)point.z).color(r,g,b,a).endVertex();
+    }
+
+    private static final class Material extends RenderStateShard {
+        private Material() { super("armory_trail",() -> {},() -> {}); }
+        static final RenderType TYPE = RenderType.create("armory_trail",DefaultVertexFormat.POSITION_COLOR,
+            VertexFormat.Mode.QUADS,262144,false,true,RenderType.CompositeState.builder()
+                .setShaderState(POSITION_COLOR_SHADER).setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                .setCullState(NO_CULL).setDepthTestState(LEQUAL_DEPTH_TEST).setWriteMaskState(COLOR_WRITE)
+                .createCompositeState(false));
+    }
+}

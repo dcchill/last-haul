@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/macten.item",
+  "textures": {
+    "layer0": "createarmory:item/mazctexture"
+  }
+}

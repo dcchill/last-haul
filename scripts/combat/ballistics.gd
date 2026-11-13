@@ -1,36 +1,29 @@
-class_name Ballistics
+﻿class_name Ballistics
 extends RefCounted
 
 signal impact(position: Vector3, normal: Vector3, material_id: String, entity_id: String)
 
-func make_projectile(origin: Vector3, direction: Vector3, ammo: AmmoDef, velocity: float, spread: float, max_range: float, seed: int, exclude: Array[RID]) -> Dictionary:
+static func shoot(direction: Vector3, speed: float, spread: float, rng: RandomNumberGenerator) -> Vector3:
+	var deviation := 0.0172275 * spread
+	return (direction.normalized() + Vector3((rng.randf() - rng.randf()) * deviation, (rng.randf() - rng.randf()) * deviation, (rng.randf() - rng.randf()) * deviation)) * speed
+
+func make_bullet(origin: Vector3, direction: Vector3, speed: float, spread: float, damage: float, head_multiplier: float, seed_value: int, exclude: Array[RID], kind: String = "bullet") -> Dictionary:
 	var rng := RandomNumberGenerator.new()
-	rng.seed = seed
-	var right := direction.normalized().cross(Vector3.UP).normalized()
-	if right.is_zero_approx():
-		right = Vector3.RIGHT
-	var up := right.cross(direction.normalized()).normalized()
-	var shot_direction := (direction.normalized() + right * rng.randf_range(-spread, spread) + up * rng.randf_range(-spread, spread)).normalized()
-	var shot_velocity := shot_direction * velocity
-	return {"position": origin, "velocity": shot_velocity, "energy": energy(ammo.mass_kg, velocity),
-		"initial_energy": energy(ammo.mass_kg, velocity), "ammo": ammo, "range": max_range,
-		"traveled": 0.0, "rng": rng, "exclude": exclude.duplicate(), "ricochets": 0}
+	rng.seed = seed_value
+	return {"position": origin, "previous": origin, "velocity": shoot(direction, speed, spread, rng), "damage": damage,
+		"head_multiplier": head_multiplier, "age": 0, "exclude": exclude.duplicate(), "kind": kind, "rng": rng}
 
-func energy(mass: float, speed: float) -> float:
-	return 0.5 * mass * speed * speed
-
-func speed_for_energy(mass: float, joules: float) -> float:
-	return sqrt(2.0 * maxf(0.0, joules) / mass)
-
-func velocity_after_forces(velocity: Vector3, ammo: AmmoDef, delta: float) -> Vector3:
-	var speed := velocity.length()
-	return velocity / (1.0 + ammo.drag * speed * delta) + Vector3.DOWN * 9.81 * ammo.gravity * delta
-
-func projectile_damage(projectile: Dictionary, material: MaterialDef) -> float:
-	var ammo: AmmoDef = projectile.ammo
-	var retained := sqrt(clampf(projectile.energy / projectile.initial_energy, 0.0, 1.0))
-	return maxf(0.0, ammo.damage * retained * (material.damage_multiplier if material != null else 1.0))
+static func advance(projectile: Dictionary) -> void:
+	projectile.previous = projectile.position
+	projectile.position += projectile.velocity
+	projectile.age += 1
+	projectile.velocity = projectile.velocity * (0.999 if projectile.kind == "bullet" else 0.99) + Vector3.DOWN * (0.015 if projectile.kind == "bullet" else 0.05)
 
 func trace(world: World3D, origin: Vector3, direction: Vector3, distance: float, exclude: Array[RID]) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(origin, origin + direction.normalized() * distance, 1, exclude)
+	query.hit_from_inside = true
 	return world.direct_space_state.intersect_ray(query)
+
+static func headshot(target: Node3D, point: Vector3) -> bool:
+	var eye: float = target.eye_position().y if target is RaidPlayer else target.global_position.y + 1.62
+	return point.y >= eye - 0.18

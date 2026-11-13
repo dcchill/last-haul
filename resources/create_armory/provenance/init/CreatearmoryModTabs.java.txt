@@ -1,0 +1,84 @@
+
+package net.createarmory.init;
+
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.network.chat.Component;
+import net.minecraft.core.registries.Registries;
+
+import net.createarmory.CreatearmoryMod;
+
+public class CreatearmoryModTabs {
+	public static final DeferredRegister<CreativeModeTab> REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreatearmoryMod.MODID);
+	public static final RegistryObject<CreativeModeTab> CREATE_ARMORY = REGISTRY.register("create_armory",
+			() -> CreativeModeTab.builder().title(Component.translatable("item_group.createarmory.create_armory")).icon(() -> new ItemStack(CreatearmoryModItems.PIPE_PISTOL.get())).displayItems((parameters, tabData) -> {
+				tabData.accept(CreatearmoryModItems.PIPE_PISTOL.get());
+				tabData.accept(CreatearmoryModItems.MINI_GUN.get());
+				tabData.accept(CreatearmoryModItems.BARRET.get());
+				tabData.accept(CreatearmoryModItems.BOLT_ACTION_SNIPER.get());
+				tabData.accept(CreatearmoryModItems.M_FOUR.get());
+				tabData.accept(CreatearmoryModItems.MAC_TEN.get());
+				tabData.accept(CreatearmoryModItems.FOUR_SIXTEEN.get());
+				tabData.accept(CreatearmoryModItems.M_SIXTEEN.get());
+				tabData.accept(CreatearmoryModItems.DOUBLE_BARREL.get());
+				tabData.accept(CreatearmoryModItems.NINE_MM.get());
+				tabData.accept(CreatearmoryModItems.FIFTY_CAL.get());
+				tabData.accept(CreatearmoryModItems.FIVE_FIVE_SIX.get());
+				tabData.accept(CreatearmoryModItems.RPG_ROCKET.get());
+				tabData.accept(CreatearmoryModItems.MOLTEN_BRASS_BUCKET.get());
+				tabData.accept(CreatearmoryModItems.SHOTGUN_SHELL.get());
+				tabData.accept(CreatearmoryModItems.UPGRADED_MINI_GUN.get());
+				tabData.accept(CreatearmoryModItems.IMPACT_NADE.get());
+				tabData.accept(CreatearmoryModItems.SMOKE_NADE.get());
+				tabData.accept(CreatearmoryModBlocks.GUN_MOUNT.get().asItem());
+				tabData.accept(CreatearmoryModBlocks.MOUNTED_MINIGUN.get().asItem());
+				tabData.accept(CreatearmoryModBlocks.MOUNTED_RPG.get().asItem());
+				tabData.accept(CreatearmoryModItems.JUNK_GUN.get());
+				tabData.accept(CreatearmoryModItems.STRANGE_SUBSTANCE.get());
+                tabData.accept(CreatearmoryModItems.RPG.get());
+                tabData.accept(CreatearmoryModItems.STANAG_MAGAZINE.get());
+                tabData.accept(CreatearmoryModItems.MAC_MAGAZINE.get());
+                tabData.accept(CreatearmoryModItems.BARRET_MAGAZINE.get());
+                tabData.accept(CreatearmoryModItems.MINIGUN_DRUM.get());
+                tabData.accept(CreatearmoryModItems.REFLEX_SIGHT.get());
+                tabData.accept(CreatearmoryModItems.FOUR_X_SCOPE.get());
+                tabData.accept(CreatearmoryModItems.SNIPER_SCOPE.get());
+                tabData.accept(CreatearmoryModItems.VERTICAL_GRIP.get());
+                tabData.accept(CreatearmoryModItems.SUPPRESSOR.get());
+
+			})
+
+					.build());
+	public static final RegistryObject<CreativeModeTab> CREATE_ARMORY_PARTS = REGISTRY.register("create_armory_parts",
+			() -> CreativeModeTab.builder().title(Component.translatable("item_group.createarmory.create_armory_parts")).icon(() -> new ItemStack(CreatearmoryModItems.M_FOUR_LOWER.get())).displayItems((parameters, tabData) -> {
+				tabData.accept(CreatearmoryModItems.BARREL_PART.get());
+				tabData.accept(CreatearmoryModItems.NINE_MM_CASING.get());
+				tabData.accept(CreatearmoryModItems.UNFINISHED_NINE_MM.get());
+				tabData.accept(CreatearmoryModItems.FIFTY_CAL_CASING.get());
+				tabData.accept(CreatearmoryModItems.UNFINISHED_FIFTY_CAL_CASING.get());
+				tabData.accept(CreatearmoryModItems.FIVE_FIVE_SIX_CASING.get());
+				tabData.accept(CreatearmoryModItems.UNFINISHED_FIVE_FIVE_SIX_CASING.get());
+				tabData.accept(CreatearmoryModItems.UNFINISHED_SHOTGUN_SHELL.get());
+				tabData.accept(CreatearmoryModItems.CASING_MOLD.get());
+				tabData.accept(CreatearmoryModItems.NINE_MM_MOLD.get());
+				tabData.accept(CreatearmoryModItems.FIFTY_CAL_MOLD.get());
+				tabData.accept(CreatearmoryModItems.FIVE_FIVE_SIX_MOLD.get());
+				tabData.accept(CreatearmoryModItems.FIFTY_CAL_MOLD_COMPLETE.get());
+				tabData.accept(CreatearmoryModItems.NINE_MM_MOLD_COMPLETE.get());
+				tabData.accept(CreatearmoryModItems.FIVE_FIVE_SIX_MOLD_COMPLETE.get());
+				tabData.accept(CreatearmoryModItems.M_FOUR_UPPER.get());
+				tabData.accept(CreatearmoryModItems.M_FOUR_LOWER.get());
+				tabData.accept(CreatearmoryModItems.BARRET_LOWER.get());
+				tabData.accept(CreatearmoryModItems.BARRET_UPPER.get());
+				tabData.accept(CreatearmoryModItems.MINIGUN_BARREL.get());
+				tabData.accept(CreatearmoryModItems.MINIGUN_BASE.get());
+				tabData.accept(CreatearmoryModItems.FOUR_SIXTEEN_UPPER.get());
+				tabData.accept(CreatearmoryModItems.M_SIXTEEN_UPPER.get());
+				tabData.accept(CreatearmoryModItems.UPGRADED_MINIGUN_BARREL.get());
+			})
+
+					.build());
+}

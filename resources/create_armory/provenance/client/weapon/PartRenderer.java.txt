@@ -1,0 +1,17 @@
+package net.createarmory.client.weapon;
+
+import net.createarmory.item.AnimatedPartItem;
+import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
+
+public class PartRenderer extends GeoItemRenderer<AnimatedPartItem> {
+    public PartRenderer() {
+        super(new GeoModel<>() {
+            @Override public ResourceLocation getModelResource(AnimatedPartItem part) { return asset("geo/" + part.model + ".geo.json"); }
+            @Override public ResourceLocation getTextureResource(AnimatedPartItem part) { return asset("textures/item/" + part.texture + ".png"); }
+            @Override public ResourceLocation getAnimationResource(AnimatedPartItem part) { return asset("animations/" + part.model + ".animation.json"); }
+        });
+    }
+    private static ResourceLocation asset(String path) { return new ResourceLocation("createarmory",path); }
+}

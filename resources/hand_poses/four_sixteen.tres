@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponHandProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_hand_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+weapon_id = "four_sixteen"
+right_bone = "lowerupper"
+right_point = Vector3(1.6, 1.5, 3.2)
+left_bone = "handguard"
+left_point = Vector3(-1.7, 3.3, -4)
+magazine_bone = "mag"
+magazine_point = Vector3(-1.45, 0.7, -0.1)
+loading_bone = "lowerupper"
+loading_point = Vector3(-1.7, 3, 0)
+withdraw_offset = Vector3(-0.07, -0.13, 0.04)
+insert_offset = Vector3(-0.06, -0.15, 0.03)
+reach_clearance = Vector3(-0.10, -0.06, 0.03)

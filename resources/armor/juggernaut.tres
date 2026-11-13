@@ -12,3 +12,10 @@ plate_weight = 6.0
 carrier_weight = 1.5
 durability_loss = 0.8
 side_plates = true
+
+display_name = "Juggernaut vest"
+slot = "chestplate"
+points = 8.0
+toughness = 3.0
+max_durability = 200
+color = Color(0.20392, 0.23137, 0.25098, 1)

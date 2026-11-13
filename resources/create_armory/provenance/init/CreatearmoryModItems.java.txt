@@ -1,0 +1,105 @@
+
+package net.createarmory.init;
+
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.DeferredRegister;
+
+import net.minecraft.world.item.Item;
+import net.createarmory.weapon.*;
+
+import net.createarmory.item.UnfinishedShotgunShellItem;
+import net.createarmory.item.UnfinishedNineMMItem;
+import net.createarmory.item.UnfinishedFiveFiveSixCasingItem;
+import net.createarmory.item.UnfinishedFiftyCalCasingItem;
+import net.createarmory.item.StrangeSubstanceItem;
+import net.createarmory.item.ShotgunShellItem;
+import net.createarmory.item.RPGRocketItem;
+import net.createarmory.item.NineMMMoldItem;
+import net.createarmory.item.NineMMMoldCompleteItem;
+import net.createarmory.item.NineMMItem;
+import net.createarmory.item.NineMMCasingItem;
+import net.createarmory.item.MoltenBrassItem;
+import net.createarmory.item.FiveFiveSixMoldItem;
+import net.createarmory.item.FiveFiveSixMoldCompleteItem;
+import net.createarmory.item.FiveFiveSixItem;
+import net.createarmory.item.FiveFiveSixCasingItem;
+import net.createarmory.item.FiftyCalMoldItem;
+import net.createarmory.item.FiftyCalMoldCompleteItem;
+import net.createarmory.item.FiftyCalItem;
+import net.createarmory.item.FiftyCalCasingItem;
+import net.createarmory.item.CasingMoldItem;
+import net.createarmory.item.BarrelPartItem;
+import net.createarmory.block.display.MountedRpgDisplayItem;
+import net.createarmory.block.display.MountedMinigunDisplayItem;
+import net.createarmory.block.display.GunMountDisplayItem;
+import net.createarmory.CreatearmoryMod;
+
+public class CreatearmoryModItems {
+	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, CreatearmoryMod.MODID);
+	public static final RegistryObject<Item> PIPE_PISTOL = REGISTRY.register("pipe_pistol", () -> new GunItem(WeaponDefinition.PIPE));
+	public static final RegistryObject<Item> MINI_GUN = REGISTRY.register("mini_gun", () -> new GunItem(WeaponDefinition.MINIGUN));
+	public static final RegistryObject<Item> BARRET = REGISTRY.register("barret", () -> new GunItem(WeaponDefinition.BARRET));
+	public static final RegistryObject<Item> BOLT_ACTION_SNIPER = REGISTRY.register("bolt_action_sniper", () -> new GunItem(WeaponDefinition.BOLT_ACTION_SNIPER));
+	public static final RegistryObject<Item> M_FOUR = REGISTRY.register("m_four", () -> new GunItem(WeaponDefinition.M4));
+	public static final RegistryObject<Item> MAC_TEN = REGISTRY.register("mac_ten", () -> new GunItem(WeaponDefinition.MAC10));
+
+	public static final RegistryObject<Item> FOUR_SIXTEEN = REGISTRY.register("four_sixteen", () -> new GunItem(WeaponDefinition.HK416));
+	public static final RegistryObject<Item> M_SIXTEEN = REGISTRY.register("m_sixteen", () -> new GunItem(WeaponDefinition.M16));
+	public static final RegistryObject<Item> DOUBLE_BARREL = REGISTRY.register("double_barrel", () -> new GunItem(WeaponDefinition.DOUBLE_BARREL));
+	public static final RegistryObject<Item> NINE_MM = REGISTRY.register("nine_mm", () -> new NineMMItem());
+	public static final RegistryObject<Item> FIFTY_CAL = REGISTRY.register("fifty_cal", () -> new FiftyCalItem());
+	public static final RegistryObject<Item> FIVE_FIVE_SIX = REGISTRY.register("five_five_six", () -> new FiveFiveSixItem());
+	public static final RegistryObject<Item> RPG_ROCKET = REGISTRY.register("rpg_rocket", () -> new RPGRocketItem());
+	public static final RegistryObject<Item> MOLTEN_BRASS_BUCKET = REGISTRY.register("molten_brass_bucket", () -> new MoltenBrassItem());
+	public static final RegistryObject<Item> BARREL_PART = REGISTRY.register("barrel_part", () -> new BarrelPartItem());
+	public static final RegistryObject<Item> NINE_MM_CASING = REGISTRY.register("nine_mm_casing", () -> new NineMMCasingItem());
+	public static final RegistryObject<Item> UNFINISHED_NINE_MM = REGISTRY.register("unfinished_nine_mm", () -> new UnfinishedNineMMItem());
+	public static final RegistryObject<Item> FIFTY_CAL_CASING = REGISTRY.register("fifty_cal_casing", () -> new FiftyCalCasingItem());
+	public static final RegistryObject<Item> UNFINISHED_FIFTY_CAL_CASING = REGISTRY.register("unfinished_fifty_cal_casing", () -> new UnfinishedFiftyCalCasingItem());
+	public static final RegistryObject<Item> FIVE_FIVE_SIX_CASING = REGISTRY.register("five_five_six_casing", () -> new FiveFiveSixCasingItem());
+	public static final RegistryObject<Item> UNFINISHED_FIVE_FIVE_SIX_CASING = REGISTRY.register("unfinished_five_five_six_casing", () -> new UnfinishedFiveFiveSixCasingItem());
+	public static final RegistryObject<Item> SHOTGUN_SHELL = REGISTRY.register("shotgun_shell", () -> new ShotgunShellItem());
+	public static final RegistryObject<Item> UNFINISHED_SHOTGUN_SHELL = REGISTRY.register("unfinished_shotgun_shell", () -> new UnfinishedShotgunShellItem());
+	public static final RegistryObject<Item> CASING_MOLD = REGISTRY.register("casing_mold", () -> new CasingMoldItem());
+	public static final RegistryObject<Item> NINE_MM_MOLD = REGISTRY.register("nine_mm_mold", () -> new NineMMMoldItem());
+	public static final RegistryObject<Item> FIFTY_CAL_MOLD = REGISTRY.register("fifty_cal_mold", () -> new FiftyCalMoldItem());
+	public static final RegistryObject<Item> FIVE_FIVE_SIX_MOLD = REGISTRY.register("five_five_six_mold", () -> new FiveFiveSixMoldItem());
+	public static final RegistryObject<Item> FIFTY_CAL_MOLD_COMPLETE = REGISTRY.register("fifty_cal_mold_complete", () -> new FiftyCalMoldCompleteItem());
+	public static final RegistryObject<Item> NINE_MM_MOLD_COMPLETE = REGISTRY.register("nine_mm_mold_complete", () -> new NineMMMoldCompleteItem());
+	public static final RegistryObject<Item> FIVE_FIVE_SIX_MOLD_COMPLETE = REGISTRY.register("five_five_six_mold_complete", () -> new FiveFiveSixMoldCompleteItem());
+	public static final RegistryObject<Item> M_FOUR_UPPER = REGISTRY.register("m_four_upper", () -> new net.createarmory.item.AnimatedPartItem("m4upper", "m4texture"));
+	public static final RegistryObject<Item> M_FOUR_LOWER = REGISTRY.register("m_four_lower", () -> new net.createarmory.item.AnimatedPartItem("m4lowerrec", "m4texture"));
+	public static final RegistryObject<Item> BARRET_LOWER = REGISTRY.register("barret_lower", () -> new net.createarmory.item.AnimatedPartItem("sniperlower", "barrettexture"));
+	public static final RegistryObject<Item> BARRET_UPPER = REGISTRY.register("barret_upper", () -> new net.createarmory.item.AnimatedPartItem("sniperupper", "barrettexture"));
+	public static final RegistryObject<Item> MINIGUN_BARREL = REGISTRY.register("minigun_barrel", () -> new net.createarmory.item.AnimatedPartItem("minigunbarrel", "mguntexture"));
+	public static final RegistryObject<Item> MINIGUN_BASE = REGISTRY.register("minigun_base", () -> new net.createarmory.item.AnimatedPartItem("minigunbase", "mguntexture"));
+	public static final RegistryObject<Item> FOUR_SIXTEEN_UPPER = REGISTRY.register("four_sixteen_upper", () -> new net.createarmory.item.AnimatedPartItem("foursixteenupper", "m4texture"));
+	public static final RegistryObject<Item> M_SIXTEEN_UPPER = REGISTRY.register("m_sixteen_upper", () -> new net.createarmory.item.AnimatedPartItem("msixteenupper", "m4texture"));
+
+	public static final RegistryObject<Item> RPG = REGISTRY.register("rpg", () -> new GunItem(WeaponDefinition.RPG));
+
+
+	public static final RegistryObject<Item> UPGRADED_MINI_GUN = REGISTRY.register("upgraded_mini_gun", () -> new GunItem(WeaponDefinition.UPGRADED_MINIGUN));
+	public static final RegistryObject<Item> UPGRADED_MINIGUN_BARREL = REGISTRY.register("upgraded_minigun_barrel", () -> new net.createarmory.item.AnimatedPartItem("upgradedminigunbarrel", "mguntexture"));
+
+	public static final RegistryObject<Item> IMPACT_NADE = REGISTRY.register("impact_nade", () -> new net.createarmory.item.GrenadeItem(false));
+
+	public static final RegistryObject<Item> SMOKE_NADE = REGISTRY.register("smoke_nade", () -> new net.createarmory.item.GrenadeItem(true));
+	public static final RegistryObject<Item> GUN_MOUNT = REGISTRY.register(CreatearmoryModBlocks.GUN_MOUNT.getId().getPath(), () -> new GunMountDisplayItem(CreatearmoryModBlocks.GUN_MOUNT.get(), new Item.Properties()));
+	public static final RegistryObject<Item> MOUNTED_MINIGUN = REGISTRY.register(CreatearmoryModBlocks.MOUNTED_MINIGUN.getId().getPath(), () -> new MountedMinigunDisplayItem(CreatearmoryModBlocks.MOUNTED_MINIGUN.get(), new Item.Properties()));
+	public static final RegistryObject<Item> MOUNTED_RPG = REGISTRY.register(CreatearmoryModBlocks.MOUNTED_RPG.getId().getPath(), () -> new MountedRpgDisplayItem(CreatearmoryModBlocks.MOUNTED_RPG.get(), new Item.Properties()));
+	public static final RegistryObject<Item> JUNK_GUN = REGISTRY.register("junk_gun", () -> new GunItem(WeaponDefinition.JUNK));
+
+	public static final RegistryObject<Item> STRANGE_SUBSTANCE = REGISTRY.register("strange_substance", () -> new StrangeSubstanceItem());
+
+    public static final RegistryObject<Item> STANAG_MAGAZINE = REGISTRY.register("stanag_magazine", () -> new MagazineItem(WeaponDefinition.Feed.STANAG));
+    public static final RegistryObject<Item> MAC_MAGAZINE = REGISTRY.register("mac_magazine", () -> new MagazineItem(WeaponDefinition.Feed.MAC));
+    public static final RegistryObject<Item> BARRET_MAGAZINE = REGISTRY.register("barret_magazine", () -> new MagazineItem(WeaponDefinition.Feed.BARRET));
+    public static final RegistryObject<Item> MINIGUN_DRUM = REGISTRY.register("minigun_drum", () -> new MagazineItem(WeaponDefinition.Feed.DRUM));
+    public static final RegistryObject<Item> REFLEX_SIGHT = REGISTRY.register("reflex_sight", () -> new AttachmentItem(AttachmentItem.Slot.OPTIC, 1));
+    public static final RegistryObject<Item> FOUR_X_SCOPE = REGISTRY.register("four_x_scope", () -> new AttachmentItem(AttachmentItem.Slot.OPTIC, 4));
+    public static final RegistryObject<Item> SNIPER_SCOPE = REGISTRY.register("sniper_scope", () -> new AttachmentItem(AttachmentItem.Slot.OPTIC, 6));
+    public static final RegistryObject<Item> VERTICAL_GRIP = REGISTRY.register("vertical_grip", () -> new AttachmentItem(AttachmentItem.Slot.GRIP, 1));
+    public static final RegistryObject<Item> SUPPRESSOR = REGISTRY.register("suppressor", () -> new AttachmentItem(AttachmentItem.Slot.MUZZLE, 1));
+}

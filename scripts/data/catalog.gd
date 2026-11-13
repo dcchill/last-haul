@@ -2,6 +2,16 @@ class_name Catalog
 extends RefCounted
 
 const PATHS: Array[String] = [
+	"res://resources/items/small_pack.tres",
+"res://resources/items/large_pack.tres",
+"res://resources/items/field_rig.tres",
+"res://resources/items/pockets.tres",
+"res://resources/items/tool_case.tres",
+"res://resources/items/medkit.tres",
+"res://resources/items/food.tres",
+"res://resources/items/tool.tres",
+"res://resources/items/pistol.tres",
+"res://resources/items/magazine.tres",
 	"res://resources/items/salvage.tres", "res://resources/ammo/rifle_round.tres",
 	"res://resources/weapons/rifle.tres", "res://resources/materials/steel.tres",
 	"res://resources/weapons/attachments/reflex_sight.tres",
@@ -32,6 +42,13 @@ func load_all() -> String:
 			items[definition.id] = _inventory_item(definition, 1, 2, 3, "armor")
 		elif definition is AttachmentDef:
 			items[definition.id] = _inventory_item(definition, 1, 1, 1, "attachment")
+	for item: ItemDef in items.values():
+		if item.kind == "weapon" and item.equipment_slots.is_empty():
+			item.equipment_slots = PackedStringArray(["primary", "secondary"])
+		if item.kind == "armor":
+			item.equipment_slots = PackedStringArray(["body_armor"])
+		if item.weight == 0:
+			item.weight = 3.0 if item.kind == "weapon" else 2.0 if item.kind == "armor" else 0.01 if item.kind == "ammo" else 0.25
 	for definition in definitions.values():
 		if definition is ItemDef and definition.stack_limit < 1:
 			return "Item stack limit must be positive"
@@ -73,7 +90,7 @@ func load_all() -> String:
 				return "Material ricochet chance cannot exceed one"
 		if definition is AttachmentDef:
 			if definition.slot.is_empty() or definition.compatible_weapons.is_empty():
-				return "Attachment requires a slot and compatible weapon"
+				return "Attachment requires a slot and compatible weapon: %s (%s, %s)" % [definition.id, definition.slot, str(definition.compatible_weapons)]
 			for weapon_id in definition.compatible_weapons:
 				if not definitions.has(weapon_id) or not definitions[weapon_id] is WeaponDef:
 					return "Attachment references a missing weapon"
@@ -92,13 +109,18 @@ func load_all() -> String:
 					return "NPC health, movement, perception and timing must be positive and finite"
 			if not is_finite(definition.field_of_view) or definition.field_of_view <= 0 or definition.field_of_view > 360 or not is_finite(definition.damage) or definition.damage < 0:
 				return "Invalid NPC FOV or damage"
+	ArmoryContent.install(self)
+	for definition in definitions.values():
+		if definition is WeaponDef and definition.armory:
+			if definition.hand_profile == null or not definition.hand_profile.valid() or definition.hand_profile.weapon_id != definition.id:
+				return "Missing or invalid weapon hand profile: " + definition.id
 	return ""
 
 func _inventory_item(definition: Resource, stack_limit: int, width: int, height: int, kind: String) -> ItemDef:
 	var item := ItemDef.new()
 	item.id = definition.id
 	item.display_name = definition.id.replace("_", " ").capitalize()
-	if definition is AmmoDef or definition is WeaponDef or definition is AttachmentDef:
+	if definition is AmmoDef or definition is WeaponDef or definition is AttachmentDef or definition is ArmorDef:
 		item.display_name = definition.display_name
 	item.stack_limit = stack_limit
 	item.width = width

@@ -12,3 +12,10 @@ plate_weight = 4.0
 carrier_weight = 1.5
 durability_loss = 0.9
 side_plates = true
+
+display_name = "Bastion vest"
+slot = "chestplate"
+points = 8.0
+toughness = 2.0
+max_durability = 160
+color = Color(0.26667, 0.30588, 0.33333, 1)

@@ -12,3 +12,10 @@ plate_weight = 2.5
 carrier_weight = 1.5
 durability_loss = 1.0
 side_plates = true
+
+display_name = "Sentinel vest"
+slot = "chestplate"
+points = 6.0
+toughness = 0.0
+max_durability = 120
+color = Color(0.33725, 0.38039, 0.41961, 1)

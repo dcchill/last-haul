@@ -1,0 +1,65 @@
+package net.createarmory.menu;
+
+import net.createarmory.init.CreatearmoryModMenus;
+import net.createarmory.weapon.GunData;
+import net.createarmory.weapon.MagazineItem;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.ItemStack;
+
+public class MagazineMenu extends AbstractContainerMenu {
+    public final int heldSlot;
+    private final Inventory inventory;
+    private final ItemStack magazine;
+
+    public MagazineMenu(int id, Inventory inventory, int heldSlot) {
+        super(CreatearmoryModMenus.MAGAZINE.get(), id);
+        this.inventory = inventory;
+        this.heldSlot = heldSlot;
+        magazine = heldSlot >= 0 && heldSlot < 9 ? inventory.getItem(heldSlot) : ItemStack.EMPTY;
+        for (int row = 0; row < 3; row++) for (int column = 0; column < 9; column++)
+            addSlot(new Slot(inventory, column + row * 9 + 9, 8 + column * 18, 86 + row * 18));
+        for (int column = 0; column < 9; column++)
+            addSlot(new Slot(inventory, column, 8 + column * 18, 144) {
+                @Override public boolean mayPickup(Player player) { return getSlotIndex() != MagazineMenu.this.heldSlot; }
+                @Override public boolean mayPlace(ItemStack stack) { return getSlotIndex() != MagazineMenu.this.heldSlot; }
+            });
+    }
+
+    public ItemStack magazine() { return magazine; }
+    @Override public boolean stillValid(Player player) {
+        return player.isAlive() && inventory.selected == heldSlot && player.getMainHandItem() == magazine
+            && magazine.getItem() instanceof MagazineItem;
+    }
+    @Override public ItemStack quickMoveStack(Player player, int slot) { return ItemStack.EMPTY; }
+
+    @Override public void clicked(int slot, int button, ClickType type, Player player) {
+        if ((slot >= 0 && slot < slots.size() && slots.get(slot).getSlotIndex() == heldSlot)
+            || (type == ClickType.SWAP && button == heldSlot)) return;
+        super.clicked(slot, button, type, player);
+    }
+
+    @Override public boolean clickMenuButton(Player player, int button) {
+        if (!stillValid(player) || player.level().isClientSide || button < 0 || button > 1) return false;
+        MagazineItem item = (MagazineItem) magazine.getItem();
+        int rounds = GunData.rounds(magazine);
+        if (button == 0) {
+            for (int slot = 0; slot < 36 && rounds < item.feed.capacity; slot++) {
+                ItemStack ammo = inventory.getItem(slot);
+                if (ammo.is(item.feed.ammo())) {
+                    int take = Math.min(item.feed.capacity - rounds, ammo.getCount());
+                    rounds += take;
+                    ammo.shrink(take);
+                }
+            }
+        } else {
+            ItemStack returned = new ItemStack(item.feed.ammo(), rounds);
+            inventory.add(returned);
+            rounds = returned.getCount();
+        }
+        GunData.setRounds(magazine, rounds);
+        inventory.setChanged();
+        broadcastChanges();
+        return true;
+    }
+}

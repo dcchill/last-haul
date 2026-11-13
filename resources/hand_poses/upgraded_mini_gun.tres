@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponHandProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/weapon_hand_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+weapon_id = "upgraded_mini_gun"
+right_bone = "bone"
+right_point = Vector3(2.2, 9, 20)
+left_bone = "bone"
+left_point = Vector3(-0.4, 16.5, 12)
+magazine_bone = "cogwheel"
+magazine_point = Vector3(-10.3, 8, 5)
+loading_bone = "bone"
+loading_point = Vector3(-5, 10, 4)
+hip_grip = Vector3(0.53, -0.58, -0.82)
+magazine_drop = Vector3(-0.2, -0.85, 0.12)
+left_elbow = Vector3(-0.55, 0.10, -0.65)
+right_elbow = Vector3(0.95, -0.58, -0.28)
+withdraw_offset = Vector3(-0.14, -0.16, 0.07)
+insert_offset = Vector3(-0.13, -0.17, 0.06)
+reach_clearance = Vector3(-0.14, -0.03, 0.04)

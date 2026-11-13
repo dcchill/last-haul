@@ -1,0 +1,6 @@
+{
+  "parent": "createarmory:displaysettings/mgun.item",
+  "textures": {
+    "layer0": "createarmory:item/mguntexture"
+  }
+}
