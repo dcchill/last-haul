@@ -9,6 +9,9 @@ var health: float
 var state: State = State.IDLE
 var last_heard: Vector3
 var attack_left: float = 0.0
+var inventory: RaidInventory
+var weapon_state: WeaponState
+var corpse_id := ""
 var armor_plates: ArmorPlates
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
 

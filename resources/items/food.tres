@@ -10,3 +10,5 @@ width = 1
 height = 1
 weight = 0.2
 stack_limit = 8
+
+stamina_amount = 40.0

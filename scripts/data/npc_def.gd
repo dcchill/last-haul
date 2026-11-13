@@ -11,3 +11,6 @@ extends Resource
 @export var attack_interval: float = 1.2
 @export var damage: float = 12.0
 @export var armor: ArmorDef
+
+@export var melee := false
+@export var carried_items: Array[String] = []

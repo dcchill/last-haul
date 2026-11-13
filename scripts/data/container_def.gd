@@ -15,3 +15,6 @@ extends Resource
 @export var progressive_discovery: bool = false
 @export var accessible: bool = true
 @export var persistent: bool = true
+
+@export_range(0, 24) var max_nesting_depth := 8
+@export var allow_containers := true

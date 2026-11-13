@@ -25,8 +25,9 @@ var cell_health := PackedFloat32Array()
 @export var blast_resistance: float = 6.0
 
 func blast(origin: Vector3, power: float) -> void:
-	# Adapter: source explosion pressure applied to the existing quarter-meter cells.
-	var hits: Array[Vector3] = []
+	if power <= 0.0:
+		return
+	var hits: Array[Vector3i] = []
 	for z in range(dimensions.z):
 		for y in range(dimensions.y):
 			for x in range(dimensions.x):
@@ -36,13 +37,20 @@ func blast(origin: Vector3, power: float) -> void:
 				var distance := point.distance_to(origin)
 				if distance > power:
 					continue
+				if power * 1.3 - distance * 0.75 <= (blast_resistance + 0.3) * 0.3:
+					continue
 				var query := PhysicsRayQueryParameters3D.create(origin, point, 1, [get_rid()])
 				if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():
 					continue
-				if power * 1.3 - distance * 0.75 > (blast_resistance + 0.3) * 0.3:
-					hits.append(point)
-	for point in hits:
-		damage_at(point, CELL_HEALTH, (point - origin).normalized())
+				hits.append(Vector3i(x, y, z))
+	if hits.is_empty():
+		return
+	for cell in hits:
+		var point := global_transform * ((Vector3(cell) + Vector3.ONE * 0.5) * CELL_SIZE - Vector3(dimensions) * CELL_SIZE * 0.5)
+		_damage_cell(cell, CELL_HEALTH, (point - origin).normalized())
+	# Support and collision depend on the finished edit, not each individual cell removal.
+	_detach_unsupported((global_position - origin).normalized())
+	_rebuild()
 
 func _ready() -> void:
 	cell_health.resize(dimensions.x * dimensions.y * dimensions.z)
@@ -56,6 +64,14 @@ func damage_at(world_position: Vector3, damage: float, impulse_direction: Vector
 	var local := to_local(world_position) + Vector3(dimensions) * CELL_SIZE * 0.5
 	var cell := Vector3i(floori(local.x / CELL_SIZE), floori(local.y / CELL_SIZE), floori(local.z / CELL_SIZE))
 	cell = Vector3i(clampi(cell.x, 0, dimensions.x - 1), clampi(cell.y, 0, dimensions.y - 1), clampi(cell.z, 0, dimensions.z - 1))
+	if not _damage_cell(cell, damage, impulse_direction):
+		return false
+	if cell_health[_index(cell)] == 0.0:
+		_detach_unsupported(impulse_direction)
+		_rebuild()
+	return true
+
+func _damage_cell(cell: Vector3i, damage: float, impulse_direction: Vector3) -> bool:
 	var index := _index(cell)
 	if cell_health[index] <= 0.0:
 		return false
@@ -63,8 +79,6 @@ func damage_at(world_position: Vector3, damage: float, impulse_direction: Vector
 	if cell_health[index] == 0.0:
 		var center := (Vector3(cell) + Vector3.ONE * 0.5) * CELL_SIZE - Vector3(dimensions) * CELL_SIZE * 0.5
 		get_node(debris_manager_path).call_deferred("spawn_debris", global_transform * center, surface_color, impulse_direction)
-		_detach_unsupported(impulse_direction)
-		_rebuild()
 	return true
 
 func remaining_cells() -> int:
@@ -80,20 +94,55 @@ func _index(cell: Vector3i) -> int:
 func _rebuild() -> void:
 	var tool := SurfaceTool.new()
 	tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for z in dimensions.z:
-		for y in dimensions.y:
-			for x in dimensions.x:
-				var cell := Vector3i(x, y, z)
-				if cell_health[_index(cell)] <= 0.0:
-					continue
-				for face in 6:
+	var has_faces := false
+	for face in 6:
+		var axis := face / 2
+		var u := (axis + 1) % 3
+		var v := (axis + 2) % 3
+		for layer in dimensions[axis]:
+			var mask := PackedByteArray()
+			mask.resize(dimensions[u] * dimensions[v])
+			for row in dimensions[v]:
+				for column in dimensions[u]:
+					var cell := Vector3i.ZERO
+					cell[axis] = layer
+					cell[u] = column
+					cell[v] = row
 					var neighbor: Vector3i = cell + FACE_NEIGHBORS[face]
-					if _inside(neighbor) and cell_health[_index(neighbor)] > 0.0:
+					if cell_health[_index(cell)] > 0.0 and (not _inside(neighbor) or cell_health[_index(neighbor)] <= 0.0):
+						mask[column + row * dimensions[u]] = 1
+			for row in dimensions[v]:
+				for column in dimensions[u]:
+					if mask[column + row * dimensions[u]] == 0:
 						continue
-					_add_face(tool, cell, face)
-	var mesh := tool.commit()
+					var width := 1
+					while column + width < dimensions[u] and mask[column + width + row * dimensions[u]] != 0:
+						width += 1
+					var height := 1
+					while row + height < dimensions[v]:
+						var full_row := true
+						for offset in width:
+							if mask[column + offset + (row + height) * dimensions[u]] == 0:
+								full_row = false
+								break
+						if not full_row:
+							break
+						height += 1
+					for dy in height:
+						for dx in width:
+							mask[column + dx + (row + dy) * dimensions[u]] = 0
+					var cell := Vector3i.ZERO
+					cell[axis] = layer
+					cell[u] = column
+					cell[v] = row
+					var span := Vector3i.ONE
+					span[u] = width
+					span[v] = height
+					_add_face(tool, cell, face, span)
+					has_faces = true
+	var mesh := tool.commit() if has_faces else null
 	surface.mesh = mesh
-	var shape := mesh.create_trimesh_shape() if mesh.get_surface_count() > 0 else null
+	var shape := mesh.create_trimesh_shape() if mesh != null else null
 	if is_inside_tree():
 		collision.set_deferred("shape", shape)
 	else:
@@ -151,10 +200,10 @@ func _detach_unsupported(impulse_direction: Vector3) -> void:
 					cell_health[_index(member)] = 0.0
 				get_node(debris_manager_path).call_deferred("spawn_cluster", positions, surface_color, impulse_direction)
 
-func _add_face(tool: SurfaceTool, cell: Vector3i, face: int) -> void:
-	var center := (Vector3(cell) + Vector3.ONE * 0.5) * CELL_SIZE - Vector3(dimensions) * CELL_SIZE * 0.5
+func _add_face(tool: SurfaceTool, cell: Vector3i, face: int, span: Vector3i) -> void:
+	var center := (Vector3(cell) + Vector3(span) * 0.5) * CELL_SIZE - Vector3(dimensions) * CELL_SIZE * 0.5
 	var points: Array = FACE_CORNERS[face]
 	for index in TRIANGLE_INDICES:
 		tool.set_normal(FACE_NORMALS[face])
-		tool.add_vertex(center + points[index] * CELL_SIZE * 0.5)
+		tool.add_vertex(center + points[index] * Vector3(span) * CELL_SIZE * 0.5)
 

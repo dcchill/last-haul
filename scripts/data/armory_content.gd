@@ -2,8 +2,9 @@ class_name ArmoryContent
 extends RefCounted
 
 const ROOT := "res://resources/create_armory/"
+const INVENTORY_DATA = preload("res://resources/inventory_content.json")
 const DATA = preload("res://resources/create_armory/content.json")
-const MIGRATIONS := {"rifle": "m_four", "rifle_round": "five_five_six"}
+const MIGRATIONS := {"rifle": "m_four", "rifle_round": "five_five_six", "pistol": "pipe_pistol", "magazine": "stanag_magazine"}
 const ARMOR_IDS := ["patrol", "vest", "sentinel", "bastion", "juggernaut"]
 # Save compatibility only: these IDs are never added to the playable catalog.
 const REMOVED_ARMOR_TIERS := {"leather": "patrol", "chainmail": "vest", "iron": "sentinel", "gold": "vest", "diamond": "bastion", "netherite": "juggernaut"}
@@ -20,12 +21,26 @@ static func install(catalog: Catalog) -> void:
 	for id in ["nine_mm", "five_five_six", "fifty_cal", "shotgun_shell", "rpg_rocket"]:
 		var ammo := AmmoDef.new()
 		ammo.id = id
+		ammo.caliber = id
 		ammo.display_name = id.replace("_", " ").capitalize()
 		catalog.definitions[id] = ammo
 		catalog.items[id] = catalog._inventory_item(ammo, 64, 1, 1, "ammo")
+	var variant: AmmoDef = catalog.definitions.five_five_six.duplicate()
+	variant.id = "five_five_six_ap"
+	variant.display_name = "5.56 armor piercing"
+	variant.damage_multiplier = 0.9
+	variant.bypass = 0.2
+	variant.penetration = 65.0
+	catalog.definitions[variant.id] = variant
+	catalog.items[variant.id] = catalog._inventory_item(variant, 64, 1, 1, "ammo")
 	for data in DATA.data.guns:
 		var gun := WeaponDef.new()
 		gun.id = data.id
+		var inventory_data: Dictionary = INVENTORY_DATA.data.get(gun.id, {})
+		var dimensions: Array = inventory_data.get("dimensions", [2, 5])
+		gun.inventory_dimensions = Vector2i(int(dimensions[0]), int(dimensions[1]))
+		gun.inventory_weight = float(inventory_data.get("weight", 3.0))
+		gun.equipment_slots = PackedStringArray(inventory_data.get("equipment_slots", ["primary", "secondary"]))
 		gun.display_name = data.name
 		gun.armory = true
 		gun.model_path = ROOT + "geo/" + data.model + ".geo.json"

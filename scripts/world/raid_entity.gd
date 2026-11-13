@@ -5,6 +5,7 @@ extends StaticBody3D
 @export_enum("target", "container") var kind: String = "target"
 @export var material: MaterialDef
 @export var loot: LootDef
+@export var interaction_offset := Vector3(0, 0.4, 0)
 @export var max_health: float = 100.0
 var health: float
 var remaining: int = 0

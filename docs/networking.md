@@ -14,7 +14,7 @@ Adapt the existing `request_*` methods into host-only handlers. Bind the authent
 
 Replicate a versioned initial snapshot of the raid phase, spawn manifest, transforms, NPC health/state, container contents, and per-player raid state. Send transform/velocity updates as sequenced transient snapshots; send claims, health changes, phase transitions, inventory deltas, spawn/despawn, and results as reliable ordered events. Ammo and inventory can be private to their owning peer. Presentation consumes confirmed shot/impact events and may add temporary predicted effects later. Late joiners receive a fresh snapshot before applying subsequent events.
 
-The host serializes competing loot requests. Revalidate ownership, range, line of sight, available quantity, and capacity at claim time, even after a container panel has opened. Add request IDs for retransmission deduplication; the existing quantity/capacity checks remain necessary.
+The host serializes competing loot requests. Revalidate ownership, range, line of sight, available quantity, and capacity at claim time, even after a container panel has opened. Preserve the inventory service request IDs, expected revisions and session result cache when adding retransmission; the existing quantity/capacity checks remain necessary.
 
 The solo prototype calls `_finish` when its only participant exits. For co-op, issue per-player extraction/death/abandonment results and keep shared simulation running while any participant remains. Track disconnected players on the host with a reconnect timeout; do not let a disconnect restore claimed loot or grant extraction. End the shared raid only when all participants have a terminal result. A client menu pause must become local UI only and must not pause the host's scene tree.
 

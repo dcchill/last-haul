@@ -6,6 +6,9 @@ builds/
 *.log
 *.bak
 graphify-out/
+# Downloaded voxel reference is not a game dependency.
+addons/zylann.voxel/
 export_credentials.cfg
 .DS_Store
 Thumbs.db
+docs/

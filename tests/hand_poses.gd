@@ -222,7 +222,7 @@ func _transitions(weapon: WeaponState, zoom: int) -> void:
 			WeaponPoseEvaluator.place(view, weapon, 0, zoom)
 			rig.evaluate(view, weapon, entry[0], seconds, 1.0 / 120, false)
 			samples += 1
-			check(rig.intersections().is_empty(), weapon.definition.id + " interrupted transition")
+			check(rig.intersections().is_empty(), weapon.definition.id + " interrupted transition " + str(entry[0]) + " frame " + str(index) + ": " + str(rig.intersections()))
 	# Rebuilding compatible attachments preserves the two hands and blends into
 	# the new contact target, including a newly installed vertical grip.
 	var installed: Dictionary = weapon.data.attachments.duplicate(true)

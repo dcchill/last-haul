@@ -8,6 +8,9 @@ extends Resource
 @export var texture_path: String = ""
 @export var animation_path: String = ""
 @export var hand_profile: WeaponHandProfile
+@export var inventory_dimensions := Vector2i(2, 5)
+@export var inventory_weight := 3.0
+@export var equipment_slots: PackedStringArray = ["primary", "secondary"]
 @export var feed: String = "DIRECT"
 @export var magazine_id: String = ""
 @export var interval_ticks: int = 4

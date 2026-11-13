@@ -2,7 +2,7 @@ class_name EquipmentComponent
 extends RefCounted
 
 signal changed
-const DEFAULT_SLOTS := ["headgear", "face", "body_armor", "rig", "backpack", "primary", "secondary", "holster", "pockets"]
+const DEFAULT_SLOTS := ["headgear", "face", "eyewear", "body_armor", "rig", "backpack", "primary", "secondary", "holster", "melee", "leggings", "boots"]
 var slots: Dictionary = {}
 
 func _init(definitions: Dictionary, names: Array = DEFAULT_SLOTS) -> void:
@@ -11,7 +11,7 @@ func _init(definitions: Dictionary, names: Array = DEFAULT_SLOTS) -> void:
 		grid.capacity = 1
 		grid.equipment_slot = slot_name
 		grid.display_name = slot_name.replace("_", " ").capitalize()
-		grid.changed.connect(func(): changed.emit())
+		grid.changed.connect(_changed)
 		slots[slot_name] = grid
 
 func storages() -> Array[RaidInventory]:
@@ -39,3 +39,24 @@ func serialize() -> Dictionary:
 	for name: String in slots:
 		result[name] = slots[name].serialize()
 	return result
+
+func owner_of(identity: String) -> RaidInventory:
+	for root in roots():
+		var owner := root.owner_of(identity)
+		if owner != null:
+			return owner
+	return null
+
+func restore(data: Dictionary, definitions: Dictionary, seen: Dictionary = {}) -> bool:
+	for name in data:
+		if not slots.has(name):
+			return false
+		var grid := InventoryPersistence.decode(data[name], definitions, seen)
+		if grid == null or grid.equipment_slot != name:
+			return false
+		slots[name] = grid
+		grid.changed.connect(_changed)
+	return true
+
+func _changed() -> void:
+	changed.emit()

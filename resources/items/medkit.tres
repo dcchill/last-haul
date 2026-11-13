@@ -10,3 +10,5 @@ width = 2
 height = 2
 weight = 0.7
 stack_limit = 1
+
+heal_amount = 12.0

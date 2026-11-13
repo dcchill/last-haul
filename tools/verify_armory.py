@@ -13,7 +13,12 @@ for original, expected in manifest["files"].items():
         target = ROOT / "provenance" / (original.removeprefix("src/main/java/net/createarmory/") + ".txt")
     else:
         target = ROOT / "provenance/mods.toml.txt"
-    assert hashlib.sha256(target.read_bytes()).hexdigest() == expected, original
+    data = target.read_bytes()
+    # Git normalizes text to LF; the pinned upstream snapshot used CRLF.
+    hashes = {hashlib.sha256(data).hexdigest()}
+    if target.suffix in {".txt", ".json", ".toml", ".mcmeta"}:
+        hashes.add(hashlib.sha256(data.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")).hexdigest())
+    assert expected in hashes, original
 assert hashlib.sha256((ROOT / "content.json").read_bytes()).hexdigest() == manifest["generated_content_sha256"]
 content = json.loads((ROOT / "content.json").read_text())
 source = (ROOT / "provenance/weapon/WeaponDefinition.java.txt").read_text()

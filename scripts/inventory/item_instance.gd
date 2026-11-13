@@ -7,6 +7,8 @@ static func create(definition: ItemDef, definitions: Dictionary, quantity: int =
 		"x": 0, "y": 0, "rotated": false, "condition": 1.0,
 		"durability": definition.max_durability, "attachments": [], "metadata": {}}
 	entry.state = ArmoryInstance.fresh(definition.id, definitions)
+	if entry.state.has("instance_id"):
+		entry.uid = entry.state.instance_id
 	if definition.container != null:
 		var config: ContainerDef = definition.container
 		entry.storage = RaidInventory.new(definitions, config.dimensions.x, config.dimensions.y)
@@ -28,6 +30,16 @@ static func weight(entry: Dictionary, definitions: Dictionary) -> float:
 	for attachment in entry.get("attachments", []):
 		if attachment is Dictionary and definitions.has(attachment.get("id", "")):
 			total += weight(attachment, definitions)
+	var state: Dictionary = entry.get("state", {})
+	if not state.get("magazine", {}).is_empty():
+		total += weight(state.magazine, definitions)
+	for attachment in state.get("attachments", {}).values():
+		total += weight(attachment, definitions)
+	for ammo in state.get("ammo", []):
+		if definitions.has(ammo):
+			total += definitions[ammo].weight
+	if definitions.has(state.get("chamber", "")):
+		total += definitions[state.chamber].weight
 	return total
 
 static func contains(entry: Dictionary, target: RaidInventory) -> bool:
@@ -39,3 +51,11 @@ static func contains(entry: Dictionary, target: RaidInventory) -> bool:
 		if contains(child, target):
 			return true
 	return false
+
+static func depth(entry: Dictionary) -> int:
+	var result := 0
+	if entry.has("storage"):
+		result = 1
+		for child in entry.storage.slots:
+			result = maxi(result, 1 + depth(child))
+	return result

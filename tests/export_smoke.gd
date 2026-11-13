@@ -20,6 +20,14 @@ func _run() -> void:
 	if app.raid == null:
 		quit(1)
 		return
+	if not app.raid.signal_decay.is_active() or app.raid.signal_decay.shader.shader == null or not app.raid.signal_decay.sensor_environment.fog_enabled:
+		push_error("Export cannot load sensor shader and haze")
+		quit(1)
+		return
+	if app.raid.signal_decay.shader.get_shader_parameter("pixel_size") != float(app.settings.sensor_pixel_size):
+		push_error("Export cannot configure sensor pixelation")
+		quit(1)
+		return
 	var id: String = app.profile.profile.player_id
 	for source in ArmoryContent.DATA.data.guns:
 		app.raid.participants[id].inventory.slots.clear()

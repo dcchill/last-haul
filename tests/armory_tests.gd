@@ -27,6 +27,7 @@ func _run() -> void:
 	await _integration()
 	await _raid_outcomes()
 	await _physics_regressions()
+	await load("res://tests/inventory_tests.gd").new().run(self)
 	print("ARMORY TESTS: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
 
@@ -87,6 +88,7 @@ func _gun_pack(id: String, loaded: int = 0) -> Dictionary:
 		entry.state.magazine = {"id": gun.magazine_id, "quantity": 1, "state": mag}
 	elif gun.magazine_id.is_empty():
 		entry.state.rounds = loaded
+		entry.state.erase("ammo")
 	var weapon := WeaponState.new(gun)
 	weapon.bind(pack, entry)
 	return {"pack": pack, "weapon": weapon}
@@ -110,16 +112,16 @@ func _weapons() -> void:
 	check(not gun.reload("missing-magazine"), "invalid explicit magazine rejected without ejection")
 	check(gun.reload("eject"), "explicit magazine ejection")
 	for tick in range(40): gun.advance_tick()
-	check(gun.magazine == 0 and pack.find_instance(mag.instance_id) >= 0, "ejection retains remaining rounds")
-	check(pack.slots[pack.find_instance(mag.instance_id)].state.rounds == 21, "magazine ammunition conserved")
+	check(gun.magazine == 1 and gun.data.chamber == "five_five_six" and pack.find_instance(mag.instance_id) >= 0, "ejection retains chambered round and physical magazine")
+	check(pack.slots[pack.find_instance(mag.instance_id)].state.rounds == 20, "magazine ammunition conserved separately from chamber")
 	check(gun.reload(), "reload can begin again")
 	gun.cancel_reload()
 	for tick in range(100): gun.advance_tick()
-	check(gun.magazine == 0 and pack.find_instance(mag.instance_id) >= 0, "cancelled reload transfers nothing")
+	check(gun.magazine == 1 and pack.find_instance(mag.instance_id) >= 0, "cancelled reload transfers nothing")
 	gun.reload()
 	pack.remove_entry(pack.slots[pack.find_instance(mag.instance_id)])
 	gun.advance_tick()
-	check(gun.reload_left == 0 and gun.magazine == 0, "missing donor cancels reload")
+	check(gun.reload_left == 0 and gun.magazine == 1, "missing donor cancels reload")
 	kit = _gun_pack("m_four", 10)
 	gun = kit.weapon
 	while kit.pack.add("salvage", 20): pass
@@ -209,7 +211,7 @@ func _persistence() -> void:
 	file.close()
 	var migrated := ProfileStore.new(catalog, old_path)
 	check(migrated._valid_legacy(old), "legacy v2 accepted before conversion")
-	check(migrated.load_profile() and migrated.profile.version == 4 and migrated.profile.player_id == "legacy-player", "v2 migration preserves identity")
+	check(migrated.load_profile() and migrated.profile.version == 5 and migrated.profile.player_id == "legacy-player", "v2 migration preserves identity")
 	if migrated.profile.stash.is_empty():
 		print("MIGRATION ERROR: ", migrated.load_error)
 		return
@@ -227,7 +229,7 @@ func _persistence() -> void:
 	file.store_string(JSON.stringify(v3))
 	file.close()
 	var upgraded := ProfileStore.new(catalog, v3_path)
-	check(upgraded.load_profile() and upgraded.profile.version == 4, "old vanilla-equipment save upgrades")
+	check(upgraded.load_profile() and upgraded.profile.version == 5, "old vanilla-equipment save upgrades")
 	var converted := false
 	var gun_preserved := false
 	for entry in upgraded.profile.stash:
@@ -383,7 +385,7 @@ func _integration() -> void:
 	for frame in range(4): await physics_frame
 	raid = app.raid
 	check(raid != null and not raid.practice, "raid deploys from staged gear")
-	check(app.profile.profile.stash.size() < original_profile.stash.size(), "raid debits persistent loadout before play")
+	check(app.profile.profile.staged.is_empty() and not original_profile.staged.is_empty(), "raid debits persistent staged loadout before play")
 	raid.request_abandon(app.profile.profile.player_id)
 	check(not app.pending_save and app.profile.profile.last_result.success == false, "raid abandonment commits failure")
 	app.free()

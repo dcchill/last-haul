@@ -62,7 +62,12 @@ static func decode(data: Variant, definitions: Dictionary, seen: Dictionary = {}
 	if not data.get("search_elapsed", 0.0) is float and not data.get("search_elapsed", 0) is int:
 		return null
 	grid.search_elapsed = float(data.get("search_elapsed", 0.0))
-	if not is_finite(grid.search_elapsed) or grid.search_elapsed < 0 or not whole(data.get("discovered", 0), 0, data.slots.size()):
+	var order: Variant = data.get("search_order", [])
+	if not order is Array: return null
+	for identity in order:
+		if not identity is String or identity in grid.search_order: return null
+		grid.search_order.append(identity)
+	if not is_finite(grid.search_elapsed) or grid.search_elapsed < 0 or not whole(data.get("discovered", 0), 0, maxi(data.slots.size(), grid.search_order.size())):
 		return null
 	grid.discovered = int(data.get("discovered", 0))
 	for encoded in data.slots:
@@ -78,6 +83,8 @@ static func decode(data: Variant, definitions: Dictionary, seen: Dictionary = {}
 			return null
 		grid.slots.append(entry)
 		grid._adopt(entry)
+	if grid.search_order.is_empty():
+		for entry in grid.slots: grid.search_order.append(entry.uid)
 	if grid.config != null and grid.config.weight_limit > 0 and grid.total_weight() > grid.config.weight_limit + 0.00001:
 		return null
 	return grid
@@ -88,8 +95,9 @@ static func decode_item(encoded: Variant, definitions: Dictionary, seen: Diction
 	var definition: ItemDef = definitions[encoded.id]
 	if not whole(encoded.get("quantity"), 1, definition.stack_limit) or not whole(encoded.get("x")) or not whole(encoded.get("y")) or not encoded.get("rotated") is bool:
 		return {}
+	if not Ammunition.valid_state(encoded, definitions): return {}
 	var entry: Dictionary = encoded.duplicate(true)
-	var item_uid: Variant = entry.get("uid", ProfileStore._new_id())
+	var item_uid: Variant = entry.get("state", {}).get("instance_id", entry.get("uid", ProfileStore._new_id()))
 	if not item_uid is String or item_uid.is_empty() or seen.has(item_uid):
 		return {}
 	seen[item_uid] = true
@@ -116,6 +124,14 @@ static func decode_item(encoded: Variant, definitions: Dictionary, seen: Diction
 		entry.storage = storage
 	elif definition.container != null:
 		entry.storage = ItemInstance.create(definition, definitions).storage
+	Ammunition.normalize(entry, definitions)
+	for nested in [entry.state.get("magazine", {})] + entry.state.get("attachments", {}).values():
+		if nested.is_empty():
+			continue
+		for identity in ArmoryInstance.ids(nested.state):
+			if seen.has(identity):
+				return {}
+			seen[identity] = true
 	return entry
 
 static func decode_entries(entries: Array, definitions: Dictionary, dimensions: Vector2i, seen: Dictionary = {}) -> RaidInventory:
@@ -138,31 +154,3 @@ static func decode_roots(data: Variant, definitions: Dictionary) -> Dictionary:
 			return {}
 		roots[name] = grid
 	return roots
-
-static func save_file(path: String, roots: Dictionary, definitions: Dictionary) -> bool:
-	var state := encode_roots(roots)
-	var text := JSON.stringify(state, "  ", true)
-	if decode_roots(JSON.parse_string(text), definitions).size() != roots.size():
-		return false
-	var file := FileAccess.open(path + ".tmp", FileAccess.WRITE)
-	if file == null:
-		return false
-	file.store_string(text)
-	file.flush()
-	var error := file.get_error()
-	file.close()
-	if error != OK or decode_roots(JSON.parse_string(FileAccess.get_file_as_string(path + ".tmp")), definitions).size() != roots.size():
-		return false
-	if FileAccess.file_exists(path) and DirAccess.copy_absolute(path, path + ".bak") != OK:
-		return false
-	return DirAccess.rename_absolute(path + ".tmp", path) == OK
-
-static func load_file(path: String, definitions: Dictionary) -> Dictionary:
-	if FileAccess.file_exists(path):
-		var roots := decode_roots(JSON.parse_string(FileAccess.get_file_as_string(path)), definitions)
-		if not roots.is_empty():
-			return roots
-	if FileAccess.file_exists(path + ".bak"):
-		return decode_roots(JSON.parse_string(FileAccess.get_file_as_string(path + ".bak")), definitions)
-	return {}
-

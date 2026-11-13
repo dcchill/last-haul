@@ -20,6 +20,9 @@ static func _commit(plans: Dictionary, dry_run: bool = false) -> bool:
 			return false
 		for i in range(entries.size()):
 			var entry := entries[i]
+			if not grid.items.has(entry.get("id", "")): return false
+			if not Ammunition.valid_state(entry, grid.items): return false
+			Ammunition.normalize(entry, grid.items)
 			if not grid.accepts(entry) or int(entry.quantity) < 1 or int(entry.quantity) > grid.items[entry.id].stack_limit:
 				return false
 			if not grid._can_place_in(entries, entry.id, int(entry.x), int(entry.y), bool(entry.rotated), i):
@@ -40,10 +43,11 @@ static func _commit(plans: Dictionary, dry_run: bool = false) -> bool:
 		return true
 	for grid: RaidInventory in plans:
 		grid.slots = plans[grid]
-		for entry in grid.slots:
-			grid._adopt(entry)
+		if not grid.draft:
+			for entry in grid.slots:
+				grid._adopt(entry)
 	for grid: RaidInventory in plans:
-		grid._notify()
+		if not grid.draft: grid._notify()
 	return true
 
 static func _space(grid: RaidInventory, entries: Array[Dictionary], id: String, rotated: bool) -> Vector2i:
@@ -200,7 +204,7 @@ static func move(source: RaidInventory, index: int, target: RaidInventory, at: V
 	dst.append(entry)
 	return _commit(plans, dry_run)
 
-static func sort_grid(grid: RaidInventory) -> bool:
+static func sort_grid(grid: RaidInventory, dry_run: bool = false) -> bool:
 	if not grid.searched:
 		return false
 	var ordered := _copies(grid)
@@ -211,6 +215,13 @@ static func sort_grid(grid: RaidInventory) -> bool:
 	)
 	var candidate: Array[Dictionary] = []
 	for entry in ordered:
+		for placed in candidate:
+			if ItemInstance.compatible(placed, entry):
+				var amount := mini(int(entry.quantity), grid.items[entry.id].stack_limit - int(placed.quantity))
+				placed.quantity += amount
+				entry.quantity -= amount
+		if entry.quantity == 0:
+			continue
 		var at := _space(grid, candidate, entry.id, bool(entry.rotated))
 		if at.x < 0:
 			entry.rotated = not bool(entry.rotated)
@@ -220,7 +231,7 @@ static func sort_grid(grid: RaidInventory) -> bool:
 		entry.x = at.x
 		entry.y = at.y
 		candidate.append(entry)
-	return _commit({grid: candidate})
+	return _commit({grid: candidate}, dry_run)
 
 static func resize(grid: RaidInventory, dimensions: Vector2i) -> bool:
 	if dimensions.x < 1 or dimensions.y < 1:

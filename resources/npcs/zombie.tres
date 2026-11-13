@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="NPCDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "zombie"
+health = 30.0
+speed = 1.8
+sight_range = 14.0
+field_of_view = 200.0
+hearing_range = 20.0
+attack_range = 1.8
+attack_interval = 1.1
+damage = 5.0
+melee = true
+carried_items = Array[String](["food", "salvage"])

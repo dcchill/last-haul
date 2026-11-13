@@ -11,3 +11,6 @@ extends Resource
 @export_range(0.0, 10.0) var armor_damage: float = 1.0
 @export_range(0.0, 1.0) var bypass: float = 0.0
 @export_range(0.0, 1.0) var stopped_damage: float = 0.05
+
+@export var caliber: String = ""
+@export var damage_multiplier := 1.0

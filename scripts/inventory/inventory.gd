@@ -4,6 +4,9 @@ extends RefCounted
 signal changed
 const CELL_SIZE := 18
 var uid: String = ProfileStore._new_id()
+var revision := 0
+# Detached transaction drafts must not adopt shared child inventories.
+var draft := false
 var slots: Array[Dictionary] = []
 var width: int
 var height: int
@@ -18,6 +21,7 @@ var searched: bool = true
 var searching: bool = false
 var search_elapsed: float = 0.0
 var discovered: int = 0
+var search_order: Array[String] = []
 var loot_generated: bool = false
 var is_open: bool = false
 
@@ -58,6 +62,15 @@ func accepts(entry: Dictionary) -> bool:
 	if not equipment_slot.is_empty() and not definition.equipment_slots.has(equipment_slot):
 		return false
 	if config != null:
+		if entry.has("storage") and not config.allow_containers:
+			return false
+		var depth := ItemInstance.depth(entry)
+		var ancestor: RaidInventory = self
+		while ancestor != null:
+			if ancestor.config != null and depth > ancestor.config.max_nesting_depth:
+				return false
+			ancestor = ancestor.parent_inventory.get_ref() if ancestor.parent_inventory != null else null
+			depth += 1
 		if not config.allowed_categories.is_empty() and not config.allowed_categories.has(definition.kind):
 			return false
 		if config.prohibited_categories.has(definition.kind):
@@ -71,7 +84,7 @@ func is_accessible() -> bool:
 	return ancestor == null or ancestor.is_accessible()
 
 func visible_item(index: int) -> bool:
-	return index >= 0 and index < slots.size() and (searched or (config != null and config.progressive_discovery and index < discovered))
+	return index >= 0 and index < slots.size() and (searched or (config != null and config.progressive_discovery and slots[index].uid in search_order.slice(0, discovered)))
 
 func can_place(item_id: String, x: int, y: int, rotated: bool = false, ignore_slot: int = -1) -> bool:
 	return _can_place_in(slots, item_id, x, y, rotated, ignore_slot)
@@ -113,6 +126,7 @@ func add(item_id: String, quantity: int, state: Dictionary = {}) -> bool:
 			return false
 		var entry := ItemInstance.create(items[item_id], items)
 		entry.state = state.duplicate(true)
+		Ammunition.normalize(entry, items)
 		return insert_instance(entry)
 	return InventoryManager.add_new(self, item_id, quantity)
 
@@ -122,6 +136,7 @@ func add_at(item_id: String, quantity: int, x: int, y: int, rotated: bool = fals
 			return false
 		var entry := ItemInstance.create(items[item_id], items)
 		entry.state = state.duplicate(true)
+		Ammunition.normalize(entry, items)
 		entry.rotated = rotated
 		return insert_instance(entry, Vector2i(x, y))
 	return InventoryManager.add_new(self, item_id, quantity, Vector2i(x, y), rotated)
@@ -184,6 +199,7 @@ func total_weight() -> float:
 	return total
 
 func _notify() -> void:
+	revision += 1
 	changed.emit()
 	var ancestor: RaidInventory = parent_inventory.get_ref() if parent_inventory != null else null
 	if ancestor != null:
@@ -197,6 +213,8 @@ func begin_search() -> bool:
 	if not is_accessible():
 		return false
 	is_open = true
+	if search_order.is_empty():
+		for entry in slots: search_order.append(entry.uid)
 	searching = not searched
 	if config == null or config.search_seconds <= 0:
 		searched = true
@@ -208,7 +226,7 @@ func tick_search(delta: float) -> void:
 	if not searching or config == null:
 		return
 	search_elapsed = minf(config.search_seconds, search_elapsed + maxf(0, delta))
-	discovered = floori(slots.size() * search_elapsed / maxf(0.001, config.search_seconds))
+	discovered = floori(search_order.size() * search_elapsed / maxf(0.001, config.search_seconds))
 	if search_elapsed >= config.search_seconds:
 		searched = true
 		searching = false
@@ -236,4 +254,17 @@ func serialize() -> Dictionary:
 	return {"uid": uid, "width": width, "height": height, "name": display_name,
 		"config": config.resource_path if config != null else "", "equipment_slot": equipment_slot,
 		"accessible": accessible, "searched": searched, "search_elapsed": search_elapsed,
-		"discovered": discovered, "loot_generated": loot_generated, "slots": snapshot()}
+		"discovered": discovered, "search_order": search_order.duplicate(), "loot_generated": loot_generated, "slots": snapshot()}
+
+func all_grids() -> Array[RaidInventory]:
+	var result: Array[RaidInventory] = [self]
+	for entry in slots:
+		if entry.has("storage"):
+			result.append_array(entry.storage.all_grids())
+	return result
+
+func owner_of(identity: String) -> RaidInventory:
+	for grid in all_grids():
+		if grid.find_uid(identity) >= 0 or grid.find_instance(identity) >= 0:
+			return grid
+	return null

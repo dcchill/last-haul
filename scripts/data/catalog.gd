@@ -2,6 +2,7 @@ class_name Catalog
 extends RefCounted
 
 const PATHS: Array[String] = [
+	"res://resources/items/field_knife.tres", "res://resources/items/face_cover.tres", "res://resources/items/field_glasses.tres",
 	"res://resources/items/small_pack.tres",
 "res://resources/items/large_pack.tres",
 "res://resources/items/field_rig.tres",
@@ -20,7 +21,7 @@ const PATHS: Array[String] = [
 	"res://resources/weapons/attachments/heavy_barrel.tres",
 	"res://resources/materials/concrete.tres", "res://resources/armor/patrol.tres", "res://resources/armor/vest.tres",
 	"res://resources/armor/sentinel.tres", "res://resources/armor/bastion.tres", "res://resources/armor/juggernaut.tres",
-	"res://resources/loot/crate.tres", "res://resources/npcs/guard.tres"]
+	"res://resources/loot/crate.tres", "res://resources/npcs/guard.tres", "res://resources/npcs/zombie.tres"]
 var definitions: Dictionary = {}
 var items: Dictionary = {}
 
@@ -114,6 +115,25 @@ func load_all() -> String:
 		if definition is WeaponDef and definition.armory:
 			if definition.hand_profile == null or not definition.hand_profile.valid() or definition.hand_profile.weapon_id != definition.id:
 				return "Missing or invalid weapon hand profile: " + definition.id
+	for item: ItemDef in items.values():
+		if item.kind == "weapon":
+			if item.definition is WeaponDef:
+				item.equipment_slots = item.definition.equipment_slots.duplicate()
+				item.width = item.definition.inventory_dimensions.x
+				item.height = item.definition.inventory_dimensions.y
+				item.weight = item.definition.inventory_weight
+		elif item.kind == "armor" and definitions[item.id] is ArmorDef:
+			item.equipment_slots = PackedStringArray([{ "helmet": "headgear", "chestplate": "body_armor" }.get(definitions[item.id].slot, definitions[item.id].slot)])
+		if item.kind == "ammo" and item.definition is AmmoDef: item.weight = item.definition.mass_kg
+		if item.weight <= 0:
+			item.weight = 0.012 if item.kind == "ammo" else 3.0 if item.kind == "weapon" else 0.3
+		if item.width < 1 or item.height < 1 or item.stack_limit < 1 or not is_finite(item.weight) or item.weight < 0:
+			return "Invalid inventory definition: " + item.id
+		if item.container != null and (item.stack_limit != 1 or item.container.dimensions.x < 1 or item.container.dimensions.y < 1):
+			return "Invalid container: " + item.id
+		if item.icon == null:
+			var icon_kind := item.kind if item.kind in ["weapon", "ammo", "magazine", "armor", "backpack", "rig", "medical", "food", "melee", "attachment", "grenade"] else "item"
+			item.icon = load("res://assets/inventory/" + icon_kind + ".svg")
 	return ""
 
 func _inventory_item(definition: Resource, stack_limit: int, width: int, height: int, kind: String) -> ItemDef:

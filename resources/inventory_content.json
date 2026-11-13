@@ -1,0 +1,24 @@
+{
+  "pipe_pistol": {
+    "dimensions": [
+      1,
+      2
+    ],
+    "weight": 0.9,
+    "equipment_slots": [
+      "holster"
+    ]
+  },
+  "mini_gun": {
+    "weight": 8.0
+  },
+  "upgraded_mini_gun": {
+    "weight": 9.0
+  },
+  "rpg": {
+    "weight": 7.0
+  },
+  "barret": {
+    "weight": 6.0
+  }
+}

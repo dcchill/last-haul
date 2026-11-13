@@ -1,16 +1,17 @@
 # Last Haul
 
-A small **Godot 4.7.2 stable** framework for a voxel-style PvE extraction shooter. This milestone provides a playable first-person block-built yard, editable gameplay resources, and explicit authority boundaries for future co-op. It has no networking or voxel destruction yet.
+A small **Godot 4.7.2 stable** framework for a voxel-style PvE extraction shooter. This milestone provides a playable first-person block-built yard, editable gameplay resources, our own destructible voxel cover, and explicit authority boundaries for future co-op. Networking is not implemented. See [voxel optimizations](docs/voxels.md) for batching, greedy meshing and current limits.
 
 ## Run
 
-1. Install the standard Godot **4.7.2 stable** editor; .NET and third-party dependencies are unnecessary.
+1. Install the standard Godot **4.7.2 stable** editor; .NET and external voxel plugins are unnecessary.
 2. Import `project.godot`, allow the first asset import to finish, and press **F6** only when editing an individual scene, or **F5** to run the complete game.
-3. Choose **Deploy to yard**. You receive a free rifle, 12 loaded rounds, and 48 reserve rounds.
-4. Shoot the yellow targets or red guard. Use the blocks as cover. The guard sees, hears shots, navigates, and attacks.
-5. Approach the orange salvage crate, aim at it, press **E**, and choose **Take one**. Close the panel with Escape.
-6. Enter the green extraction square behind and left of the spawn. Stay inside for three seconds. Leaving resets the countdown; salvage is required.
-7. Return to the stash screen. Extracted salvage persists when the application restarts. Death or abandonment loses raid loot. Free starter equipment never enters the stash.
+3. Open **Inventory / stage loadout**. New profiles receive the current one-time rifle, armor, loose ammunition and magazine kit. Existing possessions are migrated without extra grants.
+4. Equip gear and stage ammunition. **Deploy to yard** also permits an unarmed loadout.
+5. Press **R** to insert a loaded compatible magazine from pockets or an equipped rig. Manage magazines and loose rounds through inventory context actions.
+6. Loot crates, the guard or the zombie with **E**. Inventory and looting do not pause combat.
+7. Carry salvage into the green extraction zone for three seconds. Surviving gear and nested contents return to the persistent stash. Death and abandonment lose everything carried; there is no secure container.
+8. Use **Practice armory** for isolated equipment grants and reset. Practice items never enter your persistent stash.
 
 Command line, with Godot on `PATH`:
 
@@ -21,6 +22,8 @@ godot --path .
 
 The project uses the Compatibility renderer and Jolt physics. The default viewport is 1280×720 and scales with the window.
 
+The yard includes an enabled sensor-decay treatment: 2×2 pixelation, ordered dithering, restrained banding, gray-green grading, distance haze, and rare faint flickers. Settings offers Pixelation **Off / 2x / 3x / 4x**, overall strength, enable, and flicker controls. Larger pixels reduce small details; the HUD stays crisp. Press **F8** in a raid (including pause) for a temporary on/off comparison. See [sensor tuning and runtime controls](docs/signal-decay.md).
+
 ## Controls
 
 | Action | Control |
@@ -28,6 +31,10 @@ The project uses the Compatibility renderer and Jolt physics. The default viewpo
 | Move / look | WASD / mouse |
 | Sprint / jump | Shift / Space |
 | Fire / reload | Left mouse / R |
+| Inventory | I |
+| Inventory move / rotate | Drag / press R while dragging |
+| Quick transfer / equip | Ctrl-click / Alt-click |
+| Split / inspect / actions | Shift-drag / double-click / right-click |
 | Open crate | E while aiming within three meters |
 | Pause / close crate / resume | Escape |
 | Navigate menus | Tab or arrow keys; Enter/Space activates buttons |
@@ -64,9 +71,9 @@ The bake command intentionally updates the yard scene. Ordinary tests do not rew
 
 ## Saves and authority
 
-Profiles live at `user://profile.json`; settings at `user://settings.cfg`. On Windows, `user://` normally resolves to `%APPDATA%/Godot/app_userdata/Last Haul/`. The profile has a version, stable player ID, stash stacks, last result, and committed raid IDs. Writes validate a temporary file, back up a validated previous profile, then replace the main file. A failed write leaves the result pending and offers retry. Deployment and leaving results are blocked while a result is pending; an explicit quit-without-saving option remains available.
+Profiles live at `user://profile.json`; settings at `user://settings.cfg`. On Windows, `user://` normally resolves to `%APPDATA%/Godot/app_userdata/Last Haul/`. The version 5 profile stores the stash, staged equipment and inventories, physical item identities, nested contents, ammunition order, chamber state and committed raid IDs. Versions 1-4 migrate with an original-file backup. Validated temporary writes, backup recovery and corrupt-main preservation remain enabled. Completed results are journaled before credit and retained for retry when the stash is full. A disk failure that prevents journaling still requires retry before quitting.
 
-An invalid main profile recovers from a valid `.bak` after preserving the unreadable main as `.corrupt-<id>`. Recovery can roll back to the previous successful save. If neither file is valid, deployment is blocked and both originals remain untouched; move or repair those files before starting a new profile. Unsupported save versions and unknown item IDs are rejected rather than silently discarded. There is no migration from older game formats in this first version. A raid interrupted by process termination is lost; ongoing raids are not saved.
+See [inventory controls, architecture and migration](docs/inventory.md) for exact rules, editable resources and recovery behavior.
 
 `RaidAuthority` validates `request_fire`, `request_reload`, `request_interact`, `request_claim`, `request_extract`, and `request_abandon`. It advances NPC decisions, damage, and extraction using host-owned time and physics. The UI submits requests and observes outcomes; it never transfers loot directly. `RaidParticipant` keeps inventory, weapon, health, opened-container state, and extraction progress indexed by stable player ID. Persistent services outlive the disposable raid scene. See [architecture](docs/architecture.md) and [future networking](docs/networking.md).
 
@@ -99,4 +106,4 @@ Verification on this workspace uses the local official `4.7.2.stable` executable
 
 Commit scenes, `.tres` definitions, source assets, `.import` metadata, and `.gd.uid` files. `.gitignore` excludes `.godot/`, generated builds, credentials, and temporary files. No Git repository, remote, release export, or license has been created for you.
 
-This is a solo prototype with one guard and one rifle. Voxel chunks/destruction, penetration/ricochet, networking/prediction, loadout selection, advanced inventory UI, sound assets, and production persistence are deferred. The impact signal is the extension point for future material effects and destructible voxel surfaces. The local save format is editable and provides no anti-cheat guarantee.
+This is a solo prototype with guard and zombie NPCs and a reference armory. Networking/prediction, a trusted online profile service, final item-specific world art and balance tuning remain outside this inventory implementation. Voxel destruction uses our cell-based cover, support checks and capped debris; see [voxel limits](docs/voxels.md). The local save format is editable and provides no anti-cheat guarantee.

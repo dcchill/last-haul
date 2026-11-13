@@ -2,7 +2,8 @@ class_name ProfileStore
 extends RefCounted
 
 signal problem(message: String)
-const VERSION := 4
+const VERSION := 5
+const STASH_DEF: ContainerDef = preload("res://resources/containers/stash.tres")
 var path: String
 var catalog: Catalog
 var profile: Dictionary = {}
@@ -15,7 +16,7 @@ func _init(data: Catalog, save_path: String = "user://profile.json") -> void:
 	profile = _empty_profile()
 
 func _empty_profile() -> Dictionary:
-	return {"version": VERSION, "player_id": "player-" + _new_id(), "stash": [], "last_result": {}, "committed_raids": [], "starter_seeded": false}
+	return {"version": VERSION, "player_id": "player-" + _new_id(), "stash": [], "last_result": {}, "committed_raids": [], "starter_seeded": false, "stash_width": STASH_DEF.dimensions.x, "stash_height": STASH_DEF.dimensions.y, "staged": {}, "pending_result": {}}
 
 static func _new_id() -> String:
 	return Crypto.new().generate_random_bytes(16).hex_encode()
@@ -33,6 +34,32 @@ func _header_valid(value: Variant) -> bool:
 
 func valid(value: Variant) -> bool:
 	if not _header_valid(value) or value.get("version") != VERSION or not value.get("starter_seeded") is bool:
+		return false
+	if not InventoryPersistence.whole(value.get("stash_width"), 1, 128) or not InventoryPersistence.whole(value.get("stash_height"), 1, 128):
+		return false
+	if not value.get("staged") is Dictionary or not value.get("pending_result") is Dictionary:
+		return false
+	var seen: Dictionary = {}
+	var stash := InventoryPersistence.decode_entries(value.stash, catalog.items, Vector2i(int(value.stash_width), int(value.stash_height)), seen)
+	if stash == null or not _valid_armory_grid(stash, {}):
+		return false
+	for name in value.staged:
+		if name not in ["pack", "pockets"] + EquipmentComponent.DEFAULT_SLOTS: return false
+		var grid := InventoryPersistence.decode(value.staged[name], catalog.items, seen)
+		if grid == null or grid.equipment_slot != (name if name in EquipmentComponent.DEFAULT_SLOTS else "") or not _valid_armory_grid(grid, {}):
+			return false
+	var pending: Dictionary = value.pending_result
+	if not pending.is_empty():
+		if not pending.get("result") is Dictionary or not pending.result.get("raid_id") is String or not pending.result.get("success") is bool or not pending.get("items") is Array:
+			return false
+		for encoded in pending.items:
+			var entry := InventoryPersistence.decode_item(encoded, catalog.items, seen)
+			if entry.is_empty() or not ArmoryInstance.valid(entry.id, entry.state, catalog):
+				return false
+	return true
+
+func _valid_v4(value: Variant) -> bool:
+	if not _header_valid(value) or value.get("version") != 4 or not value.get("starter_seeded") is bool:
 		return false
 	var stash := RaidInventory.new(catalog.items, 10, 18)
 	var seen: Dictionary = {}
@@ -71,6 +98,8 @@ func _valid_armory_grid(grid: RaidInventory, seen: Dictionary) -> bool:
 	return true
 
 func _valid_legacy(value: Variant) -> bool:
+	if _valid_v4(value):
+		return true
 	if not _header_valid(value) or (value.get("version") != 1 and value.get("version") != 2 and value.get("version") != 3):
 		return false
 	var legacy_items := catalog.items.duplicate()
@@ -124,7 +153,7 @@ func load_profile(_starter_loadout: String = "standard") -> bool:
 		problem.emit(load_error)
 		return true
 	if not FileAccess.file_exists(path) and not FileAccess.file_exists(path + ".bak"):
-		var inventory := RaidInventory.new(catalog.items, 10, 18)
+		var inventory := RaidInventory.new(catalog.items, STASH_DEF.dimensions.x, STASH_DEF.dimensions.y)
 		inventory.add("m_four", 1)
 		inventory.add("patrol", 1)
 		inventory.add("five_five_six", 60)
@@ -155,8 +184,15 @@ func _migrate(value: Dictionary) -> bool:
 			return _fail("Invalid legacy item metadata; original preserved.")
 		var placed := inventory.insert_instance(entry, Vector2i(encoded.x, encoded.y)) if value.version >= 2 else false
 		if not placed and not inventory.add_entry(entry):
-			return _fail("Migrated stash cannot fit; original save preserved.")
-	var candidate := {"version": VERSION, "player_id": value.player_id, "stash": inventory.snapshot(), "last_result": value.last_result.duplicate(true), "committed_raids": value.committed_raids.duplicate(), "starter_seeded": true}
+			var fitted := false
+			while inventory.height < 128:
+				inventory.height += 1
+				if inventory.add_entry(entry):
+					fitted = true
+					break
+			if not fitted:
+				return _fail("Migrated stash cannot fit; original save preserved.")
+	var candidate := {"version": VERSION, "player_id": value.player_id, "stash": inventory.snapshot(), "last_result": value.last_result.duplicate(true), "committed_raids": value.committed_raids.duplicate(), "starter_seeded": true, "stash_width": inventory.width, "stash_height": inventory.height, "staged": {}, "pending_result": {}}
 	if not _write(candidate):
 		return _fail("Profile migration could not be saved; original retained.")
 	load_error = "Stash upgraded to the current equipment catalog; original backed up."
@@ -229,38 +265,64 @@ func _write(candidate: Dictionary) -> bool:
 func save_profile() -> bool:
 	return _write(profile.duplicate(true))
 
+func stash_grid() -> RaidInventory:
+	return InventoryPersistence.decode_entries(profile.stash, catalog.items, Vector2i(int(profile.stash_width), int(profile.stash_height)))
+
 func save_stash_layout(stash: Array[Dictionary]) -> bool:
 	var candidate := profile.duplicate(true)
 	candidate.stash = stash.duplicate(true)
 	return _write(candidate)
 
-func debit_loadout(entries: Array[Dictionary]) -> bool:
-	var inventory := RaidInventory.new(catalog.items, 10, 18)
-	for entry in profile.stash:
-		inventory.slots.append(entry.duplicate(true))
-	for entry in entries:
-		if not inventory.remove_entry(entry):
-			return false
-	return save_stash_layout(inventory.snapshot())
+func save_layout(stash: RaidInventory, roots: Dictionary) -> bool:
+	var candidate := profile.duplicate(true)
+	candidate.stash = stash.snapshot()
+	candidate.stash_width = stash.width
+	candidate.stash_height = stash.height
+	candidate.staged = {}
+	for name in roots:
+		candidate.staged[name] = roots[name].serialize()
+	return _write(candidate)
+
+func debit_loadout() -> bool:
+	var candidate := profile.duplicate(true)
+	candidate.staged = {}
+	return _write(candidate)
+
+func stage_result(result: Dictionary, loot: Array[Dictionary]) -> bool:
+	if profile.committed_raids.has(result.raid_id):
+		return true
+	if not profile.pending_result.is_empty():
+		return profile.pending_result.result.raid_id == result.raid_id
+	var normalized: Array[Dictionary] = []
+	if result.get("success", false):
+		for item in loot:
+			if not Ammunition.valid_state(item, catalog.items): return false
+			var encoded := item.duplicate(true)
+			Ammunition.normalize(encoded, catalog.items)
+			normalized.append(encoded)
+	var candidate := profile.duplicate(true)
+	candidate.pending_result = {"result": result.duplicate(true), "items": normalized}
+	return _write(candidate)
 
 func commit_result(result: Dictionary, loot: Array[Dictionary], equipment: Array[Dictionary] = []) -> bool:
 	if result.get("practice", false):
 		return false
 	if profile.committed_raids.has(result.raid_id):
 		return true
+	if profile.pending_result.is_empty() and not stage_result(result, equipment + loot):
+		return false
+	var pending: Dictionary = profile.pending_result
+	if pending.result.raid_id != result.raid_id:
+		return false
+	var stash := stash_grid()
+	for encoded in pending.items:
+		var entry := InventoryPersistence.decode_item(encoded, catalog.items, {})
+		if entry.is_empty() or not stash.add_entry(entry):
+			problem.emit("Stash is full; arrange storage and retry the retained result.")
+			return false
 	var candidate := profile.duplicate(true)
-	if result.success:
-		var stash := RaidInventory.new(catalog.items, 10, 18)
-		for entry in candidate.stash:
-			stash.slots.append(entry.duplicate(true))
-		for entry in equipment + loot:
-			var placed := false
-			if entry.has("x") and entry.has("y"):
-				placed = stash.add_at(entry.id, int(entry.quantity), int(entry.x), int(entry.y), bool(entry.get("rotated", false)), entry.get("state", {}))
-			if not placed and not stash.add_entry(entry):
-				problem.emit("Stash is full; result retained for retry.")
-				return false
-		candidate.stash = stash.snapshot()
-	candidate.last_result = result.duplicate(true)
+	candidate.stash = stash.snapshot()
+	candidate.last_result = pending.result.duplicate(true)
 	candidate.committed_raids.append(result.raid_id)
+	candidate.pending_result = {}
 	return _write(candidate)

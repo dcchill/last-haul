@@ -22,6 +22,18 @@ static func valid(id: String, state: Variant, catalog: Catalog) -> bool:
 		return state.is_empty()
 	if not state.get("instance_id") is String or state.instance_id.is_empty():
 		return false
+	if state.has("ammo"):
+		if not state.ammo is Array or state.ammo.size() != int(state.get("rounds", -1)):
+			return false
+		var expected := Ammunition.default_ammo(id, catalog.items)
+		for ammo in state.ammo:
+			if not ammo is String or Ammunition.caliber(ammo, catalog.items).is_empty() or Ammunition.caliber(ammo, catalog.items) != Ammunition.caliber(expected, catalog.items):
+				return false
+	if state.has("chamber") and state.chamber != "":
+		if not state.chamber is String or not catalog.definitions.get(id) is WeaponDef:
+			return false
+		if Ammunition.caliber(state.chamber, catalog.items) != catalog.definitions[id].ammo.caliber:
+			return false
 	match item.kind:
 		"weapon":
 			if not catalog.definitions[id] is WeaponDef:

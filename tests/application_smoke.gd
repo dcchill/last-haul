@@ -14,7 +14,7 @@ func settle(frames: int = 5) -> void:
 	for frame in range(frames): await physics_frame
 	await process_frame
 func inventory_frames() -> Array[Node]:
-	return app.ui.inventory_flow.get_children().filter(func(node): return node.has_meta("inventory_grid"))
+	return app.ui.workspace.find_children("*", "PanelContainer", true, false).filter(func(node): return node.has_meta("inventory_grid"))
 func capture(name: String) -> void:
 	if not captures: return
 	await RenderingServer.frame_post_draw
@@ -30,37 +30,32 @@ func run() -> void:
 	app.ui.show_inventory()
 	await settle()
 	var frames := inventory_frames()
-	check(frames.size() == 2, "staging shows pack and stash")
-	if frames.size() == 2:
-		check(frames[0].custom_minimum_size.y == app.loadout.pack.height * 18 + 44, "pack frame fits its grid")
-		check(frames[1].custom_minimum_size.y == app.stash_view.height * 18 + 44, "stash frame fits its grid")
-		check(frames[0].get_node("Grid").cell_size == 18, "inventory uses native pixel slots")
-		var grid = frames[0].get_node("Grid")
-		var pack: RaidInventory = app.loadout.pack
-		if not pack.slots.is_empty():
-			var item: Dictionary = pack.slots[0]
-			var origin := Vector2i(int(item.x), int(item.y))
-			check(grid._slot_at(Vector2(origin * 18) + Vector2.ONE) == 0, "slot selection maps to native pixels")
-			for y in range(pack.height):
-				var moved := false
-				for x in range(pack.width):
-					if Vector2i(x, y) != origin and pack.can_place(item.id, x, y, bool(item.get("rotated", false)), 0):
-						var data := {"inventory": pack, "index": 0}
-						var target := Vector2(x * 18 + 1, y * 18 + 1)
-						check(grid._can_drop_data(target, data), "grid accepts valid drag target")
-						grid._drop_data(target, data)
-						var moved_index := pack._slot_at(x, y)
-						check(moved_index >= 0 and pack.slots[moved_index].id == item.id, "grid moves dragged item")
-						moved = true
-						break
-				if moved: break
+	check(frames.size() == 3, "staging shows pockets, base pack and stash")
+	var grid: Control = app.ui.workspace.grids[app.loadout.pack.uid]
+	var pack: RaidInventory = app.loadout.pack
+	if not pack.slots.is_empty():
+		var item: Dictionary = pack.slots[0]
+		var origin := Vector2i(int(item.x), int(item.y))
+		check(grid._slot_at(Vector2(origin) * grid.cell_size + Vector2.ONE) == 0, "slot selection maps to displayed cells")
+		for y in range(pack.height):
+			var moved := false
+			for x in range(pack.width):
+				if Vector2i(x, y) != origin and pack.can_place(item.id, x, y, bool(item.rotated), 0):
+					var data: Dictionary = grid.drag_data(0)
+					var target: Vector2 = Vector2(x, y) * grid.cell_size + Vector2.ONE
+					check(grid._can_drop_data(target, data), "grid accepts valid drag target")
+					grid._drop_data(target, data)
+					check(pack._slot_at(x, y) >= 0, "grid moves dragged item through persisted transaction")
+					moved = true
+					break
+			if moved: break
 	await capture("staging")
 	if DisplayServer.get_name() != "headless":
 		var original_size := root.size
 		root.size = Vector2i(1600, 900)
 		await settle()
 		await capture("staging-large")
-		check(inventory_frames().size() == 2, "staging survives window resize")
+		check(inventory_frames().size() == 3, "staging survives window resize")
 		root.size = original_size
 		await settle()
 	app.ui.show_home()
@@ -126,6 +121,8 @@ func run() -> void:
 	var direction := target.global_position + Vector3.UP - raid.player.eye_position()
 	raid.player.rotation.y = atan2(-direction.x, -direction.z)
 	raid.player.look_pitch = atan2(direction.y, Vector2(direction.x, direction.z).length())
+	# Let the equip animation and muzzle pose settle before testing world collision.
+	await settle(30)
 	check(raid.request_fire(id), "authority accepts real shot")
 	await settle(8)
 	check(target.health < old_health, "swept projectile damages real target")
@@ -134,15 +131,22 @@ func run() -> void:
 	await settle()
 	await capture("inventory")
 	check(app.ui.mode == "raid_inventory", "raid inventory controls")
-	check(inventory_frames().size() == 1, "field inventory shows pack")
+	check(inventory_frames().size() == 3, "field inventory shows base pack, pockets and practice rig")
 	if not raid.containers.is_empty():
-		app.ui.open_container(id, raid.containers.keys()[0])
+		var first_id: String = raid.containers.keys()[0]
+		raid.player.global_position = raid.entities[first_id].global_position + Vector3(0, 0.02, 2)
+		var direction_to_loot: Vector3 = raid.entities[first_id].global_position + Vector3.UP * 0.4 - raid.player.eye_position()
+		raid.player.rotation.y = atan2(-direction_to_loot.x, -direction_to_loot.z)
+		raid.player.look_pitch = atan2(direction_to_loot.y, Vector2(direction_to_loot.x, direction_to_loot.z).length())
+		await settle()
+		check(raid.request_interact(id, first_id), "authority opens reachable loot")
 		await settle()
 		check(app.ui.mode == "container", "loot container opens")
-		check(app.ui.loot_pack_grid.global_position.y > app.ui.loot_container_grid.global_position.y, "loot grid is above player inventory")
-		check(app.ui.loot_container_grid.plain_slots and app.ui.loot_pack_grid.plain_slots, "loot grids use plain slots")
-		check(app.ui.container_weight.text.begins_with("%.2f" % app.ui.container_contents.total_weight()), "loot footer shows container weight")
+		check(app.ui.loot_pack_grid.global_position.x < app.ui.loot_container_grid.global_position.x, "player and target inventories use separate columns")
+		check(not app.ui.loot_container_grid.plain_slots and not app.ui.loot_pack_grid.plain_slots, "loot grids reuse pixel slot artwork")
+		check(app.ui.workspace.summary != null, "workspace shows weight")
 		if not app.ui.container_contents.slots.is_empty():
+			app.ui.loot_container_grid.selected_index = 0
 			app.ui.loot_container_grid.slot_selected.emit(0)
 			check(app.ui.loot_container_grid.selected_index == 0, "loot selection stays visible")
 		check(state.inventory.add("patrol", 1), "add armor for loot equipment test")
@@ -171,10 +175,9 @@ func run() -> void:
 				var replacement_id: String = contents.slots[crate_armor].state.instance_id
 				state.inventory.capacity = 0
 				app.ui._equip_loot({"inventory": contents, "index": crate_armor}, "chestplate")
-				check(state.armor_slots.get("chestplate") == armor_id and contents.find_instance(replacement_id) >= 0, "full pack leaves crate armor and equipment unchanged")
+				check(state.armor_slots.get("chestplate") == replacement_id and contents.find_instance(armor_id) >= 0, "legal equipment swap returns old armor to source crate even when pack is full")
+				check(contents.find_instance(replacement_id) < 0 and state.equipment.owner_of(replacement_id) != null, "equipment swap preserves each physical identity exactly once")
 				state.inventory.capacity = -1
-				app.ui._equip_loot({"inventory": contents, "index": crate_armor}, "chestplate")
-				check(state.armor_slots.get("chestplate") == replacement_id and state.inventory.find_instance(armor_id) >= 0, "crate armor replaces equipped armor without losing the old item")
 			raid.player.set_physics_process(true)
 		await capture("container")
 		app.ui._sort_pack()

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ContainerDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "base_pack"
+display_name = "Base pack"
+dimensions = Vector2i(10, 6)

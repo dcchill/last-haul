@@ -2,6 +2,8 @@ class_name PrototypeUI
 extends CanvasLayer
 
 var app: Node
+var workspace: InventoryWorkspace
+var container_positions: Dictionary = {}
 var root: Control
 var screen: Control
 var panel: Container
@@ -86,7 +88,6 @@ func _clear(new_mode: String) -> void:
 	shade.color = Color(0.025, 0.04, 0.055, 0.92)
 	screen.add_child(shade)
 	if new_mode in ["inventory", "raid_inventory", "container"]:
-		_inventory_layout()
 		return
 	var scroll := ScrollContainer.new()
 	scroll.position = Vector2(28, 24)
@@ -96,82 +97,6 @@ func _clear(new_mode: String) -> void:
 	panel.custom_minimum_size.x = 445
 	panel.add_theme_constant_override("separation", 9)
 	scroll.add_child(panel)
-
-func _inventory_layout() -> void:
-	screen.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	var scroll := ScrollContainer.new()
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	scroll.offset_left = 24
-	scroll.offset_top = 24
-	scroll.offset_right = -24
-	scroll.offset_bottom = -24
-	screen.add_child(scroll)
-	if mode == "container":
-		inventory_flow = VBoxContainer.new()
-		inventory_flow.add_theme_constant_override("separation", 4)
-	else:
-		inventory_flow = HFlowContainer.new()
-		inventory_flow.add_theme_constant_override("h_separation", 12)
-		inventory_flow.add_theme_constant_override("v_separation", 12)
-	inventory_flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(inventory_flow)
-	if mode == "container":
-		return
-	var frame := _inventory_frame()
-	frame.custom_minimum_size.x = 360
-	inventory_flow.add_child(frame)
-	var margins := MarginContainer.new()
-	margins.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	margins.add_theme_constant_override("margin_left", 12)
-	margins.add_theme_constant_override("margin_top", 24)
-	margins.add_theme_constant_override("margin_right", 12)
-	margins.add_theme_constant_override("margin_bottom", 24)
-	frame.add_child(margins)
-	panel = VBoxContainer.new()
-	panel.custom_minimum_size.x = 336
-	panel.add_theme_constant_override("separation", 9)
-	margins.add_child(panel)
-	panel.minimum_size_changed.connect(func(): frame.custom_minimum_size.y = panel.get_combined_minimum_size().y + 48)
-
-func _inventory_frame() -> Panel:
-	var frame := Panel.new()
-	frame.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	var close := Button.new()
-	close.text = "×"
-	close.tooltip_text = "Close inventory"
-	close.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	close.offset_left = -20
-	close.offset_top = 1
-	close.offset_right = -1
-	close.offset_bottom = 20
-	close.pressed.connect(func():
-		if mode == "container": _close_container()
-		elif mode == "raid_inventory": _close_inventory()
-		else: show_home())
-	frame.add_child(close)
-	return frame
-
-func _inventory_grid(inventory: RaidInventory, title: String, handler: Callable = Callable()) -> Control:
-	var frame := _inventory_frame()
-	frame.name = "InventoryFrame"
-	frame.set_meta("inventory_grid", true)
-	frame.custom_minimum_size = Vector2(maxi(228, inventory.width * 18 + 18), inventory.height * 18 + 44)
-	if mode == "container":
-		frame.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	inventory_flow.add_child(frame)
-	var label := Label.new()
-	label.text = title
-	label.position = Vector2(9, 1)
-	label.add_theme_font_size_override("font_size", 12)
-	frame.add_child(label)
-	var grid: Control = InventoryGridScript.new()
-	grid.name = "Grid"
-	grid.position = Vector2(9, 21)
-	grid.cell_size = 18
-	grid.plain_slots = true
-	frame.add_child(grid)
-	grid.setup(inventory, handler)
-	return grid
 
 func _text(value: String, size: int = 17) -> Label:
 	var label := Label.new()
@@ -239,7 +164,7 @@ func show_home() -> void:
 	_grid(app.stash_view, Vector2(530, 52), Callable(), 28)
 	_root_text("STAGED RAID PACK", Vector2(852, 24))
 	_grid(app.loadout.pack, Vector2(852, 52), Callable(), 28)
-	_root_text("Drag between grids. Hold R to rotate.\nOpen Inventory to inspect item state.", Vector2(852, 250))
+	_root_text("Open Inventory to move or inspect gear.\nPress R while dragging to rotate.", Vector2(852, 250))
 
 func show_hud() -> void:
 	_clear("hud")
@@ -255,67 +180,19 @@ func show_inventory(from_raid: bool = false, selected: int = -1) -> void:
 	inventory_from_raid = from_raid
 	selected_inventory_index = selected
 	_clear("raid_inventory" if from_raid else "inventory")
-	_text("FIELD INVENTORY" if from_raid else "STAGE LOADOUT", 30)
-	var pack: RaidInventory = state().inventory if from_raid else app.loadout.pack
-	var pack_grid := _inventory_grid(pack, "RAID PACK" if from_raid else "STAGED RAID PACK")
-	pack_grid.slot_selected.connect(func(index): show_inventory(from_raid, index))
-	if from_raid:
-		if state().weapon != null and state().weapon.reload_end > 0:
-			state().weapon.cancel_reload()
-		_text("HP %d / 20  |  Armor %.0f + %.0f toughness" % [ceili(state().health), state().armor.points(), state().armor.toughness()])
-		for slot in ["helmet", "chestplate", "leggings", "boots"]:
-			var entry: Dictionary = state().armor.entries.get(slot, {})
-			_text(slot.capitalize() + ": " + (app.catalog.items[entry.id].display_name if not entry.is_empty() else "None"))
-			if not entry.is_empty():
-				_button("Unequip " + slot, func():
-					app.raid.request_unequip_armor(app.profile.profile.player_id, slot)
-					show_inventory(true, selected))
-		_text("Select an item in the pack for equipment controls.")
-		var bar := OptionButton.new()
-		for index in range(9):
-			bar.add_item("Quick slot %d" % (index + 1))
-		bar.select(assign_slot)
-		bar.item_selected.connect(func(index): assign_slot = index)
-		panel.add_child(bar)
-	else:
-		_inventory_grid(app.stash_view, "STASH")
-		_text("Drag equipment and ammo into the raid pack. Hold R while dropping to rotate.")
-	if selected >= 0 and selected < pack.slots.size():
-		var entry: Dictionary = pack.slots[selected]
-		_text(app.catalog.items[entry.id].display_name, 23)
-		_text(_item_details(entry))
-		var instance_id: String = entry.get("state", {}).get("instance_id", entry.get("uid", ""))
-		var kind: String = app.catalog.items[entry.id].kind
-		if from_raid and kind in ["weapon", "grenade", "mount", "magazine"]:
-			_button("Assign to selected quick slot", func():
-				app.raid.request_assign(app.profile.profile.player_id, assign_slot, instance_id)
-				show_inventory(true, selected))
-		if from_raid and kind == "armor":
-			_button("Equip armor", func():
-				app.raid.request_equip_armor(app.profile.profile.player_id, instance_id)
-				show_inventory(true, selected))
-		if from_raid and not ArmoryContent.magazine_feed(entry.id).is_empty():
-			_button("Load magazine from loose ammunition", func():
-				if not app.raid.request_magazine_load(app.profile.profile.player_id, instance_id): show_notice("No matching rounds or magazine full")
-				show_inventory(true, pack.find_instance(instance_id)))
-			_button("Unload magazine into pack", func():
-				if not app.raid.request_magazine_load(app.profile.profile.player_id, instance_id, true): show_notice("Magazine empty or no pack space")
-				show_inventory(true, pack.find_instance(instance_id)))
-		_add_preview(entry.id, Vector2(535, 400))
-	if from_raid and app.raid.practice:
-		_button("Browse practice armory", show_practice)
-		_button("Reset targets / replenish carried ammo", func(): app.raid.practice_reset(app.profile.profile.player_id); show_inventory(true))
-	_button("Close [I / Esc]" if from_raid else "Back", _close_inventory if from_raid else show_home)
+	workspace = InventoryWorkspace.new()
+	screen.add_child(workspace)
+	workspace.setup(app, self, from_raid)
 
 func _item_details(entry: Dictionary) -> String:
 	var data: Dictionary = entry.get("state", {})
 	var kind: String = app.catalog.items[entry.id].kind
 	if kind == "weapon" and app.catalog.definitions[entry.id] is WeaponDef:
 		var gun: WeaponDef = app.catalog.definitions[entry.id]
-		var rounds: int = int(data.magazine.state.rounds) if not data.get("magazine", {}).is_empty() else int(data.get("rounds", 0))
+		var rounds: int = (int(data.magazine.state.rounds) if not data.get("magazine", {}).is_empty() else int(data.get("rounds", 0))) + (0 if data.get("chamber", "").is_empty() else 1)
 		return "%d / %d rounds · %s\nDamage %.0f · %d pellets · %d ticks/shot\nReload %.2fs · %s\nAttachments: %s" % [rounds, gun.magazine_size, gun.feed, gun.damage, gun.pellets, gun.interval_ticks, gun.reload_seconds, "automatic" if gun.automatic else "semiautomatic", ", ".join(data.get("attachments", {}).keys())]
 	if kind == "magazine":
-		return "%d rounds loaded" % int(data.get("rounds", 0))
+		return "%d rounds loaded\nNext first: %s" % [int(data.get("rounds", 0)), ", ".join(data.get("ammo", []))]
 	if kind == "armor":
 		var armor: ArmorDef = app.catalog.definitions[entry.id]
 		return "%s · %.0f armor · %.0f toughness\nDurability %d / %d" % [armor.slot, armor.points, armor.toughness, maxi(0, armor.max_durability - int(data.get("wear", 0))), armor.max_durability]
@@ -355,7 +232,7 @@ func show_practice() -> void:
 					show_notice("Pack full — clear practice pack or start a fresh session")
 				_add_preview(id, Vector2(570, 160)))
 	_button("Clear practice pack", func():
-		state().inventory.slots.clear()
+		app.raid.practice_clear(app.profile.profile.player_id)
 		state().quickbar.fill("")
 		state().armor_slots.clear()
 		state().select(0, app.catalog)
@@ -406,147 +283,31 @@ func open_container(_player_id: String, id: String) -> void:
 func _redraw_container() -> void:
 	_clear("container")
 	container_contents = app.raid.containers[container_id]
-	var box := PanelContainer.new()
-	box.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	inventory_flow.add_child(box)
-	var column := VBoxContainer.new()
-	box.add_child(column)
-	var title := Label.new()
-	title.text = "CONTAINER"
-	column.add_child(title)
-	var container_row := HBoxContainer.new()
-	column.add_child(container_row)
-	var equipment_space := Control.new()
-	container_row.add_child(equipment_space)
-	loot_container_grid = _loot_grid(container_contents, container_row)
-	loot_container_grid.selected_index = selected_container_index
-	loot_container_grid.slot_selected.connect(func(index): _select_loot(true, index))
-	var footer := HBoxContainer.new()
-	footer.name = "ContainerActions"
-	column.add_child(footer)
-	panel = footer
-	_button("Take all [F]", _take_all)
-	loot_transfer_button = _button("Transfer [R]", _transfer_selected, selected_container_index < 0)
-	_button("Sort [S]", _sort_pack)
-	container_weight = Label.new()
-	container_weight.add_theme_font_size_override("font_size", 11)
-	footer.add_child(container_weight)
-	_update_container_weight()
-	var player_title := Label.new()
-	player_title.text = "YOUR INVENTORY  •  Select an item or drag it to a slot"
-	column.add_child(player_title)
-	var player_row := HBoxContainer.new()
-	column.add_child(player_row)
-	var equipment := VBoxContainer.new()
-	equipment.name = "Equipment"
-	player_row.add_child(equipment)
-	for slot in ["helmet", "chestplate", "leggings", "boots", "held"]:
-		var button = preload("res://ui/equipment_slot.gd").new()
-		button.name = slot.capitalize()
-		var entry: Dictionary = state().held_entry() if slot == "held" else state().armor.entries.get(slot, {})
-		button.text = slot.capitalize() + ": " + (str(app.catalog.items[entry.id].display_name) if not entry.is_empty() else "Empty")
-		button.custom_minimum_size = Vector2(150, 28)
-		button.accepts_drop = func(data): return _can_equip_loot(data, slot)
-		button.drop_item = func(data): _equip_loot(data, slot)
-		button.pressed.connect(func(): _equip_selected_loot(slot))
-		equipment.add_child(button)
-	equipment_space.custom_minimum_size.x = equipment.get_combined_minimum_size().x
-	equipment.minimum_size_changed.connect(func(): equipment_space.custom_minimum_size.x = equipment.get_combined_minimum_size().x)
-	loot_pack_grid = _loot_grid(state().inventory, player_row)
-	loot_pack_grid.selected_index = selected_loot_pack_index
-	loot_pack_grid.slot_selected.connect(func(index): _select_loot(false, index))
-	panel = footer
-	_button("Close [Esc]", _close_container)
-
-func _loot_grid(inventory: RaidInventory, parent: Container) -> Control:
-	var grid: Control = InventoryGridScript.new()
-	grid.name = "Grid"
-	grid.cell_size = 28
-	grid.plain_slots = true
-	parent.add_child(grid)
-	grid.setup(inventory, _claim_drop)
-	return grid
-
-func _select_loot(from_container: bool, index: int) -> void:
-	selected_container_index = index if from_container else -1
-	selected_loot_pack_index = -1 if from_container else index
-	loot_container_grid.selected_index = selected_container_index
-	loot_pack_grid.selected_index = selected_loot_pack_index
-	loot_container_grid.queue_redraw()
-	loot_pack_grid.queue_redraw()
-	loot_transfer_button.disabled = selected_container_index < 0
+	workspace = InventoryWorkspace.new()
+	screen.add_child(workspace)
+	workspace.setup(app, self, true, container_contents)
+	loot_container_grid = workspace.grids.get(container_contents.uid)
+	loot_pack_grid = workspace.grids.get(state().inventory.uid)
+	container_weight = workspace.summary
 
 func _can_equip_loot(data: Variant, slot: String) -> bool:
-	if not data is Dictionary or data.get("inventory") not in [container_contents, state().inventory]:
-		return false
+	if not data is Dictionary or not data.get("inventory") is RaidInventory: return false
 	var source: RaidInventory = data.inventory
 	var index := int(data.get("index", -1))
-	if index < 0 or index >= source.slots.size():
-		return false
-	var definition: Resource = app.catalog.definitions.get(source.slots[index].id)
-	return definition is WeaponDef if slot == "held" else definition is ArmorDef and definition.slot == slot
-
-func _equip_selected_loot(slot: String) -> void:
-	var source := container_contents if selected_container_index >= 0 else state().inventory
-	var index := selected_container_index if selected_container_index >= 0 else selected_loot_pack_index
-	if index < 0 and slot != "held":
-		app.raid.request_unequip_armor(app.profile.profile.player_id, slot)
-		_redraw_container()
-		return
-	_equip_loot({"inventory": source, "index": index}, slot)
+	if index < 0 or index >= source.slots.size(): return false
+	var name: String = {"helmet": "headgear", "chestplate": "body_armor", "held": "primary"}.get(slot, slot)
+	return app.catalog.items[source.slots[index].id].equipment_slots.has(name)
 
 func _equip_loot(data: Dictionary, slot: String) -> void:
-	if not _can_equip_loot(data, slot):
-		show_notice("Select compatible equipment first")
-		return
+	if not _can_equip_loot(data, slot): return
 	var source: RaidInventory = data.inventory
-	var index := int(data.index)
-	var instance_id: String = source.slots[index].get("state", {}).get("instance_id", "")
-	var player_id: String = app.profile.profile.player_id
-	if source == container_contents and not app.raid.request_transfer(player_id, container_id, index):
-		show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
-		return
-	var equipped: bool = app.raid.request_assign(player_id, state().selected, instance_id) if slot == "held" else app.raid.request_equip_armor(player_id, instance_id)
-	if not equipped:
-		show_notice("Cannot equip item")
-	selected_container_index = -1
-	selected_loot_pack_index = -1
-	_redraw_container()
-
-func _update_container_weight() -> void:
-	var limit := "--"
-	if container_contents.config != null and container_contents.config.weight_limit > 0:
-		limit = "%.2f" % container_contents.config.weight_limit
-	container_weight.text = "%.2f / %s kg" % [container_contents.total_weight(), limit]
-
-func _claim_drop(data: Dictionary, target: RaidInventory, _cell: Vector2i, _rotated: bool) -> void:
-	if target == state().inventory and data.inventory == container_contents:
-		if not app.raid.request_transfer(app.profile.profile.player_id, container_id, int(data.index)):
-			show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
-	elif target == state().inventory and data.inventory == target:
-		target.move(int(data.index), _cell.x, _cell.y, _rotated)
-	selected_container_index = -1
-	selected_loot_pack_index = -1
-	_redraw_container()
-
-func _transfer_selected() -> void:
-	if not app.raid.request_transfer(app.profile.profile.player_id, container_id, selected_container_index):
-		show_notice("Cannot transfer: pack full, out of reach, or item unavailable")
-	selected_container_index = -1
-	selected_loot_pack_index = -1
-	_redraw_container()
+	workspace.equip(source, source.slots[int(data.index)].uid)
 
 func _take_all() -> void:
-	for index in range(container_contents.slots.size() - 1, -1, -1):
-		app.raid.request_transfer(app.profile.profile.player_id, container_id, index)
-	selected_container_index = -1
-	selected_loot_pack_index = -1
-	_redraw_container()
+	workspace.take_all()
 
 func _sort_pack() -> void:
-	state().inventory.sort()
-	selected_loot_pack_index = -1
-	_redraw_container()
+	workspace.submit(app.inventory_service().request("sort", state().inventory))
 
 func _close_container() -> void:
 	state().opened_container = ""
@@ -559,6 +320,7 @@ func show_result() -> void:
 	_text(app.raid.result.reason)
 	if app.pending_save:
 		_text("Result not saved. Retry before leaving.")
+		_button("Manage stash", app.open_recovery, app.profile.profile.pending_result.is_empty())
 		_button("Retry save", func(): app.retry_save(); show_result())
 		_button("Quit without saving", func(): get_tree().quit())
 	else:
@@ -603,17 +365,49 @@ func show_settings(from_raid: bool) -> void:
 	fullscreen.text = "Fullscreen"
 	fullscreen.button_pressed = app.settings.fullscreen
 	panel.add_child(fullscreen)
+	var sensor := CheckButton.new()
+	sensor.text = "Sensor treatment"
+	sensor.button_pressed = app.settings.sensor_enabled
+	panel.add_child(sensor)
+	_text("Sensor strength")
+	var strength := HSlider.new()
+	strength.max_value = 1.0
+	strength.step = 0.05
+	strength.value = app.settings.sensor_strength
+	strength.accessibility_name = "Sensor strength"
+	panel.add_child(strength)
+	var flicker := CheckButton.new()
+	flicker.text = "Sensor flicker"
+	flicker.button_pressed = app.settings.sensor_flicker
+	panel.add_child(flicker)
+	_text("Pixelation")
+	var pixels := OptionButton.new()
+	pixels.accessibility_name = "Pixelation"
+	for size in range(1, 5):
+		pixels.add_item("Off" if size == 1 else "%dx" % size, size)
+	pixels.select(app.settings.sensor_pixel_size - 1)
+	panel.add_child(pixels)
 	_button("Apply and save", func():
 		app.settings.sensitivity = sensitivity.value
 		app.settings.volume = volume.value
 		app.settings.fullscreen = fullscreen.button_pressed
+		app.settings.sensor_enabled = sensor.button_pressed
+		app.settings.sensor_strength = strength.value
+		app.settings.sensor_flicker = flicker.button_pressed
+		app.settings.sensor_pixel_size = pixels.get_selected_id()
 		app.settings.apply()
+		if app.raid != null:
+			app.raid.signal_decay.configure(app.settings)
 		show_notice("Settings saved" if app.settings.save_settings() == OK else "Could not save settings"))
 	_button("Back", show_pause if from_raid else show_home)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.physical_keycode == KEY_I:
+		if event.physical_keycode == KEY_F8 and app.raid != null:
+			show_notice("Sensor treatment ON" if app.raid.signal_decay.toggle_comparison() else "Sensor treatment OFF (F8 compares)")
+			get_viewport().set_input_as_handled()
+			return
+		if event.is_action_pressed("inventory_toggle"):
 			if mode == "hud": show_inventory(true)
 			elif mode == "raid_inventory": show_hud()
 			get_viewport().set_input_as_handled()
@@ -625,11 +419,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.physical_keycode == KEY_B and mode == "hud" and app.raid.practice:
 			show_practice()
 			return
-		if mode == "container":
-			match event.physical_keycode:
-				KEY_F: _take_all()
-				KEY_R: _transfer_selected()
-				KEY_S: _sort_pack()
+
+	if mode in ["inventory", "raid_inventory", "container"] and is_instance_valid(workspace):
+		workspace._unhandled_input(event)
+		return
 	if not event.is_action_pressed("ui_cancel"):
 		return
 	if app.raid != null and app.raid.is_active():
@@ -643,8 +436,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	notice_label.text = message if Time.get_ticks_msec() < notice_until else ""
-	if mode == "container" and is_instance_valid(container_weight):
-		_update_container_weight()
 	if mode == "customize" and not Input.is_physical_key_pressed(KEY_T):
 		if state().weapon != null:
 			state().weapon.customizing = false
@@ -662,8 +453,8 @@ func _process(_delta: float) -> void:
 		prompt = "EXTRACTING %.1fs" % participant.extraction_left
 	var bar := ""
 	for index in range(9):
-		var item_index := participant.inventory.find_instance(participant.quickbar[index])
-		var name: String = participant.inventory.slots[item_index].id if item_index >= 0 else "—"
+		var entry := participant.entry_for(participant.quickbar[index])
+		var name: String = entry.id if not entry.is_empty() else "-"
 		bar += "%s%d %s%s  " % ["[" if index == participant.selected else "", index + 1, name, "]" if index == participant.selected else ""]
 	hud.text = "LAST HAUL / CREATE ARMORY\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
 	hud.add_theme_font_size_override("font_size", 15)

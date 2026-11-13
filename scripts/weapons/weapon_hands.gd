@@ -206,7 +206,8 @@ func _fit(desired: Transform3D, side: String) -> Dictionary:
 				found = true
 				break
 		if found and HandClearance.clear(glove, GLOVE_HALF, solids, 0.001): break
-		glove.origin += Vector3(sign_x * 0.02, -0.006, 0.005)
+		# Advance from the target so projection cannot trap a transition between overlapping solids.
+		glove.origin = desired.origin + Vector3(sign_x * 0.02, -0.006, 0.005) * (attempt + 1)
 		glove = HandClearance.project(glove, GLOVE_HALF, solids)
 		sleeve = _sleeve(glove, elbow)
 	worst_correction = maxf(worst_correction, desired.origin.distance_to(glove.origin))
