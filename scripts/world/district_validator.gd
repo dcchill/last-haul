@@ -38,8 +38,9 @@ static func inspect(scene: Node3D,layout: DistrictLayout) -> Dictionary:
 			if node.entity_id.is_empty() or ids.has(node.entity_id): errors.append("missing/duplicate entity ID: "+node.entity_id)
 			ids[node.entity_id]=true
 	if buildings==0 or float(enterable)/buildings<.7: errors.append("insufficient enterable buildings")
-	if furniture!=96 or pickups!=96: errors.append("district loot socket budget mismatch")
-	if pois.size()!=7 or starts.size()!=7 or exits.size()!=4: errors.append("district landmark/insertion/extraction count")
+	if furniture!=128 or pickups!=96: errors.append("campus loot socket budget mismatch")
+	if buildings!=4 or enterable!=4: errors.append("campus needs four enterable principal buildings")
+	if pois.size()!=4 or starts.size()!=7 or exits.size()!=4: errors.append("campus landmark/insertion/extraction count")
 	if nav.navigation_mesh==null or nav.navigation_mesh.get_polygon_count()==0: errors.append("empty navigation")
 	var longest:=0.0
 	for start in starts:

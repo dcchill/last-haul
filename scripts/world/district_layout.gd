@@ -1,11 +1,10 @@
 class_name DistrictLayout
 extends RefCounted
 
-## The graph is produced before any geometry. Coordinates reserve reusable POI
-## footprints; seed changes move districts and choose physically realized routes.
-const POIS := ["research", "scrapyard", "residential", "warehouse", "substation", "rail", "checkpoint"]
-const CENTERS := [Vector2(-77,-88),Vector2(68,-91),Vector2(-98,9),Vector2(12,-12),Vector2(112,17),Vector2(65,104),Vector2(-75,108)]
-const RING := [[0,1],[1,4],[4,5],[5,6],[6,2],[2,0]]
+## Fixed campus arrival graph. Raid seeds vary contents, never the architecture.
+const POIS := ["research", "outpatient", "logistics", "facilities"]
+# Outdoor arrival points, rather than inaccessible building centers.
+const CENTERS := [Vector2(47,43),Vector2(0,77),Vector2(82,-5),Vector2(-87,5)]
 var seed_value := 0
 var version := 1
 var positions: Array[Vector2] = []
@@ -17,14 +16,10 @@ static func generate(seed_number: int, config: DistrictGenerationConfig = null) 
 	result.seed_value=seed_number
 	if config==null: config=DistrictGenerationConfig.new()
 	result.version=config.generator_version
-	var rng:=RandomNumberGenerator.new()
-	rng.seed=stream(seed_number,"layout",result.version)
 	var scale:=config.size_meters/350.0
-	for at: Vector2 in CENTERS: result.positions.append((at+Vector2(rng.randf_range(-6,6),rng.randf_range(-6,6)))*scale)
-	for pair: Array in RING: result.connect_pois(pair[0],pair[1],"street")
-	for outer in [0,1,2,4,5,6]: result.connect_pois(3,outer,"service" if outer%2==0 else "alley")
-	# A cross-district optional detour changes the graph while preserving its core.
-	result.connect_pois(2,5,"drainage" if rng.randf()<.5 else "covered_walk")
+	for at: Vector2 in CENTERS: result.positions.append(at*scale)
+	for a in POIS.size():
+		for other in range(a+1,POIS.size()): result.connect_pois(a,other,"campus")
 	return result
 
 static func stream(seed_number: int, domain: String, generation_version := 1) -> int:

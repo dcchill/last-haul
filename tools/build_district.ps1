@@ -20,19 +20,11 @@ function Invoke-DistrictTool {
     }
 }
 
-& python "$projectPath/tools/build_district_signs.py"
-if ($LASTEXITCODE -ne 0) { throw "Sign generation failed" }
 Invoke-DistrictTool -Arguments @("--headless", "--editor", "--import", "--quit")
-Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tools/build_district_assets.gd")
-Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tools/review_district_assets.gd")
-Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tools/build_art_showcase.gd")
-if ($Capture) {
-    Invoke-DistrictTool -Arguments @("--resolution", "768x768", "--script", "res://tools/review_district_assets.gd")
-    Invoke-DistrictTool -Arguments @("--resolution", "1280x720", "--script", "res://tools/review_art_showcase.gd")
-}
 if ($ReviewOnly) { return }
 Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tools/build_district.gd")
 Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tests/district_tests.gd")
+Invoke-DistrictTool -Arguments @("--headless", "--script", "res://tests/campus_tests.gd")
 if ($Capture) {
     Invoke-DistrictTool -Arguments @("--resolution", "1920x1080", "--script", "res://tests/district_review.gd")
 }

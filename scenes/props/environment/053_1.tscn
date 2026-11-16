@@ -1,0 +1,136 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_1ba0k"]
+[ext_resource type="Resource" path="res://resources/containers/environment/053.tres" id="2_l2uwi"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_278i4"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/053.tres" id="4_ofosi"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_1_body.res" id="5_12pov"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_1_panel.res" id="6_ujxep"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_i5t0y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ef266"]
+size = Vector3(0.7, 1.63, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwe3y"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a17ni"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4ylj"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pdqau"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwqi2"]
+size = Vector3(0.7, 1.65, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ujfi"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1s5nf"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ds4a7"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[node name="Prop053" type="StaticBody3D" unique_id=1713718418 groups=["raid_entities"]]
+script = ExtResource("1_1ba0k")
+display_name = "Refrigerator"
+loot_profile = "food"
+container_config = ExtResource("2_l2uwi")
+opened = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.06, -0.36)
+entity_id = "prop-053"
+kind = "container"
+material = ExtResource("3_278i4")
+loot_table = ExtResource("4_ofosi")
+interaction_offset = Vector3(-0.0279679, 0.875, -1.0180863)
+metadata/catalog_id = "053"
+metadata/variant_index = 1.0
+metadata/variant_name = "Open"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "moving_panel", "handle_mount", "handle", "hinges", "freezer_seal", "condenser_coil"])
+metadata/bounds = AABB(-0.4559358, 0, -1.0680863, 0.8559358, 1.75, 1.4555862)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=694330274]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_12pov")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=505361866]
+transform = Transform3D(0.16996716, 0, 0.98544973, 0, 1, 0, -0.98544973, 0, 0.16996716, -0.35, 0.06, -0.36)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=907804549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.06, 0.36)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_ujxep")
+
+[node name="Collision_panel_medical" type="StaticBody3D" parent="MovingPanel" unique_id=312917140]
+collision_mask = 0
+script = ExtResource("7_i5t0y")
+material = ExtResource("3_278i4")
+
+[node name="@CollisionShape3D@413" type="CollisionShape3D" parent="MovingPanel/Collision_panel_medical" unique_id=233818937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.815, 0)
+shape = SubResource("BoxShape3D_ef266")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1960087804]
+collision_mask = 0
+script = ExtResource("7_i5t0y")
+material = ExtResource("3_278i4")
+
+[node name="@CollisionShape3D@405" type="CollisionShape3D" parent="Collision_body_medical" unique_id=461629782]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_wwe3y")
+
+[node name="@CollisionShape3D@406" type="CollisionShape3D" parent="Collision_body_medical" unique_id=585887112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_a17ni")
+
+[node name="@CollisionShape3D@407" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1934818703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_i4ylj")
+
+[node name="@CollisionShape3D@408" type="CollisionShape3D" parent="Collision_body_medical" unique_id=2015844737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.715, 0)
+shape = SubResource("BoxShape3D_pdqau")
+
+[node name="@CollisionShape3D@409" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1721377545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0.335)
+shape = SubResource("BoxShape3D_wwqi2")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1920062418]
+collision_mask = 0
+script = ExtResource("7_i5t0y")
+material = ExtResource("3_278i4")
+
+[node name="@CollisionShape3D@410" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1464916649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4375, 0)
+shape = SubResource("BoxShape3D_2ujfi")
+
+[node name="@CollisionShape3D@411" type="CollisionShape3D" parent="Collision_body_steel" unique_id=235618642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_1s5nf")
+
+[node name="@CollisionShape3D@412" type="CollisionShape3D" parent="Collision_body_steel" unique_id=262521199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3125, 0)
+shape = SubResource("BoxShape3D_ds4a7")

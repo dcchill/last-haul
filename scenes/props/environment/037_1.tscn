@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/037_1_body.res" id="1_w5t53"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/037_1_panel.res" id="2_aq1tx"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_t88pl"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_17nbc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkphq"]
+size = Vector3(2.15, 1.75, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fa8n"]
+size = Vector3(0.075, 1.9, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mxtot"]
+size = Vector3(0.075, 1.9, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iqdbs"]
+size = Vector3(2.3, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ixijl"]
+size = Vector3(2.3, 0.08, 0.12)
+
+[node name="Prop037" type="Node3D" unique_id=192560071]
+metadata/catalog_id = "037"
+metadata/variant_index = 1.0
+metadata/variant_name = "Open"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["uprights", "crossrails", "moving_panel", "handle_mount", "handle", "gate_mesh"])
+metadata/bounds = AABB(-1.1875, 0, -2.1369884, 2.375, 1.9000001, 2.1969883)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=676658402]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_w5t53")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=490671734]
+transform = Transform3D(0.16996716, 0, 0.98544973, 0, 1, 0, -0.98544973, 0, 0.16996716, -1.075, 0.075, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1813376416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.075, -0.075, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_aq1tx")
+
+[node name="Collision_panel_paint" type="StaticBody3D" parent="MovingPanel" unique_id=652795553]
+collision_mask = 0
+script = ExtResource("3_t88pl")
+material = ExtResource("4_17nbc")
+
+[node name="@CollisionShape3D@399" type="CollisionShape3D" parent="MovingPanel/Collision_panel_paint" unique_id=46813024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.075, 0.875, 0)
+shape = SubResource("BoxShape3D_wkphq")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=343346571]
+collision_mask = 0
+script = ExtResource("3_t88pl")
+material = ExtResource("4_17nbc")
+
+[node name="@CollisionShape3D@395" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1679169811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15, 0.95, 0)
+shape = SubResource("BoxShape3D_0fa8n")
+
+[node name="@CollisionShape3D@396" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1156425498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.95, 0)
+shape = SubResource("BoxShape3D_mxtot")
+
+[node name="@CollisionShape3D@397" type="CollisionShape3D" parent="Collision_body_steel" unique_id=833740449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_iqdbs")
+
+[node name="@CollisionShape3D@398" type="CollisionShape3D" parent="Collision_body_steel" unique_id=521861997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86, 0)
+shape = SubResource("BoxShape3D_ixijl")

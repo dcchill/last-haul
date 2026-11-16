@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/029_1_body.res" id="1_my1is"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_cgrvf"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_ey3ep"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dvn2b"]
+height = 2.6
+radius = 0.09
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m6u0j"]
+height = 0.3640055
+radius = 0.09
+
+[node name="Prop029" type="Node3D" unique_id=1168989671]
+metadata/catalog_id = "029"
+metadata/variant_index = 1.0
+metadata/variant_name = "Leaking"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["pipe", "wall_clamps", "water_pool"])
+metadata/bounds = AABB(-0.175, 0, -0.575, 0.35, 2.7865372, 0.735)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=931985834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0134628415, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_my1is")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=2109407156]
+collision_mask = 0
+script = ExtResource("2_cgrvf")
+material = ExtResource("3_ey3ep")
+
+[node name="@CollisionShape3D@207" type="CollisionShape3D" parent="Collision_body_paint" unique_id=265090480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4865372, 0)
+shape = SubResource("CylinderShape3D_dvn2b")
+
+[node name="@CollisionShape3D@208" type="CollisionShape3D" parent="Collision_body_paint" unique_id=643943084]
+transform = Transform3D(-1, -8.4059096e-08, 2.4016881e-08, 0, -0.2747211, -0.96152395, 8.742278e-08, -0.96152395, 0.2747211, 0, 0.13653716, -0.175)
+shape = SubResource("CylinderShape3D_m6u0j")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_lwh4q"]
+
+[resource]
+script = ExtResource("1_lwh4q")
+id = "prop_cloth_dark"
+impact_color = Color(0.3019608, 0.34117648, 0.29803923, 1)
+resistance = 100.0
+thickness_meters = 0.06

@@ -1,0 +1,67 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/054_2_body.res" id="1_00ws4"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/054_2_panel.res" id="2_2pl7h"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_oaulb"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_u5a6u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kx7ga"]
+size = Vector3(0.54, 0.5, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r5hkn"]
+size = Vector3(0.65, 0.86, 0.63)
+
+[node name="Prop054" type="Node3D" unique_id=1116306841]
+metadata/catalog_id = "054"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["oven_body", "moving_panel", "handle_mount", "oven_window", "burners", "oven_knobs", "ceramic_fracture"])
+metadata/bounds = AABB(-0.325, 0, -0.38, 0.65, 0.8925, 0.695)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1346590556]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_00ws4")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1546792299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.3)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1420579811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0.3)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_2pl7h")
+
+[node name="Collision_panel_steel" type="StaticBody3D" parent="MovingPanel" unique_id=1778114593]
+collision_mask = 0
+script = ExtResource("3_oaulb")
+material = ExtResource("4_u5a6u")
+
+[node name="@CollisionShape3D@433" type="CollisionShape3D" parent="MovingPanel/Collision_panel_steel" unique_id=171098870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.030000001)
+shape = SubResource("BoxShape3D_kx7ga")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=2072992980]
+collision_mask = 0
+script = ExtResource("3_oaulb")
+material = ExtResource("4_u5a6u")
+
+[node name="@CollisionShape3D@432" type="CollisionShape3D" parent="Collision_body_medical" unique_id=443583806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
+shape = SubResource("BoxShape3D_r5hkn")

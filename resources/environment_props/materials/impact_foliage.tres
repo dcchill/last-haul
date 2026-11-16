@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_u73p0"]
+
+[resource]
+script = ExtResource("1_u73p0")
+id = "prop_foliage"
+impact_color = Color(0.33333334, 0.38431373, 0.2784314, 1)
+resistance = 100.0
+thickness_meters = 0.06

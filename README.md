@@ -1,8 +1,8 @@
 # Last Haul
 
-A **Godot 4.7.2 stable** single-player extraction shooter. **Enter raid - Medtac Quarantine District** deploys an infected human into a 350 × 350 m district with seven connected POIs, sixteen enterable buildings, upper floors, 28 enemies, and three curated layouts. The project now uses **Forward+**. See the [district guide](docs/world-generation.md), [art standards](docs/art-direction.md), and [verification record](docs/district-verification.md).
+A **Godot 4.7.2 stable** single-player extraction shooter. **Enter raid - Medtac Quarantine District** now deploys into one authored 350 ? 350 m MedTac campus: central Labs, outpatient/administration, logistics, and facilities/security. The campus has 63 functional rooms, an optional restricted basement, administration upper floors, a dispatch mezzanine, and 28 enemies. See the [campus guide](docs/world-generation.md), [area audit](docs/campus-area-audit.md), and [verification record](docs/district-verification.md).
 
-The district has 96 searchable furnishings, 48 active loose items from 96 sockets, physical signs, contextual equipment, ray-tested cover, destructible sections and an optional keycard-controlled research room. Loot follows the physical container. Overcast Day is the default; reusable dusk, morning fog and emergency-night presets share geometry. The detailed Labs scene remains available as a [regression fixture](MEDTAC_MAP.md).
+The campus has 128 searchable furnishings and 48 active loose items selected from 96 sockets. The four separate buildings connect outdoors through pedestrian and service circuits. Loot follows the physical container. One fixed layout (19381) replaces the three district layouts in normal deployment; raid contents remain seeded. Long abandonment appears in weathered surfaces, roof failures, damaged facades, exposed frames, vegetation, and abandoned vehicles. The original [Labs fixture](MEDTAC_MAP.md) remains isolated for regression tests.
 
 Start with **25 minutes until turning** in the district. Suppressants buy three minutes, capped at 25 minutes remaining. Sprinting uses stamina without accelerating infection. Follow the compass to either of your two assigned far-side extracts and remain inside for 15 continuous seconds. Death, turning, and abandonment lose carried equipment and loot. Practice remains isolated from persistent progression. See the [implemented human player notes](PLAYER_MODEL_PLAN.md).
 
@@ -69,7 +69,7 @@ Open `.tres` assets in the Inspector to change rifle capacity/timing/range, roun
 
 Scene entities use explicit `entity_id` values, including the extraction zone. Duplicates or missing references block deployment. The player's stable ID is generated once in the profile. Targets and containers reset each deployment; the stash does not.
 
-Use the [district authoring pipeline](docs/world-generation.md#authoring-pipeline) for district geometry and navigation. For the legacy yard/depot fixtures, rebake navigation with the NavigationRegion3D editor tools, or:
+Use the [campus authoring pipeline](docs/world-generation.md#authoring-pipeline) for district geometry and navigation. For the legacy yard/depot fixtures, rebake navigation with the NavigationRegion3D editor tools, or:
 
 ```powershell
 godot --headless --path . --script res://tests/bake_navigation.gd

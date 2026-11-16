@@ -1,0 +1,730 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="1_hjlkp"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="2_3i26e"]
+[ext_resource type="Material" path="res://resources/district/materials/concrete.tres" id="3_w0nx4"]
+[ext_resource type="Material" path="res://resources/district/materials/medical.tres" id="4_qfmfm"]
+[ext_resource type="Material" path="res://resources/district/materials/paint.tres" id="5_r7d1a"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/041_1.tscn" id="6_adugv"]
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="7_j6b3i"]
+[ext_resource type="Resource" path="res://resources/containers/environment/041.tres" id="8_ywyjt"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="9_i7gar"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/041.tres" id="10_b2oxj"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/042_0.tscn" id="11_s8b6c"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/043_1.tscn" id="12_ohopc"]
+[ext_resource type="Resource" path="res://resources/containers/environment/043.tres" id="13_3rwwj"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/043.tres" id="14_3dpxk"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/044_1.tscn" id="15_hgjwa"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/058_0.tscn" id="16_rs65e"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/096_1.tscn" id="17_knork"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/096_2.tscn" id="18_xn2f2"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/098_1.tscn" id="19_7hjhk"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/099_0.tscn" id="20_6wubl"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/107_0.tscn" id="21_vcvjc"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/104_0.tscn" id="22_fwwk6"]
+[ext_resource type="Resource" path="res://resources/containers/environment/104.tres" id="23_ov8mg"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/104.tres" id="24_pflgk"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/175_2.tscn" id="25_jhelu"]
+[ext_resource type="Resource" path="res://resources/containers/environment/175.tres" id="26_blh83"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/175.tres" id="27_krep4"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/061_1.tscn" id="28_ifpwj"]
+[ext_resource type="Resource" path="res://resources/containers/environment/061.tres" id="29_1vfrs"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/061.tres" id="30_s5nhx"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/062_0.tscn" id="31_dcb8j"]
+[ext_resource type="Resource" path="res://resources/containers/environment/062.tres" id="32_dwcw5"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/062.tres" id="33_x1l4t"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/064_1.tscn" id="34_855j8"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/179_1.tscn" id="35_s5lyc"]
+[ext_resource type="Resource" path="res://resources/containers/environment/179.tres" id="36_s1v0g"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/179.tres" id="37_xmowv"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/190_1.tscn" id="38_isxvj"]
+[ext_resource type="Resource" path="res://resources/containers/environment/190.tres" id="39_24gdt"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/190.tres" id="40_snnwu"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/199_0.tscn" id="41_0s8f0"]
+[ext_resource type="Resource" path="res://resources/containers/environment/199.tres" id="42_3ch5g"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/199.tres" id="43_n8hqv"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/046_0.tscn" id="44_rk20b"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/110_0.tscn" id="45_f8heu"]
+[ext_resource type="Script" path="res://scripts/world/prop_preview_camera.gd" id="46_nmf03"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rju81"]
+size = Vector3(24, 0.3, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t1m5h"]
+size = Vector3(24, 0.3, 24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h1owk"]
+size = Vector3(0.3, 3, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xrw3"]
+size = Vector3(0.3, 3, 24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ujnk"]
+size = Vector3(24, 3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gx4j"]
+size = Vector3(24, 3, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtcr7"]
+size = Vector3(2, 0.02, 22)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jm3e0"]
+size = Vector3(2, 0.02, 22)
+
+[sub_resource type="Environment" id="Environment_84er2"]
+background_mode = 1
+background_color = Color(0.20784314, 0.2627451, 0.28235295, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.7019608, 0.77254903, 0.75686276, 1)
+ambient_light_energy = 0.65
+
+[node name="InteriorExample" type="Node3D" unique_id=848435447]
+
+[node name="@StaticBody3D@2" type="StaticBody3D" parent="." unique_id=1182904082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+script = ExtResource("1_hjlkp")
+material = ExtResource("2_3i26e")
+
+[node name="@MeshInstance3D@3" type="MeshInstance3D" parent="@StaticBody3D@2" unique_id=1189084836]
+material_override = ExtResource("3_w0nx4")
+mesh = SubResource("BoxMesh_rju81")
+
+[node name="@CollisionShape3D@4" type="CollisionShape3D" parent="@StaticBody3D@2" unique_id=1979744261]
+shape = SubResource("BoxShape3D_t1m5h")
+
+[node name="@StaticBody3D@5" type="StaticBody3D" parent="." unique_id=2112970346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 0)
+script = ExtResource("1_hjlkp")
+material = ExtResource("2_3i26e")
+
+[node name="@MeshInstance3D@6" type="MeshInstance3D" parent="@StaticBody3D@5" unique_id=1257598480]
+material_override = ExtResource("4_qfmfm")
+mesh = SubResource("BoxMesh_h1owk")
+
+[node name="@CollisionShape3D@7" type="CollisionShape3D" parent="@StaticBody3D@5" unique_id=1107383604]
+shape = SubResource("BoxShape3D_2xrw3")
+
+[node name="@StaticBody3D@8" type="StaticBody3D" parent="." unique_id=704985015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 12)
+script = ExtResource("1_hjlkp")
+material = ExtResource("2_3i26e")
+
+[node name="@MeshInstance3D@9" type="MeshInstance3D" parent="@StaticBody3D@8" unique_id=1652382497]
+material_override = ExtResource("4_qfmfm")
+mesh = SubResource("BoxMesh_8ujnk")
+
+[node name="@CollisionShape3D@10" type="CollisionShape3D" parent="@StaticBody3D@8" unique_id=754364983]
+shape = SubResource("BoxShape3D_8gx4j")
+
+[node name="@StaticBody3D@11" type="StaticBody3D" parent="." unique_id=1725826521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+script = ExtResource("1_hjlkp")
+material = ExtResource("2_3i26e")
+
+[node name="@MeshInstance3D@12" type="MeshInstance3D" parent="@StaticBody3D@11" unique_id=1785930163]
+material_override = ExtResource("5_r7d1a")
+mesh = SubResource("BoxMesh_jtcr7")
+
+[node name="@CollisionShape3D@13" type="CollisionShape3D" parent="@StaticBody3D@11" unique_id=876492114]
+shape = SubResource("BoxShape3D_jm3e0")
+
+[node name="Prop041" type="StaticBody3D" parent="." unique_id=2106152845 groups=["raid_entities"] instance=ExtResource("6_adugv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 7)
+script = ExtResource("7_j6b3i")
+display_name = "Office Desk"
+opening = "drawer"
+container_config = ExtResource("8_ywyjt")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.575, -0.255)
+entity_id = "environment:example-InteriorExample-0"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("10_b2oxj")
+interaction_offset = Vector3(0, 0.465, -0.34250003)
+metadata/catalog_id = "041"
+metadata/variant_index = 1.0
+metadata/variant_name = "Cluttered"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "partial_cover", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "worktop", "apron", "papers", "cup", "case_sides", "case_ends", "case_back", "shelves", "drawer_face", "handle_mount", "handle", "moving_panel", "drawer_bottom", "hinges"])
+metadata/bounds = AABB(-0.7, 0, -0.39250004, 1.4, 0.93, 0.76750004)
+
+[node name="Prop042" type="Node3D" parent="." unique_id=1164026266 instance=ExtResource("11_s8b6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 8.2)
+metadata/catalog_id = "042"
+metadata/variant_index = 0.0
+metadata/variant_name = "Intact"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["brace", "casters", "mechanism", "seat", "back_posts", "backrest"])
+metadata/bounds = AABB(-0.27888545, 0, -0.3643381, 0.61888546, 1.0450001, 0.7286762)
+
+[node name="Prop043" type="StaticBody3D" parent="." unique_id=393902645 groups=["raid_entities"] instance=ExtResource("12_ohopc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+script = ExtResource("7_j6b3i")
+display_name = "Filing Cabinet"
+opening = "drawer"
+loot_profile = "records"
+container_config = ExtResource("13_3rwwj")
+opened = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18125, -0.27)
+entity_id = "environment:example-InteriorExample-2"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("14_3dpxk")
+interaction_offset = Vector3(0, 0.675, -0.7575)
+metadata/catalog_id = "043"
+metadata/variant_index = 1.0
+metadata/variant_name = "Open"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "records", "reception"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "drawer_face", "handle_mount", "handle", "moving_panel", "drawer_bottom", "hinges"])
+metadata/bounds = AABB(-0.25, 0, -0.8075, 0.5, 1.35, 1.1075001)
+
+[node name="Prop044" type="Node3D" parent="." unique_id=24618320 instance=ExtResource("15_hgjwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 10.5)
+metadata/catalog_id = "044"
+metadata/variant_index = 1.0
+metadata/variant_name = "Stocked"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "records", "reception"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "stored_cartons", "back_brace", "books"])
+metadata/bounds = AABB(-0.6000001, 0, -0.20000002, 1.2000002, 1.8, 0.40650004)
+
+[node name="Prop058" type="Node3D" parent="." unique_id=858252508 instance=ExtResource("16_rs65e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+metadata/catalog_id = "058"
+metadata/variant_index = 0.0
+metadata/variant_name = "Office"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "records", "reception"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "worktop", "apron", "display_housing", "display", "screen_trace", "power_button", "monitor_stand", "monitor_foot", "keyboard", "key_rows", "tower"])
+metadata/bounds = AABB(-0.7, 0, -0.375, 1.4, 1.31, 0.75)
+
+[node name="Prop096" type="Node3D" parent="." unique_id=699424276 instance=ExtResource("17_knork")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
+metadata/catalog_id = "096"
+metadata/variant_index = 1.0
+metadata/variant_name = "Abandoned"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "partial_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "bed_deck", "mattress", "pillow", "uprights", "crossrails", "headboard_bars", "safety_rails", "discarded_blanket"])
+metadata/bounds = AABB(-0.48749998, 0, -1.075, 0.97499996, 1.3, 2.15)
+
+[node name="@Node3D@14" type="Node3D" parent="." unique_id=1112621821 instance=ExtResource("18_xn2f2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
+metadata/catalog_id = "096"
+metadata/variant_index = 2.0
+metadata/variant_name = "Bloody"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "partial_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "bed_deck", "mattress", "pillow", "uprights", "crossrails", "headboard_bars", "safety_rails", "bloodstain"])
+metadata/bounds = AABB(-0.48749998, 0, -1.075, 0.97499996, 1.3, 2.15)
+
+[node name="Prop098" type="Node3D" parent="." unique_id=1128106047 instance=ExtResource("19_7hjhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+metadata/catalog_id = "098"
+metadata/variant_index = 1.0
+metadata/variant_name = "Equipped"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["iv_base", "pipe", "bag_hooks", "iv_bag"])
+metadata/bounds = AABB(-0.30149668, 0, -0.30149668, 0.60299337, 1.8774501, 0.60299337)
+
+[node name="Prop099" type="Node3D" parent="." unique_id=893590293 instance=ExtResource("20_6wubl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+metadata/catalog_id = "099"
+metadata/variant_index = 0.0
+metadata/variant_name = "Stocked"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "cart_shelves", "supply_bottles"])
+metadata/bounds = AABB(-0.3625, 0, -0.31, 0.725, 1.095, 0.62)
+
+[node name="Prop107" type="Node3D" parent="." unique_id=2022646658 instance=ExtResource("21_vcvjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+metadata/catalog_id = "107"
+metadata/variant_index = 0.0
+metadata/variant_name = "Closed"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "laboratory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["uprights", "crossrails", "divider_feet", "curtain_folds"])
+metadata/bounds = AABB(-1.05, 0, -0.325, 2.1, 1.9, 0.65)
+
+[node name="Prop104" type="StaticBody3D" parent="." unique_id=150225621 groups=["raid_entities"] instance=ExtResource("22_fwwk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+script = ExtResource("7_j6b3i")
+display_name = "Pharmaceutical Refrigerator"
+loot_profile = "medical"
+container_config = ExtResource("23_ov8mg")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.06, -0.35)
+entity_id = "environment:example-InteriorExample-10"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("24_pflgk")
+interaction_offset = Vector3(0, 0.95000005, -0.40750003)
+metadata/catalog_id = "104"
+metadata/variant_index = 0.0
+metadata/variant_name = "Sealed"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "moving_panel", "handle_mount", "handle", "hinges", "insulated_viewing_window", "temperature_readout"])
+metadata/bounds = AABB(-0.425, 0, -0.45750004, 0.85, 1.9000001, 0.8075)
+
+[node name="Prop175" type="StaticBody3D" parent="." unique_id=1442677383 groups=["raid_entities"] instance=ExtResource("25_jhelu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.925, 3)
+script = ExtResource("7_j6b3i")
+display_name = "Medical Supply Case"
+opening = "lid"
+loot_profile = "medical"
+container_config = ExtResource("26_blh83")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275, 0.2175)
+entity_id = "environment:example-InteriorExample-11"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("27_krep4")
+interaction_offset = Vector3(0, 0.17500001, -0.25750002)
+metadata/catalog_id = "175"
+metadata/variant_index = 2.0
+metadata/variant_name = "Medtac"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "medical_emblem", "medical_vials", "temperature_sensor"])
+metadata/bounds = AABB(-0.3175, 0, -0.30750003, 0.635, 0.35000002, 0.52500004)
+
+[node name="Prop061" type="StaticBody3D" parent="." unique_id=699212082 groups=["raid_entities"] instance=ExtResource("28_ifpwj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+script = ExtResource("7_j6b3i")
+display_name = "Industrial Workbench"
+opening = "drawer"
+container_config = ExtResource("29_1vfrs")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.57, -0.25)
+entity_id = "environment:example-InteriorExample-12"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("30_s5nhx")
+interaction_offset = Vector3(0, 0.51, -0.33750004)
+metadata/catalog_id = "061"
+metadata/variant_index = 1.0
+metadata/variant_name = "Cluttered"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "partial_cover", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "maintenance"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "worktop", "apron", "papers", "cup", "vise", "vise_screw", "lower_shelf", "moving_panel", "handle_mount", "handle"])
+metadata/bounds = AABB(-0.7, 0, -0.38750005, 1.4, 1.02, 0.76250005)
+
+[node name="Prop062" type="StaticBody3D" parent="." unique_id=1443956779 groups=["raid_entities"] instance=ExtResource("31_dcb8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -5)
+script = ExtResource("7_j6b3i")
+display_name = "Tool Trolley"
+opening = "drawer"
+container_config = ExtResource("32_dwcw5")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6825, -0.22)
+entity_id = "environment:example-InteriorExample-13"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("33_x1l4t")
+interaction_offset = Vector3(0.033500016, 0.415, -0.3075)
+metadata/catalog_id = "062"
+metadata/variant_index = 0.0
+metadata/variant_name = "Closed"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "maintenance"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "drawer_face", "handle_mount", "handle", "moving_panel", "drawer_bottom", "hinges", "tire", "wheel_hub", "axle_cap", "trolley_handle", "tool_liner"])
+metadata/bounds = AABB(-0.473, 0, -0.35750002, 1.013, 0.83, 0.62750006)
+
+[node name="Prop064" type="Node3D" parent="." unique_id=746315344 instance=ExtResource("34_855j8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -9)
+metadata/catalog_id = "064"
+metadata/variant_index = 1.0
+metadata/variant_name = "Rusty"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.25,
+"rooms": ["workshop", "maintenance"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "lathe_bed", "guideways", "headstock", "chuck", "workpiece", "tailstock", "carriage", "feed_handwheel"])
+metadata/bounds = AABB(-1, 0, -0.495, 2, 1.575, 0.82000005)
+
+[node name="Prop179" type="StaticBody3D" parent="." unique_id=724537269 groups=["raid_entities"] instance=ExtResource("35_s5lyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -9)
+script = ExtResource("7_j6b3i")
+display_name = "Mechanic's Tool Chest"
+opening = "drawer"
+container_config = ExtResource("36_s1v0g")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825, -0.22)
+entity_id = "environment:example-InteriorExample-15"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("37_xmowv")
+interaction_offset = Vector3(0, 0.48749998, -0.3075)
+metadata/catalog_id = "179"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "maintenance"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "drawer_face", "handle_mount", "handle", "moving_panel", "drawer_bottom", "hinges", "tire", "wheel_hub", "axle_cap", "chest_worktop"])
+metadata/bounds = AABB(-0.645, 0, -0.35750002, 1.29, 0.97499996, 0.63250005)
+
+[node name="Prop190" type="StaticBody3D" parent="." unique_id=672902289 groups=["raid_entities"] instance=ExtResource("38_isxvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7)
+script = ExtResource("7_j6b3i")
+display_name = "Server Rack Storage"
+container_config = ExtResource("39_24gdt")
+locked = true
+key_item = "medtac_keycard"
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.275, 0.06, -0.45)
+entity_id = "environment:example-InteriorExample-16"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("40_snnwu")
+interaction_offset = Vector3(0, 1, -0.59999996)
+metadata/catalog_id = "190"
+metadata/variant_index = 1.0
+metadata/variant_name = "Secured"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "moving_panel", "handle_mount", "handle", "hinges", "server_door_window", "rack_servers", "drive_lights"])
+metadata/bounds = AABB(-0.325, 0, -0.65, 0.65, 2, 1.1)
+
+[node name="Prop199" type="StaticBody3D" parent="." unique_id=845901092 groups=["raid_entities"] instance=ExtResource("41_0s8f0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.76, -7)
+script = ExtResource("7_j6b3i")
+display_name = "Medtac Secure Research Case"
+opening = "lid"
+loot_profile = "specimen"
+container_config = ExtResource("42_3ch5g")
+locked = true
+key_item = "medtac_keycard"
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.2675)
+entity_id = "environment:example-InteriorExample-17"
+kind = "container"
+material = ExtResource("9_i7gar")
+loot_table = ExtResource("43_n8hqv")
+interaction_offset = Vector3(0, 0.21250002, -0.3075)
+metadata/catalog_id = "199"
+metadata/variant_index = 0.0
+metadata/variant_name = "Locked"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior", "exterior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.25,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "reinforcement_bands", "medical_emblem", "combination_lock", "security_straps", "medical_vials"])
+metadata/bounds = AABB(-0.3925, 0, -0.35750002, 0.785, 0.42500004, 0.64250004)
+
+[node name="Prop046" type="Node3D" parent="." unique_id=1202032959 instance=ExtResource("44_rk20b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -7)
+metadata/catalog_id = "046"
+metadata/variant_index = 0.0
+metadata/variant_name = "Small"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "worktop", "apron"])
+metadata/bounds = AABB(-0.7, 0, -0.375, 1.4, 0.78000003, 0.75)
+
+[node name="Prop110" type="Node3D" parent="." unique_id=1435926847 instance=ExtResource("45_f8heu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+metadata/catalog_id = "110"
+metadata/variant_index = 0.0
+metadata/variant_name = "Active"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.25,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["terminal_base", "terminal_pedestal", "display_housing", "display", "screen_trace", "power_button", "input_deck", "emergency_switch"])
+metadata/bounds = AABB(-0.35, 0, -0.36213964, 0.7, 1.81, 0.66213965)
+
+[node name="@WorldEnvironment@15" type="WorldEnvironment" parent="." unique_id=1553443252]
+environment = SubResource("Environment_84er2")
+
+[node name="@DirectionalLight3D@16" type="DirectionalLight3D" parent="." unique_id=1584078622]
+transform = Transform3D(0.81915206, 0.43938506, -0.36868784, 0, 0.64278764, 0.76604444, 0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+light_color = Color(0.9019608, 0.87058824, 0.79607844, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="@Camera3D@17" type="Camera3D" parent="." unique_id=1729661008]
+transform = Transform3D(-0.7808688, -0.31881598, 0.5372153, 0, 0.8599641, 0.5103546, -0.62469506, 0.39852, -0.67151916, 20, 20, -25)
+current = true
+script = ExtResource("46_nmf03")
+preview_title = "LAST HAUL / INTERIOR PROP EXAMPLE"

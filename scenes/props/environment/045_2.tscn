@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/045_2_body.res" id="1_r1gwc"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_5ns5e"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_7c6ya"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5pb5h"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6rwco"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vj3ry"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_untux"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qckps"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hcyfl"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q82jb"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ga6r"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[node name="Prop045" type="Node3D" unique_id=1993567634]
+metadata/catalog_id = "045"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "partial_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "back_brace", "brace"])
+metadata/bounds = AABB(-0.6000001, 0, -0.21000001, 1.2000002, 1.8, 0.41650003)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=183533822]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_r1gwc")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=578925607]
+collision_mask = 0
+script = ExtResource("2_5ns5e")
+material = ExtResource("3_7c6ya")
+
+[node name="@CollisionShape3D@181" type="CollisionShape3D" parent="Collision_body_paint" unique_id=669617217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5675, 0.9, -0.1675)
+shape = SubResource("BoxShape3D_5pb5h")
+
+[node name="@CollisionShape3D@182" type="CollisionShape3D" parent="Collision_body_paint" unique_id=2123992382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5675, 0.9, 0.1675)
+shape = SubResource("BoxShape3D_6rwco")
+
+[node name="@CollisionShape3D@183" type="CollisionShape3D" parent="Collision_body_paint" unique_id=735823957]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5675, 0.9, -0.1675)
+shape = SubResource("BoxShape3D_vj3ry")
+
+[node name="@CollisionShape3D@184" type="CollisionShape3D" parent="Collision_body_paint" unique_id=299782274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5675, 0.9, 0.1675)
+shape = SubResource("BoxShape3D_untux")
+
+[node name="@CollisionShape3D@185" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1600793462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_qckps")
+
+[node name="@CollisionShape3D@186" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1289025341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6533333, 0)
+shape = SubResource("BoxShape3D_hcyfl")
+
+[node name="@CollisionShape3D@187" type="CollisionShape3D" parent="Collision_body_paint" unique_id=924479422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1866666, 0)
+shape = SubResource("BoxShape3D_q82jb")
+
+[node name="@CollisionShape3D@188" type="CollisionShape3D" parent="Collision_body_paint" unique_id=806070557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72, 0)
+shape = SubResource("BoxShape3D_1ga6r")

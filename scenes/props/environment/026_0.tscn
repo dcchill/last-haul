@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/026_0_body.res" id="1_r1jcc"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_fphfm"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_26wqm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u0muj"]
+size = Vector3(0.95, 0.65, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hxbrw"]
+size = Vector3(0.08, 0.1, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5fjh2"]
+size = Vector3(0.08, 0.1, 0.6)
+
+[node name="Prop026" type="Node3D" unique_id=1460257989]
+metadata/catalog_id = "026"
+metadata/variant_index = 0.0
+metadata/variant_name = "Working"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "wall_brackets"])
+metadata/bounds = AABB(-0.47500002, 0, -0.405, 0.95000005, 0.75, 0.70500004)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=706594328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_r1jcc")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1791242769]
+collision_mask = 0
+script = ExtResource("2_fphfm")
+material = ExtResource("3_26wqm")
+
+[node name="@CollisionShape3D@187" type="CollisionShape3D" parent="Collision_body_paint" unique_id=582655664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42499998, 0)
+shape = SubResource("BoxShape3D_u0muj")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=573394332]
+collision_mask = 0
+script = ExtResource("2_fphfm")
+material = ExtResource("3_26wqm")
+
+[node name="@CollisionShape3D@188" type="CollisionShape3D" parent="Collision_body_steel" unique_id=827070472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3325, 0.05, 0)
+shape = SubResource("BoxShape3D_hxbrw")
+
+[node name="@CollisionShape3D@189" type="CollisionShape3D" parent="Collision_body_steel" unique_id=940962351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3325, 0.05, 0)
+shape = SubResource("BoxShape3D_5fjh2")

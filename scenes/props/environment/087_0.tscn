@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/087_0_body.res" id="1_nsy03"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_l1kut"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_acibr"]
+
+[sub_resource type="Resource" id="Resource_tjgit"]
+script = ExtResource("3_acibr")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g6b7e"]
+size = Vector3(0.2, 6, 0.2)
+
+[node name="Prop087" type="Node3D" unique_id=1271236143]
+metadata/catalog_id = "087"
+metadata/variant_index = 0.0
+metadata/variant_name = "Wooden"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["utility_pole", "crossarm", "insulators"])
+metadata/bounds = AABB(-0.85, 0, -0.1, 1.7, 6, 0.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1617917175]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_nsy03")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=57126515]
+collision_mask = 0
+script = ExtResource("2_l1kut")
+material = SubResource("Resource_tjgit")
+
+[node name="@CollisionShape3D@123" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1973408003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_g6b7e")

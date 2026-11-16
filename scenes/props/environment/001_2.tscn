@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/001_2_body.res" id="1_jghsh"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_0iwpt"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_i4hnh"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_s727o"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2xbdc"]
+points = PackedVector3Array(-1.4, 0, 0.42, 1.4, 0, 0.42, -1.4, 0, -0.42, 1.4, 0, -0.42, -1.4, 0.18, -0.42, 1.4, 0.18, -0.42, -1.4, 0.65, -0.2, 1.4, 0.65, -0.2, -1.4, 1.05, -0.15, 1.4, 1.05, -0.15, -1.4, 1.05, 0.15, 1.4, 1.05, 0.15, -1.4, 0.65, 0.2, 1.4, 0.65, 0.2, -1.4, 0.18, 0.42, 1.4, 0.18, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uys28"]
+size = Vector3(0.12, 1.1, 0.88)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vwqfj"]
+size = Vector3(0.12, 1.1, 0.88)
+
+[node name="Prop001" type="Node3D" unique_id=1271580990]
+metadata/catalog_id = "001"
+metadata/variant_index = 2.0
+metadata/variant_name = "Reinforced"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["jersey_profile", "reflectors", "reinforcing_straps"])
+metadata/bounds = AABB(-1.4000001, 0, -0.44, 2.8000002, 1.1, 0.88)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=636505488]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_jghsh")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=2088808118]
+collision_mask = 0
+script = ExtResource("2_0iwpt")
+material = ExtResource("3_i4hnh")
+
+[node name="@CollisionShape3D@4" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1039720986]
+shape = SubResource("ConvexPolygonShape3D_2xbdc")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=264648646]
+collision_mask = 0
+script = ExtResource("2_0iwpt")
+material = ExtResource("4_s727o")
+
+[node name="@CollisionShape3D@5" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1660190110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.98, 0.55, 0)
+shape = SubResource("BoxShape3D_uys28")
+
+[node name="@CollisionShape3D@6" type="CollisionShape3D" parent="Collision_body_steel" unique_id=235803629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98, 0.55, 0)
+shape = SubResource("BoxShape3D_vwqfj")

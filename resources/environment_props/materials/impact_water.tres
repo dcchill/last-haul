@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_v05ac"]
+
+[resource]
+script = ExtResource("1_v05ac")
+id = "prop_water"
+impact_color = Color(0.33333334, 0.44313726, 0.44705883, 1)
+resistance = 100.0
+thickness_meters = 0.06

@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/091_3_body.res" id="1_7l6n2"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_4p3j5"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_pr7g7"]
+
+[sub_resource type="Resource" id="Resource_6jtrp"]
+script = ExtResource("3_pr7g7")
+id = "prop_plastic"
+impact_color = Color(0.34901962, 0.42745098, 0.4509804, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ppe3l"]
+height = 0.88
+radius = 0.3
+
+[node name="Prop091" type="Node3D" unique_id=2038295363]
+metadata/catalog_id = "091"
+metadata/variant_index = 3.0
+metadata/variant_name = "Contaminated"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "hazard", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tank_shell", "tank_bands", "bung", "spill"])
+metadata/bounds = AABB(-0.325, 0, -0.725, 0.84499997, 0.91749996, 1.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=869624619]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_7l6n2")
+
+[node name="Collision_body_plastic" type="StaticBody3D" parent="." unique_id=1930917105]
+collision_mask = 0
+script = ExtResource("2_4p3j5")
+material = SubResource("Resource_6jtrp")
+
+[node name="@CollisionShape3D@184" type="CollisionShape3D" parent="Collision_body_plastic" unique_id=1806480687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44, 0)
+shape = SubResource("CylinderShape3D_ppe3l")

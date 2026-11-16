@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ContainerDef" format=3]
+
+[ext_resource type="Texture2D" path="res://ui/container_large_no_slots.png" id="1_g15r5"]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="2_2lokl"]
+
+[resource]
+script = ExtResource("2_2lokl")
+id = "prop_191"
+display_name = "Food Supply Box"
+dimensions = Vector2i(6, 4)
+allowed_categories = PackedStringArray("food")
+prohibited_categories = PackedStringArray()
+searchable = true
+search_seconds = 2.0
+progressive_discovery = true

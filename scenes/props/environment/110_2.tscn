@@ -1,0 +1,76 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/110_2_body.res" id="1_hqi2a"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_a5sp0"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_d7kws"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5b0pv"]
+size = Vector3(0.7, 0.12, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1f1d"]
+size = Vector3(0.22, 1.4, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dd0wa"]
+size = Vector3(0.6, 0.06, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_diefl"]
+size = Vector3(0.7, 0.52, 0.1)
+
+[node name="Prop110" type="Node3D" unique_id=391938230]
+metadata/catalog_id = "110"
+metadata/variant_index = 2.0
+metadata/variant_name = "Sabotaged"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.25,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["terminal_base", "terminal_pedestal", "display_housing", "power_button", "input_deck", "emergency_switch"])
+metadata/bounds = AABB(-0.35, 0, -0.36213964, 0.7, 1.81, 0.66213965)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=775020283]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_hqi2a")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=2007550260]
+collision_mask = 0
+script = ExtResource("2_a5sp0")
+material = ExtResource("3_d7kws")
+
+[node name="@CollisionShape3D@272" type="CollisionShape3D" parent="Collision_body_steel" unique_id=929567153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+shape = SubResource("BoxShape3D_5b0pv")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1997504697]
+collision_mask = 0
+script = ExtResource("2_a5sp0")
+material = ExtResource("3_d7kws")
+
+[node name="@CollisionShape3D@273" type="CollisionShape3D" parent="Collision_body_medical" unique_id=330161319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.08)
+shape = SubResource("BoxShape3D_h1f1d")
+
+[node name="@CollisionShape3D@275" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1856722212]
+transform = Transform3D(1, 0, 0, 0, 0.9838437, -0.17902958, 0, 0.17902958, 0.9838437, 0, 1.15, -0.16)
+shape = SubResource("BoxShape3D_dd0wa")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1655973006]
+collision_mask = 0
+script = ExtResource("2_a5sp0")
+material = ExtResource("3_d7kws")
+
+[node name="@CollisionShape3D@274" type="CollisionShape3D" parent="Collision_body_paint" unique_id=579233737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+shape = SubResource("BoxShape3D_diefl")

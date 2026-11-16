@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/109_1_body.res" id="1_n6v8x"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_hvjed"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_l2fje"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0bpp5"]
+size = Vector3(1.15, 0.07, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wu2uh"]
+size = Vector3(0.075, 2.3, 0.09)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k22pa"]
+size = Vector3(0.075, 2.3, 0.09)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_py6a2"]
+size = Vector3(1.1, 0.08, 0.09)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jj5i8"]
+size = Vector3(1.1, 0.08, 0.09)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1tmda"]
+height = 0.4
+radius = 0.035
+
+[node name="Prop109" type="Node3D" unique_id=1443340627]
+metadata/catalog_id = "109"
+metadata/variant_index = 1.0
+metadata/variant_name = "Leaking"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "laboratory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["drain_platform", "uprights", "crossrails", "pipe", "shower_head", "shower_valve", "drain_slots", "standing_water"])
+metadata/bounds = AABB(-0.58750004, 0, -0.54, 1.1750001, 2.3, 1.04)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1492848561]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_n6v8x")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1990691378]
+collision_mask = 0
+script = ExtResource("2_hvjed")
+material = ExtResource("3_l2fje")
+
+[node name="@CollisionShape3D@252" type="CollisionShape3D" parent="Collision_body_steel" unique_id=489175783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_0bpp5")
+
+[node name="@CollisionShape3D@253" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1318886407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55, 1.15, 0)
+shape = SubResource("BoxShape3D_wu2uh")
+
+[node name="@CollisionShape3D@254" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1148189719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55, 1.15, 0)
+shape = SubResource("BoxShape3D_k22pa")
+
+[node name="@CollisionShape3D@255" type="CollisionShape3D" parent="Collision_body_steel" unique_id=179848545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_py6a2")
+
+[node name="@CollisionShape3D@256" type="CollisionShape3D" parent="Collision_body_steel" unique_id=621664012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.26, 0)
+shape = SubResource("BoxShape3D_jj5i8")
+
+[node name="@CollisionShape3D@257" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1700480921]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 2.25, -0.2)
+shape = SubResource("CylinderShape3D_1tmda")

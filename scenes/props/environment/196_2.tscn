@@ -1,0 +1,125 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_o5ij4"]
+[ext_resource type="Resource" path="res://resources/containers/environment/196.tres" id="2_kn27c"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_i1qbq"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/196.tres" id="4_h3sj1"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/196_2_body.res" id="5_l3jxr"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/196_2_panel.res" id="6_4tkl1"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_dgauk"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="8_eaii1"]
+
+[sub_resource type="Resource" id="Resource_0jn0f"]
+script = ExtResource("8_eaii1")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gvwqw"]
+size = Vector3(0.635, 0.065, 0.485)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_skn4k"]
+size = Vector3(0.06, 0.35, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bk6b1"]
+size = Vector3(0.06, 0.35, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w7e1d"]
+size = Vector3(0.6, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n7ru6"]
+size = Vector3(0.6, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uq7eh"]
+size = Vector3(0.5, 0.25, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c4nxr"]
+size = Vector3(0.6, 0.315, 0.06)
+
+[node name="Prop196" type="StaticBody3D" unique_id=1000632849 groups=["raid_entities"]]
+script = ExtResource("1_o5ij4")
+display_name = "Buried Scavenger Cache"
+opening = "lid"
+container_config = ExtResource("2_kn27c")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.385, 0.2425)
+entity_id = "prop-196"
+kind = "container"
+material = ExtResource("3_i1qbq")
+loot_table = ExtResource("4_h3sj1")
+interaction_offset = Vector3(0, 0.23000002, -0.35)
+metadata/catalog_id = "196"
+metadata/variant_index = 2.0
+metadata/variant_name = "Improvised"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "reinforcement_bands", "dug_earth_rim", "soil_camouflage", "cache_marker_stone"])
+metadata/bounds = AABB(-0.5, 0, -0.4, 1, 0.46000004, 0.8)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2122321251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015000001, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_l3jxr")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1168236066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.385, 0.2425)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1662591279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37, -0.2425)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_4tkl1")
+
+[node name="Collision_panel_wood" type="StaticBody3D" parent="MovingPanel" unique_id=2026563796]
+collision_mask = 0
+script = ExtResource("7_dgauk")
+material = SubResource("Resource_0jn0f")
+
+[node name="@CollisionShape3D@655" type="CollisionShape3D" parent="MovingPanel/Collision_panel_wood" unique_id=978851786]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2425)
+shape = SubResource("BoxShape3D_gvwqw")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1721369306]
+collision_mask = 0
+script = ExtResource("7_dgauk")
+material = SubResource("Resource_0jn0f")
+
+[node name="@CollisionShape3D@649" type="CollisionShape3D" parent="Collision_body_wood" unique_id=454684354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27, 0.19, 0)
+shape = SubResource("BoxShape3D_skn4k")
+
+[node name="@CollisionShape3D@650" type="CollisionShape3D" parent="Collision_body_wood" unique_id=57555753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27, 0.19, 0)
+shape = SubResource("BoxShape3D_bk6b1")
+
+[node name="@CollisionShape3D@651" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1971331945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_w7e1d")
+
+[node name="@CollisionShape3D@652" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1325433871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32999998, 0)
+shape = SubResource("BoxShape3D_n7ru6")
+
+[node name="@CollisionShape3D@653" type="CollisionShape3D" parent="Collision_body_wood" unique_id=567205665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, 0.2)
+shape = SubResource("BoxShape3D_uq7eh")
+
+[node name="@CollisionShape3D@654" type="CollisionShape3D" parent="Collision_body_wood" unique_id=979867684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, -0.195)
+shape = SubResource("BoxShape3D_c4nxr")

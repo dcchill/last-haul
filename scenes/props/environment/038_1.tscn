@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/038_1_body.res" id="1_k1pbl"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_nb5o4"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_ng845"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1pww"]
+size = Vector3(0.65, 0.08, 0.65)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ddv2"]
+size = Vector3(0.1, 0.60406953, 0.1)
+
+[node name="Prop038" type="Node3D" unique_id=1953423235]
+metadata/catalog_id = "038"
+metadata/variant_index = 1.0
+metadata/variant_name = "Tilted"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["dish_base", "dish_mount", "stepped_dish", "feed_arm", "feedhorn"])
+metadata/bounds = AABB(-0.70971483, 0, -0.58, 1.015011, 1.238689, 0.905)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=461776463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11144178, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_k1pbl")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1798226198]
+collision_mask = 0
+script = ExtResource("2_nb5o4")
+material = ExtResource("3_ng845")
+
+[node name="@CollisionShape3D@412" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1566826955]
+transform = Transform3D(0.9393727, -0.3428978, 0, 0.3428978, 0.9393727, 0, 0, 0, 1, -0.013715912, 0.1490167, 0)
+shape = SubResource("BoxShape3D_i1pww")
+
+[node name="@CollisionShape3D@413" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1045042644]
+transform = Transform3D(0.9393727, -0.32355836, 0.11352925, 0.3428978, 0.8863921, -0.31101477, 0, 0.3310877, 0.9436, -0.1251577, 0.45431283, 0.1)
+shape = SubResource("BoxShape3D_2ddv2")

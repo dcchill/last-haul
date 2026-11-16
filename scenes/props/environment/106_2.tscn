@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/106_2_body.res" id="1_dp3qy"]
+
+[node name="Prop106" type="Node3D" unique_id=534553278]
+metadata/catalog_id = "106"
+metadata/variant_index = 2.0
+metadata/variant_name = "Shattered"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["sample_rack_base", "sample_rack_grid", "sample_tubes"])
+metadata/bounds = AABB(-0.325, 0, -0.15, 0.65, 0.425, 0.3)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=363668083]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_dp3qy")

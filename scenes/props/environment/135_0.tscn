@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/135_0_body.res" id="1_pfn4n"]
+
+[node name="Prop135" type="Node3D" unique_id=232828247]
+metadata/catalog_id = "135"
+metadata/variant_index = 0.0
+metadata/variant_name = "Rolled"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["residence", "dormitory", "camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["rolled_blanket", "bedroll_straps"])
+metadata/bounds = AABB(-0.325, 0, -0.215, 0.65, 0.43, 0.43)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=260187087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015000001, 0)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_pfn4n")

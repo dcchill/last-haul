@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/007_3_body.res" id="1_bsaem"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_emijs"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_154ty"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_3hxrp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ukfd"]
+size = Vector3(0.45, 0.2, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wagcf"]
+size = Vector3(0.12, 2.3, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bksg7"]
+size = Vector3(1.5, 0.65, 0.07)
+
+[node name="Prop007" type="Node3D" unique_id=609602514]
+metadata/catalog_id = "007"
+metadata/variant_index = 3.0
+metadata/variant_name = "Vandalized"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["footing", "pole", "sign_board", "direction_text", "arrow", "painted_slash"])
+metadata/bounds = AABB(-0.75, 0, -0.225, 1.5, 2.3, 0.45)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2088181154]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_bsaem")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=1044529696]
+collision_mask = 0
+script = ExtResource("2_emijs")
+material = ExtResource("3_154ty")
+
+[node name="@CollisionShape3D@97" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=193055140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_2ukfd")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=346638841]
+collision_mask = 0
+script = ExtResource("2_emijs")
+material = ExtResource("4_3hxrp")
+
+[node name="@CollisionShape3D@98" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1208492090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("BoxShape3D_wagcf")
+
+[node name="@CollisionShape3D@99" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1617895492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, -0.1)
+shape = SubResource("BoxShape3D_bksg7")

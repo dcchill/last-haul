@@ -1,0 +1,83 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_8jyq4"]
+[ext_resource type="Resource" path="res://resources/containers/environment/187.tres" id="2_e3fkj"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_p1cyh"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/187.tres" id="4_8nhmi"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/187_1_body.res" id="5_qii4e"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/187_1_panel.res" id="6_oo46p"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_stmvx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_by7we"]
+size = Vector3(0.48, 0.12, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8tf2y"]
+size = Vector3(0.55, 0.16, 0.42)
+
+[node name="Prop187" type="StaticBody3D" unique_id=1920201149 groups=["raid_entities"]]
+script = ExtResource("1_8jyq4")
+display_name = "Cash Drawer"
+opening = "drawer"
+loot_profile = "records"
+container_config = ExtResource("2_e3fkj")
+opened = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.1975)
+entity_id = "prop-187"
+kind = "container"
+material = ExtResource("3_p1cyh")
+loot_table = ExtResource("4_8nhmi")
+interaction_offset = Vector3(0, 0.08, -0.67750007)
+metadata/catalog_id = "187"
+metadata/variant_index = 1.0
+metadata/variant_name = "Open"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "records", "reception"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["cash_drawer_case", "moving_panel", "handle_mount", "handle", "cash_tray", "coin_dividers"])
+metadata/bounds = AABB(-0.275, 0, -0.7275001, 0.55, 0.16, 0.9375001)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1533276804]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_qii4e")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1306133039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.5975)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=756442866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0.1975)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_oo46p")
+
+[node name="Collision_panel_steel" type="StaticBody3D" parent="MovingPanel" unique_id=1109345015]
+collision_mask = 0
+script = ExtResource("7_stmvx")
+material = ExtResource("3_p1cyh")
+
+[node name="@CollisionShape3D@383" type="CollisionShape3D" parent="MovingPanel/Collision_panel_steel" unique_id=880636559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.022499993)
+shape = SubResource("BoxShape3D_by7we")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1995433998]
+collision_mask = 0
+script = ExtResource("7_stmvx")
+material = ExtResource("3_p1cyh")
+
+[node name="@CollisionShape3D@382" type="CollisionShape3D" parent="Collision_body_steel" unique_id=844985394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_8tf2y")

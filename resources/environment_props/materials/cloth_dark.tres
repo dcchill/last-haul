@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+resource_name = "cloth_dark"
+albedo_color = Color(0.3019608, 0.34117648, 0.29803923, 1)
+roughness = 0.95

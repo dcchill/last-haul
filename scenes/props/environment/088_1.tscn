@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/088_1_body.res" id="1_utdnn"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_wpwn0"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_5qp0u"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_ut3fw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8yh2"]
+size = Vector3(1.35, 0.18, 1.05)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8f6tg"]
+height = 0.525
+radius = 0.33
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d3g7a"]
+height = 0.75
+radius = 0.27
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h8jkv"]
+height = 0.45
+radius = 0.1425
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0fs6c"]
+height = 0.6
+radius = 0.1425
+
+[node name="Prop088" type="Node3D" unique_id=408241681]
+metadata/catalog_id = "088"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pump_foundation", "impeller_housing", "pump_motor", "motor_fins", "pipe"])
+metadata/bounds = AABB(-0.975, 0, -0.525, 1.725, 1.3499999, 1.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=650950589]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_utdnn")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=1451364219]
+collision_mask = 0
+script = ExtResource("2_wpwn0")
+material = ExtResource("3_5qp0u")
+
+[node name="@CollisionShape3D@131" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1325311438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0)
+shape = SubResource("BoxShape3D_a8yh2")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1161750606]
+collision_mask = 0
+script = ExtResource("2_wpwn0")
+material = ExtResource("4_ut3fw")
+
+[node name="@CollisionShape3D@132" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1721991512]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.3, 0.525, 0)
+shape = SubResource("CylinderShape3D_8f6tg")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=337381735]
+collision_mask = 0
+script = ExtResource("2_wpwn0")
+material = ExtResource("4_ut3fw")
+
+[node name="@CollisionShape3D@133" type="CollisionShape3D" parent="Collision_body_steel" unique_id=223929011]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.375, 0.525, 0)
+shape = SubResource("CylinderShape3D_d3g7a")
+
+[node name="@CollisionShape3D@134" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1743447733]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, -0.75, 0.525, 0)
+shape = SubResource("CylinderShape3D_h8jkv")
+
+[node name="@CollisionShape3D@135" type="CollisionShape3D" parent="Collision_body_steel" unique_id=366765334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.05, 0)
+shape = SubResource("CylinderShape3D_0fs6c")

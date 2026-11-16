@@ -45,15 +45,17 @@ func _run() -> void:
 	app.home()
 	await process_frame
 	app.deploy(false)
-	if app.raid==null or app.raid.map_definition.id!="medtac_quarantine_district" or app.raid.npcs.size()!=28 or app.raid.containers.size()!=144:
-		push_error("Export cannot deploy quarantine district with actors and typed loot")
+	var campus: RaidMapDefinition=load("res://resources/maps/medtac_campus.tres")
+	if app.raid==null or app.raid.map_definition.id!="medtac_campus" or app.raid.npcs.size()!=campus.enemy_count:
+		push_error("Export cannot deploy the MedTac Research Campus with actors")
 		quit(1)
 		return
-	if app.raid.get_node_or_null("Atmosphere")==null or app.raid.get_meta("tactical_report",{}).get("errors",["missing"]).size()!=0:
-		push_error("Export is missing district atmosphere or validated tactical data")
+	var furnishings:=app.raid.entities.values().filter(func(e): return e is SearchableFurniture).size()
+	if app.raid.containers.size()!=furnishings+campus.active_loose_loot or app.raid.get_node_or_null("Atmosphere")==null or app.raid.find_child("Skybridge",true,false)==null:
+		push_error("Export is missing campus loot, atmosphere or the skybridge")
 		quit(1)
 		return
-	print("EXPORTED DISTRICT: curated layout, 28 actors, 144 loot sources and atmosphere")
+	print("EXPORTED CAMPUS: MedTac Research Campus with %d actors and %d active loot sources" % [app.raid.npcs.size(), app.raid.containers.size()])
 	app.raid.request_abandon(id)
 	app.home()
 	await process_frame

@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/100_1_body.res" id="1_ncfj7"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_k2b8n"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_a3umd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3jcl6"]
+size = Vector3(0.42, 0.06, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bu0kh"]
+size = Vector3(0.55, 0.4, 0.1)
+
+[node name="Prop100" type="Node3D" unique_id=1494420195]
+metadata/catalog_id = "100"
+metadata/variant_index = 1.0
+metadata/variant_name = "Flickering"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["monitor_base", "monitor_stand", "display_housing", "display", "screen_trace", "power_button", "failed_scanline"])
+metadata/bounds = AABB(-0.275, 0, -0.15, 0.55, 0.6, 0.3)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=194515868]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ncfj7")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=627110389]
+collision_mask = 0
+script = ExtResource("2_k2b8n")
+material = ExtResource("3_a3umd")
+
+[node name="@CollisionShape3D@116" type="CollisionShape3D" parent="Collision_body_medical" unique_id=519917111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+shape = SubResource("BoxShape3D_3jcl6")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1191226306]
+collision_mask = 0
+script = ExtResource("2_k2b8n")
+material = ExtResource("3_a3umd")
+
+[node name="@CollisionShape3D@117" type="CollisionShape3D" parent="Collision_body_paint" unique_id=546580390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("BoxShape3D_bu0kh")

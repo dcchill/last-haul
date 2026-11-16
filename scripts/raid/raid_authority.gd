@@ -111,7 +111,8 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	if dressing!=null:
 		for npc in npcs:
 			for marker in get_tree().get_nodes_in_group("medtac_cover")+get_tree().get_nodes_in_group("district_cover"):
-				if is_ancestor_of(marker) and marker.global_position.distance_to(npc.home_position)<24:
+				# Cover on another storey is not cover; keep NPCs on their own floor.
+				if is_ancestor_of(marker) and marker.global_position.distance_to(npc.home_position)<24 and absf(marker.global_position.y-npc.home_position.y)<1.5:
 					npc.cover_points.append(marker.global_position)
 	raid_id = ProfileStore._new_id()
 	phase = Phase.ACTIVE
@@ -666,6 +667,10 @@ func _build_loot() -> void:
 		for entity in entities.values():
 			if not entity is RaidEntity or entity.kind != "container": continue
 			if entity is RaidLootPickup: continue
+			if entity is SearchableFurniture and entity.container_config != null:
+				containers[entity.entity_id] = entity.create_inventory(catalog.items, loot_rng)
+				if entity.keycard_candidate: candidates.append(entity)
+				continue
 			var contents := RaidInventory.new(catalog.items, 10, 6)
 			if entity is SearchableFurniture: contents.display_name=entity.display_name
 			for id: String in entity.guaranteed_items:
@@ -680,6 +685,9 @@ func _build_loot() -> void:
 		return
 	for entity in entities.values():
 		if entity is RaidEntity and entity.kind == "container" and not entity.entity_id.begins_with("battery-"):
+			if entity is SearchableFurniture and entity.container_config != null:
+				containers[entity.entity_id] = entity.create_inventory(catalog.items, random)
+				continue
 			var contents := RaidInventory.new(catalog.items, 10, 6)
 			contents.add("salvage", 3)
 			containers[entity.entity_id] = contents
@@ -758,7 +766,10 @@ func interaction_owner(node: Node) -> Node:
 func interaction_prompt(identity: String) -> String:
 	var entity: Node=entities.get(identity)
 	if entity is RaidLootPickup: return "[E] Pick up "+catalog.items[entity.item_id].display_name
-	if entity is SearchableFurniture: return "[E] Search "+entity.display_name
+	if entity is SearchableFurniture:
+		if entity.locked: return "[E] Unlock " + entity.display_name + (" (MedTac keycard)" if entity.key_item == "medtac_keycard" else " (locked)")
+		var contents: RaidInventory = containers.get(identity)
+		return "[E] " + ("Search " if contents == null or not contents.searched else "Open ") + entity.display_name + (" (empty)" if contents != null and contents.searched and contents.slots.is_empty() else "")
 	if entity is RaidDoor: return "[E] Open door" if not entity.open else "[E] Close door"
 	return "[E] Interact" if entity!=null else ""
 
@@ -814,6 +825,21 @@ func request_interact(player_id: String, entity_id: String) -> bool:
 		return false
 	if participants[player_id].actor.interaction_id() != entity_id:
 		return false
+	var furniture := entities.get(entity_id) as SearchableFurniture
+	if furniture != null and furniture.locked:
+		var state: RaidParticipant = participants[player_id]
+		var card := ""
+		for carried in [state.inventory, state.pockets] + state.equipment.roots():
+			for grid in carried.all_grids():
+				if not grid.is_accessible(): continue
+				for entry in grid.slots:
+					if not furniture.key_item.is_empty() and entry.id == furniture.key_item: card = entry.uid
+		if card.is_empty():
+			notice.emit("Locked: " + furniture.display_name)
+			return false
+		var service := inventory_service(player_id)
+		if not service.submit(service.request("consume", state.owner_of(card), null, card, Vector2i(-1, -1), false, 1)).ok: return false
+		furniture.locked = false
 	participants[player_id].opened_container = entity_id
 	if entities[entity_id] is SearchableFurniture: entities[entity_id].open_furniture()
 	containers[entity_id].begin_search()
@@ -963,6 +989,8 @@ func gameplay_step() -> void:
 		else:
 			contents.searching = false
 			contents.is_open = false
+			var furniture := entities.get(container_id) as SearchableFurniture
+			if furniture != null and furniture.container_config != null: furniture.set_open(false)
 	for state: RaidParticipant in participants.values():
 		if not state.opened_container.is_empty() and not _container_reachable(state.actor.entity_id, state.opened_container):
 			state.opened_container = ""

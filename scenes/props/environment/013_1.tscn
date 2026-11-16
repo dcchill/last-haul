@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/013_1_body.res" id="1_yjh7w"]
+
+[node name="Prop013" type="Node3D" unique_id=926016059]
+metadata/catalog_id = "013"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["filled_bag", "tied_bag_neck"])
+metadata/bounds = AABB(-0.54022753, 0, -0.7341672, 1.1734889, 0.40500003, 1.409178)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=559708720]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_yjh7w")

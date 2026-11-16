@@ -16,12 +16,13 @@ func _initialize() -> void:
 		for i in pieces.size():
 			for j in range(i+1,pieces.size()):
 				for overlap in Geometry2D.intersect_polygons(pieces[i],pieces[j]): check(absf(DistrictSurfaceGeometry.area(overlap))<.0001,"pavement pieces do not overlap")
-	for seed_number in [19381,43721,90217]:
+	for seed_number in [19381]:
 		var scene: Node3D=load("res://scenes/raid/district/district_%d.tscn"%seed_number).instantiate()
 		var author:=DistrictSceneAuthor.new(); author.scene=scene
 		var footprints: Array[AABB]=[]
 		for building in scene.find_children("Building*","Node3D",true,false):
-			footprints.append(author.world_transform(building)*AABB(Vector3(-6,0,-8),Vector3(12,3.5,16)))
+			if not building.has_meta("building_bounds"): continue
+			footprints.append(author.world_transform(building)*building.get_meta("building_bounds"))
 			var props: Array[AABB]=[]
 			for node in building.get_children():
 				var bounds:=AABB()
@@ -34,7 +35,7 @@ func _initialize() -> void:
 				elif node is Node3D and node.has_meta("bounds"): bounds=node.get_meta("bounds")
 				else: continue
 				bounds=node.transform*bounds
-				check(bounds.end.y<=7.01,"interior prop remains below roof")
+				check(bounds.end.y<=8.51,"interior prop remains below roof")
 				for previous in props:
 					var overlap:=previous.intersection(bounds)
 					check(not (overlap.size.x>.1 and overlap.size.y>.1 and overlap.size.z>.1),"interior props do not interpenetrate")

@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/071_0_body.res" id="1_qodt7"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_oal2g"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_4ua3w"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rll7m"]
+height = 1.9
+radius = 0.65
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgi5y"]
+size = Vector3(0.08, 0.18, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0abou"]
+size = Vector3(0.08, 0.18, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gh3lu"]
+size = Vector3(0.08, 0.18, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a2cpj"]
+size = Vector3(0.08, 0.18, 0.08)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dq08m"]
+height = 0.65
+radius = 0.075
+
+[node name="Prop071" type="Node3D" unique_id=1553552934]
+metadata/catalog_id = "071"
+metadata/variant_index = 0.0
+metadata/variant_name = "Sealed"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "hard_cover", "hazard", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "factory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tank_shell", "tank_bands", "legs", "valve_neck", "valve_handle", "pipe", "hazard_plate"])
+metadata/bounds = AABB(-0.675, 0, -0.6775, 1.78, 2.0575, 1.3525)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1712343119]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_qodt7")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1796353139]
+collision_mask = 0
+script = ExtResource("2_oal2g")
+material = ExtResource("3_4ua3w")
+
+[node name="@CollisionShape3D@308" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1889458307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("CylinderShape3D_rll7m")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=841299007]
+collision_mask = 0
+script = ExtResource("2_oal2g")
+material = ExtResource("3_4ua3w")
+
+[node name="@CollisionShape3D@309" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2055657037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.09, -0.35)
+shape = SubResource("BoxShape3D_cgi5y")
+
+[node name="@CollisionShape3D@310" type="CollisionShape3D" parent="Collision_body_steel" unique_id=770137538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.09, 0.35)
+shape = SubResource("BoxShape3D_0abou")
+
+[node name="@CollisionShape3D@311" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1976491388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.09, -0.35)
+shape = SubResource("BoxShape3D_gh3lu")
+
+[node name="@CollisionShape3D@312" type="CollisionShape3D" parent="Collision_body_steel" unique_id=468099186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.09, 0.35)
+shape = SubResource("BoxShape3D_a2cpj")
+
+[node name="@CollisionShape3D@313" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2027634123]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0.78, 0.475, 0)
+shape = SubResource("CylinderShape3D_dq08m")

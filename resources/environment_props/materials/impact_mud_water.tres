@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_udd24"]
+
+[resource]
+script = ExtResource("1_udd24")
+id = "prop_mud_water"
+impact_color = Color(0.4, 0.3882353, 0.29411766, 1)
+resistance = 100.0
+thickness_meters = 0.06

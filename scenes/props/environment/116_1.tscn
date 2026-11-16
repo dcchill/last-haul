@@ -1,0 +1,80 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/116_1_body.res" id="1_t3rgf"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_7ilaq"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_4h5ec"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0osw"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_874cg"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3iyq8"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7haux"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h20qb"]
+size = Vector3(1.4, 0.045, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmhj2"]
+size = Vector3(1.4, 0.045, 0.45)
+
+[node name="Prop116" type="Node3D" unique_id=592448219]
+metadata/catalog_id = "116"
+metadata/variant_index = 1.0
+metadata/variant_name = "Stocked"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["security", "armory", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "back_brace", "stock_cradle", "rifle_receiver", "rifle_stock", "rifle_barrel"])
+metadata/bounds = AABB(-0.70000005, 0, -0.22500001, 1.4000001, 1.65, 0.45450002)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1540962377]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_t3rgf")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=349213495]
+collision_mask = 0
+script = ExtResource("2_7ilaq")
+material = ExtResource("3_4h5ec")
+
+[node name="@CollisionShape3D@181" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1964489223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6675, 0.825, -0.1925)
+shape = SubResource("BoxShape3D_a0osw")
+
+[node name="@CollisionShape3D@182" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1995460236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6675, 0.825, 0.1925)
+shape = SubResource("BoxShape3D_874cg")
+
+[node name="@CollisionShape3D@183" type="CollisionShape3D" parent="Collision_body_steel" unique_id=299914906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6675, 0.825, -0.1925)
+shape = SubResource("BoxShape3D_3iyq8")
+
+[node name="@CollisionShape3D@184" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1188384145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6675, 0.825, 0.1925)
+shape = SubResource("BoxShape3D_7haux")
+
+[node name="@CollisionShape3D@185" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1357420009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_h20qb")
+
+[node name="@CollisionShape3D@186" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1838789994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, 0)
+shape = SubResource("BoxShape3D_tmhj2")

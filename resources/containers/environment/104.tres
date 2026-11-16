@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ContainerDef" format=3]
+
+[ext_resource type="Texture2D" path="res://ui/container_large_no_slots.png" id="1_imupb"]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="2_h5yfo"]
+
+[resource]
+script = ExtResource("2_h5yfo")
+id = "prop_104"
+display_name = "Pharmaceutical Refrigerator"
+dimensions = Vector2i(8, 6)
+allowed_categories = PackedStringArray("medical", "item")
+prohibited_categories = PackedStringArray()
+searchable = true
+search_seconds = 2.0
+progressive_discovery = true

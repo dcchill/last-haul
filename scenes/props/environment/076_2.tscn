@@ -1,0 +1,64 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/076_2_body.res" id="1_iacg1"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_82gka"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_hhhfe"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_y5t67"]
+
+[sub_resource type="Resource" id="Resource_2t26q"]
+script = ExtResource("3_hhhfe")
+id = "prop_warning"
+impact_color = Color(0.70980394, 0.6039216, 0.32941177, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_11dbr"]
+size = Vector3(0.42, 0.42, 0.2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l1ls2"]
+points = PackedVector3Array(-0.08, 0.5, -0.06, -0.08, 0.5, 0.06, 0.08, 0.5, -0.06, 0.08, 0.5, 0.06, 0.08, 0.18, -0.06, 0.08, 0.18, 0.06, 0.24, 0.14, -0.06, 0.24, 0.14, 0.06, 0.3, 0.28, -0.06, 0.3, 0.28, 0.06, 0.32, 0.12, -0.06, 0.32, 0.12, 0.06, 0.18, 0, -0.06, 0.18, 0, 0.06, -0.04, 0.04, -0.06, -0.04, 0.04, 0.06, -0.12, 0.2, -0.06, -0.12, 0.2, 0.06)
+
+[node name="Prop076" type="Node3D" unique_id=1051921342]
+metadata/catalog_id = "076"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "ceiling",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "factory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 2.6
+}
+metadata/components = Array[String](["hoist_cable", "pulley_block", "sheaves", "crane_hook", "block_repair"])
+metadata/bounds = AABB(-0.21, 0, -0.14, 0.53, 1.6500001, 0.28)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=502758816]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_iacg1")
+
+[node name="Collision_body_warning" type="StaticBody3D" parent="." unique_id=1033216919]
+collision_mask = 0
+script = ExtResource("2_82gka")
+material = SubResource("Resource_2t26q")
+
+[node name="@CollisionShape3D@372" type="CollisionShape3D" parent="Collision_body_warning" unique_id=692038991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57, 0)
+shape = SubResource("BoxShape3D_11dbr")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1693819963]
+collision_mask = 0
+script = ExtResource("2_82gka")
+material = ExtResource("4_y5t67")
+
+[node name="@CollisionShape3D@373" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1016333567]
+shape = SubResource("ConvexPolygonShape3D_l1ls2")

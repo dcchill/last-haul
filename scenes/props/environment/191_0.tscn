@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_2qmic"]
+[ext_resource type="Resource" path="res://resources/containers/environment/191.tres" id="2_ekvg0"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_fgbjm"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/191.tres" id="4_bppvn"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/191_0_body.res" id="5_qc47c"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/191_0_panel.res" id="6_37vgo"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_b72il"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="8_3f0jl"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/191_0_contents.res" id="9_7omnt"]
+
+[sub_resource type="Resource" id="Resource_ljyc3"]
+script = ExtResource("8_3f0jl")
+id = "prop_cardboard"
+impact_color = Color(0.58431375, 0.52156866, 0.39607844, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rrvjv"]
+size = Vector3(0.585, 0.065, 0.435)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xel1q"]
+size = Vector3(0.06, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_72vnf"]
+size = Vector3(0.06, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3p6wh"]
+size = Vector3(0.55, 0.07, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w44ag"]
+size = Vector3(0.55, 0.07, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65ygb"]
+size = Vector3(0.45, 0.3, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_huf15"]
+size = Vector3(0.55, 0.36, 0.06)
+
+[node name="Prop191" type="StaticBody3D" unique_id=619827532 groups=["raid_entities"]]
+script = ExtResource("1_2qmic")
+display_name = "Food Supply Box"
+opening = "lid"
+loot_profile = "food"
+container_config = ExtResource("2_ekvg0")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0.2175)
+entity_id = "prop-191"
+kind = "container"
+material = ExtResource("3_fgbjm")
+loot_table = ExtResource("4_bppvn")
+interaction_offset = Vector3(0, 0.24750002, -0.2575)
+metadata/catalog_id = "191"
+metadata/variant_index = 0.0
+metadata/variant_name = "Cardboard"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "sealing_tape", "packed_supplies"])
+metadata/bounds = AABB(-0.2925, 0, -0.3075, 0.585, 0.49500003, 0.525)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2042205002]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_qc47c")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=538674531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0.2175)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=964721796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, -0.2175)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_37vgo")
+
+[node name="Collision_panel_cardboard" type="StaticBody3D" parent="MovingPanel" unique_id=1248666413]
+collision_mask = 0
+script = ExtResource("7_b72il")
+material = SubResource("Resource_ljyc3")
+
+[node name="@CollisionShape3D@482" type="CollisionShape3D" parent="MovingPanel/Collision_panel_cardboard" unique_id=2082790148]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2175)
+shape = SubResource("BoxShape3D_rrvjv")
+
+[node name="LootContents" type="MeshInstance3D" parent="." unique_id=852110218]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("9_7omnt")
+
+[node name="Collision_body_cardboard" type="StaticBody3D" parent="." unique_id=425297681]
+collision_mask = 0
+script = ExtResource("7_b72il")
+material = SubResource("Resource_ljyc3")
+
+[node name="@CollisionShape3D@476" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=169196558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245, 0.2, 0)
+shape = SubResource("BoxShape3D_xel1q")
+
+[node name="@CollisionShape3D@477" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=1474536542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.245, 0.2, 0)
+shape = SubResource("BoxShape3D_72vnf")
+
+[node name="@CollisionShape3D@478" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=21063568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_3p6wh")
+
+[node name="@CollisionShape3D@479" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=862489671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365, 0)
+shape = SubResource("BoxShape3D_w44ag")
+
+[node name="@CollisionShape3D@480" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=1128050675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0.175)
+shape = SubResource("BoxShape3D_65ygb")
+
+[node name="@CollisionShape3D@481" type="CollisionShape3D" parent="Collision_body_cardboard" unique_id=1052893919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.17)
+shape = SubResource("BoxShape3D_huf15")

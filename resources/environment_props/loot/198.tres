@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="LootTable" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/loot_table.gd" id="1_80pjd"]
+
+[resource]
+script = ExtResource("1_80pjd")
+rolls = Vector2i(1, 3)
+entries = Array[Dictionary]([{
+"id": "m_four",
+"max": 1.0,
+"min": 1,
+"weight": 1.0
+}, {
+"id": "pipe_pistol",
+"max": 1.0,
+"min": 1,
+"weight": 2.0
+}, {
+"id": "reflex_sight",
+"max": 1.0,
+"min": 1,
+"weight": 3.0
+}, {
+"id": "four_x_scope",
+"max": 1.0,
+"min": 1,
+"weight": 1.0
+}, {
+"id": "vertical_grip",
+"max": 1.0,
+"min": 1,
+"weight": 2.0
+}, {
+"id": "suppressor",
+"max": 1.0,
+"min": 1,
+"weight": 1.0
+}])

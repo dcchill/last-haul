@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/030_0_body.res" id="1_cdw3i"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_r76x1"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_bsgdc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_or5ei"]
+size = Vector3(0.07, 1.9, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olfw2"]
+size = Vector3(0.07, 1.9, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61udh"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jkj6q"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_omige"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5el4u"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tgsf0"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53p1a"]
+size = Vector3(0.6, 0.045, 0.08)
+
+[node name="Prop030" type="Node3D" unique_id=1042567912]
+metadata/catalog_id = "030"
+metadata/variant_index = 0.0
+metadata/variant_name = "Folded"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "traversable", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["ladder_rails", "ladder_rungs", "standoffs", "fold_latch"])
+metadata/bounds = AABB(-0.4, 0, -0.040000003, 0.8, 1.9, 0.35)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=706867954]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_cdw3i")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=320813545]
+collision_mask = 0
+script = ExtResource("2_r76x1")
+material = ExtResource("3_bsgdc")
+
+[node name="@CollisionShape3D@210" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1771564598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 0.95, 0)
+shape = SubResource("BoxShape3D_or5ei")
+
+[node name="@CollisionShape3D@211" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1308257596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, 0.95, 0)
+shape = SubResource("BoxShape3D_olfw2")
+
+[node name="@CollisionShape3D@212" type="CollisionShape3D" parent="Collision_body_steel" unique_id=930266100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("BoxShape3D_61udh")
+
+[node name="@CollisionShape3D@213" type="CollisionShape3D" parent="Collision_body_steel" unique_id=200949353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+shape = SubResource("BoxShape3D_jkj6q")
+
+[node name="@CollisionShape3D@214" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1531092205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74, 0)
+shape = SubResource("BoxShape3D_omige")
+
+[node name="@CollisionShape3D@215" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1379503552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02, 0)
+shape = SubResource("BoxShape3D_5el4u")
+
+[node name="@CollisionShape3D@216" type="CollisionShape3D" parent="Collision_body_steel" unique_id=940558547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("BoxShape3D_tgsf0")
+
+[node name="@CollisionShape3D@217" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1054993974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
+shape = SubResource("BoxShape3D_53p1a")

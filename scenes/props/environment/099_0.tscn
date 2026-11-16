@@ -1,0 +1,92 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/099_0_body.res" id="1_h1uie"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_8gi32"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_vhxt0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3u10j"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1f6te"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjlbr"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_42mrx"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m2lpi"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lbqqf"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ml2ah"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[node name="Prop099" type="Node3D" unique_id=893590293]
+metadata/catalog_id = "099"
+metadata/variant_index = 0.0
+metadata/variant_name = "Stocked"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "cart_shelves", "supply_bottles"])
+metadata/bounds = AABB(-0.3625, 0, -0.31, 0.725, 1.095, 0.62)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=770353524]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_h1uie")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=944092476]
+collision_mask = 0
+script = ExtResource("2_8gi32")
+material = ExtResource("3_vhxt0")
+
+[node name="@CollisionShape3D@93" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1500531370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.45, -0.23)
+shape = SubResource("BoxShape3D_3u10j")
+
+[node name="@CollisionShape3D@94" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1081092310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33, 0.45, 0.23)
+shape = SubResource("BoxShape3D_1f6te")
+
+[node name="@CollisionShape3D@95" type="CollisionShape3D" parent="Collision_body_steel" unique_id=121802439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.45, -0.23)
+shape = SubResource("BoxShape3D_vjlbr")
+
+[node name="@CollisionShape3D@96" type="CollisionShape3D" parent="Collision_body_steel" unique_id=826091260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33, 0.45, 0.23)
+shape = SubResource("BoxShape3D_42mrx")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1466665624]
+collision_mask = 0
+script = ExtResource("2_8gi32")
+material = ExtResource("3_vhxt0")
+
+[node name="@CollisionShape3D@97" type="CollisionShape3D" parent="Collision_body_medical" unique_id=206860505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_m2lpi")
+
+[node name="@CollisionShape3D@98" type="CollisionShape3D" parent="Collision_body_medical" unique_id=722531122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("BoxShape3D_lbqqf")
+
+[node name="@CollisionShape3D@99" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1992143219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_ml2ah")

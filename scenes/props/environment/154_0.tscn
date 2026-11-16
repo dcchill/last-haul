@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/154_0_body.res" id="1_je6yi"]
+
+[node name="Prop154" type="Node3D" unique_id=768710969]
+metadata/catalog_id = "154"
+metadata/variant_index = 0.0
+metadata/variant_name = "Dry"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["debris_fragments"])
+metadata/bounds = AABB(-0.479529, 0, -0.6229728, 1.1233525, 0.36, 1.3881786)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1898131585]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_je6yi")

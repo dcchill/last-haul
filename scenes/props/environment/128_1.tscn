@@ -1,0 +1,99 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/128_1_body.res" id="1_ra8fu"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_pb2b6"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_mh2pi"]
+
+[sub_resource type="Resource" id="Resource_tl0bn"]
+script = ExtResource("3_mh2pi")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86hid"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sneeh"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fyr4"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emi1p"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3pmb"]
+size = Vector3(0.05, 2, 0.05)
+
+[sub_resource type="Resource" id="Resource_7ilkn"]
+script = ExtResource("3_mh2pi")
+id = "prop_cloth_dark"
+impact_color = Color(0.3019608, 0.34117648, 0.29803923, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfoss"]
+size = Vector3(1.8, 0.3, 1.3)
+
+[node name="Prop128" type="Node3D" unique_id=1142041711]
+metadata/catalog_id = "128"
+metadata/variant_index = 1.0
+metadata/variant_name = "Covered"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tent_poles", "guy_rope", "ridgepole", "tarp_roof", "covered_supplies"])
+metadata/bounds = AABB(-1.5053036, 0, -1.207696, 3.0106072, 1.76, 2.415392)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1065944462]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ra8fu")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1527045107]
+collision_mask = 0
+script = ExtResource("2_pb2b6")
+material = SubResource("Resource_tl0bn")
+
+[node name="@CollisionShape3D@44" type="CollisionShape3D" parent="Collision_body_wood" unique_id=2103116864]
+transform = Transform3D(0.08304553, 0.5828471, 0.8083271, 0, 0.8111289, -0.5848674, -0.99654573, 0.04857062, 0.06736063, -0.6, 0.865, -0.95)
+shape = SubResource("BoxShape3D_86hid")
+
+[node name="@CollisionShape3D@45" type="CollisionShape3D" parent="Collision_body_wood" unique_id=850392839]
+transform = Transform3D(-0.0830455, 0.5828471, 0.8083271, 0, 0.8111289, -0.5848674, -0.99654573, -0.048570607, -0.0673606, -0.6, 0.865, 0.95)
+shape = SubResource("BoxShape3D_sneeh")
+
+[node name="@CollisionShape3D@46" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1375157278]
+transform = Transform3D(0.08304553, -0.5828471, -0.8083271, 0, 0.8111289, -0.5848674, 0.99654573, 0.04857062, 0.06736063, 0.6, 0.865, -0.95)
+shape = SubResource("BoxShape3D_3fyr4")
+
+[node name="@CollisionShape3D@47" type="CollisionShape3D" parent="Collision_body_wood" unique_id=183628234]
+transform = Transform3D(-0.0830455, -0.5828471, -0.8083271, 0, 0.8111289, -0.5848674, 0.99654573, -0.048570607, -0.0673606, 0.6, 0.865, 0.95)
+shape = SubResource("BoxShape3D_emi1p")
+
+[node name="@CollisionShape3D@48" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1384393997]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.7, 0)
+shape = SubResource("BoxShape3D_f3pmb")
+
+[node name="Collision_body_cloth_dark" type="StaticBody3D" parent="." unique_id=150134736]
+collision_mask = 0
+script = ExtResource("2_pb2b6")
+material = SubResource("Resource_7ilkn")
+
+[node name="@CollisionShape3D@49" type="CollisionShape3D" parent="Collision_body_cloth_dark" unique_id=1392546321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_rfoss")

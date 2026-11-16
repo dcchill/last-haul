@@ -1,0 +1,76 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/110_1_body.res" id="1_k1kiv"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_rgafk"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_afj8v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b02oy"]
+size = Vector3(0.7, 0.12, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2g6u0"]
+size = Vector3(0.22, 1.4, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23wu3"]
+size = Vector3(0.6, 0.06, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l22jr"]
+size = Vector3(0.7, 0.52, 0.1)
+
+[node name="Prop110" type="Node3D" unique_id=1182972002]
+metadata/catalog_id = "110"
+metadata/variant_index = 1.0
+metadata/variant_name = "Offline"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.25,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["terminal_base", "terminal_pedestal", "display_housing", "display", "power_button", "input_deck", "emergency_switch"])
+metadata/bounds = AABB(-0.35, 0, -0.36213964, 0.7, 1.81, 0.66213965)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=265451593]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_k1kiv")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=146841631]
+collision_mask = 0
+script = ExtResource("2_rgafk")
+material = ExtResource("3_afj8v")
+
+[node name="@CollisionShape3D@268" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2112484693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+shape = SubResource("BoxShape3D_b02oy")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=144099652]
+collision_mask = 0
+script = ExtResource("2_rgafk")
+material = ExtResource("3_afj8v")
+
+[node name="@CollisionShape3D@269" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1075419580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0.08)
+shape = SubResource("BoxShape3D_2g6u0")
+
+[node name="@CollisionShape3D@271" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1155229962]
+transform = Transform3D(1, 0, 0, 0, 0.9838437, -0.17902958, 0, 0.17902958, 0.9838437, 0, 1.15, -0.16)
+shape = SubResource("BoxShape3D_23wu3")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=2090008331]
+collision_mask = 0
+script = ExtResource("2_rgafk")
+material = ExtResource("3_afj8v")
+
+[node name="@CollisionShape3D@270" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1201434280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+shape = SubResource("BoxShape3D_l22jr")

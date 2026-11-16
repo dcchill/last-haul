@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/120_1_body.res" id="1_f4vgi"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_tuoxx"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_8jvv0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iemme"]
+size = Vector3(0.65, 0.2, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kse4d"]
+height = 0.48
+radius = 0.28
+
+[node name="Prop120" type="Node3D" unique_id=1482610196]
+metadata/catalog_id = "120"
+metadata/variant_index = 1.0
+metadata/variant_name = "Broken"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["searchlight_base", "searchlight_yoke", "searchlight_barrel", "searchlight_lens"])
+metadata/bounds = AABB(-0.33, 0, -0.265, 0.66, 0.83000004, 0.515)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=832379532]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_f4vgi")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=231913849]
+collision_mask = 0
+script = ExtResource("2_tuoxx")
+material = ExtResource("3_8jvv0")
+
+[node name="@CollisionShape3D@304" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1018879830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_iemme")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=166689131]
+collision_mask = 0
+script = ExtResource("2_tuoxx")
+material = ExtResource("3_8jvv0")
+
+[node name="@CollisionShape3D@305" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1948621037]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.55, 0)
+shape = SubResource("CylinderShape3D_kse4d")

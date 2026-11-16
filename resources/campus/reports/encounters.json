@@ -1,0 +1,362 @@
+[
+	{
+		"at": [
+			33.5,
+			0.100000001490116,
+			-26.0
+		],
+		"building": "lab1",
+		"floor": 1,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			15.5,
+			0.100000001490116,
+			-36.0
+		],
+		"building": "lab1",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			40.5,
+			4.29999971389771,
+			-63.0
+		],
+		"building": "lab1",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			33.5,
+			4.29999971389771,
+			-28.0
+		],
+		"building": "lab1",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			61.5,
+			4.29999971389771,
+			-15.5
+		],
+		"building": "lab1",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			61.5,
+			8.5,
+			-63.0
+		],
+		"building": "lab1",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			33.5,
+			8.5,
+			-24.0
+		],
+		"building": "lab1",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			30.5,
+			8.5,
+			-9.0
+		],
+		"building": "lab1",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			47.5,
+			8.5,
+			-11.0
+		],
+		"building": "lab1",
+		"floor": 3,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			69.5,
+			12.7000007629395,
+			-50.0
+		],
+		"building": "lab1",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			72.5,
+			12.7000007629395,
+			-42.0
+		],
+		"building": "lab1",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			24.5,
+			12.7000007629395,
+			-63.0
+		],
+		"building": "lab1",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			46.5,
+			12.7000007629395,
+			-63.0
+		],
+		"building": "lab1",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			13.0,
+			0.100000001490116,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 1,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			38.0,
+			0.100000001490116,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 1,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			41.0,
+			4.29999971389771,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			20.5,
+			4.29999971389771,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			77.0,
+			4.29999971389771,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 2,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			37.0,
+			8.5,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			27.0,
+			8.5,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			58.0,
+			8.5,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 3,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			47.5,
+			8.5,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 3,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			25.0,
+			12.7000007629395,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			36.0,
+			12.7000007629395,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			55.0,
+			12.7000007629395,
+			57.5999984741211
+		],
+		"building": "lab2",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			10.0,
+			12.7000007629395,
+			47.5999984741211
+		],
+		"building": "lab2",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			70.0,
+			12.7000007629395,
+			33.5999984741211
+		],
+		"building": "lab2",
+		"floor": 4,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			-85.5,
+			4.29999971389771,
+			-10.0
+		],
+		"building": "distribution_wing",
+		"floor": 2,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			-29.0,
+			0.100000001490116,
+			-63.0
+		],
+		"building": "distribution",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			-32.0,
+			0.100000001490116,
+			-33.0
+		],
+		"building": "distribution",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			-83.0,
+			0.100000001490116,
+			-62.0
+		],
+		"building": "distribution",
+		"floor": 1,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			-58.0,
+			0.100000001490116,
+			12.6000003814697
+		],
+		"building": "exterior",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			-55.0,
+			0.100000001490116,
+			45.0
+		],
+		"building": "exterior",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			1.5,
+			0.100000001490116,
+			38.5
+		],
+		"building": "exterior",
+		"floor": 1,
+		"kind": "scav"
+	},
+	{
+		"at": [
+			-72.0,
+			0.100000001490116,
+			60.0
+		],
+		"building": "exterior",
+		"floor": 1,
+		"kind": "infected"
+	},
+	{
+		"at": [
+			-30.0,
+			0.100000001490116,
+			-10.0
+		],
+		"building": "distribution",
+		"floor": 1,
+		"kind": "scav"
+	}
+]

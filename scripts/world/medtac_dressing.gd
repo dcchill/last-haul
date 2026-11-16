@@ -5,7 +5,19 @@ var configured := false
 var layout_seed := -1
 var selected_routes: Array[String] = []
 
+## Decorative props flagged "nonsolid" keep collision off. The flag lives on the
+## saved instance root because overrides inside instanced props are not saved.
+static func apply_nonsolid(root: Node) -> int:
+	var count := 0
+	for node in root.find_children("*", "Node3D", true, false):
+		if not node.get_meta("nonsolid", false): continue
+		for body in node.find_children("*", "CollisionObject3D", true, false):
+			if body is RaidEntity or body is RaidDoor: continue
+			body.collision_layer = 0; count += 1
+	return count
+
 func configure(seed_value: int) -> void:
+	apply_nonsolid(get_parent())
 	if configured and layout_seed==seed_value: return
 	layout_seed=seed_value
 	configured=true

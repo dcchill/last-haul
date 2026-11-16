@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_ca8a3"]
+
+[resource]
+script = ExtResource("1_ca8a3")
+id = "prop_light"
+impact_color = Color(0.8392157, 0.8392157, 0.7137255, 1)
+resistance = 100.0
+thickness_meters = 0.06

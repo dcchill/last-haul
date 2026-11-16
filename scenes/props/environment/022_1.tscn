@@ -1,0 +1,116 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_1_body.res" id="1_hw756"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_1_panel.res" id="2_6rl6l"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_iqp64"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_fv1n2"]
+
+[sub_resource type="Resource" id="Resource_dkaob"]
+script = ExtResource("4_fv1n2")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sdmp1"]
+size = Vector3(0.92, 2.03, 0.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7donp"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iv70u"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68lkc"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_16rx6"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qfyip"]
+size = Vector3(1.05, 0.16, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wl4q6"]
+size = Vector3(1.05, 0.16, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0k71b"]
+size = Vector3(1.05, 0.16, 0.08)
+
+[node name="Prop022" type="Node3D" unique_id=1050531958]
+metadata/catalog_id = "022"
+metadata/variant_index = 1.0
+metadata/variant_name = "Boarded"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["uprights", "crossrails", "moving_panel", "handle_mount", "handle", "lock_plate", "plank_seams", "door_braces"])
+metadata/bounds = AABB(-0.5625, 0, -0.16, 1.125, 2.15, 0.22)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1653652249]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_hw756")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1045713981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.06, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=414807832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, -0.06, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_6rl6l")
+
+[node name="Collision_panel_wood" type="StaticBody3D" parent="MovingPanel" unique_id=1859847585]
+collision_mask = 0
+script = ExtResource("3_iqp64")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@34" type="CollisionShape3D" parent="MovingPanel/Collision_panel_wood" unique_id=1946030868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, 1.0150001, 0)
+shape = SubResource("BoxShape3D_sdmp1")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1883232525]
+collision_mask = 0
+script = ExtResource("3_iqp64")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@30" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1613024477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_7donp")
+
+[node name="@CollisionShape3D@31" type="CollisionShape3D" parent="Collision_body_wood" unique_id=520107488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_iv70u")
+
+[node name="@CollisionShape3D@32" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1045350861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_68lkc")
+
+[node name="@CollisionShape3D@33" type="CollisionShape3D" parent="Collision_body_wood" unique_id=30423861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11, 0)
+shape = SubResource("BoxShape3D_16rx6")
+
+[node name="@CollisionShape3D@35" type="CollisionShape3D" parent="Collision_body_wood" unique_id=795230333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.12)
+shape = SubResource("BoxShape3D_qfyip")
+
+[node name="@CollisionShape3D@36" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1353145631]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -0.12)
+shape = SubResource("BoxShape3D_wl4q6")
+
+[node name="@CollisionShape3D@37" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1899255878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.12)
+shape = SubResource("BoxShape3D_0k71b")

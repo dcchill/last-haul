@@ -3,7 +3,7 @@ extends Node
 var catalog := Catalog.new()
 var profile: ProfileStore
 var settings := SettingsStore.new()
-var selected_map: RaidMapDefinition = preload("res://resources/maps/medtac_quarantine_district.tres")
+var selected_map: RaidMapDefinition = load("res://resources/maps/medtac_campus.tres")
 # Explicit override for compact regression scenes; normal play follows map data.
 var normal_raid_scene: PackedScene
 var raid: RaidAuthority

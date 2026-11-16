@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/012_0_body.res" id="1_d8dt1"]
+
+[node name="Prop012" type="Node3D" unique_id=2029151406]
+metadata/catalog_id = "012"
+metadata/variant_index = 0.0
+metadata/variant_name = "Household"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["debris_fragments", "refuse"])
+metadata/bounds = AABB(-0.53186303, 0, -0.6229728, 1.1756866, 0.36, 1.3881786)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=543484797]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_d8dt1")

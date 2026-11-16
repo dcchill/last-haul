@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/014_1_body.res" id="1_6ta0r"]
+
+[node name="Prop014" type="Node3D" unique_id=1506167281]
+metadata/catalog_id = "014"
+metadata/variant_index = 1.0
+metadata/variant_name = "Concrete"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["debris_fragments"])
+metadata/bounds = AABB(-0.479529, 0, -0.6229728, 1.1233525, 0.36, 1.3881786)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1276169917]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_6ta0r")

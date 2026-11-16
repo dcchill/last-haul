@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/045_1_body.res" id="1_j83kv"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_mns12"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_q68tu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_prrt4"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lb88h"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jrn2n"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypiij"]
+size = Vector3(0.065, 1.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_se8dg"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w50w7"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3wad"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w4e5m"]
+size = Vector3(1.2, 0.045, 0.4)
+
+[node name="Prop045" type="Node3D" unique_id=907981781]
+metadata/catalog_id = "045"
+metadata/variant_index = 1.0
+metadata/variant_name = "Stocked"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "partial_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "stored_cartons", "back_brace"])
+metadata/bounds = AABB(-0.6000001, 0, -0.20000002, 1.2000002, 1.8, 0.40650004)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1368646826]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_j83kv")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1875486678]
+collision_mask = 0
+script = ExtResource("2_mns12")
+material = ExtResource("3_q68tu")
+
+[node name="@CollisionShape3D@173" type="CollisionShape3D" parent="Collision_body_paint" unique_id=2012353899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5675, 0.9, -0.1675)
+shape = SubResource("BoxShape3D_prrt4")
+
+[node name="@CollisionShape3D@174" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1175307259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5675, 0.9, 0.1675)
+shape = SubResource("BoxShape3D_lb88h")
+
+[node name="@CollisionShape3D@175" type="CollisionShape3D" parent="Collision_body_paint" unique_id=614013753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5675, 0.9, -0.1675)
+shape = SubResource("BoxShape3D_jrn2n")
+
+[node name="@CollisionShape3D@176" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1663255715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5675, 0.9, 0.1675)
+shape = SubResource("BoxShape3D_ypiij")
+
+[node name="@CollisionShape3D@177" type="CollisionShape3D" parent="Collision_body_paint" unique_id=734018341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_se8dg")
+
+[node name="@CollisionShape3D@178" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1840320962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6533333, 0)
+shape = SubResource("BoxShape3D_w50w7")
+
+[node name="@CollisionShape3D@179" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1955362828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1866666, 0)
+shape = SubResource("BoxShape3D_b3wad")
+
+[node name="@CollisionShape3D@180" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1741895550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72, 0)
+shape = SubResource("BoxShape3D_w4e5m")

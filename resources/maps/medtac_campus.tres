@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaidMapDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/raid_map_definition.gd" id="1_lrhhy"]
+
+[resource]
+script = ExtResource("1_lrhhy")
+id = "medtac_campus"
+display_name = "MedTac Research Campus"
+scene_path = "res://scenes/raid/campus/medtac_campus.tscn"
+infection_seconds = 1500.0
+active_loose_loot = 85
+enemy_count = 36
+infected_count = 26

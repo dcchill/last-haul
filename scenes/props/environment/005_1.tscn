@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/005_1_body.res" id="1_22hg6"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_oi5pa"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_pjir5"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_htoye"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4514m"]
+size = Vector3(0.45, 0.2, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ox27"]
+size = Vector3(0.12, 5.5, 0.12)
+
+[node name="Prop005" type="Node3D" unique_id=1040642238]
+metadata/catalog_id = "005"
+metadata/variant_index = 1.0
+metadata/variant_name = "Flickering"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["footing", "pole", "lamp_arm", "lamp_housing", "diffuser", "failed_lamp_segment"])
+metadata/bounds = AABB(-0.225, 0, -0.24000001, 1.525, 5.58, 0.465)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=343190098]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_22hg6")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=474525232]
+collision_mask = 0
+script = ExtResource("2_oi5pa")
+material = ExtResource("3_pjir5")
+
+[node name="@CollisionShape3D@74" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1739214009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_4514m")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=261500894]
+collision_mask = 0
+script = ExtResource("2_oi5pa")
+material = ExtResource("4_htoye")
+
+[node name="@CollisionShape3D@75" type="CollisionShape3D" parent="Collision_body_paint" unique_id=611188734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75, 0)
+shape = SubResource("BoxShape3D_8ox27")

@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/098_2_body.res" id="1_72eia"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_augbc"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_tgcws"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m2jdd"]
+height = 1.82
+radius = 0.02
+
+[node name="Prop098" type="Node3D" unique_id=418581308]
+metadata/catalog_id = "098"
+metadata/variant_index = 2.0
+metadata/variant_name = "Bent"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["iv_base", "pipe", "bag_hooks"])
+metadata/bounds = AABB(-0.5888026, 0, -0.30149668, 0.8757607, 1.9453157, 0.60299337)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1612468067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016497761, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_72eia")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1002862519]
+collision_mask = 0
+script = ExtResource("2_augbc")
+material = ExtResource("3_tgcws")
+
+[node name="@CollisionShape3D@92" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1414635423]
+transform = Transform3D(0.9838437, -0.17902958, 0, 0.17902958, 0.9838437, 0, 0, 0, 1, -0.17723928, 0.9905031, 0)
+shape = SubResource("CylinderShape3D_m2jdd")

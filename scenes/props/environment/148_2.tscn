@@ -1,0 +1,58 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/148_2_body.res" id="1_ef0y7"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_7vtun"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_pav7n"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_doswb"]
+points = PackedVector3Array(-0.8, 0, -0.7, -0.8, 0, 0.7, 0.8, 0, -0.7, 0.8, 0, 0.7, 0.92, 0.2, -0.7, 0.92, 0.2, 0.7, 0.4, 1.2, -0.7, 0.4, 1.2, 0.7, -0.4, 1.4, -0.7, -0.4, 1.4, 0.7, -1, 0.3, -0.7, -1, 0.3, 0.7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_olln1"]
+points = PackedVector3Array(-0.8, 0, -0.7, -0.8, 0, 0.7, 0.8, 0, -0.7, 0.8, 0, 0.7, 0.92, 0.2, -0.7, 0.92, 0.2, 0.7, 0.4, 1.2, -0.7, 0.4, 1.2, 0.7, -0.4, 1.4, -0.7, -0.4, 1.4, 0.7, -1, 0.3, -0.7, -1, 0.3, 0.7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2aqwx"]
+points = PackedVector3Array(-0.8, 0, -0.7, -0.8, 0, 0.7, 0.8, 0, -0.7, 0.8, 0, 0.7, 0.92, 0.2, -0.7, 0.92, 0.2, 0.7, 0.4, 1.2, -0.7, 0.4, 1.2, 0.7, -0.4, 1.4, -0.7, -0.4, 1.4, 0.7, -1, 0.3, -0.7, -1, 0.3, 0.7)
+
+[node name="Prop148" type="Node3D" unique_id=2009591197]
+metadata/catalog_id = "148"
+metadata/variant_index = 2.0
+metadata/variant_name = "Large"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["fractured_rock"])
+metadata/bounds = AABB(-1, 0, -0.7, 2.42, 1.4, 1.7)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1680980190]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ef0y7")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=93607752]
+collision_mask = 0
+script = ExtResource("2_7vtun")
+material = ExtResource("3_pav7n")
+
+[node name="@CollisionShape3D@100" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=853246056]
+shape = SubResource("ConvexPolygonShape3D_doswb")
+
+[node name="@CollisionShape3D@101" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=442422486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.15)
+shape = SubResource("ConvexPolygonShape3D_olln1")
+
+[node name="@CollisionShape3D@102" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=873699119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.3)
+shape = SubResource("ConvexPolygonShape3D_2aqwx")

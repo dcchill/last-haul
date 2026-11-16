@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_3d8yf"]
+[ext_resource type="Resource" path="res://resources/containers/environment/192.tres" id="2_bovor"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_rey4t"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/192.tres" id="4_ei61d"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/192_1_body.res" id="5_s3bsi"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/192_1_panel.res" id="6_fdkxq"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_8bnjl"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/192_1_contents.res" id="8_bttwh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6bef"]
+size = Vector3(0.8475, 0.065, 0.485)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mjdw3"]
+size = Vector3(0.06, 0.54, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yg413"]
+size = Vector3(0.06, 0.54, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6kdvd"]
+size = Vector3(0.8125, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gqyvy"]
+size = Vector3(0.8125, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_khyvt"]
+size = Vector3(0.7125, 0.44, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ungam"]
+size = Vector3(0.8125, 0.486, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ktifa"]
+size = Vector3(0.08, 0.378, 0.315)
+
+[node name="Prop192" type="StaticBody3D" unique_id=1477496164 groups=["raid_entities"]]
+script = ExtResource("1_3d8yf")
+display_name = "Refrigerated Food Cooler"
+opening = "lid"
+loot_profile = "medical"
+container_config = ExtResource("2_bovor")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0.2425)
+entity_id = "prop-192"
+kind = "container"
+material = ExtResource("3_rey4t")
+loot_table = ExtResource("4_ei61d")
+interaction_offset = Vector3(0.043750018, 0.31750003, -0.28250003)
+metadata/catalog_id = "192"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "cooler_compressor", "cooler_vents", "packed_supplies"])
+metadata/bounds = AABB(-0.42375, 0, -0.33250004, 0.93500006, 0.63500005, 0.57500005)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1791003086]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_s3bsi")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1078083741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56, 0.2425)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=27151007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.56, -0.2425)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_fdkxq")
+
+[node name="Collision_panel_medical" type="StaticBody3D" parent="MovingPanel" unique_id=1699569908]
+collision_mask = 0
+script = ExtResource("7_8bnjl")
+material = ExtResource("3_rey4t")
+
+[node name="@CollisionShape3D@518" type="CollisionShape3D" parent="MovingPanel/Collision_panel_medical" unique_id=38263891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2425)
+shape = SubResource("BoxShape3D_o6bef")
+
+[node name="LootContents" type="MeshInstance3D" parent="." unique_id=54831810]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("8_bttwh")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1893018300]
+collision_mask = 0
+script = ExtResource("7_8bnjl")
+material = ExtResource("3_rey4t")
+
+[node name="@CollisionShape3D@512" type="CollisionShape3D" parent="Collision_body_medical" unique_id=717041569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37625, 0.27, 0)
+shape = SubResource("BoxShape3D_mjdw3")
+
+[node name="@CollisionShape3D@513" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1062792019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37625, 0.27, 0)
+shape = SubResource("BoxShape3D_yg413")
+
+[node name="@CollisionShape3D@514" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1952931845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_6kdvd")
+
+[node name="@CollisionShape3D@515" type="CollisionShape3D" parent="Collision_body_medical" unique_id=216266908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505, 0)
+shape = SubResource("BoxShape3D_gqyvy")
+
+[node name="@CollisionShape3D@516" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1913589676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0.2)
+shape = SubResource("BoxShape3D_khyvt")
+
+[node name="@CollisionShape3D@517" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1458552732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, -0.195)
+shape = SubResource("BoxShape3D_ungam")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=483172414]
+collision_mask = 0
+script = ExtResource("7_8bnjl")
+material = ExtResource("3_rey4t")
+
+[node name="@CollisionShape3D@519" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1338351978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44625, 0.27, 0)
+shape = SubResource("BoxShape3D_ktifa")

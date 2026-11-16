@@ -1,0 +1,60 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/056_1_body.res" id="1_gfrc4"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_71jcm"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_sm5n4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wmib"]
+size = Vector3(0.28, 0.36, 0.42)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u8d8y"]
+height = 0.2
+radius = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4cxoe"]
+size = Vector3(0.46, 0.55, 0.2)
+
+[node name="Prop056" type="Node3D" unique_id=957612799]
+metadata/catalog_id = "056"
+metadata/variant_index = 1.0
+metadata/variant_name = "Dirty"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["bathroom", "washroom"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["toilet_plinth", "bowl", "bowl_opening", "cistern", "cistern_lid", "flush_lever", "limescale"])
+metadata/bounds = AABB(-0.25, 0, -0.32999998, 0.5, 0.97999996, 0.695)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1395673144]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_gfrc4")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=405578611]
+collision_mask = 0
+script = ExtResource("2_71jcm")
+material = ExtResource("3_sm5n4")
+
+[node name="@CollisionShape3D@454" type="CollisionShape3D" parent="Collision_body_medical" unique_id=318972068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0.05)
+shape = SubResource("BoxShape3D_0wmib")
+
+[node name="@CollisionShape3D@455" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1983310630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, -0.08)
+shape = SubResource("CylinderShape3D_u8d8y")
+
+[node name="@CollisionShape3D@456" type="CollisionShape3D" parent="Collision_body_medical" unique_id=46202467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.25)
+shape = SubResource("BoxShape3D_4cxoe")

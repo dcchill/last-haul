@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/079_0_body.res" id="1_1cwyf"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_ugxs1"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_rd1jn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqxsh"]
+size = Vector3(0.065, 2.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0a6g6"]
+size = Vector3(0.065, 2.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_krd27"]
+size = Vector3(0.065, 2.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vqkey"]
+size = Vector3(0.065, 2.8, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8v45"]
+size = Vector3(3.2, 0.045, 1.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x2t3m"]
+size = Vector3(3.2, 0.045, 1.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_20wqu"]
+size = Vector3(3.2, 0.045, 1.1)
+
+[node name="Prop079" type="Node3D" unique_id=832999326]
+metadata/catalog_id = "079"
+metadata/variant_index = 0.0
+metadata/variant_name = "Empty"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative", "partial_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "factory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "back_brace"])
+metadata/bounds = AABB(-1.6000001, 0, -0.5500001, 3.2000003, 2.8, 1.1000001)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=47183645]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_1cwyf")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=832768109]
+collision_mask = 0
+script = ExtResource("2_ugxs1")
+material = ExtResource("3_rd1jn")
+
+[node name="@CollisionShape3D@401" type="CollisionShape3D" parent="Collision_body_steel" unique_id=499096053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5675, 1.4, -0.5175)
+shape = SubResource("BoxShape3D_dqxsh")
+
+[node name="@CollisionShape3D@402" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1304316684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5675, 1.4, 0.5175)
+shape = SubResource("BoxShape3D_0a6g6")
+
+[node name="@CollisionShape3D@403" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1689240899]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5675, 1.4, -0.5175)
+shape = SubResource("BoxShape3D_krd27")
+
+[node name="@CollisionShape3D@404" type="CollisionShape3D" parent="Collision_body_steel" unique_id=604054006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5675, 1.4, 0.5175)
+shape = SubResource("BoxShape3D_vqkey")
+
+[node name="@CollisionShape3D@405" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1016067186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_j8v45")
+
+[node name="@CollisionShape3D@406" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2109546798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42, 0)
+shape = SubResource("BoxShape3D_x2t3m")
+
+[node name="@CollisionShape3D@407" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1731655416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72, 0)
+shape = SubResource("BoxShape3D_20wqu")

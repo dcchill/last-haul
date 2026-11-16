@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/151_2_body.res" id="1_dm3ks"]
+
+[node name="Prop151" type="Node3D" unique_id=1927346025]
+metadata/catalog_id = "151"
+metadata/variant_index = 2.0
+metadata/variant_name = "Waterlogged"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["mud_strata", "standing_water"])
+metadata/bounds = AABB(-0.65, 0, -0.52, 1.5999999, 0.3405, 1.04)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=339236828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0005000001, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_dm3ks")

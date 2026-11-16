@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+resource_name = "oil"
+transparency = 1
+albedo_color = Color(0.20392157, 0.24313726, 0.2509804, 0.72)
+metallic = 0.25
+roughness = 0.14

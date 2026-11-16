@@ -1,5 +1,6 @@
 extends Camera3D
 
+@export var preview_title := "LAST HAUL / 64 WORLD PROPS"
 var home_transform: Transform3D
 
 func _ready() -> void:
@@ -7,7 +8,7 @@ func _ready() -> void:
 	var hud := CanvasLayer.new()
 	var label := Label.new()
 	label.position = Vector2(24, 20)
-	label.text = "LAST HAUL / 64 WORLD PROPS\nHold RMB + WASD to fly · Q/E down/up · Shift faster · Home overview · Esc release"
+	label.text = preview_title + "\nHold RMB + WASD to fly · Q/E down/up · Shift faster · Home overview · Esc release"
 	label.add_theme_color_override("font_shadow_color", Color.BLACK)
 	label.add_theme_constant_override("shadow_offset_x", 2)
 	label.add_theme_constant_override("shadow_offset_y", 2)

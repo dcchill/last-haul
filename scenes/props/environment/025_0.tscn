@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/025_0_body.res" id="1_oktta"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_3g0ti"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_vobxp"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_1wxd1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x65ar"]
+size = Vector3(0.075, 1.3, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qqljp"]
+size = Vector3(0.075, 1.3, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bve5u"]
+size = Vector3(1.4, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l4v1o"]
+size = Vector3(1.4, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7krde"]
+size = Vector3(0.05, 1.3, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86308"]
+size = Vector3(1.4, 0.05, 0.05)
+
+[sub_resource type="Resource" id="Resource_usugy"]
+script = ExtResource("4_1wxd1")
+id = "prop_glass"
+impact_color = Color(0.13725491, 0.24313726, 0.2627451, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4fiyl"]
+size = Vector3(1.28, 1.18, 0.035)
+
+[node name="Prop025" type="Node3D" unique_id=954923475]
+metadata/catalog_id = "025"
+metadata/variant_index = 0.0
+metadata/variant_name = "Intact"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["uprights", "crossrails", "glazing", "mullion", "transom"])
+metadata/bounds = AABB(-0.7375, 0, -0.060000006, 1.475, 1.3, 0.120000005)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1416983148]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_oktta")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1537963861]
+collision_mask = 0
+script = ExtResource("2_3g0ti")
+material = ExtResource("3_vobxp")
+
+[node name="@CollisionShape3D@152" type="CollisionShape3D" parent="Collision_body_steel" unique_id=769269873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.65, 0)
+shape = SubResource("BoxShape3D_x65ar")
+
+[node name="@CollisionShape3D@153" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1196337814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.65, 0)
+shape = SubResource("BoxShape3D_qqljp")
+
+[node name="@CollisionShape3D@154" type="CollisionShape3D" parent="Collision_body_steel" unique_id=230978615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_bve5u")
+
+[node name="@CollisionShape3D@155" type="CollisionShape3D" parent="Collision_body_steel" unique_id=135974787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26, 0)
+shape = SubResource("BoxShape3D_l4v1o")
+
+[node name="@CollisionShape3D@157" type="CollisionShape3D" parent="Collision_body_steel" unique_id=301604473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.035)
+shape = SubResource("BoxShape3D_7krde")
+
+[node name="@CollisionShape3D@158" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1078070307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.035)
+shape = SubResource("BoxShape3D_86308")
+
+[node name="Collision_body_glass" type="StaticBody3D" parent="." unique_id=261168312]
+collision_mask = 0
+script = ExtResource("2_3g0ti")
+material = SubResource("Resource_usugy")
+
+[node name="@CollisionShape3D@156" type="CollisionShape3D" parent="Collision_body_glass" unique_id=2126140712]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("BoxShape3D_4fiyl")

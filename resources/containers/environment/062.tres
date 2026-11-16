@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ContainerDef" format=3]
+
+[ext_resource type="Texture2D" path="res://ui/container_large_no_slots.png" id="1_kg7gq"]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="2_lljkg"]
+
+[resource]
+script = ExtResource("2_lljkg")
+id = "prop_062"
+display_name = "Tool Trolley"
+dimensions = Vector2i(8, 5)
+allowed_categories = PackedStringArray()
+prohibited_categories = PackedStringArray()
+searchable = true
+search_seconds = 2.0
+progressive_discovery = true

@@ -30,6 +30,8 @@ func damage(amount: float) -> void:
 	health = maxf(0,health-amount)
 	if health > 0: return
 	broken = true
+	if get_parent().has_meta("wall_length"):
+		get_tree().call_group("campus_breaches","mark_dirty",get_parent())
 	for node in find_children("*", "", true, false):
 		if node is CollisionShape3D: node.set_deferred("disabled",true)
 		if node is Light3D: node.visible=false

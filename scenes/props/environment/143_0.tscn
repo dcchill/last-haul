@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/143_0_body.res" id="1_l7jtc"]
+
+[node name="Prop143" type="Node3D" unique_id=1624361062]
+metadata/catalog_id = "143"
+metadata/variant_index = 0.0
+metadata/variant_name = "Sparse"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["bush_stems", "leaf_mass"])
+metadata/bounds = AABB(-0.63875, 0, -0.42108813, 1.33875, 0.6532172, 0.49217623)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1063864557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0016085804, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_l7jtc")

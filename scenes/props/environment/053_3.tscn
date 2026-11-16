@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_i0aqj"]
+[ext_resource type="Resource" path="res://resources/containers/environment/053.tres" id="2_a3hq8"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_uilsp"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/053.tres" id="4_v6gsr"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_3_body.res" id="5_d6cop"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_3_panel.res" id="6_a4av8"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_sw444"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lh3h4"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_un0sl"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqsc6"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h07tx"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qkmf"]
+size = Vector3(0.7, 1.65, 0.05)
+
+[node name="Prop053" type="StaticBody3D" unique_id=1854381886 groups=["raid_entities"]]
+script = ExtResource("1_i0aqj")
+display_name = "Refrigerator"
+loot_profile = "food"
+container_config = ExtResource("2_a3hq8")
+starts_empty = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.06, -0.36)
+entity_id = "prop-053"
+kind = "container"
+material = ExtResource("3_uilsp")
+loot_table = ExtResource("4_v6gsr")
+interaction_offset = Vector3(0, 0.875, -0.39499998)
+metadata/catalog_id = "053"
+metadata/variant_index = 3.0
+metadata/variant_name = "Stripped"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "handle_mount", "hinges", "freezer_seal", "condenser_coil"])
+metadata/bounds = AABB(-0.4, 0, -0.445, 0.8, 1.75, 0.8325)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=947436367]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_d6cop")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1968602046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.06, -0.36)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1271243420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.06, 0.36)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_a4av8")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=2125616141]
+collision_mask = 0
+script = ExtResource("7_sw444")
+material = ExtResource("3_uilsp")
+
+[node name="@CollisionShape3D@423" type="CollisionShape3D" parent="Collision_body_medical" unique_id=2076628629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_lh3h4")
+
+[node name="@CollisionShape3D@424" type="CollisionShape3D" parent="Collision_body_medical" unique_id=885980935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_un0sl")
+
+[node name="@CollisionShape3D@425" type="CollisionShape3D" parent="Collision_body_medical" unique_id=646263259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_dqsc6")
+
+[node name="@CollisionShape3D@426" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1290006904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.715, 0)
+shape = SubResource("BoxShape3D_h07tx")
+
+[node name="@CollisionShape3D@427" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1113720718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0.335)
+shape = SubResource("BoxShape3D_5qkmf")

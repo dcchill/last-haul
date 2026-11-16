@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/019_2_body.res" id="1_ulknl"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_mvq05"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_n8h8g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tep6c"]
+size = Vector3(0.07, 0.25, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8q2n6"]
+size = Vector3(0.07, 0.25, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_todyd"]
+size = Vector3(0.07, 0.25, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kc8d4"]
+size = Vector3(0.07, 0.25, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a1mwv"]
+size = Vector3(0.58, 0.04, 0.8)
+
+[node name="Prop019" type="Node3D" unique_id=1807883325]
+metadata/catalog_id = "019"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "basket_floor", "basket_wire", "basket_rim", "brace", "push_handle"])
+metadata/bounds = AABB(-0.3724263, 0, -0.52, 0.7448526, 1.025, 1.15)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=491933132]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ulknl")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1899851130]
+collision_mask = 0
+script = ExtResource("2_mvq05")
+material = ExtResource("3_n8h8g")
+
+[node name="@CollisionShape3D@261" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1940808880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0.125, -0.44)
+shape = SubResource("BoxShape3D_tep6c")
+
+[node name="@CollisionShape3D@262" type="CollisionShape3D" parent="Collision_body_steel" unique_id=153500259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0.125, 0.44)
+shape = SubResource("BoxShape3D_8q2n6")
+
+[node name="@CollisionShape3D@263" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1023803028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0.125, -0.44)
+shape = SubResource("BoxShape3D_todyd")
+
+[node name="@CollisionShape3D@264" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1081510912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29, 0.125, 0.44)
+shape = SubResource("BoxShape3D_kc8d4")
+
+[node name="@CollisionShape3D@265" type="CollisionShape3D" parent="Collision_body_steel" unique_id=291182619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_a1mwv")

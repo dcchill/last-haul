@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/017_1_body.res" id="1_5f18c"]
+
+[node name="Prop017" type="Node3D" unique_id=200037621]
+metadata/catalog_id = "017"
+metadata/variant_index = 1.0
+metadata/variant_name = "Ajar"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["rim", "opening", "cover", "cover_ribs"])
+metadata/bounds = AABB(-0.53, 0, -0.53, 1.29, 0.14750001, 1.06)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1362802773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2351742e-08, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_5f18c")

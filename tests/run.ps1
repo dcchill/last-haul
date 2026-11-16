@@ -32,7 +32,9 @@ if (Get-Command python -ErrorAction SilentlyContinue) {
 if ($LASTEXITCODE -ne 0) { throw "Armory snapshot verification failed" }
 Invoke-GodotCheck -Arguments @("--headless", "--editor", "--import", "--quit")
 Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/run_tests.gd")
-Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/district_tests.gd")
+# The retired Quarantine District tests (district_tests, campus_tests, campus_breach_tests)
+# remain in tests/ but no longer gate the build; the MedTac Research Campus replaces it.
+Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/medtac_campus_tests.gd")
 Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/district_surface_tests.gd")
 Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/asset_surface_tests.gd")
 Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/district_import_tests.gd")
@@ -52,6 +54,7 @@ Invoke-GodotCheck -Arguments @("--headless", "--script", "res://tests/persistenc
 Invoke-GodotCheck -Arguments @("--headless", "--export-pack", "Windows Desktop", ".godot/last-haul-armory.pck")
 Invoke-GodotCheck -PackOnly -Arguments @("--headless", "--main-pack", "$projectPath/.godot/last-haul-armory.pck", "--script", "$projectPath/tests/export_smoke.gd")
 if ($Capture) {
+    Invoke-GodotCheck -Arguments @("--resolution", "1280x720", "--script", "res://tests/medtac_campus_review.gd")
     Invoke-GodotCheck -Arguments @("--resolution", "1280x720", "--script", "res://tests/medtac_tests.gd", "--", "--capture")
     Invoke-GodotCheck -Arguments @("--resolution", "1280x720", "--script", "res://tests/player_body_tests.gd", "--", "--capture")
     Invoke-GodotCheck -Arguments @("--resolution", "1280x720", "--script", "res://tests/world_props_tests.gd", "--", "--capture", "--benchmark")

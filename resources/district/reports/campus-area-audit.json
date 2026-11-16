@@ -1,0 +1,2504 @@
+[
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-35.5,
+			0.0,
+			-43.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.5, 0.1, 0.0), (0.5, 0.1, 7.0), (8.5, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"packing_table",
+			"roll_cage"
+		],
+		"functions": [
+			"Specimen receiving and sorting"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Specimen receiving and sorting",
+		"purpose": "receiving",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-35.5,
+			0.0,
+			-24.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.5, 0.1, -0.5), (0.5, 0.1, -11.5), (8.5, 0.1, -0.5)]",
+		"equipment": [
+			"storage_table",
+			"clean_workbench",
+			"sample_rack",
+			"biosafety_cabinet",
+			"eyewash"
+		],
+		"functions": [
+			"Sample preparation"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 4
+		},
+		"name": "Sample preparation",
+		"purpose": "preparation",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-35.5,
+			0.0,
+			3.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.5, 0.1, 0.0), (8.5, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"clean_workbench",
+			"centrifuge",
+			"clean_workbench",
+			"analyzer"
+		],
+		"functions": [
+			"Central analysis"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 4
+		},
+		"name": "Central analysis",
+		"purpose": "analysis",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-35.5,
+			0.0,
+			19.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.5, 0.1, 0.5), (8.5, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Research office and records"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Research office and records",
+		"purpose": "records",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-15.0,
+			0.0,
+			-43.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.0, 0.1, 0.0), (0.0, 0.1, 7.0), (-8.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"ultra_freezer",
+			"lab_fridge"
+		],
+		"functions": [
+			"cold storage",
+			"reagent store"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Cold and freezer storage",
+		"purpose": "cold",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-15.0,
+			0.0,
+			-24.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.0, 0.1, 0.5), (0.0, 0.1, -11.5), (-8.0, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"clean_workbench",
+			"microscope",
+			"clean_workbench",
+			"analyzer"
+		],
+		"functions": [
+			"microscopy",
+			"instrumentation"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 4
+		},
+		"name": "Microscopy",
+		"purpose": "microscopy",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-15.0,
+			0.0,
+			-1.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.0, 0.1, 0.0), (0.0, 0.1, 6.0), (-8.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"supply_cart"
+		],
+		"functions": [
+			"Clean supplies"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Clean supplies",
+		"purpose": "store",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-15.0,
+			0.0,
+			11.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.0, 0.1, -0.5), (0.0, 0.1, -6.5), (-8.0, 0.1, -0.5)]",
+		"equipment": [
+			"storage_table",
+			"autoclave",
+			"wash_station",
+			"shower"
+		],
+		"functions": [
+			"wash/sterilization",
+			"decontamination"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Wash and sterilization",
+		"purpose": "sterile",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-15.0,
+			0.0,
+			22.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.0, 0.1, 0.0), (-8.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"instrument_bench"
+		],
+		"functions": [
+			"Equipment service"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Equipment service",
+		"purpose": "workshop",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			15.0,
+			0.0,
+			-42.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.0, 0.1, 0.0), (8.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"break_table",
+			"shower"
+		],
+		"functions": [
+			"Staff changing"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Staff changing",
+		"purpose": "staff",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			15.0,
+			0.0,
+			-23.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.0, 0.1, -0.5), (8.0, 0.1, -0.5)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"monitor_cart",
+			"wash_station",
+			"privacy_screen"
+		],
+		"functions": [
+			"Procedure room"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Procedure room",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			15.0,
+			0.0,
+			2.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.0, 0.1, 0.5), (0.0, 0.1, 9.5), (8.0, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"recovery_bed",
+			"recovery_bed",
+			"monitor_cart",
+			"privacy_screen"
+		],
+		"functions": [
+			"Nursing and monitored recovery"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Nursing and monitored recovery",
+		"purpose": "recovery",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			15.0,
+			0.0,
+			19.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(8.0, 0.1, 0.0), (0.0, 0.1, -7.0), (8.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"exam_chair"
+		],
+		"functions": [
+			"Consent and consultation"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Consent and consultation",
+		"purpose": "office",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			35.5,
+			0.0,
+			-44.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.5, 0.1, 0.0), (-8.5, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"supply_cart"
+		],
+		"functions": [
+			"Clinical supplies"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Clinical supplies",
+		"purpose": "medical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			35.5,
+			0.0,
+			-25.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.5, 0.1, 0.5), (-8.5, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"wash_station",
+			"clean_workbench",
+			"sample_rack",
+			"privacy_screen"
+		],
+		"functions": [
+			"participant examination",
+			"sample collection"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Participant examination",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			35.5,
+			0.0,
+			2.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.5, 0.1, -0.5), (-8.5, 0.1, -0.5)]",
+		"equipment": [
+			"storage_table",
+			"storage_table",
+			"nurse_desk",
+			"exam_chair",
+			"exam_chair"
+		],
+		"functions": [
+			"Reception and screening"
+		],
+		"loot": {
+			"loose_sockets": 4,
+			"searchable": 2
+		},
+		"name": "Reception and screening",
+		"purpose": "waiting",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			35.5,
+			0.0,
+			19.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-8.5, 0.1, 0.0), (-8.5, 0.1, 0.0)]",
+		"equipment": [
+			"toilet",
+			"toilet",
+			"wash_station"
+		],
+		"functions": [
+			"Labs toilets"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 0
+		},
+		"name": "Labs toilets",
+		"purpose": "toilet",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-31.0,
+			-4.19999980926514,
+			-43.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-13.0, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Trial control"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Trial control",
+		"purpose": "control",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-31.0,
+			-4.19999980926514,
+			-27.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-13.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"monitor_cart"
+		],
+		"functions": [
+			"Trial observation"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Trial observation",
+		"purpose": "control",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-2.0,
+			-4.19999980926514,
+			-35.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 16.5)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"recovery_bed",
+			"monitor_cart",
+			"iv_stand"
+		],
+		"functions": [
+			"Human trials"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 4
+		},
+		"name": "Human trials",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			29.0,
+			-4.19999980926514,
+			-43.5
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(15.0, 0.1, 0.5)]",
+		"equipment": [
+			"storage_table",
+			"recovery_bed",
+			"monitor_cart",
+			"privacy_screen"
+		],
+		"functions": [
+			"Failed containment"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Failed containment",
+		"purpose": "containment",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			21.5,
+			-4.19999980926514,
+			-27.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-0.5, 0.1, 8.0)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"wash_station"
+		],
+		"functions": [
+			"Isolation"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Isolation",
+		"purpose": "isolation",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			36.5,
+			-4.19999980926514,
+			-27.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(7.5, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"ultra_freezer"
+		],
+		"functions": [
+			"Specimen vault"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Specimen vault",
+		"purpose": "cold",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-34.5,
+			-4.19999980926514,
+			-7.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-0.5, 0.1, -6.0)]",
+		"equipment": [
+			"storage_table",
+			"supply_cart"
+		],
+		"functions": [
+			"Basement medical store"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Basement medical store",
+		"purpose": "medical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-16.5,
+			-4.19999980926514,
+			-7.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-0.5, 0.1, -6.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Basement security control"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Basement security control",
+		"purpose": "security",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			0.0,
+			-4.19999980926514,
+			-7.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -6.0)]",
+		"equipment": [
+			"storage_table",
+			"air_handler"
+		],
+		"functions": [
+			"Ventilation and service"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Ventilation and service",
+		"purpose": "utility",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			15.0,
+			-4.19999980926514,
+			-7.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 6.0)]",
+		"equipment": [
+			"storage_table",
+			"trash_bin"
+		],
+		"functions": [
+			"Waste holding"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Waste holding",
+		"purpose": "utility",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			33.0,
+			-4.19999980926514,
+			-7.0
+		],
+		"building": "research",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -6.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Cure transfer archive"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Cure transfer archive",
+		"purpose": "records",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			0.0,
+			0.0,
+			111.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -9.0), (0.0, 0.1, 9.0), (-16.0, 0.1, 5.0)]",
+		"equipment": [
+			"storage_table",
+			"nurse_desk",
+			"exam_chair",
+			"exam_chair",
+			"exam_chair"
+		],
+		"functions": [
+			"Public waiting and reception"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Public waiting and reception",
+		"purpose": "waiting",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-27.0,
+			0.0,
+			107.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -5.0), (0.0, 0.1, -5.0)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"privacy_screen"
+		],
+		"functions": [
+			"Triage"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Triage",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-27.0,
+			0.0,
+			116.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(11.0, 0.1, 0.0), (11.0, 0.1, 0.0)]",
+		"equipment": [
+			"toilet",
+			"toilet",
+			"wash_station"
+		],
+		"functions": [
+			"Public toilets"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 0
+		},
+		"name": "Public toilets",
+		"purpose": "toilet",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			27.0,
+			0.0,
+			111.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -9.0), (0.0, 0.1, -9.0)]",
+		"equipment": [
+			"storage_table",
+			"exam_bed",
+			"wash_station",
+			"monitor_cart"
+		],
+		"functions": [
+			"Treatment"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Treatment",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-31.0,
+			0.0,
+			89.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"exam_bed",
+			"wash_station"
+		],
+		"functions": [
+			"Consultation and exam one"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Consultation and exam one",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-17.0,
+			0.0,
+			89.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"exam_bed",
+			"wash_station"
+		],
+		"functions": [
+			"Consultation and exam two"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Consultation and exam two",
+		"purpose": "clinical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			0.0,
+			0.0,
+			89.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (0.0, 0.1, -9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"storage_table",
+			"nurse_desk"
+		],
+		"functions": [
+			"dispensary",
+			"records/reception support"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 4
+		},
+		"name": "Dispensary",
+		"purpose": "medical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			24.0,
+			0.0,
+			89.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"storage_table",
+			"break_table",
+			"toilet",
+			"wash_station"
+		],
+		"functions": [
+			"Outpatient staff room"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Outpatient staff room",
+		"purpose": "staff",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-2.5,
+			4.19999980926514,
+			100.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(2.5, 0.1, 0.0), (-17.5, 0.1, -16.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Administration open office"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 3
+		},
+		"name": "Administration open office",
+		"purpose": "office",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			25.0,
+			4.19999980926514,
+			88.5
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(1.0, 0.1, 8.5), (1.0, 0.1, 8.5)]",
+		"equipment": [
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Manager office"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Manager office",
+		"purpose": "office",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			25.0,
+			4.19999980926514,
+			111.5
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(1.0, 0.1, -8.5), (1.0, 0.1, -8.5)]",
+		"equipment": [
+			"break_table",
+			"exam_chair",
+			"exam_chair"
+		],
+		"functions": [
+			"Meeting room"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Meeting room",
+		"purpose": "meeting",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-27.5,
+			4.19999980926514,
+			84.0
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(7.5, 0.1, 0.0), (7.5, 0.1, 0.0)]",
+		"equipment": [
+			"server_rack"
+		],
+		"functions": [
+			"IT closet"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "IT closet",
+		"purpose": "control",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-27.5,
+			4.19999980926514,
+			92.5
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-1.5, 0.1, 4.5), (-1.5, 0.1, 4.5)]",
+		"equipment": [
+			"storage_table",
+			"office_desk"
+		],
+		"functions": [
+			"Administration archive"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Administration archive",
+		"purpose": "records",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-27.5,
+			4.19999980926514,
+			111.5
+		],
+		"building": "outpatient",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-1.5, 0.1, -8.5), (-1.5, 0.1, -8.5)]",
+		"equipment": [
+			"storage_table",
+			"break_table",
+			"wash_station",
+			"toilet"
+		],
+		"functions": [
+			"Staff kitchenette and toilet"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 1
+		},
+		"name": "Staff kitchenette and toilet",
+		"purpose": "staff",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			102.0,
+			0.0,
+			23.0
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 10.0)]",
+		"equipment": [
+			"storage_table",
+			"packing_table",
+			"roll_cage",
+			"pallet_jack"
+		],
+		"functions": [
+			"Receiving inspection"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Receiving inspection",
+		"purpose": "receiving",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			110.0,
+			0.0,
+			-3.0
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -2.0), (8.0, 0.1, 16.0)]",
+		"equipment": [
+			"storage_table",
+			"storage_table"
+		],
+		"functions": [
+			"Bulk rack hall"
+		],
+		"loot": {
+			"loose_sockets": 4,
+			"searchable": 2
+		},
+		"name": "Bulk rack hall",
+		"purpose": "store",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			119.0,
+			0.0,
+			23.0
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-1.0, 0.1, -10.0), (-1.0, 0.1, -10.0)]",
+		"equipment": [
+			"storage_table",
+			"ultra_freezer",
+			"lab_fridge"
+		],
+		"functions": [
+			"Cold chain storage"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Cold chain storage",
+		"purpose": "cold",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			102.0,
+			0.0,
+			-25.0
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 6.0)]",
+		"equipment": [
+			"storage_table",
+			"packing_table",
+			"roll_cage"
+		],
+		"functions": [
+			"Packing and dispatch"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Packing and dispatch",
+		"purpose": "packing",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			102.0,
+			0.0,
+			-36.5
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(-9.0, 0.1, -0.5), (-9.0, 0.1, -0.5)]",
+		"equipment": [
+			"break_table",
+			"toilet"
+		],
+		"functions": [
+			"Logistics staff and toilets"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 2
+		},
+		"name": "Logistics staff and toilets",
+		"purpose": "staff",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			120.0,
+			0.0,
+			-36.5
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(7.0, 0.1, -0.5), (7.0, 0.1, -0.5)]",
+		"equipment": [
+			"storage_table"
+		],
+		"functions": [
+			"Secure equipment cage"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Secure equipment cage",
+		"purpose": "security",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			120.0,
+			0.0,
+			-25.0
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(7.0, 0.1, 0.0), (7.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"instrument_bench"
+		],
+		"functions": [
+			"Logistics workshop"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Logistics workshop",
+		"purpose": "workshop",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			110.0,
+			4.19999980926514,
+			-33.5
+		],
+		"building": "logistics",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 7.5), (0.0, 0.1, 7.5)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"office_desk",
+			"terminal",
+			"office_chair"
+		],
+		"functions": [
+			"Dispatch mezzanine office"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 2
+		},
+		"name": "Dispatch mezzanine office",
+		"purpose": "office",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-101.0,
+			0.0,
+			-14.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 11.0), (0.0, 0.1, 11.0), (-7.0, 0.1, -5.0)]",
+		"equipment": [
+			"storage_table",
+			"office_desk",
+			"terminal",
+			"office_chair",
+			"monitor_cart"
+		],
+		"functions": [
+			"Security desk and control"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 1
+		},
+		"name": "Security desk and control",
+		"purpose": "control",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-118.0,
+			0.0,
+			-19.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(10.0, 0.1, 0.0), (10.0, 0.1, 0.0)]",
+		"equipment": [
+			"security_locker"
+		],
+		"functions": [
+			"Security equipment store"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Security equipment store",
+		"purpose": "security",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-118.0,
+			0.0,
+			-8.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 5.0), (0.0, 0.1, 5.0)]",
+		"equipment": [
+			"toilet",
+			"wash_station"
+		],
+		"functions": [
+			"Facilities changing and toilet"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Facilities changing and toilet",
+		"purpose": "staff",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-107.0,
+			0.0,
+			9.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -8.0), (0.0, 0.1, 8.0), (0.0, 0.1, -8.0)]",
+		"equipment": [
+			"storage_table",
+			"instrument_bench",
+			"work_cart"
+		],
+		"functions": [
+			"Maintenance workshop"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 1
+		},
+		"name": "Maintenance workshop",
+		"purpose": "workshop",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-124.0,
+			0.0,
+			5.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, -4.0), (0.0, 0.1, -4.0)]",
+		"equipment": [
+			"trash_bin"
+		],
+		"functions": [
+			"Janitor store"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Janitor store",
+		"purpose": "utility",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-122.0,
+			0.0,
+			26.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"electrical_panel"
+		],
+		"functions": [
+			"Electrical switchgear"
+		],
+		"loot": {
+			"loose_sockets": 0,
+			"searchable": 1
+		},
+		"name": "Electrical switchgear",
+		"purpose": "electrical",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-110.0,
+			0.0,
+			26.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(0.0, 0.1, 9.0), (3.0, 0.1, -9.0), (0.0, 0.1, 9.0)]",
+		"equipment": [
+			"storage_table",
+			"generator"
+		],
+		"functions": [
+			"Generator plant"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 1
+		},
+		"name": "Generator plant",
+		"purpose": "generator",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "physical doors and departmental circulation",
+		"at": [
+			-99.0,
+			0.0,
+			26.0
+		],
+		"building": "facilities",
+		"corrected": "shared walls; purpose-sized spaces; explicit workflow; editable static architecture",
+		"encounter": "optional purpose-specific search / alternate departmental routes",
+		"entrances": "[(5.0, 0.1, 0.0), (5.0, 0.1, 0.0)]",
+		"equipment": [
+			"storage_table",
+			"water_pump"
+		],
+		"functions": [
+			"Water and pump room"
+		],
+		"loot": {
+			"loose_sockets": 2,
+			"searchable": 1
+		},
+		"name": "Water and pump room",
+		"purpose": "pump",
+		"service_access": "adjoining departmental circulation"
+	},
+	{
+		"adjoining": "all four buildings",
+		"at": [
+			0.0,
+			1.60000002384186,
+			62.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "cross-campus travel",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "curbs, drainage, benches",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Inner campus circuit",
+		"purpose": "walking and alternate approaches",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "perimeter and yards",
+		"at": [
+			0.0,
+			1.60000002384186,
+			-130.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "longer bypass",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "road signs, wrecks, utility poles",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Outer service circuit",
+		"purpose": "freight and emergency access",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "outpatient and pedestrian circuit",
+		"at": [
+			-88.0,
+			1.60000002384186,
+			100.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "low-value salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "parking markings, abandoned cars",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Visitor parking",
+		"purpose": "public arrival",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "logistics and east road",
+		"at": [
+			113.0,
+			1.60000002384186,
+			54.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "scavenger approach",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "dock markings, vehicle barriers",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Loading apron",
+		"purpose": "truck turning and receiving",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "facilities and west road",
+		"at": [
+			-112.0,
+			1.60000002384186,
+			51.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "technical salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "fuel bund, fenced waste enclosure",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "West service yard",
+		"purpose": "maintenance and separated fuel/waste",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "outer service circuit",
+		"at": [
+			0.0,
+			1.60000002384186,
+			-160.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "protected approach",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "woodland and boundary wall",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "North perimeter",
+		"purpose": "boundary and insertion travel",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "freight road",
+		"at": [
+			160.0,
+			1.60000002384186,
+			0.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "protected approach",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "woodland, service gates",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "East perimeter",
+		"purpose": "boundary and extraction travel",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "visitor access",
+		"at": [
+			0.0,
+			1.60000002384186,
+			160.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "protected approach",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "woodland, evacuation markers",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "South perimeter",
+		"purpose": "boundary and extraction travel",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "maintenance road",
+		"at": [
+			-160.0,
+			1.60000002384186,
+			0.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "protected approach",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "woodland, utility poles",
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "West perimeter",
+		"purpose": "boundary and insertion travel",
+		"service_access": "maintenance via the adjoining circulation"
+	},
+	{
+		"adjoining": "research",
+		"at": [
+			-25.0,
+			1.60000002384186,
+			-48.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-25.0,
+			1.70000004768372,
+			-48.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Research service spine",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-25.0,
+			1.70000004768372,
+			24.0
+		]
+	},
+	{
+		"adjoining": "research",
+		"at": [
+			25.0,
+			1.60000002384186,
+			-48.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			25.0,
+			1.70000004768372,
+			-48.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Clinical staff spine",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			25.0,
+			1.70000004768372,
+			24.0
+		]
+	},
+	{
+		"adjoining": "research",
+		"at": [
+			-37.0,
+			1.60000002384186,
+			-10.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-37.0,
+			1.70000004768372,
+			-10.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Central connector",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			37.0,
+			1.70000004768372,
+			-10.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			-49.0,
+			1.0,
+			-3.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "credential entry and free emergency egress",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			-49.0,
+			1.64999997615814,
+			-3.0
+		],
+		"eye_reverse": [
+			-49.0,
+			-2.55000019073486,
+			-17.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "BasementStairWest",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-49.0,
+			-2.55000019073486,
+			-17.0
+		],
+		"target_reverse": [
+			-49.0,
+			1.64999997615814,
+			-3.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			49.0,
+			1.0,
+			5.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "credential entry and free emergency egress",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			49.0,
+			1.64999997615814,
+			5.0
+		],
+		"eye_reverse": [
+			49.0,
+			-2.55000019073486,
+			-9.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "BasementStairEast",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			49.0,
+			-2.55000019073486,
+			-9.0
+		],
+		"target_reverse": [
+			49.0,
+			1.64999997615814,
+			5.0
+		]
+	},
+	{
+		"adjoining": "research",
+		"at": [
+			-53.0,
+			-2.59999990463257,
+			-20.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-53.0,
+			-2.5,
+			-20.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Basement containment loop",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-53.0,
+			-2.5,
+			-20.0
+		]
+	},
+	{
+		"adjoining": "research",
+		"at": [
+			-43.0,
+			-2.59999990463257,
+			-16.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-43.0,
+			-2.5,
+			-16.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Basement clean distribution",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			43.0,
+			-2.5,
+			-16.0
+		]
+	},
+	{
+		"adjoining": "outpatient",
+		"at": [
+			-37.0,
+			1.60000002384186,
+			100.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-37.0,
+			1.70000004768372,
+			100.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Outpatient public circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			37.0,
+			1.70000004768372,
+			100.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			-40.0,
+			1.0,
+			107.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			-40.0,
+			1.64999997615814,
+			107.0
+		],
+		"eye_reverse": [
+			-40.0,
+			5.84999990463257,
+			93.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "AdministrationStairWest",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-40.0,
+			5.84999990463257,
+			93.0
+		],
+		"target_reverse": [
+			-40.0,
+			1.64999997615814,
+			107.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			40.0,
+			1.0,
+			107.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			40.0,
+			1.64999997615814,
+			107.0
+		],
+		"eye_reverse": [
+			40.0,
+			5.84999990463257,
+			93.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "AdministrationStairEast",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			40.0,
+			5.84999990463257,
+			93.0
+		],
+		"target_reverse": [
+			40.0,
+			1.64999997615814,
+			107.0
+		]
+	},
+	{
+		"adjoining": "outpatient",
+		"at": [
+			-43.0,
+			5.79999971389771,
+			100.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-43.0,
+			5.89999961853027,
+			100.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Administration shared circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			43.0,
+			5.89999961853027,
+			100.0
+		]
+	},
+	{
+		"adjoining": "logistics",
+		"at": [
+			109.0,
+			1.60000002384186,
+			31.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			109.0,
+			1.70000004768372,
+			31.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Warehouse vehicle aisle",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			109.0,
+			1.70000004768372,
+			-15.0
+		]
+	},
+	{
+		"adjoining": "logistics",
+		"at": [
+			86.5,
+			1.60000002384186,
+			25.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			86.5,
+			1.70000004768372,
+			25.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Warehouse perimeter staff access",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			133.5,
+			1.70000004768372,
+			25.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			89.0,
+			1.0,
+			-8.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			89.0,
+			1.64999997615814,
+			-8.0
+		],
+		"eye_reverse": [
+			89.0,
+			5.84999990463257,
+			-22.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "DispatchStairWest",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			89.0,
+			5.84999990463257,
+			-22.0
+		],
+		"target_reverse": [
+			89.0,
+			1.64999997615814,
+			-8.0
+		]
+	},
+	{
+		"adjoining": "floor corridors",
+		"at": [
+			131.0,
+			1.0,
+			-8.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "no mandatory combat bottleneck",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "treads, rails, emergency cable",
+		"eye": [
+			131.0,
+			1.64999997615814,
+			-8.0
+		],
+		"eye_reverse": [
+			131.0,
+			5.84999990463257,
+			-22.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "DispatchStairEast",
+		"purpose": "vertical circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			131.0,
+			5.84999990463257,
+			-22.0
+		],
+		"target_reverse": [
+			131.0,
+			1.64999997615814,
+			-8.0
+		]
+	},
+	{
+		"adjoining": "logistics",
+		"at": [
+			89.0,
+			5.79999971389771,
+			-23.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			89.0,
+			5.89999961853027,
+			-23.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Dispatch mezzanine egress",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			131.0,
+			5.89999961853027,
+			-23.0
+		]
+	},
+	{
+		"adjoining": "facilities",
+		"at": [
+			-127.0,
+			1.60000002384186,
+			-1.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate departmental access",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear floor, doors and structural frame",
+		"eye": [
+			-127.0,
+			1.70000004768372,
+			-1.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "Security and maintenance circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-92.0,
+			1.70000004768372,
+			33.0
+		]
+	},
+	{
+		"adjoining": "departmental service edge",
+		"at": [
+			-39.0,
+			1.60000002384186,
+			21.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "optional salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "exposed slab edges, damp and supported rubble",
+		"eye": [
+			-36.0,
+			1.60000002384186,
+			24.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "research roof failure",
+		"purpose": "water ingress and supported roof collapse",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-39.0,
+			3.79999995231628,
+			21.0
+		]
+	},
+	{
+		"adjoining": "departmental service edge",
+		"at": [
+			-33.0,
+			5.79999971389771,
+			92.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "optional salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "exposed slab edges, damp and supported rubble",
+		"eye": [
+			-30.0,
+			5.79999971389771,
+			95.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "outpatient roof failure",
+		"purpose": "water ingress and supported roof collapse",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-33.0,
+			8.0,
+			92.0
+		]
+	},
+	{
+		"adjoining": "departmental service edge",
+		"at": [
+			120.0,
+			1.60000002384186,
+			0.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "optional salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "exposed slab edges, damp and supported rubble",
+		"eye": [
+			123.0,
+			1.60000002384186,
+			3.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "logistics roof failure",
+		"purpose": "water ingress and supported roof collapse",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			120.0,
+			3.79999995231628,
+			0.0
+		]
+	},
+	{
+		"adjoining": "departmental service edge",
+		"at": [
+			-126.0,
+			1.60000002384186,
+			5.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "optional salvage",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "exposed slab edges, damp and supported rubble",
+		"eye": [
+			-123.0,
+			1.60000002384186,
+			8.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "facilities roof failure",
+		"purpose": "water ingress and supported roof collapse",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-126.0,
+			3.79999995231628,
+			5.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			44.0,
+			1.64999997615814,
+			-35.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			44.0,
+			1.64999997615814,
+			-35.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "research circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			44.0,
+			1.64999997615814,
+			-5.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			0.0,
+			1.64999997615814,
+			100.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			0.0,
+			1.64999997615814,
+			100.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "outpatient circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			32.0,
+			1.64999997615814,
+			100.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			110.0,
+			1.64999997615814,
+			16.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			110.0,
+			1.64999997615814,
+			16.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "logistics circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			110.0,
+			1.64999997615814,
+			-18.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			-110.0,
+			1.64999997615814,
+			5.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			-110.0,
+			1.64999997615814,
+			5.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "facilities circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			-110.0,
+			1.64999997615814,
+			25.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			0.0,
+			5.84999990463257,
+			100.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			0.0,
+			5.84999990463257,
+			100.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "administration upper circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			32.0,
+			5.84999990463257,
+			100.0
+		]
+	},
+	{
+		"adjoining": "room doors and exterior exits",
+		"at": [
+			110.0,
+			5.84999990463257,
+			-24.0
+		],
+		"corrected": "reserved walking lanes; supported props; separate pedestrian and vehicle space",
+		"encounter": "alternate exits",
+		"entrances": "pedestrian/service approaches",
+		"equipment": "clear corridors, structural frame",
+		"eye": [
+			110.0,
+			5.84999990463257,
+			-24.0
+		],
+		"loot": "none; storage is inside the adjoining departments",
+		"name": "dispatch upper circulation",
+		"purpose": "department circulation",
+		"service_access": "maintenance via the adjoining circulation",
+		"target": [
+			129.0,
+			5.84999990463257,
+			-24.0
+		]
+	}
+]

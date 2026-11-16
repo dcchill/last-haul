@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/121_2_body.res" id="1_mkb2g"]
+
+[node name="Prop121" type="Node3D" unique_id=221658637]
+metadata/catalog_id = "121"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "hazard"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["razor_coil", "razor_barbs", "loose_wire"])
+metadata/bounds = AABB(-1.245, 0, -0.36129192, 2.8502674, 0.7283389, 0.72258383)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1512444162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02166111, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_mkb2g")

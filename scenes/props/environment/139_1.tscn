@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/139_1_body.res" id="1_jq0ek"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_yvf46"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_r5aoh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qicxk"]
+size = Vector3(0.6, 0.6, 0.35)
+
+[node name="Prop139" type="Node3D" unique_id=1460983447]
+metadata/catalog_id = "139"
+metadata/variant_index = 1.0
+metadata/variant_name = "Electric"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "hazard", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["heater_case", "heater_elements", "element_guard"])
+metadata/bounds = AABB(-0.3, 0, -0.2375, 0.6, 0.6, 0.4125)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=293124732]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_jq0ek")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=2063945411]
+collision_mask = 0
+script = ExtResource("2_yvf46")
+material = ExtResource("3_r5aoh")
+
+[node name="@CollisionShape3D@254" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1618676862]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_qicxk")

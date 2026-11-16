@@ -1,0 +1,136 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_ajiwb"]
+[ext_resource type="Resource" path="res://resources/containers/environment/177.tres" id="2_j7k7q"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_jc5s6"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/177.tres" id="4_annw2"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/177_1_body.res" id="5_mnpxv"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/177_1_panel.res" id="6_e751c"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_4lotq"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/177_1_contents.res" id="8_milk5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2e0po"]
+size = Vector3(0.685, 0.065, 0.485)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pcs8l"]
+size = Vector3(0.06, 0.38, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tdlay"]
+size = Vector3(0.06, 0.38, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5roy0"]
+size = Vector3(0.65, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68x1h"]
+size = Vector3(0.65, 0.07, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_17as7"]
+size = Vector3(0.55, 0.28, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cphvq"]
+size = Vector3(0.65, 0.342, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owaxh"]
+size = Vector3(0.08, 0.266, 0.315)
+
+[node name="Prop177" type="StaticBody3D" unique_id=1252741742 groups=["raid_entities"]]
+script = ExtResource("1_ajiwb")
+display_name = "Pharmaceutical Storage Case"
+opening = "lid"
+loot_profile = "medical"
+container_config = ExtResource("2_j7k7q")
+key_item = "medtac_keycard"
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.2425)
+entity_id = "prop-177"
+kind = "container"
+material = ExtResource("3_jc5s6")
+loot_table = ExtResource("4_annw2")
+interaction_offset = Vector3(0.043750018, 0.23750001, -0.2825)
+metadata/catalog_id = "177"
+metadata/variant_index = 1.0
+metadata/variant_name = "Refrigerated"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["laboratory", "cold_storage", "research"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "cooler_compressor", "cooler_vents", "medical_vials"])
+metadata/bounds = AABB(-0.3425, 0, -0.3325, 0.77250004, 0.47500002, 0.57500005)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=239983993]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_mnpxv")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=794919383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.2425)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=2133874938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -0.2425)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_e751c")
+
+[node name="Collision_panel_medical" type="StaticBody3D" parent="MovingPanel" unique_id=1745081173]
+collision_mask = 0
+script = ExtResource("7_4lotq")
+material = ExtResource("3_jc5s6")
+
+[node name="@CollisionShape3D@165" type="CollisionShape3D" parent="MovingPanel/Collision_panel_medical" unique_id=534040592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2425)
+shape = SubResource("BoxShape3D_2e0po")
+
+[node name="LootContents" type="MeshInstance3D" parent="." unique_id=1259328297]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("8_milk5")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1049869075]
+collision_mask = 0
+script = ExtResource("7_4lotq")
+material = ExtResource("3_jc5s6")
+
+[node name="@CollisionShape3D@159" type="CollisionShape3D" parent="Collision_body_medical" unique_id=367838509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.295, 0.19, 0)
+shape = SubResource("BoxShape3D_pcs8l")
+
+[node name="@CollisionShape3D@160" type="CollisionShape3D" parent="Collision_body_medical" unique_id=284194975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.295, 0.19, 0)
+shape = SubResource("BoxShape3D_tdlay")
+
+[node name="@CollisionShape3D@161" type="CollisionShape3D" parent="Collision_body_medical" unique_id=367012473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_5roy0")
+
+[node name="@CollisionShape3D@162" type="CollisionShape3D" parent="Collision_body_medical" unique_id=524660244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.345, 0)
+shape = SubResource("BoxShape3D_68x1h")
+
+[node name="@CollisionShape3D@163" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1625176774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, 0.2)
+shape = SubResource("BoxShape3D_17as7")
+
+[node name="@CollisionShape3D@164" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1649478083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, -0.195)
+shape = SubResource("BoxShape3D_cphvq")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=246313787]
+collision_mask = 0
+script = ExtResource("7_4lotq")
+material = ExtResource("3_jc5s6")
+
+[node name="@CollisionShape3D@166" type="CollisionShape3D" parent="Collision_body_steel" unique_id=685792225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365, 0.19, 0)
+shape = SubResource("BoxShape3D_owaxh")

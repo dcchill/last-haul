@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/130_1_body.res" id="1_bm5un"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_06812"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_0prin"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kb67k"]
+height = 0.64
+radius = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m6so5"]
+size = Vector3(0.7, 0.06, 0.6)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mxf1o"]
+height = 0.5
+radius = 0.16
+
+[node name="Prop130" type="Node3D" unique_id=1210617329]
+metadata/catalog_id = "130"
+metadata/variant_index = 1.0
+metadata/variant_name = "Gas-Fired"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["stove_barrel", "firebox_opening", "cooking_plate", "pipe", "cooking_pot", "gas_bottle"])
+metadata/bounds = AABB(-0.35, 0, -0.31750003, 1.01, 1.8000001, 0.61750007)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1714798087]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_bm5un")
+
+[node name="Collision_body_rust" type="StaticBody3D" parent="." unique_id=804195561]
+collision_mask = 0
+script = ExtResource("2_06812")
+material = ExtResource("3_0prin")
+
+[node name="@CollisionShape3D@89" type="CollisionShape3D" parent="Collision_body_rust" unique_id=1386134377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0)
+shape = SubResource("CylinderShape3D_kb67k")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=534348409]
+collision_mask = 0
+script = ExtResource("2_06812")
+material = ExtResource("3_0prin")
+
+[node name="@CollisionShape3D@90" type="CollisionShape3D" parent="Collision_body_steel" unique_id=167051392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66, 0)
+shape = SubResource("BoxShape3D_m6so5")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=2041212714]
+collision_mask = 0
+script = ExtResource("2_06812")
+material = ExtResource("3_0prin")
+
+[node name="@CollisionShape3D@91" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1902680076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.25, 0)
+shape = SubResource("CylinderShape3D_mxf1o")

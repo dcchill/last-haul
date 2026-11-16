@@ -1,0 +1,142 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/094_1_body.res" id="1_hfmqd"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_7pme8"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_phvdc"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_1w0n6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ia234"]
+size = Vector3(0.065, 1.45, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6vyy3"]
+size = Vector3(0.065, 1.45, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_31ons"]
+size = Vector3(0.065, 1.45, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g8mcn"]
+size = Vector3(0.065, 1.45, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fasx5"]
+size = Vector3(1.5, 0.045, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4ouu"]
+size = Vector3(1.5, 0.045, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvw0m"]
+size = Vector3(1.5, 0.045, 0.6)
+
+[sub_resource type="Resource" id="Resource_3n2r5"]
+script = ExtResource("4_1w0n6")
+id = "prop_rubber"
+impact_color = Color(0.14509805, 0.16470589, 0.16862746, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x6l4"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ywkbs"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tl5hx"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_atd75"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_buiwa"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypqy6"]
+size = Vector3(0.4, 0.32, 0.42)
+
+[node name="Prop094" type="Node3D" unique_id=1396496101]
+metadata/catalog_id = "094"
+metadata/variant_index = 1.0
+metadata/variant_name = "Depleted"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "back_brace", "battery_cells", "terminals", "bus_bar"])
+metadata/bounds = AABB(-0.75000006, 0, -0.30000004, 1.5000001, 1.45, 0.6000001)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1344891861]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_hfmqd")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1067428847]
+collision_mask = 0
+script = ExtResource("2_7pme8")
+material = ExtResource("3_phvdc")
+
+[node name="@CollisionShape3D@219" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1120792570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7175, 0.725, -0.2675)
+shape = SubResource("BoxShape3D_ia234")
+
+[node name="@CollisionShape3D@220" type="CollisionShape3D" parent="Collision_body_steel" unique_id=324304706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7175, 0.725, 0.2675)
+shape = SubResource("BoxShape3D_6vyy3")
+
+[node name="@CollisionShape3D@221" type="CollisionShape3D" parent="Collision_body_steel" unique_id=7626426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7175, 0.725, -0.2675)
+shape = SubResource("BoxShape3D_31ons")
+
+[node name="@CollisionShape3D@222" type="CollisionShape3D" parent="Collision_body_steel" unique_id=704854548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7175, 0.725, 0.2675)
+shape = SubResource("BoxShape3D_g8mcn")
+
+[node name="@CollisionShape3D@223" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1696567130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_fasx5")
+
+[node name="@CollisionShape3D@224" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1281294485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.745, 0)
+shape = SubResource("BoxShape3D_i4ouu")
+
+[node name="@CollisionShape3D@225" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1748563588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37, 0)
+shape = SubResource("BoxShape3D_rvw0m")
+
+[node name="Collision_body_rubber" type="StaticBody3D" parent="." unique_id=1626751742]
+collision_mask = 0
+script = ExtResource("2_7pme8")
+material = SubResource("Resource_3n2r5")
+
+[node name="@CollisionShape3D@226" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=457816449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, 0)
+shape = SubResource("BoxShape3D_0x6l4")
+
+[node name="@CollisionShape3D@227" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=650644641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_ywkbs")
+
+[node name="@CollisionShape3D@228" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=53033303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, 0)
+shape = SubResource("BoxShape3D_tl5hx")
+
+[node name="@CollisionShape3D@229" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=1273665153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.95, 0)
+shape = SubResource("BoxShape3D_atd75")
+
+[node name="@CollisionShape3D@230" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=1544964740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("BoxShape3D_buiwa")
+
+[node name="@CollisionShape3D@231" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=1973355276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.95, 0)
+shape = SubResource("BoxShape3D_ypqy6")

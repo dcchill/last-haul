@@ -1,0 +1,14 @@
+{
+	"doors": 314,
+	"enemies": 36,
+	"entities": 1468,
+	"errors": [],
+	"infected": 26,
+	"lights": 488,
+	"longest_extraction_route_m": 287.372524324805,
+	"loose_sockets": 171,
+	"navigation_polygons": 13307,
+	"rooms": 280,
+	"rooms_checked": 280,
+	"storage": 721
+}

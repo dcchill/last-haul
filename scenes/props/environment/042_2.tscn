@@ -1,0 +1,88 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/042_2_body.res" id="1_8qrh4"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_7n4a2"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_cpti4"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_rhfy7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r1uod"]
+height = 0.4
+radius = 0.045
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cr563"]
+size = Vector3(0.045, 0.65, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nfoy8"]
+size = Vector3(0.045, 0.65, 0.045)
+
+[sub_resource type="Resource" id="Resource_0h1hq"]
+script = ExtResource("4_rhfy7")
+id = "prop_cloth"
+impact_color = Color(0.52156866, 0.5176471, 0.46666667, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yvnj2"]
+size = Vector3(0.5, 0.1, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tovih"]
+size = Vector3(0.5, 0.36, 0.07)
+
+[node name="Prop042" type="Node3D" unique_id=1138641789]
+metadata/catalog_id = "042"
+metadata/variant_index = 2.0
+metadata/variant_name = "Overturned"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["brace", "casters", "mechanism", "seat", "back_posts", "backrest"])
+metadata/bounds = AABB(-0.27888545, 0, 0.009999987, 0.61888546, 0.7286762, 1.0450001)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1955136078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3643381, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_8qrh4")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=2031553463]
+collision_mask = 0
+script = ExtResource("2_7n4a2")
+material = ExtResource("3_cpti4")
+
+[node name="@CollisionShape3D@84" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1078066615]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.3643381, 0.3)
+shape = SubResource("CylinderShape3D_r1uod")
+
+[node name="@CollisionShape3D@86" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1062725273]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.2, 0.16433807, 0.73)
+shape = SubResource("BoxShape3D_cr563")
+
+[node name="@CollisionShape3D@87" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1656109986]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.2, 0.16433807, 0.73)
+shape = SubResource("BoxShape3D_nfoy8")
+
+[node name="Collision_body_cloth" type="StaticBody3D" parent="." unique_id=1413989106]
+collision_mask = 0
+script = ExtResource("2_7n4a2")
+material = SubResource("Resource_0h1hq")
+
+[node name="@CollisionShape3D@85" type="CollisionShape3D" parent="Collision_body_cloth" unique_id=1621539308]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.36433807, 0.48)
+shape = SubResource("BoxShape3D_yvnj2")
+
+[node name="@CollisionShape3D@88" type="CollisionShape3D" parent="Collision_body_cloth" unique_id=98804647]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.14433806, 0.86)
+shape = SubResource("BoxShape3D_tovih")

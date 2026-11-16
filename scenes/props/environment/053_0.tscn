@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_wq28n"]
+[ext_resource type="Resource" path="res://resources/containers/environment/053.tres" id="2_pcbsi"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_uw2k4"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/053.tres" id="4_kkwsi"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_0_body.res" id="5_32en3"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/053_0_panel.res" id="6_rmju6"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_53gne"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wqgvr"]
+size = Vector3(0.7, 1.63, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qqpy0"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yurgm"]
+size = Vector3(0.06, 1.75, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j663v"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wawd7"]
+size = Vector3(0.8, 0.07, 0.72)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a2quv"]
+size = Vector3(0.7, 1.65, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qj8t4"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jaji3"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spoko"]
+size = Vector3(0.68, 0.035, 0.64)
+
+[node name="Prop053" type="StaticBody3D" unique_id=440580527 groups=["raid_entities"]]
+script = ExtResource("1_wq28n")
+display_name = "Refrigerator"
+loot_profile = "food"
+container_config = ExtResource("2_pcbsi")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.06, -0.36)
+entity_id = "prop-053"
+kind = "container"
+material = ExtResource("3_uw2k4")
+loot_table = ExtResource("4_kkwsi")
+interaction_offset = Vector3(0, 0.875, -0.4175)
+metadata/catalog_id = "053"
+metadata/variant_index = 0.0
+metadata/variant_name = "Closed"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["kitchen", "staff_room"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "shelves", "moving_panel", "handle_mount", "handle", "hinges", "freezer_seal", "condenser_coil"])
+metadata/bounds = AABB(-0.4, 0, -0.4675, 0.8, 1.75, 0.855)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2069652452]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_32en3")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=487942976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.06, -0.36)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1425193982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, -0.06, 0.36)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_rmju6")
+
+[node name="Collision_panel_medical" type="StaticBody3D" parent="MovingPanel" unique_id=1760564532]
+collision_mask = 0
+script = ExtResource("7_53gne")
+material = ExtResource("3_uw2k4")
+
+[node name="@CollisionShape3D@404" type="CollisionShape3D" parent="MovingPanel/Collision_panel_medical" unique_id=1404468464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.815, 0)
+shape = SubResource("BoxShape3D_wqgvr")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=51936677]
+collision_mask = 0
+script = ExtResource("7_53gne")
+material = ExtResource("3_uw2k4")
+
+[node name="@CollisionShape3D@396" type="CollisionShape3D" parent="Collision_body_medical" unique_id=895862469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_qqpy0")
+
+[node name="@CollisionShape3D@397" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1808002944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37, 0.875, 0)
+shape = SubResource("BoxShape3D_yurgm")
+
+[node name="@CollisionShape3D@398" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1298601777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
+shape = SubResource("BoxShape3D_j663v")
+
+[node name="@CollisionShape3D@399" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1880265597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.715, 0)
+shape = SubResource("BoxShape3D_wawd7")
+
+[node name="@CollisionShape3D@400" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1511128923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0.335)
+shape = SubResource("BoxShape3D_a2quv")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=638929493]
+collision_mask = 0
+script = ExtResource("7_53gne")
+material = ExtResource("3_uw2k4")
+
+[node name="@CollisionShape3D@401" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1596990617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4375, 0)
+shape = SubResource("BoxShape3D_qj8t4")
+
+[node name="@CollisionShape3D@402" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1489821600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_jaji3")
+
+[node name="@CollisionShape3D@403" type="CollisionShape3D" parent="Collision_body_steel" unique_id=761980711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3125, 0)
+shape = SubResource("BoxShape3D_spoko")

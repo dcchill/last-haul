@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/155_2_body.res" id="1_y687o"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_wmqcc"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_o8vd6"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jmuom"]
+points = PackedVector3Array(-0.65, 0, -0.455, -0.65, 0, 0.455, 0.65, 0, -0.455, 0.65, 0, 0.455, 0.65, 0.12, -0.455, 0.65, 0.12, 0.455, 0.2, 0.15, -0.455, 0.2, 0.15, 0.455, -0.65, 0.1, -0.455, -0.65, 0.1, 0.455)
+
+[node name="Prop155" type="Node3D" unique_id=1474829795]
+metadata/catalog_id = "155"
+metadata/variant_index = 2.0
+metadata/variant_name = "Raised"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "traversable", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pavement_slab"])
+metadata/bounds = AABB(-0.65, 0, -0.44989085, 1.3, 0.28430438, 0.92219746)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2056445566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.067994356, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_y687o")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=1402443200]
+collision_mask = 0
+script = ExtResource("2_wmqcc")
+material = ExtResource("3_o8vd6")
+
+[node name="@CollisionShape3D@115" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=788683100]
+transform = Transform3D(1, 0, 0, 0, 0.9887711, -0.14943814, 0, 0.14943814, 0.9887711, 0, 0.067994356, 0)
+shape = SubResource("ConvexPolygonShape3D_jmuom")

@@ -1,0 +1,78 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/006_2_body.res" id="1_ldjwt"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_anihx"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_krakg"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_ihc8c"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="5_7gixo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_35mxs"]
+size = Vector3(0.45, 0.2, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4o5fw"]
+size = Vector3(0.12, 3.8, 0.12)
+
+[sub_resource type="Resource" id="Resource_mcl6s"]
+script = ExtResource("5_7gixo")
+id = "prop_rubber"
+impact_color = Color(0.14509805, 0.16470589, 0.16862746, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ootmw"]
+size = Vector3(0.38, 1.12, 0.25)
+
+[node name="Prop006" type="Node3D" unique_id=1921746091]
+metadata/catalog_id = "006"
+metadata/variant_index = 2.0
+metadata/variant_name = "Shattered"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["footing", "pole", "signal_housing", "signal_lens", "signal_hood"])
+metadata/bounds = AABB(-0.225, 0, -0.47, 0.45, 3.8, 0.695)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1322142127]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ldjwt")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=1227014293]
+collision_mask = 0
+script = ExtResource("2_anihx")
+material = ExtResource("3_krakg")
+
+[node name="@CollisionShape3D@86" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1082596047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_35mxs")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1180590980]
+collision_mask = 0
+script = ExtResource("2_anihx")
+material = ExtResource("4_ihc8c")
+
+[node name="@CollisionShape3D@87" type="CollisionShape3D" parent="Collision_body_paint" unique_id=431803312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+shape = SubResource("BoxShape3D_4o5fw")
+
+[node name="Collision_body_rubber" type="StaticBody3D" parent="." unique_id=934573726]
+collision_mask = 0
+script = ExtResource("2_anihx")
+material = SubResource("Resource_mcl6s")
+
+[node name="@CollisionShape3D@88" type="CollisionShape3D" parent="Collision_body_rubber" unique_id=1810275185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, -0.16)
+shape = SubResource("BoxShape3D_ootmw")

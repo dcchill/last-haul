@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/032_2_body.res" id="1_jt72p"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_j2p24"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_d8fmp"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_si3n0"]
+
+[sub_resource type="Resource" id="Resource_67qnu"]
+script = ExtResource("3_d8fmp")
+id = "prop_cloth"
+impact_color = Color(0.52156866, 0.5176471, 0.46666667, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_17d0j"]
+size = Vector3(2.8, 0.1, 1.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcwrq"]
+size = Vector3(0.07, 1.2690941, 0.07)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ijnfy"]
+size = Vector3(0.07, 1.2690941, 0.07)
+
+[node name="Prop032" type="Node3D" unique_id=1225368010]
+metadata/catalog_id = "032"
+metadata/variant_index = 2.0
+metadata/variant_name = "Torn"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["canopy_roof", "canopy_braces", "hanging_edge"])
+metadata/bounds = AABB(-1.4, 0, -1.3013113, 2.8, 0.8075141, 1.3692374)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=410736424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6199392, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_jt72p")
+
+[node name="Collision_body_cloth" type="StaticBody3D" parent="." unique_id=29512262]
+collision_mask = 0
+script = ExtResource("2_j2p24")
+material = SubResource("Resource_67qnu")
+
+[node name="@CollisionShape3D@342" type="CollisionShape3D" parent="Collision_body_cloth" unique_id=2028651900]
+transform = Transform3D(1, 0, 0, 0, 0.99280864, -0.119712204, 0, 0.119712204, 0.99280864, 0, 0.68006074, -0.65)
+shape = SubResource("BoxShape3D_17d0j")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1349696438]
+collision_mask = 0
+script = ExtResource("2_j2p24")
+material = ExtResource("4_si3n0")
+
+[node name="@CollisionShape3D@343" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1128954938]
+transform = Transform3D(-1, -7.50857e-08, 4.4775877e-08, 0, -0.51217633, -0.85888034, 8.742278e-08, -0.85888034, 0.51217633, -1.26, 0.35506082, -0.495)
+shape = SubResource("BoxShape3D_rcwrq")
+
+[node name="@CollisionShape3D@344" type="CollisionShape3D" parent="Collision_body_steel" unique_id=327475286]
+transform = Transform3D(-1, -7.50857e-08, 4.4775877e-08, 0, -0.51217633, -0.85888034, 8.742278e-08, -0.85888034, 0.51217633, 1.26, 0.35506082, -0.495)
+shape = SubResource("BoxShape3D_ijnfy")

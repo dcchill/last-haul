@@ -1,0 +1,80 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/060_1_body.res" id="1_20db2"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_rh3nb"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_nxesc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xmkrc"]
+size = Vector3(0.075, 1.9, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jwweh"]
+size = Vector3(0.075, 1.9, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vu58w"]
+size = Vector3(2, 0.08, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f1qqg"]
+size = Vector3(2, 0.08, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fy7np"]
+size = Vector3(0.1, 0.06, 0.65)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gpm34"]
+size = Vector3(0.1, 0.06, 0.65)
+
+[node name="Prop060" type="Node3D" unique_id=85043287]
+metadata/catalog_id = "060"
+metadata/variant_index = 1.0
+metadata/variant_name = "Curtain"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["uprights", "crossrails", "divider_feet", "curtain_folds"])
+metadata/bounds = AABB(-1.05, 0, -0.325, 2.1, 1.9, 0.65)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1136842246]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_20db2")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1766000919]
+collision_mask = 0
+script = ExtResource("2_rh3nb")
+material = ExtResource("3_nxesc")
+
+[node name="@CollisionShape3D@512" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1785871739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95, 0)
+shape = SubResource("BoxShape3D_xmkrc")
+
+[node name="@CollisionShape3D@513" type="CollisionShape3D" parent="Collision_body_steel" unique_id=241775004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.95, 0)
+shape = SubResource("BoxShape3D_jwweh")
+
+[node name="@CollisionShape3D@514" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2078095104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_vu58w")
+
+[node name="@CollisionShape3D@515" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1267086961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86, 0)
+shape = SubResource("BoxShape3D_f1qqg")
+
+[node name="@CollisionShape3D@516" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1288684972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.03, 0)
+shape = SubResource("BoxShape3D_fy7np")
+
+[node name="@CollisionShape3D@517" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1376162507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.03, 0)
+shape = SubResource("BoxShape3D_gpm34")

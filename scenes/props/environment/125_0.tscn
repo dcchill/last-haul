@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/125_0_body.res" id="1_bt06x"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_ha5hf"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_yhvtj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mpxfh"]
+size = Vector3(0.3, 0.2, 0.3)
+
+[node name="Prop125" type="Node3D" unique_id=1426722780]
+metadata/catalog_id = "125"
+metadata/variant_index = 0.0
+metadata/variant_name = "Off"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["beacon_mount", "beacon_lens", "beacon_cap"])
+metadata/bounds = AABB(-0.15, 0, -0.15, 0.3, 0.52000004, 0.3)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=847394209]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_bt06x")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=178286165]
+collision_mask = 0
+script = ExtResource("2_ha5hf")
+material = ExtResource("3_yhvtj")
+
+[node name="@CollisionShape3D@371" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1837787494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_mpxfh")

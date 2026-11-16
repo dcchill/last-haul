@@ -1,0 +1,99 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/126_1_body.res" id="1_8tf38"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_jkxvi"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_d8sf3"]
+
+[sub_resource type="Resource" id="Resource_tl0bn"]
+script = ExtResource("3_d8sf3")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c1rqf"]
+size = Vector3(0.06, 0.45, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mh5p2"]
+size = Vector3(0.06, 0.45, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ompc"]
+size = Vector3(0.06, 0.45, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_so4no"]
+size = Vector3(0.06, 0.45, 0.06)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5e5io"]
+size = Vector3(0.9, 0.1, 2.05)
+
+[sub_resource type="Resource" id="Resource_wvwhx"]
+script = ExtResource("3_d8sf3")
+id = "prop_cloth"
+impact_color = Color(0.52156866, 0.5176471, 0.46666667, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yx7y4"]
+size = Vector3(0.82, 0.16, 1.97)
+
+[node name="Prop126" type="Node3D" unique_id=2018785296]
+metadata/catalog_id = "126"
+metadata/variant_index = 1.0
+metadata/variant_name = "Padded"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["residence", "dormitory", "camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "bed_deck", "mattress", "pillow"])
+metadata/bounds = AABB(-0.45, 0, -1.025, 0.9, 0.79, 2.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1966838579]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_8tf38")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1381285651]
+collision_mask = 0
+script = ExtResource("2_jkxvi")
+material = SubResource("Resource_tl0bn")
+
+[node name="@CollisionShape3D@7" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1835505716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 0.225, -0.995)
+shape = SubResource("BoxShape3D_c1rqf")
+
+[node name="@CollisionShape3D@8" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1995248333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.42, 0.225, 0.995)
+shape = SubResource("BoxShape3D_mh5p2")
+
+[node name="@CollisionShape3D@9" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1321757935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0.225, -0.995)
+shape = SubResource("BoxShape3D_3ompc")
+
+[node name="@CollisionShape3D@10" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1784586847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 0.225, 0.995)
+shape = SubResource("BoxShape3D_so4no")
+
+[node name="@CollisionShape3D@11" type="CollisionShape3D" parent="Collision_body_wood" unique_id=278862689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_5e5io")
+
+[node name="Collision_body_cloth" type="StaticBody3D" parent="." unique_id=797084381]
+collision_mask = 0
+script = ExtResource("2_jkxvi")
+material = SubResource("Resource_wvwhx")
+
+[node name="@CollisionShape3D@12" type="CollisionShape3D" parent="Collision_body_cloth" unique_id=2086114257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, 0)
+shape = SubResource("BoxShape3D_yx7y4")

@@ -1,0 +1,148 @@
+{
+	"floors": {
+		"distribution/1": {
+			"baseline": 936.282157053927,
+			"containers": 24,
+			"empty": 1,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 4,
+			"loose_value": 62.1345029239766
+		},
+		"distribution_wing/1": {
+			"baseline": 903.709747406898,
+			"containers": 14,
+			"empty": 1,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 3,
+			"loose_value": 32.3099415204678
+		},
+		"distribution_wing/2": {
+			"baseline": 1642.0806102552,
+			"containers": 12,
+			"empty": 0,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 7,
+			"loose_value": 156.578947368421
+		},
+		"exterior/1": {
+			"baseline": 758.92807320183,
+			"containers": 16,
+			"empty": 0,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 0,
+			"loose_value": 0.0
+		},
+		"lab1/1": {
+			"baseline": 3296.87994531469,
+			"containers": 43,
+			"empty": 1,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 23,
+			"loose_value": 248.538011695906
+		},
+		"lab1/2": {
+			"baseline": 6036.86313705661,
+			"containers": 45,
+			"empty": 3,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 21,
+			"loose_value": 231.140350877193
+		},
+		"lab1/3": {
+			"baseline": 7458.88180272109,
+			"containers": 48,
+			"empty": 6,
+			"locked": 5,
+			"locked_bonus": 1015.625,
+			"loose": 19,
+			"loose_value": 365.350877192982
+		},
+		"lab1/4": {
+			"baseline": 13260.7347413099,
+			"containers": 45,
+			"empty": 11,
+			"locked": 10,
+			"locked_bonus": 4526.18208770196,
+			"loose": 15,
+			"loose_value": 661.111111111111
+		},
+		"lab2/1": {
+			"baseline": 2549.20364174907,
+			"containers": 38,
+			"empty": 2,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 20,
+			"loose_value": 253.508771929825
+		},
+		"lab2/2": {
+			"baseline": 3554.39129766488,
+			"containers": 42,
+			"empty": 3,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 28,
+			"loose_value": 437.426900584795
+		},
+		"lab2/3": {
+			"baseline": 7227.50425170068,
+			"containers": 50,
+			"empty": 4,
+			"locked": 1,
+			"locked_bonus": 87.5,
+			"loose": 15,
+			"loose_value": 375.292397660819
+		},
+		"lab2/4": {
+			"baseline": 8485.64534760022,
+			"containers": 43,
+			"empty": 10,
+			"locked": 7,
+			"locked_bonus": 2833.91881673828,
+			"loose": 16,
+			"loose_value": 765.497076023392
+		},
+		"skybridge/3": {
+			"baseline": 0.0,
+			"containers": 1,
+			"empty": 1,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 0,
+			"loose_value": 0.0
+		}
+	},
+	"lab_floor_ratio": {
+		"1": 1.0,
+		"2": 1.62,
+		"3": 2.43,
+		"4": 3.65
+	},
+	"lab_floor_value": {
+		"1": 6348.1303706895,
+		"2": 10259.8216861835,
+		"3": 15427.0293292756,
+		"4": 23172.9882760447
+	},
+	"targets": {
+		"1": 1.0,
+		"2": 1.5,
+		"3": 2.3,
+		"4": 3.5
+	},
+	"zero_value_items": [
+		"medkit",
+		"food",
+		"tool",
+		"salvage",
+		"nine_mm_casing",
+		"five_five_six_casing",
+		"fifty_cal_casing"
+	]
+}

@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" format=3]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dcudfbu8evh0g"]
 
 [sub_resource type="Image" id="Image_t54so"]
 data = {

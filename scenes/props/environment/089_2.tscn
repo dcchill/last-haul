@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/089_2_body.res" id="1_p7xw2"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_u310r"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_k0uyy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8too"]
+size = Vector3(0.075, 1.7, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmfax"]
+size = Vector3(0.075, 1.7, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hx0lt"]
+size = Vector3(1.2, 0.08, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7pd4"]
+size = Vector3(1.2, 0.08, 0.5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qyxpi"]
+height = 0.2
+radius = 0.04
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nj2jf"]
+height = 0.2
+radius = 0.04
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xdlbk"]
+height = 0.2
+radius = 0.04
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_27qy4"]
+height = 0.8
+radius = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o7haj"]
+height = 1.2
+radius = 0.13
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dhkx6"]
+height = 1.2
+radius = 0.13
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d65df"]
+size = Vector3(0.28, 0.4, 0.3)
+
+[node name="Prop089" type="Node3D" unique_id=1816399459]
+metadata/catalog_id = "089"
+metadata/variant_index = 2.0
+metadata/variant_name = "Broken"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["sheltered", "dry"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["uprights", "crossrails", "filter_canisters", "pipe", "filter_controls", "broken_filter"])
+metadata/bounds = AABB(-0.63750005, 0, -0.25, 1.4275, 1.7, 0.5)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=650768308]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_p7xw2")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1630659372]
+collision_mask = 0
+script = ExtResource("2_u310r")
+material = ExtResource("3_k0uyy")
+
+[node name="@CollisionShape3D@166" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2020182450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.85, 0)
+shape = SubResource("BoxShape3D_k8too")
+
+[node name="@CollisionShape3D@167" type="CollisionShape3D" parent="Collision_body_steel" unique_id=633169667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.85, 0)
+shape = SubResource("BoxShape3D_cmfax")
+
+[node name="@CollisionShape3D@168" type="CollisionShape3D" parent="Collision_body_steel" unique_id=213195036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_hx0lt")
+
+[node name="@CollisionShape3D@169" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2039529516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66, 0)
+shape = SubResource("BoxShape3D_v7pd4")
+
+[node name="@CollisionShape3D@171" type="CollisionShape3D" parent="Collision_body_steel" unique_id=691693437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 1.55, 0)
+shape = SubResource("CylinderShape3D_qyxpi")
+
+[node name="@CollisionShape3D@173" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1364183866]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+shape = SubResource("CylinderShape3D_nj2jf")
+
+[node name="@CollisionShape3D@174" type="CollisionShape3D" parent="Collision_body_steel" unique_id=119099069]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.55, 0)
+shape = SubResource("CylinderShape3D_xdlbk")
+
+[node name="@CollisionShape3D@175" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1182905715]
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 1.65, 0)
+shape = SubResource("CylinderShape3D_27qy4")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1714352899]
+collision_mask = 0
+script = ExtResource("2_u310r")
+material = ExtResource("3_k0uyy")
+
+[node name="@CollisionShape3D@170" type="CollisionShape3D" parent="Collision_body_medical" unique_id=595198931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.85, 0)
+shape = SubResource("CylinderShape3D_o7haj")
+
+[node name="@CollisionShape3D@172" type="CollisionShape3D" parent="Collision_body_medical" unique_id=385263055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("CylinderShape3D_dhkx6")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1125161922]
+collision_mask = 0
+script = ExtResource("2_u310r")
+material = ExtResource("3_k0uyy")
+
+[node name="@CollisionShape3D@176" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1655361765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65, 0.9, 0)
+shape = SubResource("BoxShape3D_d65df")

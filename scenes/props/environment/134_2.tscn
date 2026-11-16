@@ -1,0 +1,59 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/134_2_body.res" id="1_s7kd1"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_xdiw6"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_gxbu7"]
+
+[sub_resource type="Resource" id="Resource_tl0bn"]
+script = ExtResource("3_gxbu7")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63av3"]
+size = Vector3(0.08, 1.8, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rgij6"]
+size = Vector3(0.08, 1.8, 0.08)
+
+[node name="Prop134" type="Node3D" unique_id=1685702817]
+metadata/catalog_id = "134"
+metadata/variant_index = 2.0
+metadata/variant_name = "Food"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["drying_posts", "clothesline", "drying_supplies"])
+metadata/bounds = AABB(-1.05, 0, -0.04, 2.1, 1.8, 0.08)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1089846479]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_s7kd1")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=681238303]
+collision_mask = 0
+script = ExtResource("2_xdiw6")
+material = SubResource("Resource_tl0bn")
+
+[node name="@CollisionShape3D@170" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1742101107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.9, 0)
+shape = SubResource("BoxShape3D_63av3")
+
+[node name="@CollisionShape3D@171" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1222509975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.9, 0)
+shape = SubResource("BoxShape3D_rgij6")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_a0gxv"]
+
+[resource]
+script = ExtResource("1_a0gxv")
+id = "prop_cardboard"
+impact_color = Color(0.58431375, 0.52156866, 0.39607844, 1)
+resistance = 100.0
+thickness_meters = 0.06

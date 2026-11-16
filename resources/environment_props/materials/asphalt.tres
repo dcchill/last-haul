@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+resource_name = "asphalt"
+albedo_color = Color(0.20784314, 0.23137255, 0.23529412, 1)
+roughness = 0.95

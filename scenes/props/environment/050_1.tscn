@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/050_1_body.res" id="1_81x8d"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_12xg6"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_58sk8"]
+
+[sub_resource type="Resource" id="Resource_0h1hq"]
+script = ExtResource("3_58sk8")
+id = "prop_cloth"
+impact_color = Color(0.52156866, 0.5176471, 0.46666667, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exph7"]
+size = Vector3(0.9, 0.2, 2.05)
+
+[node name="Prop050" type="Node3D" unique_id=924844749]
+metadata/catalog_id = "050"
+metadata/variant_index = 1.0
+metadata/variant_name = "Dirty"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["residence", "dormitory", "camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["mattress", "mattress_seams", "stain"])
+metadata/bounds = AABB(-0.45, 0, -1.025, 0.9, 0.222, 2.05)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2103937838]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_81x8d")
+
+[node name="Collision_body_cloth" type="StaticBody3D" parent="." unique_id=1304985183]
+collision_mask = 0
+script = ExtResource("2_12xg6")
+material = SubResource("Resource_0h1hq")
+
+[node name="@CollisionShape3D@327" type="CollisionShape3D" parent="Collision_body_cloth" unique_id=1218031967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_exph7")

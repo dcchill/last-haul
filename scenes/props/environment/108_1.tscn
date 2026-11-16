@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/108_1_body.res" id="1_nmtan"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/108_1_panel.res" id="2_ee280"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_eai61"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_5m3wf"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/108_1_contents.res" id="5_a5256"]
+
+[sub_resource type="Resource" id="Resource_i7faf"]
+script = ExtResource("4_5m3wf")
+id = "prop_warning"
+impact_color = Color(0.70980394, 0.6039216, 0.32941177, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ffxdj"]
+size = Vector3(0.55, 0.06, 0.5)
+
+[sub_resource type="Resource" id="Resource_0lbh5"]
+script = ExtResource("4_5m3wf")
+id = "prop_plastic"
+impact_color = Color(0.34901962, 0.42745098, 0.4509804, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vwb0"]
+size = Vector3(0.5, 0.66, 0.45)
+
+[node name="Prop108" type="Node3D" unique_id=18510109]
+metadata/catalog_id = "108"
+metadata/variant_index = 1.0
+metadata/variant_name = "Overflowing"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "hazard", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "laboratory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["waste_bin", "moving_panel", "handle_mount", "handle", "biohazard_label", "waste_bags"])
+metadata/bounds = AABB(-0.275, 0, -0.24000001, 0.55, 1.2037396, 0.56074)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=942147163]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_nmtan")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1733988588]
+transform = Transform3D(1, 0, 0, 0, 0.21900666, -0.9757234, 0, 0.9757234, 0.21900666, 0, 0.7, 0.25)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=2135012555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, -0.25)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_ee280")
+
+[node name="Collision_panel_warning" type="StaticBody3D" parent="MovingPanel" unique_id=1325116249]
+collision_mask = 0
+script = ExtResource("3_eai61")
+material = SubResource("Resource_i7faf")
+
+[node name="@CollisionShape3D@243" type="CollisionShape3D" parent="MovingPanel/Collision_panel_warning" unique_id=279150006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+shape = SubResource("BoxShape3D_ffxdj")
+
+[node name="LootContents" type="MeshInstance3D" parent="." unique_id=1124918576]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_a5256")
+
+[node name="Collision_body_plastic" type="StaticBody3D" parent="." unique_id=1222899890]
+collision_mask = 0
+script = ExtResource("3_eai61")
+material = SubResource("Resource_0lbh5")
+
+[node name="@CollisionShape3D@242" type="CollisionShape3D" parent="Collision_body_plastic" unique_id=1985939373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33, 0)
+shape = SubResource("BoxShape3D_5vwb0")

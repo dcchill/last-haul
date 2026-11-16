@@ -1,0 +1,68 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/119_1_body.res" id="1_jl7ju"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_2l0m8"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_30b8y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dfc8f"]
+size = Vector3(0.055, 0.7560423, 0.055)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5e11u"]
+size = Vector3(0.055, 0.7560423, 0.055)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_umf02"]
+size = Vector3(0.055, 0.7560423, 0.055)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s51f4"]
+height = 1.7
+radius = 0.045
+
+[node name="Prop119" type="Node3D" unique_id=1267747637]
+metadata/catalog_id = "119"
+metadata/variant_index = 1.0
+metadata/variant_name = "Folded"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tripod", "pipe", "floodlight_housing", "floodlight_lens"])
+metadata/bounds = AABB(-0.625, 0, 0.01817584, 1.25, 1.0957109, 2.276824)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=846544506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54785544, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_jl7ju")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=808753019]
+collision_mask = 0
+script = ExtResource("2_2l0m8")
+material = ExtResource("3_30b8y")
+
+[node name="@CollisionShape3D@294" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1629480988]
+transform = Transform3D(-4.371139e-08, 0.7936064, -0.6084315, 1, 6.128502e-08, 8.094252e-09, 4.371139e-08, -0.6084315, -0.7936064, 0.3, 0.54785544, 0.27)
+shape = SubResource("BoxShape3D_dfc8f")
+
+[node name="@CollisionShape3D@295" type="CollisionShape3D" parent="Collision_body_steel" unique_id=881344882]
+transform = Transform3D(0.8660254, -0.3968032, 0.30421576, -0.5, -0.6872833, 0.5269172, -2.1855694e-08, -0.6084316, -0.7936064, -0.15, 0.28804782, 0.27)
+shape = SubResource("BoxShape3D_5e11u")
+
+[node name="@CollisionShape3D@296" type="CollisionShape3D" parent="Collision_body_steel" unique_id=791747642]
+transform = Transform3D(-0.8660254, -0.39680326, 0.3042158, -0.50000006, 0.6872833, -0.5269171, -2.1855696e-08, -0.60843146, -0.7936064, -0.15, 0.8076631, 0.27)
+shape = SubResource("BoxShape3D_umf02")
+
+[node name="@CollisionShape3D@297" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1945158233]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.5478554, 1.25)
+shape = SubResource("CylinderShape3D_s51f4")

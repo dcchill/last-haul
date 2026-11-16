@@ -1,5 +1,6 @@
 """Physical signs using the project's original bitmap alphabet. No dependencies."""
 import ast
+import re
 from pathlib import Path
 import struct
 import zlib
@@ -27,12 +28,28 @@ SIGNS = {
     'east': 'EAST FREIGHT GATE\nEXTRACTION / 15 SECONDS',
     'south': 'SOUTH EVACUATION\nEXTRACTION / 15 SECONDS',
     'west': 'WEST DRAINAGE EXIT\nEXTRACTION / 15 SECONDS',
+    'campus_cure_transfer': 'CURE STOCK EVACUATED\nSUPPRESSANTS ARE NOT A CURE',
+    'campus_trial_notice': 'TRIAL 19 / CONTAINMENT FAILED\nEXCLUSIVE CURE DISTRIBUTION',
 }
 
 def chunk(tag, data):
     return struct.pack('!I', len(data)) + tag + data + struct.pack('!I', zlib.crc32(tag + data) & 0xffffffff)
 
 def main():
+    # Campus room labels share the original physical bitmap-sign pipeline.
+    author = (ROOT / 'tools/campus_scene_author.gd').read_text(encoding='utf-8')
+    roles = 'analysis|microscopy|preparation|sterile|cold|clinical|recovery|isolation|toilet|office|control|records|meeting|staff|receiving|packing|utility|generator|pump|electrical|workshop|decon|containment|waiting|security|medical|store'
+    titles = re.findall(r'\["([^"]+)","(?:' + roles + r')"\]', author)
+    titles += re.findall(r'room\([^,]+,"([^"]+)"', author)
+    for title in titles:
+        identity = 'campus_' + title.lower().replace('/', '_').replace(' ', '_')
+        # Wrap long room names at word boundaries instead of clipping lettering.
+        words, lines = title.upper().split(), ['']
+        for word in words:
+            if len(lines[-1]) + len(word) + 1 > 38:
+                lines.append('')
+            lines[-1] = (lines[-1] + ' ' + word).strip()
+        SIGNS[identity] = '\n'.join(lines)
     directory = ROOT / 'assets/district/signs'
     directory.mkdir(parents=True, exist_ok=True)
     for identity, text in SIGNS.items():

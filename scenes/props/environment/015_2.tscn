@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/015_2_body.res" id="1_twlhk"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_0pjui"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_q5cj1"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p2mip"]
+points = PackedVector3Array(-0.6, 0, 0.42, 0.6, 0, 0.42, -0.6, 0, -0.42, 0.6, 0, -0.42, -0.6, 0.18, -0.42, 0.6, 0.18, -0.42, -0.6, 0.65, -0.2, 0.6, 0.65, -0.2, -0.6, 1.05, -0.15, 0.6, 1.05, -0.15, -0.6, 1.05, 0.15, 0.6, 1.05, 0.15, -0.6, 0.65, 0.2, 0.6, 0.65, 0.2, -0.6, 0.18, 0.42, 0.6, 0.18, 0.42)
+
+[node name="Prop015" type="Node3D" unique_id=1853486742]
+metadata/catalog_id = "015"
+metadata/variant_index = 2.0
+metadata/variant_name = "Cracked"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["jersey_profile", "reflectors", "fracture"])
+metadata/bounds = AABB(-0.6, 0, -0.42, 1.2, 1.05, 0.84)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=119483939]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_twlhk")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=44932571]
+collision_mask = 0
+script = ExtResource("2_0pjui")
+material = ExtResource("3_q5cj1")
+
+[node name="@CollisionShape3D@230" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=993776015]
+shape = SubResource("ConvexPolygonShape3D_p2mip")

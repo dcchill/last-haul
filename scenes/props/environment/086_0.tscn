@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/086_0_body.res" id="1_k1r0p"]
+
+[node name="Prop086" type="Node3D" unique_id=1638353298]
+metadata/catalog_id = "086"
+metadata/variant_index = 0.0
+metadata/variant_name = "Coiled"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["cable_coil"])
+metadata/bounds = AABB(-0.3469037, 0, -0.3469037, 0.6938074, 0.03500001, 0.6938074)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=221885093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.017499996, 0)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_k1r0p")

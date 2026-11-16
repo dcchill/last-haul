@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/099_2_body.res" id="1_ypfp6"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_whchb"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_jane5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wrxik"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rjcn"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqbrg"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ssitr"]
+size = Vector3(0.04, 0.9, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dc5uf"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cj4uo"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5kwf"]
+size = Vector3(0.72, 0.045, 0.52)
+
+[node name="Prop099" type="Node3D" unique_id=377805560]
+metadata/catalog_id = "099"
+metadata/variant_index = 2.0
+metadata/variant_name = "Overturned"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "triage"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "casters", "cart_shelves"])
+metadata/bounds = AABB(-0.9225, 0, -0.31, 0.9225, 0.725, 0.62)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=686451696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3625, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ypfp6")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=347616711]
+collision_mask = 0
+script = ExtResource("2_whchb")
+material = ExtResource("3_jane5")
+
+[node name="@CollisionShape3D@107" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1715297132]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.45, 0.03249997, -0.23)
+shape = SubResource("BoxShape3D_wrxik")
+
+[node name="@CollisionShape3D@108" type="CollisionShape3D" parent="Collision_body_steel" unique_id=120333356]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.45, 0.03249997, 0.23)
+shape = SubResource("BoxShape3D_4rjcn")
+
+[node name="@CollisionShape3D@109" type="CollisionShape3D" parent="Collision_body_steel" unique_id=274374839]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.45, 0.6925, -0.23)
+shape = SubResource("BoxShape3D_uqbrg")
+
+[node name="@CollisionShape3D@110" type="CollisionShape3D" parent="Collision_body_steel" unique_id=125945002]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.45, 0.6925, 0.23)
+shape = SubResource("BoxShape3D_ssitr")
+
+[node name="Collision_body_medical" type="StaticBody3D" parent="." unique_id=1485985265]
+collision_mask = 0
+script = ExtResource("2_whchb")
+material = ExtResource("3_jane5")
+
+[node name="@CollisionShape3D@111" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1879798884]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.2, 0.3625, 0)
+shape = SubResource("BoxShape3D_dc5uf")
+
+[node name="@CollisionShape3D@112" type="CollisionShape3D" parent="Collision_body_medical" unique_id=1924638561]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.65, 0.36249998, 0)
+shape = SubResource("BoxShape3D_cj4uo")
+
+[node name="@CollisionShape3D@113" type="CollisionShape3D" parent="Collision_body_medical" unique_id=701339849]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.9, 0.36249998, 0)
+shape = SubResource("BoxShape3D_l5kwf")

@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/087_2_body.res" id="1_npauh"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_fp2ea"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_aukcb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4vw5g"]
+size = Vector3(0.2, 6, 0.2)
+
+[node name="Prop087" type="Node3D" unique_id=1058610339]
+metadata/catalog_id = "087"
+metadata/variant_index = 2.0
+metadata/variant_name = "Fallen"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["utility_pole", "crossarm", "insulators"])
+metadata/bounds = AABB(-6, 0, -0.1, 6, 1.7, 0.2)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=681638453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85000026, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_npauh")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=260497947]
+collision_mask = 0
+script = ExtResource("2_fp2ea")
+material = ExtResource("3_aukcb")
+
+[node name="@CollisionShape3D@125" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1528657443]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3, 0.85000014, 0)
+shape = SubResource("BoxShape3D_4vw5g")

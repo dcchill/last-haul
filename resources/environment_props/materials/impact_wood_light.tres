@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_fguma"]
+
+[resource]
+script = ExtResource("1_fguma")
+id = "prop_wood_light"
+impact_color = Color(0.6392157, 0.5921569, 0.45882353, 1)
+resistance = 350.0
+thickness_meters = 0.06

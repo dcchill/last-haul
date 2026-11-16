@@ -1,0 +1,51 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/112_1_body.res" id="1_0npok"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_d6yos"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_2noq5"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cudpe"]
+points = PackedVector3Array(-1.1, 0, 0.5, 1.1, 0, 0.5, -1.1, 0, -0.5, 1.1, 0, -0.5, -1.1, 0.4, -0.4, 1.1, 0.4, -0.4, -1.1, 1.25, -0.22, 1.1, 1.25, -0.22, -1.1, 1.25, 0.22, 1.1, 1.25, 0.22, -1.1, 0.4, 0.4, 1.1, 0.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbx0i"]
+size = Vector3(2.2, 0.36, 0.6)
+
+[node name="Prop112" type="Node3D" unique_id=89607819]
+metadata/catalog_id = "112"
+metadata/variant_index = 1.0
+metadata/variant_name = "Double"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["defensive_profile", "second_course"])
+metadata/bounds = AABB(-1.1, 0, -0.5, 2.2, 1.25, 1.6)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=118348302]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_0npok")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=1778553182]
+collision_mask = 0
+script = ExtResource("2_d6yos")
+material = ExtResource("3_2noq5")
+
+[node name="@CollisionShape3D@59" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1674058245]
+shape = SubResource("ConvexPolygonShape3D_cudpe")
+
+[node name="@CollisionShape3D@60" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=830048978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0.8)
+shape = SubResource("BoxShape3D_wbx0i")

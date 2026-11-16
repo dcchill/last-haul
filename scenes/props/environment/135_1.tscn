@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/135_1_body.res" id="1_e2k5i"]
+
+[node name="Prop135" type="Node3D" unique_id=680107284]
+metadata/catalog_id = "135"
+metadata/variant_index = 1.0
+metadata/variant_name = "Laid Out"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["residence", "dormitory", "camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["sleeping_mat", "blanket", "pillow"])
+metadata/bounds = AABB(-0.35, 0, -0.95, 0.7, 0.24, 1.9)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1993767946]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_e2k5i")

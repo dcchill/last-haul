@@ -1,0 +1,44 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/155_0_body.res" id="1_xk57j"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_ovvhu"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_f0ien"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2jww0"]
+points = PackedVector3Array(-0.4, 0, -0.28, -0.4, 0, 0.28, 0.4, 0, -0.28, 0.4, 0, 0.28, 0.4, 0.12, -0.28, 0.4, 0.12, 0.28, 0.2, 0.15, -0.28, 0.2, 0.15, 0.28, -0.4, 0.1, -0.28, -0.4, 0.1, 0.28)
+
+[node name="Prop155" type="Node3D" unique_id=1838541089]
+metadata/catalog_id = "155"
+metadata/variant_index = 0.0
+metadata/variant_name = "Small"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "traversable", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pavement_slab"])
+metadata/bounds = AABB(-0.4, 0, -0.28, 0.8, 0.15, 0.56)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=613744703]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_xk57j")
+
+[node name="Collision_body_concrete" type="StaticBody3D" parent="." unique_id=2034726013]
+collision_mask = 0
+script = ExtResource("2_ovvhu")
+material = ExtResource("3_f0ien")
+
+[node name="@CollisionShape3D@113" type="CollisionShape3D" parent="Collision_body_concrete" unique_id=1204291740]
+shape = SubResource("ConvexPolygonShape3D_2jww0")

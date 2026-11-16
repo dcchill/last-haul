@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/059_1_body.res" id="1_l1uo1"]
+
+[node name="Prop059" type="Node3D" unique_id=2018847972]
+metadata/catalog_id = "059"
+metadata/variant_index = 1.0
+metadata/variant_name = "Stopped"
+metadata/category = "Interiors & Furniture"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["residential", "office"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "residence"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["clock_rim", "clock_face", "hour_marks", "minute_hand", "hour_hand", "loose_hand"])
+metadata/bounds = AABB(-0.3, 0, -0.085, 0.6, 0.6, 0.12)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1876513025]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_l1uo1")

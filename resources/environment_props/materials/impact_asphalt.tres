@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_f0wc7"]
+
+[resource]
+script = ExtResource("1_f0wc7")
+id = "prop_asphalt"
+impact_color = Color(0.20784314, 0.23137255, 0.23529412, 1)
+resistance = 100.0
+thickness_meters = 0.06

@@ -1,0 +1,704 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="1_c1sjl"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="2_fgibp"]
+[ext_resource type="Material" path="res://resources/campus/materials/concrete.tres" id="3_q6if3"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="4_kkoob"]
+[ext_resource type="PackedScene" path="res://scenes/props/medtac/detail/air_handler.tscn" id="5_r73lg"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/027_1.tscn" id="6_4pwal"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/027_0.tscn" id="7_70ecq"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/038_1.tscn" id="8_gp35o"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/026_1.tscn" id="9_ds3hu"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/093_0.tscn" id="10_il7ob"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/085_1.tscn" id="11_ngg8w"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/027_2.tscn" id="12_8ljx4"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/152_0.tscn" id="13_yd7wo"]
+[ext_resource type="Material" path="res://resources/campus/materials/ivy.tres" id="14_3fueh"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/152_1.tscn" id="15_3l11s"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/152_2.tscn" id="16_00fw5"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/152_3.tscn" id="17_mp5ep"]
+[ext_resource type="Material" path="res://resources/campus/materials/panel.tres" id="18_7m4qd"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kvwf2"]
+data = PackedVector3Array(-21, 0, 11, -21, 0, -11.4, 21.7, 0, -11.4, -21, -0.18, 11, 21.7, -0.18, -11.4, -21, -0.18, -11.4, 21.7, 0, -11.4, 21.7, 0, 11, -21, 0, 11, 21.7, -0.18, -11.4, -21, -0.18, 11, 21.7, -0.18, 11)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pxhdt"]
+_surfaces = [{
+"aabb": AABB(-21, -0.18, -11.4, 42.7, 0.18, 22.4),
+"attribute_data": PackedByteArray("AACowWZmNsGama1BZmY2wQAAqMEAADBBAACowWZmNsEAAKjBAAAwQZqZrUFmZjbBmpmtQQAAMEEAAKjBAAAwQZqZrUFmZjbBmpmtQQAAMEE="),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAFAAQA"),
+"material": ExtResource("3_q6if3"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AACowQAAAABmZjbBmpmtQQAAAABmZjbBAACowQAAAAAAADBBAACowexROL5mZjbBAACowexROL4AADBBmpmtQexROL5mZjbBmpmtQQAAAAAAADBBAACowQAAAAAAADBBmpmtQQAAAABmZjbBmpmtQexROL4AADBB/3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/78=")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oi2q2"]
+size = Vector3(42.7, 1.1, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_si5qc"]
+size = Vector3(42.7, 1.1, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_18emt"]
+size = Vector3(0.3, 1.1, 22.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v8myb"]
+size = Vector3(0.3, 1.1, 22.4)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t3kka"]
+_surfaces = [{
+"aabb": AABB(-2.0876074, -0.015, -1.1092238, 4.175215, 0.03, 2.2184477),
+"attribute_data": PackedByteArray("DPuNP4/CdTwM+42/j8J1PAz7jb+PwnW8DPuNP4/CdbwM+40/j8J1PAz7jT+PwnW8DPuNv4/CdTwM+42/j8J1vFybBUAM+40/XJsFwAz7jT9cmwXADPuNv1ybBUAM+42/XJsFwAz7jb9cmwXADPuNP1ybBUAM+42/XJsFQAz7jT9cmwXAj8J1PFybBUCPwnU8XJsFQI/CdbxcmwXAj8J1vFybBcCPwnU8XJsFQI/CdbxcmwXAj8J1PFybBcCPwnW8XJsFQI/CdTxcmwVAj8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("XJsFQI/CdTwM+40/XJsFQI/CdTwM+42/XJsFQI/CdbwM+42/XJsFQI/CdbwM+40/XJsFwI/CdTwM+40/XJsFwI/CdbwM+40/XJsFwI/CdTwM+42/XJsFwI/CdbwM+42/XJsFQI/CdTwM+40/XJsFwI/CdTwM+40/XJsFwI/CdTwM+42/XJsFQI/CdTwM+42/XJsFwI/CdbwM+42/XJsFwI/CdbwM+40/XJsFQI/CdbwM+42/XJsFQI/CdbwM+40/XJsFwI/CdTwM+40/XJsFQI/CdTwM+40/XJsFQI/CdbwM+40/XJsFwI/CdbwM+40/XJsFwI/CdTwM+40/XJsFQI/CdbwM+40/XJsFwI/CdTwM+42/XJsFwI/CdbwM+42/XJsFQI/CdTwM+42/XJsFQI/CdbwM+42/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_exfmh"]
+_surfaces = [{
+"aabb": AABB(-1.474832, -0.015, -0.74235064, 2.949664, 0.03, 1.4847013),
+"attribute_data": PackedByteArray("sQo+P4/CdTyxCj6/j8J1PLEKPr+PwnW8sQo+P4/CdbyxCj4/j8J1PLEKPj+PwnW8sQo+v4/CdTyxCj6/j8J1vEzHvD+xCj4/TMe8v7EKPj9Mx7y/sQo+v0zHvD+xCj6/TMe8v7EKPr9Mx7y/sQo+P0zHvD+xCj6/TMe8P7EKPj9Mx7y/j8J1PEzHvD+PwnU8TMe8P4/CdbxMx7y/j8J1vEzHvL+PwnU8TMe8P4/CdbxMx7y/j8J1PEzHvL+PwnW8TMe8P4/CdTxMx7w/j8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("TMe8P4/CdTyxCj4/TMe8P4/CdTyxCj6/TMe8P4/CdbyxCj6/TMe8P4/CdbyxCj4/TMe8v4/CdTyxCj4/TMe8v4/CdbyxCj4/TMe8v4/CdTyxCj6/TMe8v4/CdbyxCj6/TMe8P4/CdTyxCj4/TMe8v4/CdTyxCj4/TMe8v4/CdTyxCj6/TMe8P4/CdTyxCj6/TMe8v4/CdbyxCj6/TMe8v4/CdbyxCj4/TMe8P4/CdbyxCj6/TMe8P4/CdbyxCj4/TMe8v4/CdTyxCj4/TMe8P4/CdTyxCj4/TMe8P4/CdbyxCj4/TMe8v4/CdbyxCj4/TMe8v4/CdTyxCj4/TMe8P4/CdbyxCj4/TMe8v4/CdTyxCj6/TMe8v4/CdbyxCj6/TMe8P4/CdTyxCj6/TMe8P4/CdbyxCj6/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jom4v"]
+_surfaces = [{
+"aabb": AABB(-2.3672025, -0.015, -1.3420599, 4.734405, 0.03, 2.6841197),
+"attribute_data": PackedByteArray("nsirP4/CdTyeyKu/j8J1PJ7Iq7+PwnW8nsirP4/CdbyeyKs/j8J1PJ7Iqz+PwnW8nsirv4/CdTyeyKu/j8J1vD+AF0CeyKs/P4AXwJ7Iqz8/gBfAnsirvz+AF0CeyKu/P4AXwJ7Iq78/gBfAnsirPz+AF0CeyKu/P4AXQJ7Iqz8/gBfAj8J1PD+AF0CPwnU8P4AXQI/Cdbw/gBfAj8J1vD+AF8CPwnU8P4AXQI/Cdbw/gBfAj8J1PD+AF8CPwnW8P4AXQI/CdTw/gBdAj8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("P4AXQI/CdTyeyKs/P4AXQI/CdTyeyKu/P4AXQI/CdbyeyKu/P4AXQI/CdbyeyKs/P4AXwI/CdTyeyKs/P4AXwI/CdbyeyKs/P4AXwI/CdTyeyKu/P4AXwI/CdbyeyKu/P4AXQI/CdTyeyKs/P4AXwI/CdTyeyKs/P4AXwI/CdTyeyKu/P4AXQI/CdTyeyKu/P4AXwI/CdbyeyKu/P4AXwI/CdbyeyKs/P4AXQI/CdbyeyKu/P4AXQI/CdbyeyKs/P4AXwI/CdTyeyKs/P4AXQI/CdTyeyKs/P4AXQI/CdbyeyKs/P4AXwI/CdbyeyKs/P4AXwI/CdTyeyKs/P4AXQI/CdbyeyKs/P4AXwI/CdTyeyKu/P4AXwI/CdbyeyKu/P4AXQI/CdTyeyKu/P4AXQI/CdbyeyKu/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uwgir"]
+_surfaces = [{
+"aabb": AABB(-2.3690891, -0.015, -1.1016088, 4.7381783, 0.03, 2.2032175),
+"attribute_data": PackedByteArray("hAGNP4/CdTyEAY2/j8J1PIQBjb+PwnW8hAGNP4/CdbyEAY0/j8J1PIQBjT+PwnW8hAGNv4/CdTyEAY2/j8J1vCifF0CEAY0/KJ8XwIQBjT8onxfAhAGNvyifF0CEAY2/KJ8XwIQBjb8onxfAhAGNPyifF0CEAY2/KJ8XQIQBjT8onxfAj8J1PCifF0CPwnU8KJ8XQI/CdbwonxfAj8J1vCifF8CPwnU8KJ8XQI/CdbwonxfAj8J1PCifF8CPwnW8KJ8XQI/CdTwonxdAj8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("KJ8XQI/CdTyEAY0/KJ8XQI/CdTyEAY2/KJ8XQI/CdbyEAY2/KJ8XQI/CdbyEAY0/KJ8XwI/CdTyEAY0/KJ8XwI/CdbyEAY0/KJ8XwI/CdTyEAY2/KJ8XwI/CdbyEAY2/KJ8XQI/CdTyEAY0/KJ8XwI/CdTyEAY0/KJ8XwI/CdTyEAY2/KJ8XQI/CdTyEAY2/KJ8XwI/CdbyEAY2/KJ8XwI/CdbyEAY0/KJ8XQI/CdbyEAY2/KJ8XQI/CdbyEAY0/KJ8XwI/CdTyEAY0/KJ8XQI/CdTyEAY0/KJ8XQI/CdbyEAY0/KJ8XwI/CdbyEAY0/KJ8XwI/CdTyEAY0/KJ8XQI/CdbyEAY0/KJ8XwI/CdTyEAY2/KJ8XwI/CdbyEAY2/KJ8XQI/CdTyEAY2/KJ8XQI/CdbyEAY2/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3qyy7"]
+_surfaces = [{
+"aabb": AABB(-2.1086473, -0.015, -1.4736694, 4.2172947, 0.03, 2.9473388),
+"attribute_data": PackedByteArray("M6G8P4/CdTwzoby/j8J1PDOhvL+PwnW8M6G8P4/Cdbwzobw/j8J1PDOhvD+PwnW8M6G8v4/CdTwzoby/j8J1vBT0BkAzobw/FPQGwDOhvD8U9AbAM6G8vxT0BkAzoby/FPQGwDOhvL8U9AbAM6G8PxT0BkAzoby/FPQGQDOhvD8U9AbAj8J1PBT0BkCPwnU8FPQGQI/CdbwU9AbAj8J1vBT0BsCPwnU8FPQGQI/CdbwU9AbAj8J1PBT0BsCPwnW8FPQGQI/CdTwU9AZAj8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("FPQGQI/CdTwzobw/FPQGQI/CdTwzoby/FPQGQI/Cdbwzoby/FPQGQI/Cdbwzobw/FPQGwI/CdTwzobw/FPQGwI/Cdbwzobw/FPQGwI/CdTwzoby/FPQGwI/Cdbwzoby/FPQGQI/CdTwzobw/FPQGwI/CdTwzobw/FPQGwI/CdTwzoby/FPQGQI/CdTwzoby/FPQGwI/Cdbwzoby/FPQGwI/Cdbwzobw/FPQGQI/Cdbwzoby/FPQGQI/Cdbwzobw/FPQGwI/CdTwzobw/FPQGQI/CdTwzobw/FPQGQI/Cdbwzobw/FPQGwI/Cdbwzobw/FPQGwI/CdTwzobw/FPQGQI/Cdbwzobw/FPQGwI/CdTwzoby/FPQGwI/Cdbwzoby/FPQGQI/CdTwzoby/FPQGQI/Cdbwzoby/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ux4in"]
+_surfaces = [{
+"aabb": AABB(-1.6080474, -0.015, -1.3935621, 3.2160947, 0.03, 2.7871242),
+"attribute_data": PackedByteArray("PmCyP4/CdTw+YLK/j8J1PD5gsr+PwnW8PmCyP4/Cdbw+YLI/j8J1PD5gsj+PwnW8PmCyv4/CdTw+YLK/j8J1vH/UzT8+YLI/f9TNvz5gsj9/1M2/PmCyv3/UzT8+YLK/f9TNvz5gsr9/1M2/PmCyP3/UzT8+YLK/f9TNPz5gsj9/1M2/j8J1PH/UzT+PwnU8f9TNP4/Cdbx/1M2/j8J1vH/Uzb+PwnU8f9TNP4/Cdbx/1M2/j8J1PH/Uzb+PwnW8f9TNP4/CdTx/1M0/j8J1vA=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkA"),
+"material": ExtResource("14_3fueh"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("f9TNP4/CdTw+YLI/f9TNP4/CdTw+YLK/f9TNP4/Cdbw+YLK/f9TNP4/Cdbw+YLI/f9TNv4/CdTw+YLI/f9TNv4/Cdbw+YLI/f9TNv4/CdTw+YLK/f9TNv4/Cdbw+YLK/f9TNP4/CdTw+YLI/f9TNv4/CdTw+YLI/f9TNv4/CdTw+YLK/f9TNP4/CdTw+YLK/f9TNv4/Cdbw+YLK/f9TNv4/Cdbw+YLI/f9TNP4/Cdbw+YLK/f9TNP4/Cdbw+YLI/f9TNv4/CdTw+YLI/f9TNP4/CdTw+YLI/f9TNP4/Cdbw+YLI/f9TNv4/Cdbw+YLI/f9TNv4/CdTw+YLI/f9TNP4/Cdbw+YLI/f9TNv4/CdTw+YLK/f9TNv4/Cdbw+YLK/f9TNP4/CdTw+YLK/f9TNP4/Cdbw+YLK/////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d8hgd"]
+_surfaces = [{
+"aabb": AABB(-21.15, 0, -11.549999, 43, 1.1000001, 22.699999),
+"attribute_data": PackedByteArray("AAA0wc3MjD/MzDjBzcyMP8zMOMEAAAAAAAA0wQAAAAAAADTBzcyMPwAANMEAAAAAzMw4wc3MjD/MzDjBAAAAAJqZrUEAADTBAACowQAANMEAAKjBzMw4wZqZrUHMzDjBAACowczMOMEAAKjBAAA0wZqZrUHMzDjBmpmtQQAANMEAAKjBzcyMP5qZrUHNzIw/mpmtQQAAAAAAAKjBAAAAAAAAqMHNzIw/mpmtQQAAAAAAAKjBzcyMPwAAqMEAAAAAmpmtQc3MjD+ama1BAAAAAGZmMkHNzIw/mpktQc3MjD+amS1BAAAAAGZmMkEAAAAAZmYyQc3MjD9mZjJBAAAAAJqZLUHNzIw/mpktQQAAAACama1BZmYyQQAAqMFmZjJBAACowZqZLUGama1BmpktQQAAqMGamS1BAACowWZmMkGama1BmpktQZqZrUFmZjJBAACowc3MjD+ama1BzcyMP5qZrUEAAAAAAACowQAAAAAAAKjBzcyMP5qZrUEAAAAAAACowc3MjD8AAKjBAAAAAJqZrUHNzIw/mpmtQQAAAAAAADBBzcyMP2ZmNsHNzIw/ZmY2wQAAAAAAADBBAAAAAAAAMEHNzIw/AAAwQQAAAABmZjbBzcyMP2ZmNsEAAAAAMzOpwUuVLUEzM6nBAAA0wRcvqcEBADTB6tCmwZuZLUH1/6fBmpktQTMzqcGamS1BAACowZuZLUEAAKjBAAAwQTMzqcEAADBBMzOpwWZmNsEW/afBgEzAvRYvqcEAADTBzcymwQAANMHNzKbBmpktQerQpsGamS1BAACowWZmNsH//6fB//8zwTMzqcGbmS1BFy+pwZqZLUHq0KbBAQA0wfX/p8EAADTBMzOpwbH7M8EzM6nBAAAwQTMzqcEBADTBAACowWZmNsEzM6nBZmY2wRYvqcGbmS1BzcymwZqZLUHNzKbBAQA0wekCqMGATMC9AACowQAAMEH//6fBmpktQTMzqcHNzIw/zcymwc3MjD/NzKbBAAAAADMzqcEAAAAAMzOpwc3MjD/NzKbBAAAAADMzqcHNzIw/MzOpwQAAAADNzKbBzcyMP83MpsEAAAAAAAAwQc3MjD9mZjbBzcyMP2ZmNsEAAAAAAAAwQQAAAAAAADBBzcyMPwAAMEEAAAAAZmY2wc3MjD9mZjbBAAAAAM3MrkEAADBBmpmtQQAAMEGama1BBshMvmZmrEGamS1BZ2asQQAANMGEaqxBAQA0wZqZrUGbmS1BmpmtQWDMTL6ama1B//8zwc3MrkEAADTBhGqsQQAANMGama1BZmY2wc3MrkFmZjbBmpmtQcDMTL6wyK5BAQA0wWdmrEGamS1BhGqsQZqZLUFmZqxBAQA0wc3MrkFmZjbBmpmtQWZmNsGama1BAAAwQc3MrkEAADBBzcyuQUmVLUHNzK5BAQA0wYRqrEGbmS1Bj5mtQZqZLUFnZqxBzcyMP83MrkHNzIw/zcyuQQAAAABnZqxBAAAAAGdmrEHNzIw/zcyuQQAAAABnZqxBzcyMP2dmrEEAAAAAzcyuQc3MjD/NzK5BAAAAAA=="),
+"format": 34359742487,
+"index_count": 261,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkAGgAbABwAHQAaABwAHgAfACAAIAAfACEAIgAjACQAJQAiACQAJgAnACgAKAAnACkAKgArACwALQAuAC8AMAAxADIAMgAxADMANAA1ADYANwA0ADYAOAA5ADoAOgA5ADsAPAA9AD4APwBAADwAPAA+AD8AQQA8AEIAQwBEAEEAQwBBAEIAPgA9AEUARgBHAEgASQBKAEYARgBIAEkASwBMAEcASwBHAEUATQBOAE8ATwBQAFEAUQBNAE8ATQBSAE4ADQBTAFEAVABVAFMADQBUAFMAVgBXAFgAWABPAFkAWQBWAFgAWgBbAFYAUgBaAFYAXABdAF4AXwBgAGEAYgBjAGQAZABjAGUAZgBnAGgAaQBmAGgAagBrAGwAbABrAG0AbgBvAHAAcQByAHMAcAB0AHEAcQBzAHAAdQB2AHcAdQB3AG4AdgB1AHgAeQB6AHcAeQB3AHYADwB7AHwAfQB+AHsAewAPAH8AfwB9AHsADwB8AIAAgACBAA8AKACCAIMAgwCEACgAKACEAIUAhQB8AHsAewAoAIUAewCGAIcAhwAoAHsAfACFAIAAiACJAIoAiwCMAI0AjgCPAJAAkACPAJEA"),
+"material": ExtResource("18_7m4qd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 146,
+"vertex_data": PackedByteArray("mpmtQc3MjD8AADTBmpmtQc3MjD/MzDjBmpmtQQAAAADMzDjBmpmtQQAAAAAAADTBAACowc3MjD8AADTBAACowQAAAAAAADTBAACowc3MjD/MzDjBAACowQAAAADMzDjBmpmtQc3MjD8AADTBAACowc3MjD8AADTBAACowc3MjD/MzDjBmpmtQc3MjD/MzDjBAACowQAAAADMzDjBAACowQAAAAAAADTBmpmtQQAAAADMzDjBmpmtQQAAAAAAADTBAACowc3MjD8AADTBmpmtQc3MjD8AADTBmpmtQQAAAAAAADTBAACowQAAAAAAADTBAACowc3MjD8AADTBmpmtQQAAAAAAADTBAACowc3MjD/MzDjBAACowQAAAADMzDjBmpmtQc3MjD/MzDjBmpmtQQAAAADMzDjBmpmtQc3MjD9mZjJBmpmtQc3MjD+amS1BmpmtQQAAAACamS1BmpmtQQAAAABmZjJBAACowc3MjD9mZjJBAACowQAAAABmZjJBAACowc3MjD+amS1BAACowQAAAACamS1BmpmtQc3MjD9mZjJBAACowc3MjD9mZjJBAACowc3MjD+amS1BmpmtQc3MjD+amS1BAACowQAAAACamS1BAACowQAAAABmZjJBmpmtQQAAAACamS1BmpmtQQAAAABmZjJBAACowc3MjD9mZjJBmpmtQc3MjD9mZjJBmpmtQQAAAABmZjJBAACowQAAAABmZjJBAACowc3MjD9mZjJBmpmtQQAAAABmZjJBAACowc3MjD+amS1BAACowQAAAACamS1BmpmtQc3MjD+amS1BmpmtQQAAAACamS1Bzcymwc3MjD8AADBBzcymwc3MjD9mZjbBzcymwQAAAABmZjbBzcymwQAAAAAAADBBMzOpwc3MjD8AADBBMzOpwQAAAAAAADBBMzOpwc3MjD9mZjbBMzOpwQAAAABmZjbBMzOpwc3MjD9LlS1BMzOpwc3MjD8AADTBFy+pwc3MjD8BADTB6tCmwc7MjD+bmS1B9f+nwczMjD+amS1BMzOpwc3MjD+amS1BAACowc3MjD+bmS1BAACowc3MjD8AADBBMzOpwc3MjD8AADBBMzOpwc3MjD9mZjbBFv2nwczMjD+ATMC9Fi+pwc3MjD8AADTBzcymwc3MjD8AADTBzcymwc3MjD+amS1B6tCmwc3MjD+amS1BAACowc3MjD9mZjbB//+nwc3MjD///zPBMzOpwQAAAACbmS1BFy+pwQAAAACamS1B6tCmwQAAAAABADTB9f+nwQAAAAAAADTBMzOpwQAAAACx+zPBMzOpwQAAAAAAADBBMzOpwQAAAAABADTBAACowQAAAABmZjbBMzOpwQAAAABmZjbBFi+pwQAAAACbmS1BzcymwQAAAACamS1BzcymwQAAAAABADTB6QKowQAAAACATMC9AACowQAAAAAAADBB//+nwQAAAACamS1BMzOpwc3MjD8AADBBzcymwc3MjD8AADBBzcymwQAAAAAAADBBMzOpwQAAAAAAADBBMzOpwc3MjD8AADBBzcymwQAAAAAAADBBMzOpwc3MjD9mZjbBMzOpwQAAAABmZjbBzcymwc3MjD9mZjbBzcymwQAAAABmZjbBzcyuQc3MjD8AADBBzcyuQc3MjD9mZjbBzcyuQQAAAABmZjbBzcyuQQAAAAAAADBBZ2asQc3MjD8AADBBZ2asQQAAAAAAADBBZ2asQc3MjD9mZjbBZ2asQQAAAABmZjbBzcyuQc3MjD8AADBBmpmtQc3MjD8AADBBmpmtQc7MjD8GyEy+ZmasQc3MjD+amS1BZ2asQc3MjD8AADTBhGqsQc3MjD8BADTBmpmtQc3MjD+bmS1BmpmtQc3MjD9gzEy+mpmtQc3MjD///zPBzcyuQc3MjD8AADTBhGqsQc3MjD8AADTBmpmtQc3MjD9mZjbBzcyuQc3MjD9mZjbBmpmtQQAAAADAzEy+sMiuQQAAAAABADTBZ2asQQAAAACamS1BhGqsQQAAAACamS1BZmasQQAAAAABADTBzcyuQQAAAABmZjbBmpmtQQAAAABmZjbBmpmtQQAAAAAAADBBzcyuQQAAAAAAADBBzcyuQQAAAABJlS1BzcyuQQAAAAABADTBhGqsQQAAAACbmS1Bj5mtQQAAAACamS1BZ2asQc3MjD8AADBBzcyuQc3MjD8AADBBzcyuQQAAAAAAADBBZ2asQQAAAAAAADBBZ2asQc3MjD8AADBBzcyuQQAAAAAAADBBZ2asQc3MjD9mZjbBZ2asQQAAAABmZjbBzcyuQc3MjD9mZjbBzcyuQQAAAABmZjbB////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgP///3//f/+/////f/9//7////9//3//v////3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA//////9/AID//////38AgP//////fwCA//////9/AID///9//3//v////3//f/+/////f/9//7////9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP//////fwCA//////9/AID//////38AgP//////fwCA////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgA==")
+}]
+
+[node name="Roof" type="Node3D" unique_id=1113640492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.4, 0)
+metadata/campus_roof = true
+
+[node name="Slab14751" type="Node3D" parent="." unique_id=617680137]
+metadata/campus_slab = true
+metadata/surface_y = 8.4
+
+[node name="StructureConcrete" type="StaticBody3D" parent="Slab14751" unique_id=1940712150]
+script = ExtResource("1_c1sjl")
+material = ExtResource("2_fgibp")
+
+[node name="Part14754" type="CollisionShape3D" parent="Slab14751/StructureConcrete" unique_id=1276535675]
+shape = SubResource("ConcavePolygonShape3D_kvwf2")
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Slab14751" unique_id=1514108406]
+mesh = SubResource("ArrayMesh_pxhdt")
+metadata/world_generated = true
+
+[node name="StructurePanel" type="StaticBody3D" parent="." unique_id=1258018537]
+script = ExtResource("1_c1sjl")
+material = ExtResource("4_kkoob")
+
+[node name="Part14756" type="CollisionShape3D" parent="StructurePanel" unique_id=631642929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35000038, 0.55, -11.4)
+shape = SubResource("BoxShape3D_oi2q2")
+
+[node name="Part14757" type="CollisionShape3D" parent="StructurePanel" unique_id=300032685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35000038, 0.55, 11)
+shape = SubResource("BoxShape3D_si5qc")
+
+[node name="Part14758" type="CollisionShape3D" parent="StructurePanel" unique_id=909244579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0.55, -0.19999981)
+shape = SubResource("BoxShape3D_18emt")
+
+[node name="Part14759" type="CollisionShape3D" parent="StructurePanel" unique_id=855221927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7, 0.55, -0.19999981)
+shape = SubResource("BoxShape3D_v8myb")
+
+[node name="Part14760" type="Node3D" parent="." unique_id=1541657375 instance=ExtResource("5_r73lg")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 2.8954506, 0, -7.5969715)
+metadata/bounds = AABB(-1.25, 0, -0.6, 2.5, 2.4, 1.24)
+metadata/medtac_prop_id = "air_handler"
+metadata/campus_equipment = "m:air_handler"
+metadata/supported_by = "floor"
+
+[node name="Cover14760" type="Marker3D" parent="." unique_id=371587703 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.695451, 0.1, -7.5969715)
+
+[node name="Part14762" type="Node3D" parent="." unique_id=881657075 instance=ExtResource("6_4pwal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0739, 0, 0.018824577)
+metadata/catalog_id = "027"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "roof_curb", "duct_outlet"])
+metadata/bounds = AABB(-1.5, 0, -1.0799999, 3, 1.74, 2.08)
+metadata/campus_equipment = "e:027:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14762" type="Marker3D" parent="." unique_id=1225778123 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2739003, 0.1, 0.018824577)
+
+[node name="Part14764" type="Node3D" parent="." unique_id=1036155859 instance=ExtResource("7_70ecq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -12.775539, 0, 6.723034)
+metadata/catalog_id = "027"
+metadata/variant_index = 0.0
+metadata/variant_name = "Standard"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "roof_curb", "duct_outlet"])
+metadata/bounds = AABB(-1, 0, -0.88, 2, 1.34, 1.6800001)
+metadata/campus_equipment = "e:027:0"
+metadata/supported_by = "floor"
+
+[node name="Cover14764" type="Marker3D" parent="." unique_id=1853711544 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.975539, 0.1, 6.723034)
+
+[node name="Part14766" type="Node3D" parent="." unique_id=1953423235 instance=ExtResource("8_gp35o")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.7625, 0, 3.1803598)
+metadata/catalog_id = "038"
+metadata/variant_index = 1.0
+metadata/variant_name = "Tilted"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["dish_base", "dish_mount", "stepped_dish", "feed_arm", "feedhorn"])
+metadata/bounds = AABB(-0.70971483, 0, -0.58, 1.015011, 1.238689, 0.905)
+metadata/campus_equipment = "e:038:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14766" type="Marker3D" parent="." unique_id=1665546309 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.962501, 0.1, 3.1803598)
+
+[node name="Part14768" type="Node3D" parent="." unique_id=1847908052 instance=ExtResource("9_ds3hu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5479813, 0, 5.4286776)
+metadata/catalog_id = "026"
+metadata/variant_index = 1.0
+metadata/variant_name = "Rusty"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "wall_brackets"])
+metadata/bounds = AABB(-0.47500002, 0, -0.405, 0.95000005, 0.75, 0.70500004)
+metadata/campus_equipment = "e:026:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14768" type="Marker3D" parent="." unique_id=1718651728 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3479815, 0.1, 5.4286776)
+
+[node name="Part14770" type="Node3D" parent="." unique_id=470198233 instance=ExtResource("10_il7ob")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 17.832348, 0, 6.477544)
+metadata/catalog_id = "093"
+metadata/variant_index = 0.0
+metadata/variant_name = "Straight"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pipe", "flanges", "flange_bolts"])
+metadata/bounds = AABB(-0.35, 0, -0.0025000004, 0.7, 0.7, 1.6025001)
+metadata/campus_equipment = "e:093:0"
+metadata/supported_by = "floor"
+
+[node name="Cover14770" type="Marker3D" parent="." unique_id=484989696 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.632347, 0.1, 6.477544)
+
+[node name="Part14772" type="Node3D" parent="." unique_id=1558713118 instance=ExtResource("11_ngg8w")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11.894424, 0, 4.5143557)
+metadata/catalog_id = "085"
+metadata/variant_index = 1.0
+metadata/variant_name = "Metal"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["spool_flange", "spool_core", "wound_cable", "spool_bore"])
+metadata/bounds = AABB(-0.45, 0, -0.53, 0.88, 1.06, 1.06)
+metadata/campus_equipment = "e:085:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14772" type="Marker3D" parent="." unique_id=320992139 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.694425, 0.1, 4.5143557)
+
+[node name="Part14774" type="Node3D" parent="." unique_id=1045643550 instance=ExtResource("6_4pwal")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.3444653, 0, -5.8959208)
+metadata/catalog_id = "027"
+metadata/variant_index = 1.0
+metadata/variant_name = "Large"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "roof_curb", "duct_outlet"])
+metadata/bounds = AABB(-1.5, 0, -1.0799999, 3, 1.74, 2.08)
+metadata/campus_equipment = "e:027:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14774" type="Marker3D" parent="." unique_id=1965147572 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45553476, 0.1, -5.8959208)
+
+[node name="Part14776" type="Node3D" parent="." unique_id=750776082 instance=ExtResource("7_70ecq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.444557, 0, -5.5151606)
+metadata/catalog_id = "027"
+metadata/variant_index = 0.0
+metadata/variant_name = "Standard"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "roof_curb", "duct_outlet"])
+metadata/bounds = AABB(-1, 0, -0.88, 2, 1.34, 1.6800001)
+metadata/campus_equipment = "e:027:0"
+metadata/supported_by = "floor"
+
+[node name="Cover14776" type="Marker3D" parent="." unique_id=1996301041 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.644557, 0.1, -5.5151606)
+
+[node name="Part14778" type="Node3D" parent="." unique_id=1174268641 instance=ExtResource("8_gp35o")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -15.213835, 0, 1.0520487)
+metadata/catalog_id = "038"
+metadata/variant_index = 1.0
+metadata/variant_name = "Tilted"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["dish_base", "dish_mount", "stepped_dish", "feed_arm", "feedhorn"])
+metadata/bounds = AABB(-0.70971483, 0, -0.58, 1.015011, 1.238689, 0.905)
+metadata/campus_equipment = "e:038:1"
+metadata/supported_by = "floor"
+
+[node name="Cover14778" type="Marker3D" parent="." unique_id=1378455329 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.413835, 0.1, 1.0520487)
+
+[node name="Part14780" type="Node3D" parent="." unique_id=1175849727 instance=ExtResource("5_r73lg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8537903, 0, 5.3885984)
+metadata/bounds = AABB(-1.25, 0, -0.6, 2.5, 2.4, 1.24)
+metadata/medtac_prop_id = "air_handler"
+metadata/campus_equipment = "m:air_handler"
+metadata/supported_by = "floor"
+
+[node name="Cover14780" type="Marker3D" parent="." unique_id=869842209 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05379, 0.1, 5.3885984)
+
+[node name="Part14782" type="Node3D" parent="." unique_id=303432883 instance=ExtResource("12_8ljx4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.6251507, 0, -2.5935612)
+metadata/catalog_id = "027"
+metadata/variant_index = 2.0
+metadata/variant_name = "Broken"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "rooftop",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["housing", "fan_rim", "fan_recess", "fan_blades", "fan_hub", "cooling_louvers", "roof_curb", "duct_outlet", "detached_panel"])
+metadata/bounds = AABB(-1, 0, -0.88, 2, 1.34, 1.6800001)
+metadata/campus_equipment = "e:027:2"
+metadata/supported_by = "floor"
+
+[node name="Cover14782" type="Marker3D" parent="." unique_id=695526949 groups=["district_cover"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1748493, 0.1, -2.5935612)
+
+[node name="Part14784" type="Node3D" parent="." unique_id=1875177353 instance=ExtResource("13_yd7wo")]
+transform = Transform3D(-0.9575277, 0, -0.28834134, 0, 1, 0, 0.28834134, 0, -0.9575277, -2.9704056, 0, 0.82288265)
+metadata/catalog_id = "152"
+metadata/variant_index = 0.0
+metadata/variant_name = "Clear"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.012000033, 0.75)
+metadata/campus_equipment = "e:152:0"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14784" type="Node3D" parent="." unique_id=2133034747]
+transform = Transform3D(-0.4484772, 0, 0.89379424, 0, 1, 0, -0.89379424, 0, -0.4484772, 1.1702309, 0.02, -1.6472836)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14784" unique_id=611969547]
+mesh = SubResource("ArrayMesh_t3kka")
+metadata/world_generated = true
+
+[node name="Part14786" type="Node3D" parent="." unique_id=915834027 instance=ExtResource("15_3l11s")]
+transform = Transform3D(0.47440246, 0, -0.8803081, 0, 1, 0, 0.8803081, 0, 0.47440246, 6.060013, 0, 7.9417286)
+metadata/catalog_id = "152"
+metadata/variant_index = 1.0
+metadata/variant_name = "Muddy"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.012000033, 0.75)
+metadata/campus_equipment = "e:152:1"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14786" type="Node3D" parent="." unique_id=1057496821]
+transform = Transform3D(0.2009945, 0, -0.9795924, 0, 1, 0, 0.9795924, 0, 0.2009945, -7.9623976, 0.02, -1.3669739)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14786" unique_id=618545792]
+mesh = SubResource("ArrayMesh_exfmh")
+metadata/world_generated = true
+
+[node name="Part14788" type="Node3D" parent="." unique_id=1552698318 instance=ExtResource("16_00fw5")]
+transform = Transform3D(-0.053138293, 0, 0.9985872, 0, 1, 0, -0.9985872, 0, -0.053138293, -16.681, 0, -8.452238)
+metadata/catalog_id = "152"
+metadata/variant_index = 2.0
+metadata/variant_name = "Oily"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.012000033, 0.75)
+metadata/campus_equipment = "e:152:2"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14788" type="Node3D" parent="." unique_id=715833102]
+transform = Transform3D(-0.26272404, 0, -0.964871, 0, 1, 0, 0.964871, 0, -0.26272404, -7.5241165, 0.02, 2.572733)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14788" unique_id=2047659625]
+mesh = SubResource("ArrayMesh_jom4v")
+metadata/world_generated = true
+
+[node name="Part14790" type="Node3D" parent="." unique_id=218124888 instance=ExtResource("17_mp5ep")]
+transform = Transform3D(-0.99726385, 0, -0.07392413, 0, 1, 0, 0.07392413, 0, -0.99726385, -18.54401, 0, -8.359432)
+metadata/catalog_id = "152"
+metadata/variant_index = 3.0
+metadata/variant_name = "Stagnant"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle", "surface_scum"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.043500017, 0.75)
+metadata/campus_equipment = "e:152:3"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14790" type="Node3D" parent="." unique_id=1050845018]
+transform = Transform3D(-0.67280287, 0, -0.7398218, 0, 1, 0, 0.7398218, 0, -0.67280287, -2.791954, 0.02, 7.0118427)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14790" unique_id=1679324694]
+mesh = SubResource("ArrayMesh_uwgir")
+metadata/world_generated = true
+
+[node name="Part14792" type="Node3D" parent="." unique_id=1831730442 instance=ExtResource("13_yd7wo")]
+transform = Transform3D(0.04418658, 0, 0.9990233, 0, 1, 0, -0.9990233, 0, 0.04418658, 11.572763, 0, 6.9273243)
+metadata/catalog_id = "152"
+metadata/variant_index = 0.0
+metadata/variant_name = "Clear"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.012000033, 0.75)
+metadata/campus_equipment = "e:152:0"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14792" type="Node3D" parent="." unique_id=858756861]
+transform = Transform3D(0.5166298, 0, -0.85620886, 0, 1, 0, 0.85620886, 0, 0.5166298, -7.950903, 0.02, -7.453794)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14792" unique_id=159752138]
+mesh = SubResource("ArrayMesh_3qyy7")
+metadata/world_generated = true
+
+[node name="Part14794" type="Node3D" parent="." unique_id=229156950 instance=ExtResource("15_3l11s")]
+transform = Transform3D(0.40654892, 0, -0.913629, 0, 1, 0, 0.913629, 0, 0.40654892, -11.786346, 0, 1.6269674)
+metadata/catalog_id = "152"
+metadata/variant_index = 1.0
+metadata/variant_name = "Muddy"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["puddle"])
+metadata/bounds = AABB(-0.8, 0, -0.28500003, 1.6500001, 0.012000033, 0.75)
+metadata/campus_equipment = "e:152:1"
+metadata/nonsolid = true
+metadata/supported_by = "floor"
+
+[node name="Debris14794" type="Node3D" parent="." unique_id=1965614610]
+transform = Transform3D(0.38980156, 0, 0.92089885, 0, 1, 0, -0.92089885, 0, 0.38980156, 9.960207, 0.02, 1.0946455)
+
+[node name="BakedMesh" type="MeshInstance3D" parent="Debris14794" unique_id=769230820]
+mesh = SubResource("ArrayMesh_ux4in")
+metadata/world_generated = true
+
+[node name="BakedMesh" type="MeshInstance3D" parent="." unique_id=2128604066]
+mesh = SubResource("ArrayMesh_d8hgd")
+metadata/world_generated = true

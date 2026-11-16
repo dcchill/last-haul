@@ -1,0 +1,80 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/116_0_body.res" id="1_hixvq"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_a5tbr"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_wwoxs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2reu5"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8evh"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uhith"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c7yt"]
+size = Vector3(0.065, 1.65, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljmqj"]
+size = Vector3(1.4, 0.045, 0.45)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_381or"]
+size = Vector3(1.4, 0.045, 0.45)
+
+[node name="Prop116" type="Node3D" unique_id=1874470577]
+metadata/catalog_id = "116"
+metadata/variant_index = 0.0
+metadata/variant_name = "Empty"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["security", "armory", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["legs", "shelves", "back_brace", "stock_cradle"])
+metadata/bounds = AABB(-0.70000005, 0, -0.22500001, 1.4000001, 1.65, 0.45450002)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=974273451]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_hixvq")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=537100224]
+collision_mask = 0
+script = ExtResource("2_a5tbr")
+material = ExtResource("3_wwoxs")
+
+[node name="@CollisionShape3D@175" type="CollisionShape3D" parent="Collision_body_steel" unique_id=561516681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6675, 0.825, -0.1925)
+shape = SubResource("BoxShape3D_2reu5")
+
+[node name="@CollisionShape3D@176" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1862988166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6675, 0.825, 0.1925)
+shape = SubResource("BoxShape3D_o8evh")
+
+[node name="@CollisionShape3D@177" type="CollisionShape3D" parent="Collision_body_steel" unique_id=283100199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6675, 0.825, -0.1925)
+shape = SubResource("BoxShape3D_uhith")
+
+[node name="@CollisionShape3D@178" type="CollisionShape3D" parent="Collision_body_steel" unique_id=476912527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6675, 0.825, 0.1925)
+shape = SubResource("BoxShape3D_5c7yt")
+
+[node name="@CollisionShape3D@179" type="CollisionShape3D" parent="Collision_body_steel" unique_id=21864212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0)
+shape = SubResource("BoxShape3D_ljmqj")
+
+[node name="@CollisionShape3D@180" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1114248797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, 0)
+shape = SubResource("BoxShape3D_381or")

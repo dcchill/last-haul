@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/128_0_body.res" id="1_tc6c0"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_fkjam"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_ahvel"]
+
+[sub_resource type="Resource" id="Resource_tl0bn"]
+script = ExtResource("3_ahvel")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_agirb"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xir6"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_exukf"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oxbv5"]
+size = Vector3(0.045, 2.0588589, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bf2my"]
+size = Vector3(0.05, 2, 0.05)
+
+[node name="Prop128" type="Node3D" unique_id=270669772]
+metadata/catalog_id = "128"
+metadata/variant_index = 0.0
+metadata/variant_name = "Lean-To"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tent_poles", "guy_rope", "ridgepole", "tarp_roof"])
+metadata/bounds = AABB(-1.5053036, 0, -1.207696, 3.0106072, 1.7439922, 2.415392)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=678501251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01600777, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_tc6c0")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=567859362]
+collision_mask = 0
+script = ExtResource("2_fkjam")
+material = SubResource("Resource_tl0bn")
+
+[node name="@CollisionShape3D@39" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1445950911]
+transform = Transform3D(0.08304553, 0.5828471, 0.8083271, 0, 0.8111289, -0.5848674, -0.99654573, 0.04857062, 0.06736063, -0.6, 0.8489922, -0.95)
+shape = SubResource("BoxShape3D_agirb")
+
+[node name="@CollisionShape3D@40" type="CollisionShape3D" parent="Collision_body_wood" unique_id=174402547]
+transform = Transform3D(-0.0830455, 0.5828471, 0.8083271, 0, 0.8111289, -0.5848674, -0.99654573, -0.048570607, -0.0673606, -0.6, 0.8489922, 0.95)
+shape = SubResource("BoxShape3D_0xir6")
+
+[node name="@CollisionShape3D@41" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1191025233]
+transform = Transform3D(0.08304553, -0.5828471, -0.8083271, 0, 0.8111289, -0.5848674, 0.99654573, 0.04857062, 0.06736063, 0.6, 0.8489922, -0.95)
+shape = SubResource("BoxShape3D_exukf")
+
+[node name="@CollisionShape3D@42" type="CollisionShape3D" parent="Collision_body_wood" unique_id=833099683]
+transform = Transform3D(-0.0830455, -0.5828471, -0.8083271, 0, 0.8111289, -0.5848674, 0.99654573, -0.048570607, -0.0673606, 0.6, 0.8489922, 0.95)
+shape = SubResource("BoxShape3D_oxbv5")
+
+[node name="@CollisionShape3D@43" type="CollisionShape3D" parent="Collision_body_wood" unique_id=876092265]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.6839923, 0)
+shape = SubResource("BoxShape3D_bf2my")

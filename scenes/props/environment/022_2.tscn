@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_2_body.res" id="1_stvxr"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_2_panel.res" id="2_0brcd"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_be06d"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_rxtgf"]
+
+[sub_resource type="Resource" id="Resource_dkaob"]
+script = ExtResource("4_rxtgf")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2tydk"]
+size = Vector3(0.92, 2.03, 0.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cet1x"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jx8c0"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dep1q"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3exgk"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[node name="Prop022" type="Node3D" unique_id=1312238670]
+metadata/catalog_id = "022"
+metadata/variant_index = 2.0
+metadata/variant_name = "Broken"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["uprights", "crossrails", "moving_panel", "handle_mount", "lock_plate", "plank_seams", "split_panel"])
+metadata/bounds = AABB(-0.5625, 0, -0.09500001, 1.125, 2.15, 0.15500002)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1670852]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_stvxr")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1111218653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.06, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=579878263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, -0.06, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_0brcd")
+
+[node name="Collision_panel_wood" type="StaticBody3D" parent="MovingPanel" unique_id=1296829895]
+collision_mask = 0
+script = ExtResource("3_be06d")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@42" type="CollisionShape3D" parent="MovingPanel/Collision_panel_wood" unique_id=1536687449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, 1.0150001, 0)
+shape = SubResource("BoxShape3D_2tydk")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1025974741]
+collision_mask = 0
+script = ExtResource("3_be06d")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@38" type="CollisionShape3D" parent="Collision_body_wood" unique_id=2116036134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_cet1x")
+
+[node name="@CollisionShape3D@39" type="CollisionShape3D" parent="Collision_body_wood" unique_id=648349634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_jx8c0")
+
+[node name="@CollisionShape3D@40" type="CollisionShape3D" parent="Collision_body_wood" unique_id=355776271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_dep1q")
+
+[node name="@CollisionShape3D@41" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1063280802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11, 0)
+shape = SubResource("BoxShape3D_3exgk")

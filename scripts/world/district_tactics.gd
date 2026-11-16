@@ -39,6 +39,7 @@ static func analyze(scene: Node3D,layout: DistrictLayout,map: RID,config: Distri
 				samples.append({"x":at.x,"z":at.z,"exposure":float(open)/8,"sightline_m":sight})
 	var errors: Array[String]=[]
 	var maximum_gap:=0.0
+	var maximum_gap_at:=Vector3.ZERO
 	for edge in layout.edges:
 		var a:=Vector3(layout.positions[edge.x].x,.1,layout.positions[edge.x].y)
 		var b:=Vector3(layout.positions[edge.y].x,.1,layout.positions[edge.y].y)
@@ -49,9 +50,9 @@ static func analyze(scene: Node3D,layout: DistrictLayout,map: RID,config: Distri
 				var at:=path[segment-1].lerp(path[segment],float(index)/count)
 				var distance:=INF
 				for point in points: distance=minf(distance,Vector2(at.x,at.z).distance_to(Vector2(point.x,point.z)))
-				maximum_gap=maxf(maximum_gap,distance)
+				if distance>maximum_gap: maximum_gap=distance; maximum_gap_at=at
 	if points.size()<60: errors.append("insufficient physically verified crouch cover")
 	if maximum_gap>config.maximum_exposure_gap: errors.append("mandatory traversal exceeds configured distance from useful cover: %.1fm"%maximum_gap)
 	var serialized: Array[Dictionary]=[]
 	for at in points: serialized.append({"x":at.x,"y":at.y,"z":at.z})
-	return {"valid_cover":serialized,"rejected_cover_anchors":rejected,"exposure_samples":samples,"maximum_cover_distance_m":maximum_gap,"longest_sampled_sightline_m":longest,"errors":errors}
+	return {"valid_cover":serialized,"rejected_cover_anchors":rejected,"exposure_samples":samples,"maximum_cover_distance_m":maximum_gap,"maximum_cover_gap_at":maximum_gap_at,"longest_sampled_sightline_m":longest,"errors":errors}

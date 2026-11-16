@@ -1,0 +1,106 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/004_3_body.res" id="1_hs8wh"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_xe61u"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_cm8kf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f06rd"]
+size = Vector3(0.5, 0.12, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ean0"]
+size = Vector3(0.5, 0.12, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcj74"]
+size = Vector3(0.08, 0.85, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0mmyx"]
+size = Vector3(0.08, 0.85, 0.08)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hxv04"]
+points = PackedVector3Array(-0.32, -0.15, 0.16, 0.32, -0.15, 0.16, -0.32, -0.11, 0, 0.32, -0.11, 0, -0.32, -0.15, -0.16, 0.32, -0.15, -0.16, -0.32, 0.15, -0.16, 0.32, 0.15, -0.16, -0.32, 0.11, 0, 0.32, 0.11, 0, -0.32, 0.15, 0.16, 0.32, 0.15, 0.16)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2q5fw"]
+points = PackedVector3Array(-0.32, -0.15, 0.16, 0.32, -0.15, 0.16, -0.32, -0.11, 0, 0.32, -0.11, 0, -0.32, -0.15, -0.16, 0.32, -0.15, -0.16, -0.32, 0.15, -0.16, 0.32, 0.15, -0.16, -0.32, 0.11, 0, 0.32, 0.11, 0, -0.32, 0.15, 0.16, 0.32, 0.15, 0.16)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ydybf"]
+points = PackedVector3Array(-0.32, -0.15, 0.16, 0.32, -0.15, 0.16, -0.32, -0.11, 0, 0.32, -0.11, 0, -0.32, -0.15, -0.16, 0.32, -0.15, -0.16, -0.32, 0.15, -0.16, 0.32, 0.15, -0.16, -0.32, 0.11, 0, 0.32, 0.11, 0, -0.32, 0.15, 0.16, 0.32, 0.15, 0.16)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_knvj2"]
+points = PackedVector3Array(-0.32, -0.15, 0.16, 0.32, -0.15, 0.16, -0.32, -0.11, 0, 0.32, -0.11, 0, -0.32, -0.15, -0.16, 0.32, -0.15, -0.16, -0.32, 0.15, -0.16, 0.32, 0.15, -0.16, -0.32, 0.11, 0, 0.32, 0.11, 0, -0.32, 0.15, 0.16, 0.32, 0.15, 0.16)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_psnjm"]
+points = PackedVector3Array(-0.32, -0.15, 0.16, 0.32, -0.15, 0.16, -0.32, -0.11, 0, 0.32, -0.11, 0, -0.32, -0.15, -0.16, 0.32, -0.15, -0.16, -0.32, 0.15, -0.16, 0.32, 0.15, -0.16, -0.32, 0.11, 0, 0.32, 0.11, 0, -0.32, 0.15, 0.16, 0.32, 0.15, 0.16)
+
+[node name="Prop004" type="Node3D" unique_id=469874567]
+metadata/catalog_id = "004"
+metadata/variant_index = 3.0
+metadata/variant_name = "Overgrown"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["feet", "posts", "corrugated_guardrail", "vines"])
+metadata/bounds = AABB(-1.69, 0, -0.375, 3.38, 0.85, 0.75)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1478897611]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_hs8wh")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1360067081]
+collision_mask = 0
+script = ExtResource("2_xe61u")
+material = ExtResource("3_cm8kf")
+
+[node name="@CollisionShape3D@63" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1564854370]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44, 0.06, 0)
+shape = SubResource("BoxShape3D_f06rd")
+
+[node name="@CollisionShape3D@65" type="CollisionShape3D" parent="Collision_body_steel" unique_id=932118883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44, 0.06, 0)
+shape = SubResource("BoxShape3D_8ean0")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1985151011]
+collision_mask = 0
+script = ExtResource("2_xe61u")
+material = ExtResource("3_cm8kf")
+
+[node name="@CollisionShape3D@64" type="CollisionShape3D" parent="Collision_body_paint" unique_id=600123455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44, 0.425, 0)
+shape = SubResource("BoxShape3D_dcj74")
+
+[node name="@CollisionShape3D@66" type="CollisionShape3D" parent="Collision_body_paint" unique_id=441288848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44, 0.425, 0)
+shape = SubResource("BoxShape3D_0mmyx")
+
+[node name="@CollisionShape3D@67" type="CollisionShape3D" parent="Collision_body_paint" unique_id=897713876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28, 0.68, 0)
+shape = SubResource("ConvexPolygonShape3D_hxv04")
+
+[node name="@CollisionShape3D@68" type="CollisionShape3D" parent="Collision_body_paint" unique_id=167251313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64, 0.68, 0)
+shape = SubResource("ConvexPolygonShape3D_2q5fw")
+
+[node name="@CollisionShape3D@69" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1033394243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0)
+shape = SubResource("ConvexPolygonShape3D_ydybf")
+
+[node name="@CollisionShape3D@70" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1262692070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.64, 0.68, 0)
+shape = SubResource("ConvexPolygonShape3D_knvj2")
+
+[node name="@CollisionShape3D@71" type="CollisionShape3D" parent="Collision_body_paint" unique_id=866525299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28, 0.68, 0)
+shape = SubResource("ConvexPolygonShape3D_psnjm")

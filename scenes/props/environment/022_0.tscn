@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_0_body.res" id="1_0aluu"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/022_0_panel.res" id="2_cvelg"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="3_ma4t5"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="4_vmo8h"]
+
+[sub_resource type="Resource" id="Resource_dkaob"]
+script = ExtResource("4_vmo8h")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4jsg6"]
+size = Vector3(0.92, 2.03, 0.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rsliu"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tt6bl"]
+size = Vector3(0.075, 2.15, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0four"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6uqm"]
+size = Vector3(1.05, 0.08, 0.12)
+
+[node name="Prop022" type="Node3D" unique_id=1368467363]
+metadata/catalog_id = "022"
+metadata/variant_index = 0.0
+metadata/variant_name = "Residential"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["uprights", "crossrails", "moving_panel", "handle_mount", "handle", "lock_plate", "plank_seams"])
+metadata/bounds = AABB(-0.5625, 0, -0.1075, 1.125, 2.15, 0.1675)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1699228703]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_0aluu")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=503683636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.06, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=595328802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, -0.06, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("2_cvelg")
+
+[node name="Collision_panel_wood" type="StaticBody3D" parent="MovingPanel" unique_id=832369670]
+collision_mask = 0
+script = ExtResource("3_ma4t5")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@29" type="CollisionShape3D" parent="MovingPanel/Collision_panel_wood" unique_id=934918290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, 1.0150001, 0)
+shape = SubResource("BoxShape3D_4jsg6")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1302383010]
+collision_mask = 0
+script = ExtResource("3_ma4t5")
+material = SubResource("Resource_dkaob")
+
+[node name="@CollisionShape3D@25" type="CollisionShape3D" parent="Collision_body_wood" unique_id=481495444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_rsliu")
+
+[node name="@CollisionShape3D@26" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1599481498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.525, 1.075, 0)
+shape = SubResource("BoxShape3D_tt6bl")
+
+[node name="@CollisionShape3D@27" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1591049823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_0four")
+
+[node name="@CollisionShape3D@28" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1920878629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.11, 0)
+shape = SubResource("BoxShape3D_x6uqm")

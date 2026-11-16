@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/028_0_body.res" id="1_ps06c"]
+
+[node name="Prop028" type="Node3D" unique_id=304119904]
+metadata/catalog_id = "028"
+metadata/variant_index = 0.0
+metadata/variant_name = "Straight"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["gutter_trough", "gutter_rim", "gutter_bracket"])
+metadata/bounds = AABB(-1, 0, -0.1425, 2, 0.26, 0.3825)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1818763310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060000002, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_ps06c")

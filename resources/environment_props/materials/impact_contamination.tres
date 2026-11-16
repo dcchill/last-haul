@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MaterialDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="1_hbs04"]
+
+[resource]
+script = ExtResource("1_hbs04")
+id = "prop_contamination"
+impact_color = Color(0.30980393, 0.34901962, 0.2509804, 1)
+resistance = 100.0
+thickness_meters = 0.06

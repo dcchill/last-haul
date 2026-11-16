@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/122_2_body.res" id="1_q168r"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_4sobt"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_34vlo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4p78j"]
+points = PackedVector3Array(-0.35, 0, -0.0375, -0.35, 0, 0.0375, 0.35, 0, -0.0375, 0.35, 0, 0.0375, 0.4, 1.2, -0.0375, 0.4, 1.2, 0.0375, 0.28, 1.45, -0.0375, 0.28, 1.45, 0.0375, -0.28, 1.45, -0.0375, -0.28, 1.45, 0.0375, -0.4, 1.2, -0.0375, -0.4, 1.2, 0.0375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gkoio"]
+size = Vector3(0.6, 0.08, 0.55)
+
+[node name="Prop122" type="Node3D" unique_id=386368000]
+metadata/catalog_id = "122"
+metadata/variant_index = 2.0
+metadata/variant_name = "Damaged"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["ballistic_shield", "view_port", "handle_mount", "shield_kickstand", "impact_dents"])
+metadata/bounds = AABB(-0.4, 0, -0.060000002, 0.8, 1.45, 0.585)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1708974110]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_q168r")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=285566305]
+collision_mask = 0
+script = ExtResource("2_4sobt")
+material = ExtResource("3_34vlo")
+
+[node name="@CollisionShape3D@312" type="CollisionShape3D" parent="Collision_body_paint" unique_id=245410454]
+shape = SubResource("ConvexPolygonShape3D_4p78j")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=226915145]
+collision_mask = 0
+script = ExtResource("2_4sobt")
+material = ExtResource("3_34vlo")
+
+[node name="@CollisionShape3D@313" type="CollisionShape3D" parent="Collision_body_steel" unique_id=503993807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0.25)
+shape = SubResource("BoxShape3D_gkoio")

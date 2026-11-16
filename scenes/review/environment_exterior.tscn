@@ -1,0 +1,579 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="1_gujuh"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="2_xqm67"]
+[ext_resource type="Material" path="res://resources/district/materials/concrete.tres" id="3_rl6vo"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/001_1.tscn" id="4_25sxf"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/003_0.tscn" id="5_xjpy5"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/002_1.tscn" id="6_k0iro"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/002_0.tscn" id="7_ix6ie"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/004_2.tscn" id="8_0qn5p"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/008_1.tscn" id="9_5gq6q"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/005_0.tscn" id="10_p225u"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/156_1.tscn" id="11_u6dww"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/159_2.tscn" id="12_31wvw"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/011_3.tscn" id="13_yr7d6"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/171_2.tscn" id="14_ndqe1"]
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="15_d1q7l"]
+[ext_resource type="Resource" path="res://resources/containers/environment/171.tres" id="16_ph1he"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="17_fhaai"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/171.tres" id="18_ei46o"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/195_2.tscn" id="19_f55w7"]
+[ext_resource type="Resource" path="res://resources/containers/environment/195.tres" id="20_oexbt"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/195.tres" id="21_1jpfw"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/111_2.tscn" id="22_uclgx"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/127_2.tscn" id="23_l1g1i"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/131_0.tscn" id="24_w7hue"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/142_1.tscn" id="25_pf3cl"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/143_1.tscn" id="26_ihb75"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/148_3.tscn" id="27_dun8h"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/144_1.tscn" id="28_v105u"]
+[ext_resource type="PackedScene" path="res://scenes/props/environment/155_3.tscn" id="29_j23lg"]
+[ext_resource type="Script" path="res://scripts/world/prop_preview_camera.gd" id="30_5f2mo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2cbq6"]
+size = Vector3(24, 0.3, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_633v2"]
+size = Vector3(24, 0.3, 24)
+
+[sub_resource type="Environment" id="Environment_qxei4"]
+background_mode = 1
+background_color = Color(0.20784314, 0.2627451, 0.28235295, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.7019608, 0.77254903, 0.75686276, 1)
+ambient_light_energy = 0.65
+
+[node name="ExteriorExample" type="Node3D" unique_id=405149052]
+
+[node name="@StaticBody3D@18" type="StaticBody3D" parent="." unique_id=57416375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+script = ExtResource("1_gujuh")
+material = ExtResource("2_xqm67")
+
+[node name="@MeshInstance3D@19" type="MeshInstance3D" parent="@StaticBody3D@18" unique_id=1409558573]
+material_override = ExtResource("3_rl6vo")
+mesh = SubResource("BoxMesh_2cbq6")
+
+[node name="@CollisionShape3D@20" type="CollisionShape3D" parent="@StaticBody3D@18" unique_id=694514881]
+shape = SubResource("BoxShape3D_633v2")
+
+[node name="Prop001" type="Node3D" parent="." unique_id=1720893710 instance=ExtResource("4_25sxf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 8)
+metadata/catalog_id = "001"
+metadata/variant_index = 1.0
+metadata/variant_name = "Cracked"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["jersey_profile", "reflectors", "fracture"])
+metadata/bounds = AABB(-1.4000001, 0, -0.42, 2.8000002, 1.05, 0.84)
+
+[node name="Prop003" type="Node3D" parent="." unique_id=577418891 instance=ExtResource("5_xjpy5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+metadata/catalog_id = "003"
+metadata/variant_index = 0.0
+metadata/variant_name = "Standard"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["feet", "posts", "rails", "warning_marks"])
+metadata/bounds = AABB(-1.33, 0, -0.375, 2.66, 1, 0.75)
+
+[node name="Prop002" type="Node3D" parent="." unique_id=1671468803 instance=ExtResource("6_k0iro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+metadata/catalog_id = "002"
+metadata/variant_index = 1.0
+metadata/variant_name = "Faded"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["base", "tapered_cone", "split_base"])
+metadata/bounds = AABB(-0.21, 0, -0.21, 0.42, 0.75, 0.42)
+
+[node name="@Node3D@21" type="Node3D" parent="." unique_id=612532491 instance=ExtResource("7_ix6ie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 6)
+metadata/catalog_id = "002"
+metadata/variant_index = 0.0
+metadata/variant_name = "Upright"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["base", "tapered_cone"])
+metadata/bounds = AABB(-0.21, 0, -0.21, 0.42, 0.75, 0.42)
+
+[node name="Prop004" type="Node3D" parent="." unique_id=528683283 instance=ExtResource("8_0qn5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 4)
+metadata/catalog_id = "004"
+metadata/variant_index = 2.0
+metadata/variant_name = "Broken"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["feet", "posts", "corrugated_guardrail"])
+metadata/bounds = AABB(-1.69, 0, -0.375, 3.38, 0.85, 0.75)
+
+[node name="Prop008" type="Node3D" parent="." unique_id=1824712877 instance=ExtResource("9_5gq6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3)
+metadata/catalog_id = "008"
+metadata/variant_index = 1.0
+metadata/variant_name = "Shattered"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["shelter_columns", "shelter_roof", "bench", "bench_supports"])
+metadata/bounds = AABB(-1.6, 0, -0.5, 3.2, 2.58, 1.5)
+
+[node name="Prop005" type="Node3D" parent="." unique_id=1222145067 instance=ExtResource("10_p225u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+metadata/catalog_id = "005"
+metadata/variant_index = 0.0
+metadata/variant_name = "Working"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["footing", "pole", "lamp_arm", "lamp_housing", "diffuser"])
+metadata/bounds = AABB(-0.225, 0, -0.24000001, 1.525, 5.58, 0.465)
+
+[node name="Prop156" type="Node3D" parent="." unique_id=1355294208 instance=ExtResource("11_u6dww")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+metadata/catalog_id = "156"
+metadata/variant_index = 1.0
+metadata/variant_name = "Crashed"
+metadata/category = "Abandoned Vehicles & Transport"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "parking", "loading"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tire", "wheel_hub", "axle_cap", "chassis", "chassis_rails", "wheel_arch_body", "body_collision_core", "glazed_cab", "roof", "cab_pillars", "window_sill", "door_handles", "wing_mirrors", "bumpers", "lamps", "radiator_grille", "grille_slats", "crumpled_hood"])
+metadata/bounds = AABB(-1.0211, 0, -2.32, 2.0422, 1.63, 4.64)
+
+[node name="Prop159" type="Node3D" parent="." unique_id=308736407 instance=ExtResource("12_31wvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+metadata/catalog_id = "159"
+metadata/variant_index = 2.0
+metadata/variant_name = "Abandoned"
+metadata/category = "Abandoned Vehicles & Transport"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "parking", "loading"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tire", "wheel_hub", "axle_cap", "chassis", "chassis_rails", "wheel_arch_body", "body_collision_core", "glazed_cab", "roof", "cab_pillars", "window_sill", "door_handles", "wing_mirrors", "bumpers", "lamps", "radiator_grille", "grille_slats", "body_corrosion"])
+metadata/bounds = AABB(-1.0211, 0, -2.62, 2.0422, 2.0800002, 5.24)
+
+[node name="Prop011" type="Node3D" parent="." unique_id=2097047649 instance=ExtResource("13_yr7d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -6)
+metadata/catalog_id = "011"
+metadata/variant_index = 3.0
+metadata/variant_name = "Loaded"
+metadata/category = "Streets, Sidewalks & Debris"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["street", "checkpoint"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pallet_stringers", "pallet_deck", "cargo_cartons", "packing_tape"])
+metadata/bounds = AABB(-0.575, 0, -0.5, 1.15, 0.8225, 1)
+
+[node name="Prop171" type="StaticBody3D" parent="." unique_id=1965863627 groups=["raid_entities"] instance=ExtResource("14_ndqe1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+script = ExtResource("15_d1q7l")
+display_name = "Wooden Supply Crate"
+opening = "lid"
+container_config = ExtResource("16_ph1he")
+opened = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.585, 0.3425)
+entity_id = "environment:example-ExteriorExample-10"
+kind = "container"
+material = ExtResource("17_fhaai")
+loot_table = ExtResource("18_ei46o")
+interaction_offset = Vector3(0, 0.634898, -0.39000002)
+metadata/catalog_id = "171"
+metadata/variant_index = 2.0
+metadata/variant_name = "Reinforced"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "latches", "reinforcement_bands", "handle", "plank_joints", "diagonal_batten", "packed_supplies"])
+metadata/bounds = AABB(-0.4425, 0, -0.44000003, 0.885, 1.269796, 0.8556793)
+
+[node name="Prop195" type="StaticBody3D" parent="." unique_id=83793416 groups=["raid_entities"] instance=ExtResource("19_f55w7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -9)
+script = ExtResource("15_d1q7l")
+display_name = "Dumpster"
+opening = "lid"
+loot_profile = "personal"
+container_config = ExtResource("20_oexbt")
+opened = true
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32, 0.5675)
+entity_id = "environment:example-ExteriorExample-11"
+kind = "container"
+material = ExtResource("17_fhaai")
+loot_table = ExtResource("21_1jpfw")
+interaction_offset = Vector3(0, 1.15, -0.60749996)
+metadata/catalog_id = "195"
+metadata/variant_index = 2.0
+metadata/variant_name = "Overflowing"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["case_sides", "case_ends", "case_back", "hinges", "case_front", "moving_panel", "handle_mount", "handle", "latches", "tire", "wheel_hub", "axle_cap", "fork_pockets", "overflowing_bags"])
+metadata/bounds = AABB(-0.9175, 0, -0.65749997, 1.835, 2.4438717, 1.2981794)
+
+[node name="Prop111" type="Node3D" parent="." unique_id=834911330 instance=ExtResource("22_uclgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+metadata/catalog_id = "111"
+metadata/variant_index = 2.0
+metadata/variant_name = "Corner"
+metadata/category = "Military & Security"
+metadata/classifications = ["decorative", "soft_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["security"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["military", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["checkpoint", "security"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["sandbags", "corner_sandbags"])
+metadata/bounds = AABB(-1.17, 0, -0.2, 2.5300002, 0.54, 1.19)
+
+[node name="Prop127" type="Node3D" parent="." unique_id=2013940539 instance=ExtResource("23_l1g1i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+metadata/catalog_id = "127"
+metadata/variant_index = 2.0
+metadata/variant_name = "Patched"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tent_poles", "guy_rope", "ridgepole", "tarp_roof", "tent_back", "entrance_flaps", "sewn_patch"])
+metadata/bounds = AABB(-1.6313287, 0, -1.8068202, 3.2626574, 1.86, 3.6136403)
+
+[node name="Prop131" type="Node3D" parent="." unique_id=1299693048 instance=ExtResource("24_w7hue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+metadata/catalog_id = "131"
+metadata/variant_index = 0.0
+metadata/variant_name = "Cold"
+metadata/category = "Scavenger & Survivor Camps"
+metadata/classifications = ["decorative", "hazard", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["camp"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["scavenger", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["camp"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["fire_ring_stones", "firewood"])
+metadata/bounds = AABB(-0.625, 0, -0.62840223, 1.25, 0.27, 1.2568045)
+
+[node name="Prop142" type="Node3D" parent="." unique_id=1560615675 instance=ExtResource("25_pf3cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
+metadata/catalog_id = "142"
+metadata/variant_index = 1.0
+metadata/variant_name = "Mature"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["tapered_trunk", "branches", "root_flare", "leaf_mass"])
+metadata/bounds = AABB(-1.0481446, 0, -0.80615675, 2.1481447, 5.5257087, 1.6123135)
+
+[node name="Prop143" type="Node3D" parent="." unique_id=701496355 instance=ExtResource("26_ihb75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 9)
+metadata/catalog_id = "143"
+metadata/variant_index = 1.0
+metadata/variant_name = "Dense"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["bush_stems", "leaf_mass"])
+metadata/bounds = AABB(-0.6387501, 0, -0.42108813, 1.3387501, 0.6532172, 0.84217626)
+
+[node name="Prop148" type="Node3D" parent="." unique_id=1794182461 instance=ExtResource("27_dun8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+metadata/catalog_id = "148"
+metadata/variant_index = 3.0
+metadata/variant_name = "Fractured"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "hard_cover", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["fractured_rock", "split_rock_fragment"])
+metadata/bounds = AABB(-0.65, 0, -0.6, 1.748, 0.91, 1.355)
+
+[node name="Prop144" type="Node3D" parent="." unique_id=741406429 instance=ExtResource("28_v105u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 10)
+metadata/catalog_id = "144"
+metadata/variant_index = 1.0
+metadata/variant_name = "Dry"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["grass_blades"])
+metadata/bounds = AABB(-0.54, 0, -0.5125, 1.0030769, 0.46, 0.96617645)
+
+[node name="Prop155" type="Node3D" parent="." unique_id=713473168 instance=ExtResource("29_j23lg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 9)
+metadata/catalog_id = "155"
+metadata/variant_index = 3.0
+metadata/variant_name = "Root-Split"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "traversable", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pavement_slab", "lifting_root"])
+metadata/bounds = AABB(-0.65, 0, -0.455, 1.3, 0.25947368, 0.91)
+
+[node name="@WorldEnvironment@22" type="WorldEnvironment" parent="." unique_id=1509515040]
+environment = SubResource("Environment_qxei4")
+
+[node name="@DirectionalLight3D@23" type="DirectionalLight3D" parent="." unique_id=799054525]
+transform = Transform3D(0.81915206, 0.43938506, -0.36868784, 0, 0.64278764, 0.76604444, 0.57357645, -0.62750685, 0.5265408, 0, 0, 0)
+light_color = Color(0.9019608, 0.87058824, 0.79607844, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="@Camera3D@24" type="Camera3D" parent="." unique_id=982090234]
+transform = Transform3D(-0.7359311, -0.3029986, 0.6054728, 0, 0.8942722, 0.4475234, -0.6770565, 0.3293464, -0.6581227, 23, 18, -25)
+current = true
+script = ExtResource("30_5f2mo")
+preview_title = "LAST HAUL / EXTERIOR PROP EXAMPLE"

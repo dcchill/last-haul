@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/146_0_body.res" id="1_auj56"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_4fe6x"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="3_2sld4"]
+
+[sub_resource type="Resource" id="Resource_mgqfk"]
+script = ExtResource("3_2sld4")
+id = "prop_wood"
+impact_color = Color(0.4745098, 0.42352942, 0.3137255, 1)
+resistance = 350.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gc374"]
+size = Vector3(0.1, 1.1011357, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ohr2"]
+size = Vector3(0.1, 1.1011357, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_byvnc"]
+size = Vector3(0.1, 1.1011357, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kha52"]
+size = Vector3(0.1, 1.1011357, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_72yld"]
+size = Vector3(0.1, 1.1011357, 0.1)
+
+[node name="Prop146" type="Node3D" unique_id=1154301626]
+metadata/catalog_id = "146"
+metadata/variant_index = 0.0
+metadata/variant_name = "Wall"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["root_tendrils"])
+metadata/bounds = AABB(-1.017901, 0, 5.1513314e-05, 2.1201713, 1.6174186, 0.14989693)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2054456360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0848036, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_auj56")
+
+[node name="Collision_body_wood" type="StaticBody3D" parent="." unique_id=1705323169]
+collision_mask = 0
+script = ExtResource("2_4fe6x")
+material = SubResource("Resource_mgqfk")
+
+[node name="@CollisionShape3D@79" type="CollisionShape3D" parent="Collision_body_wood" unique_id=147126963]
+transform = Transform3D(-4.371139e-08, 0.99896854, -0.045407694, 1, 4.5651134e-08, 4.1681467e-08, 4.371139e-08, -0.045407694, -0.99896854, 0.55, 1.0848036, 0.075)
+shape = SubResource("BoxShape3D_gc374")
+
+[node name="@CollisionShape3D@80" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1557330289]
+transform = Transform3D(0.7833269, 0.6209688, -0.028225876, 0.62161, -0.782519, 0.035569113, 2.7171435e-08, -0.045407727, -0.99896854, 0.34188548, 0.6539738, 0.07499998)
+shape = SubResource("BoxShape3D_2ohr2")
+
+[node name="@CollisionShape3D@81" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1970169633]
+transform = Transform3D(0.9738476, -0.22696774, 0.010316723, -0.22720209, -0.97284317, 0.04422022, -9.931319e-09, -0.045407735, -0.99896854, -0.12496115, 0.54918736, 0.07499998)
+shape = SubResource("BoxShape3D_byvnc")
+
+[node name="@CollisionShape3D@82" type="CollisionShape3D" parent="Collision_body_wood" unique_id=1314090943]
+transform = Transform3D(0.42737988, -0.90313965, 0.04105183, -0.90407217, -0.42693904, 0.019406378, -3.951825e-08, -0.045407712, -0.99896854, -0.49723968, 0.8497447, 0.074999996)
+shape = SubResource("BoxShape3D_kha52")
+
+[node name="@CollisionShape3D@83" type="CollisionShape3D" parent="Collision_body_wood" unique_id=2035491196]
+transform = Transform3D(-0.44252044, -0.8958335, 0.040719733, -0.89675844, 0.442064, -0.02009379, -3.9198557e-08, -0.045407675, -0.99896854, -0.49321714, 1.3281898, 0.07500001)
+shape = SubResource("BoxShape3D_72yld")

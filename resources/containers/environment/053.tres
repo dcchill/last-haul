@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ContainerDef" format=3]
+
+[ext_resource type="Texture2D" path="res://ui/container_large_no_slots.png" id="1_38qvy"]
+[ext_resource type="Script" path="res://scripts/data/container_def.gd" id="2_1874j"]
+
+[resource]
+script = ExtResource("2_1874j")
+id = "prop_053"
+display_name = "Refrigerator"
+dimensions = Vector2i(8, 6)
+allowed_categories = PackedStringArray("food")
+prohibited_categories = PackedStringArray()
+searchable = true
+search_seconds = 2.0
+progressive_discovery = true

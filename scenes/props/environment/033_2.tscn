@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/033_2_body.res" id="1_lfu52"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_gd2h1"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_4sirg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ut1rx"]
+size = Vector3(2, 0.8, 0.15)
+
+[node name="Prop033" type="Node3D" unique_id=1892036115]
+metadata/catalog_id = "033"
+metadata/variant_index = 2.0
+metadata/variant_name = "Hanging"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["sign_casing", "raised_letters", "sign_hangers"])
+metadata/bounds = AABB(-1.1270674, 0, -0.1075, 2.1109111, 1.3360639, 0.1825)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1603033371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17902961, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_lfu52")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1695143826]
+collision_mask = 0
+script = ExtResource("2_gd2h1")
+material = ExtResource("3_4sirg")
+
+[node name="@CollisionShape3D@347" type="CollisionShape3D" parent="Collision_body_paint" unique_id=1831601193]
+transform = Transform3D(0.9838437, -0.17902958, 0, 0.17902958, 0.9838437, 0, 0, 0, 1, -0.07161184, 0.5725671, 0)
+shape = SubResource("BoxShape3D_ut1rx")

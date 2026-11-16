@@ -1,0 +1,89 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_v1wjn"]
+[ext_resource type="Resource" path="res://resources/containers/environment/180.tres" id="2_g6rkb"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_poqkt"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/180.tres" id="4_a2swa"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/180_1_body.res" id="5_7dkqd"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/180_1_panel.res" id="6_y26ma"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_kbia4"]
+[ext_resource type="Script" path="res://scripts/data/material_def.gd" id="8_duft1"]
+
+[sub_resource type="Resource" id="Resource_urtmf"]
+script = ExtResource("8_duft1")
+id = "prop_cloth_dark"
+impact_color = Color(0.3019608, 0.34117648, 0.29803923, 1)
+resistance = 100.0
+thickness_meters = 0.06
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ics5v"]
+size = Vector3(0.595, 0.1925, 0.035)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_olob8"]
+points = PackedVector3Array(-0.315, 0, -0.175, -0.315, 0, 0.175, 0.315, 0, -0.175, 0.315, 0, 0.175, 0.35, 0.0525, -0.175, 0.35, 0.0525, 0.175, 0.329, 0.28, -0.175, 0.329, 0.28, 0.175, 0.21, 0.35, -0.175, 0.21, 0.35, 0.175, -0.21, 0.35, -0.175, -0.21, 0.35, 0.175, -0.35, 0.2625, -0.175, -0.35, 0.2625, 0.175)
+
+[node name="Prop180" type="StaticBody3D" unique_id=819977022 groups=["raid_entities"]]
+script = ExtResource("1_v1wjn")
+display_name = "Duffel Bag"
+opening = "drawer"
+loot_profile = "personal"
+container_config = ExtResource("2_g6rkb")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2275, -0.1775)
+entity_id = "prop-180"
+kind = "container"
+material = ExtResource("3_poqkt")
+loot_table = ExtResource("4_a2swa")
+interaction_offset = Vector3(0, 0.20875002, -0.2525)
+metadata/catalog_id = "180"
+metadata/variant_index = 1.0
+metadata/variant_name = "Tactical"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["storage", "warehouse"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["bag_shell", "moving_panel", "handle_mount", "handle", "carry_straps"])
+metadata/bounds = AABB(-0.35, 0, -0.3025, 0.7, 0.41750005, 0.4925)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=744676146]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_7dkqd")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1055487569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2275, -0.1775)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1801176829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2275, 0.1775)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_y26ma")
+
+[node name="Collision_panel_cloth_dark" type="StaticBody3D" parent="MovingPanel" unique_id=1384281292]
+collision_mask = 0
+script = ExtResource("7_kbia4")
+material = SubResource("Resource_urtmf")
+
+[node name="@CollisionShape3D@272" type="CollisionShape3D" parent="MovingPanel/Collision_panel_cloth_dark" unique_id=1018374657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.017499998)
+shape = SubResource("BoxShape3D_ics5v")
+
+[node name="Collision_body_cloth_dark" type="StaticBody3D" parent="." unique_id=1708930669]
+collision_mask = 0
+script = ExtResource("7_kbia4")
+material = SubResource("Resource_urtmf")
+
+[node name="@CollisionShape3D@271" type="CollisionShape3D" parent="Collision_body_cloth_dark" unique_id=1354912174]
+shape = SubResource("ConvexPolygonShape3D_olob8")

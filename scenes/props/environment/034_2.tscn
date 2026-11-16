@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/034_2_body.res" id="1_0mgab"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_0fwo6"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_ebcdl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_187ax"]
+size = Vector3(0.12, 0.24, 0.1)
+
+[node name="Prop034" type="Node3D" unique_id=636618771]
+metadata/catalog_id = "034"
+metadata/variant_index = 2.0
+metadata/variant_name = "Smashed"
+metadata/category = "Building Exteriors & Architecture"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "wall",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["entrance", "utility"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 1.1
+}
+metadata/components = Array[String](["mounting_plate", "camera_bracket", "camera_body", "weather_hood"])
+metadata/bounds = AABB(-0.06, 0, -0.61, 0.45, 0.45000002, 0.76)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=759862943]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_0mgab")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1908444203]
+collision_mask = 0
+script = ExtResource("2_0fwo6")
+material = ExtResource("3_ebcdl")
+
+[node name="@CollisionShape3D@351" type="CollisionShape3D" parent="Collision_body_steel" unique_id=441060993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.1)
+shape = SubResource("BoxShape3D_187ax")

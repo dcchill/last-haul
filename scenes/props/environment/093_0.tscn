@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/093_0_body.res" id="1_bq47f"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_pk67n"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_245ie"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bsobh"]
+height = 1.6
+radius = 0.28
+
+[node name="Prop093" type="Node3D" unique_id=470198233]
+metadata/catalog_id = "093"
+metadata/variant_index = 0.0
+metadata/variant_name = "Straight"
+metadata/category = "Utilities & Infrastructure"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior", "exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["utility", "plant"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["pipe", "flanges", "flange_bolts"])
+metadata/bounds = AABB(-0.35, 0, -0.0025000004, 0.7, 0.7, 1.6025001)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=782484274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06999999, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_bq47f")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=157180631]
+collision_mask = 0
+script = ExtResource("2_pk67n")
+material = ExtResource("3_245ie")
+
+[node name="@CollisionShape3D@200" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1000937310]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.35, 0.8)
+shape = SubResource("CylinderShape3D_bsobh")

@@ -1,0 +1,8198 @@
+{
+	"areas": [
+		{
+			"building": "lab1",
+			"floor": 1,
+			"name": "Atrium garden"
+		},
+		{
+			"building": "lab1",
+			"floor": 1,
+			"name": "Lab 1 Research level 1 circulation"
+		},
+		{
+			"building": "lab1",
+			"floor": 2,
+			"name": "Lab 1 Research level 2 circulation"
+		},
+		{
+			"building": "lab1",
+			"floor": 3,
+			"name": "Lab 1 Research level 3 circulation"
+		},
+		{
+			"building": "lab1",
+			"floor": 4,
+			"name": "Lab 1 Research level 4 circulation"
+		},
+		{
+			"building": "lab1",
+			"floor": 5,
+			"name": "Lab 1 Research roof access"
+		},
+		{
+			"building": "lab2",
+			"floor": 1,
+			"name": "Lab 2 Clinical level 1 circulation"
+		},
+		{
+			"building": "lab2",
+			"floor": 2,
+			"name": "Lab 2 Clinical level 2 circulation"
+		},
+		{
+			"building": "lab2",
+			"floor": 3,
+			"name": "Lab 2 Clinical level 3 circulation"
+		},
+		{
+			"building": "lab2",
+			"floor": 4,
+			"name": "Lab 2 Clinical level 4 circulation"
+		},
+		{
+			"building": "lab2",
+			"floor": 5,
+			"name": "Lab 2 Clinical roof access"
+		},
+		{
+			"building": "distribution_wing",
+			"floor": 1,
+			"name": "Distribution offices level 1 circulation"
+		},
+		{
+			"building": "distribution_wing",
+			"floor": 2,
+			"name": "Distribution offices level 2 circulation"
+		},
+		{
+			"building": "distribution",
+			"floor": 1,
+			"name": "Pallet storage aisles"
+		},
+		{
+			"building": "distribution",
+			"floor": 1,
+			"name": "Receiving and loading docks"
+		},
+		{
+			"building": "distribution",
+			"floor": 1,
+			"name": "Shipping preparation"
+		},
+		{
+			"building": "distribution",
+			"floor": 1,
+			"name": "Scavenger camp"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Main campus roads"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Lab 2 ambulance bay"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Truck loading yard"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Visitor parking lot"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Western quarantine blockade"
+		},
+		{
+			"building": "exterior",
+			"floor": 1,
+			"name": "Overgrown lab grounds"
+		},
+		{
+			"building": "skybridge",
+			"floor": 3,
+			"name": "Third-floor skybridge"
+		}
+	],
+	"rooms": [
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"e:-15:open",
+				"s:-36:open"
+			],
+			"equipment": [
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:046:0",
+				"e:048:1",
+				"m:personal_bag",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Visitor waiting",
+			"rect": [
+				-40.0,
+				-22.0,
+				10.0,
+				14.0
+			],
+			"role": "waiting",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 112.0,
+			"building": "lab1",
+			"doors": [
+				"w:0:ext"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"m:nurse_desk",
+				"e:048:1",
+				"e:034:2",
+				"e:042:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Main reception lobby",
+			"rect": [
+				-40.0,
+				-8.0,
+				7.0,
+				16.0
+			],
+			"role": "lobby",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 48.0,
+			"building": "lab1",
+			"doors": [
+				"w:0:open:10",
+				"e:0:open:4"
+			],
+			"equipment": [
+				"e:114:2",
+				"m:security_locker"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Security screening",
+			"rect": [
+				-33.0,
+				-8.0,
+				3.0,
+				16.0
+			],
+			"role": "checkpoint",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 70.0,
+			"building": "lab1",
+			"doors": [
+				"n:-36.5:door"
+			],
+			"equipment": [
+				"e:124:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"e:116:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Security office",
+			"rect": [
+				-40.0,
+				8.0,
+				10.0,
+				7.0
+			],
+			"role": "security",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 70.0,
+			"building": "lab1",
+			"doors": [
+				"e:18.5:door"
+			],
+			"equipment": [
+				"m:packing_table",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box",
+				"m:wrapped_pallet"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Mail room",
+			"rect": [
+				-40.0,
+				15.0,
+				10.0,
+				7.0
+			],
+			"role": "mail",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 260.0,
+			"building": "lab1",
+			"doors": [
+				"s:-26:open",
+				"s:-18:door"
+			],
+			"equipment": [
+				"e:058:2",
+				"e:042:2",
+				"e:058:0",
+				"e:042:1",
+				"e:058:2",
+				"e:042:2",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:2",
+				"e:058:2",
+				"e:042:2",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"m:filing_cabinet",
+				"e:043:0",
+				"e:044:1",
+				"e:060:0"
+			],
+			"floor": 1,
+			"loose": 3,
+			"name": "Open-plan administration",
+			"rect": [
+				-40.0,
+				-32.0,
+				26.0,
+				10.0
+			],
+			"role": "openoffice",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"s:-10:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Director's office",
+			"rect": [
+				-14.0,
+				-32.0,
+				8.0,
+				10.0
+			],
+			"role": "exec",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"s:-2:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Finance office",
+			"rect": [
+				-6.0,
+				-32.0,
+				8.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"s:6:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Human resources",
+			"rect": [
+				2.0,
+				-32.0,
+				8.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"s:15:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Records room",
+			"rect": [
+				10.0,
+				-32.0,
+				10.0,
+				10.0
+			],
+			"role": "records",
+			"sources": 3,
+			"tier": 1
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"s:25:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"e:057:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Conference room A",
+			"rect": [
+				20.0,
+				-32.0,
+				20.0,
+				10.0
+			],
+			"role": "conference",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"w:-15:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"e:057:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Conference room B",
+			"rect": [
+				30.0,
+				-22.0,
+				10.0,
+				14.0
+			],
+			"role": "conference",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"w:-1:open"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:2",
+				"e:047:2",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Staff break room",
+			"rect": [
+				30.0,
+				-8.0,
+				10.0,
+				14.0
+			],
+			"role": "breakroom",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 60.0,
+			"building": "lab1",
+			"doors": [
+				"w:9:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:storage_table"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Facilities storage",
+			"rect": [
+				30.0,
+				6.0,
+				10.0,
+				6.0
+			],
+			"role": "storage",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"e:17:extdoor",
+				"w:17:open:3"
+			],
+			"equipment": [
+				"m:packing_table",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box",
+				"m:wrapped_pallet"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Service entrance",
+			"rect": [
+				30.0,
+				12.0,
+				10.0,
+				10.0
+			],
+			"role": "service_entry",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"n:-29:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:091:0",
+				"e:091:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Janitorial store",
+			"rect": [
+				-40.0,
+				22.0,
+				12.0,
+				10.0
+			],
+			"role": "janitor",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:-23:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Public restrooms",
+			"rect": [
+				-28.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:-13:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"e:057:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Meeting room",
+			"rect": [
+				-18.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "meeting",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"n:-4:open:3",
+				"s:-4:extdoor"
+			],
+			"equipment": [
+				"e:048:3",
+				"e:129:1",
+				"e:125:2",
+				"e:180:2"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Emergency exit hall",
+			"rect": [
+				-8.0,
+				22.0,
+				8.0,
+				10.0
+			],
+			"role": "exit_hall",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:5:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:176:1",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "First aid room",
+			"rect": [
+				0.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "firstaid",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:15:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:0",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "IT support",
+			"rect": [
+				10.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "it",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"n:25:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:storage_table"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Print and supplies",
+			"rect": [
+				20.0,
+				22.0,
+				20.0,
+				10.0
+			],
+			"role": "supplies",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"n:-18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Staff restrooms",
+			"rect": [
+				-22.6000003814697,
+				-19.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"n:-12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:0",
+				"e:085:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Riser closet",
+			"rect": [
+				-14.5,
+				-19.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 83.5,
+			"building": "lab1",
+			"doors": [
+				"e:-7.5:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Visitor badge office",
+			"rect": [
+				-22.6000003814697,
+				-11.0,
+				12.1000003814697,
+				6.90000009536743
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"s:-24.8:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:0",
+				"e:085:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Electrical room",
+			"rect": [
+				-27.0,
+				-10.0,
+				4.40000009536743,
+				8.5
+			],
+			"role": "electrical",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:18:open:3",
+				"w:-6:open:3",
+				"s:20:door"
+			],
+			"equipment": [
+				"d:medical_station",
+				"d:medical_station",
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"e:110:0",
+				"m:storage_table",
+				"m:exam_chair",
+				"e:175:1",
+				"e:048:1"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Corporate exhibit hall",
+			"rect": [
+				10.5,
+				-19.0,
+				16.5,
+				17.5
+			],
+			"role": "exhibit",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:-20:open:3",
+				"w:10:door",
+				"e:6:open:3"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:193:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:0",
+				"e:047:0",
+				"m:break_table",
+				"e:047:2",
+				"e:047:2",
+				"m:break_table",
+				"e:047:0",
+				"e:047:2",
+				"m:break_table",
+				"e:047:2",
+				"e:047:0",
+				"e:057:0",
+				"m:trash_bin",
+				"e:191:2",
+				"e:048:3"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Cafeteria",
+			"rect": [
+				-27.0,
+				1.5,
+				16.5,
+				17.5
+			],
+			"role": "cafeteria",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:-15:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"e:051:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Coat room",
+			"rect": [
+				-10.5,
+				-19.0,
+				5.0,
+				8.5
+			],
+			"role": "coatroom",
+			"sources": 3,
+			"tier": 1
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:-15:door",
+				"s:5:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Interview rooms",
+			"rect": [
+				-2.5,
+				-19.0,
+				13.0,
+				8.5
+			],
+			"role": "interview",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:15:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:091:0",
+				"e:091:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Cleaning cupboard",
+			"rect": [
+				-10.5,
+				10.5,
+				5.0,
+				8.5
+			],
+			"role": "janitor",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:15:door",
+				"n:4:open:3"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:nurse_desk",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "MedTac pharmacy kiosk",
+			"rect": [
+				-2.5,
+				10.5,
+				13.0,
+				8.5
+			],
+			"role": "dispensary",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"s:18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Service restrooms",
+			"rect": [
+				14.5,
+				11.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"s:12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:0",
+				"e:085:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Riser closet east",
+			"rect": [
+				10.5,
+				11.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 73.8,
+			"building": "lab1",
+			"doors": [
+				"w:7.5:door"
+			],
+			"equipment": [
+				"e:124:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"e:116:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Badge and key control",
+			"rect": [
+				10.5,
+				4.90000009536743,
+				12.1000003814697,
+				6.09999990463257
+			],
+			"role": "security_desk",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"n:24.8:door"
+			],
+			"equipment": [
+				"m:air_handler",
+				"e:082:0",
+				"e:073:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Plant room",
+			"rect": [
+				22.6000003814697,
+				1.5,
+				4.40000009536743,
+				8.5
+			],
+			"role": "plant",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:-18:door",
+				"n:-35:door"
+			],
+			"equipment": [
+				"e:109:1",
+				"m:wash_station",
+				"m:eyewash",
+				"e:108:0",
+				"e:108:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Decontamination vestibule",
+			"rect": [
+				-40.0,
+				-22.0,
+				10.0,
+				8.0
+			],
+			"role": "decon",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:-10:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Researcher office one",
+			"rect": [
+				-40.0,
+				-14.0,
+				10.0,
+				8.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:-2:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Researcher office two",
+			"rect": [
+				-40.0,
+				-6.0,
+				10.0,
+				8.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:6:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Researcher office three",
+			"rect": [
+				-40.0,
+				2.0,
+				10.0,
+				8.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"e:16:open:3"
+			],
+			"equipment": [
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:2",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"m:filing_cabinet",
+				"e:043:0",
+				"e:044:1",
+				"e:060:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Technical workstations",
+			"rect": [
+				-40.0,
+				10.0,
+				10.0,
+				12.0
+			],
+			"role": "workstations",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"e:-27:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Pharmaceutical laboratory A",
+			"rect": [
+				-40.0,
+				-32.0,
+				20.0,
+				10.0
+			],
+			"role": "pharmalab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 180.0,
+			"building": "lab1",
+			"doors": [
+				"s:-11:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Pharmaceutical laboratory B",
+			"rect": [
+				-20.0,
+				-32.0,
+				18.0,
+				10.0
+			],
+			"role": "pharmalab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"s:3:door",
+				"s:13:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Chemistry and analytical lab",
+			"rect": [
+				-2.0,
+				-32.0,
+				20.0,
+				10.0
+			],
+			"role": "chemlab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"s:23:door",
+				"w:-27:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:biosafety_cabinet",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Sample preparation",
+			"rect": [
+				18.0,
+				-32.0,
+				10.0,
+				10.0
+			],
+			"role": "prep",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:29:door"
+			],
+			"equipment": [
+				"m:autoclave",
+				"m:wash_station",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Glass wash and autoclave",
+			"rect": [
+				28.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "glasswash",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:-16:door"
+			],
+			"equipment": [
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:104:1",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Cold storage",
+			"rect": [
+				30.0,
+				-22.0,
+				10.0,
+				12.0
+			],
+			"role": "cold",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"w:-5:door"
+			],
+			"equipment": [
+				"e:091:0",
+				"e:091:1",
+				"e:091:2",
+				"e:045:1",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:177:0",
+				"e:071:0"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Controlled chemical storage",
+			"rect": [
+				30.0,
+				-10.0,
+				10.0,
+				10.0
+			],
+			"role": "chemstore",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"w:5:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Equipment storage",
+			"rect": [
+				30.0,
+				0.0,
+				10.0,
+				10.0
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:16:open:3"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Deliveries holding",
+			"rect": [
+				30.0,
+				10.0,
+				10.0,
+				12.0
+			],
+			"role": "storage",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"n:-29:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "South restrooms",
+			"rect": [
+				-40.0,
+				22.0,
+				12.0,
+				10.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"n:-21:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Data analysis office",
+			"rect": [
+				-28.0,
+				22.0,
+				14.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"n:-7:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Stability testing lab",
+			"rect": [
+				-14.0,
+				22.0,
+				14.0,
+				10.0
+			],
+			"role": "chemlab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 160.0,
+			"building": "lab1",
+			"doors": [
+				"n:4:door",
+				"n:12:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Formulation lab",
+			"rect": [
+				0.0,
+				22.0,
+				16.0,
+				10.0
+			],
+			"role": "pharmalab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:21:door"
+			],
+			"equipment": [
+				"e:091:0",
+				"e:091:1",
+				"e:091:2",
+				"e:045:1",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:177:0",
+				"e:071:0"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Reagent store",
+			"rect": [
+				16.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "chemstore",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"n:28:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Lab manager's office",
+			"rect": [
+				26.0,
+				22.0,
+				14.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"n:-18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Level two restrooms",
+			"rect": [
+				-22.6000003814697,
+				-19.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"n:-12.5:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:091:0",
+				"e:091:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Janitor closet",
+			"rect": [
+				-14.5,
+				-19.0,
+				4.0,
+				8.0
+			],
+			"role": "janitor",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 83.5,
+			"building": "lab1",
+			"doors": [
+				"e:-7.5:door"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:105:1",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Instrument calibration",
+			"rect": [
+				-22.6000003814697,
+				-11.0,
+				12.1000003814697,
+				6.90000009536743
+			],
+			"role": "calibration",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"s:-24.8:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Level two electrical",
+			"rect": [
+				-27.0,
+				-10.0,
+				4.40000009536743,
+				8.5
+			],
+			"role": "electrical",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:18:door",
+				"s:20:door"
+			],
+			"equipment": [
+				"e:066:0",
+				"m:conveyor",
+				"e:066:0",
+				"m:conveyor",
+				"e:066:0",
+				"m:conveyor",
+				"e:074:1",
+				"e:073:2",
+				"m:tool_drawers",
+				"m:packing_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Tablet press suite",
+			"rect": [
+				10.5,
+				-19.0,
+				16.5,
+				17.5
+			],
+			"role": "pressroom",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:-20:door",
+				"e:6:door"
+			],
+			"equipment": [
+				"e:071:0",
+				"e:080:0",
+				"e:071:0",
+				"e:080:0",
+				"e:071:1",
+				"e:080:0",
+				"e:074:1",
+				"e:073:2",
+				"m:tool_drawers",
+				"m:packing_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Pilot mixing plant",
+			"rect": [
+				-27.0,
+				1.5,
+				16.5,
+				17.5
+			],
+			"role": "mixing",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:-15:door"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:105:1",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Balance room",
+			"rect": [
+				-10.5,
+				-19.0,
+				5.0,
+				8.5
+			],
+			"role": "balance",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:-15:door",
+				"s:5:open:3"
+			],
+			"equipment": [
+				"e:058:2",
+				"e:042:1",
+				"e:058:0",
+				"e:042:2",
+				"e:058:2",
+				"e:042:1",
+				"e:058:2",
+				"m:filing_cabinet",
+				"e:043:0",
+				"e:044:1",
+				"e:060:0"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Write-up area",
+			"rect": [
+				-2.5,
+				-19.0,
+				13.0,
+				8.5
+			],
+			"role": "workstations",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:15:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:108:0",
+				"e:108:1",
+				"m:sharps_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Chemical waste store",
+			"rect": [
+				-10.5,
+				10.5,
+				5.0,
+				8.5
+			],
+			"role": "waste",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:15:door",
+				"n:4:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Microbiology lab",
+			"rect": [
+				-2.5,
+				10.5,
+				13.0,
+				8.5
+			],
+			"role": "chemlab",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"s:18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Lab restrooms",
+			"rect": [
+				14.5,
+				11.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"s:12.5:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"e:092:0",
+				"e:092:0",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Gas cylinder store",
+			"rect": [
+				10.5,
+				11.0,
+				4.0,
+				8.0
+			],
+			"role": "gasstore",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 73.8,
+			"building": "lab1",
+			"doors": [
+				"w:7.5:door"
+			],
+			"equipment": [
+				"m:packing_table",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box",
+				"m:wrapped_pallet"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Sample receipt",
+			"rect": [
+				10.5,
+				4.90000009536743,
+				12.1000003814697,
+				6.09999990463257
+			],
+			"role": "receipt",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"n:24.8:door"
+			],
+			"equipment": [
+				"m:air_handler",
+				"e:082:1",
+				"e:073:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Level two plant room",
+			"rect": [
+				22.6000003814697,
+				1.5,
+				4.40000009536743,
+				8.5
+			],
+			"role": "plant",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:-18:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Research office west one",
+			"rect": [
+				-40.0,
+				-22.0,
+				10.0,
+				8.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"e:-10:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Research office west two",
+			"rect": [
+				-40.0,
+				-14.0,
+				10.0,
+				8.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"e:0:open:4"
+			],
+			"equipment": [
+				"e:115:1",
+				"e:115:2",
+				"e:115:1",
+				"e:114:2",
+				"m:security_locker",
+				"e:111:1",
+				"e:122:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Restricted access checkpoint",
+			"rect": [
+				-40.0,
+				-6.0,
+				10.0,
+				12.0
+			],
+			"role": "checkpoint",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 160.0,
+			"building": "lab1",
+			"doors": [
+				"e:14:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Specialised equipment storage",
+			"rect": [
+				-40.0,
+				6.0,
+				10.0,
+				16.0
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:-29:door",
+				"e:-27:glass"
+			],
+			"equipment": [
+				"e:109:2",
+				"m:wash_station",
+				"m:eyewash",
+				"m:staff_locker",
+				"e:108:0",
+				"e:108:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Decontamination airlock",
+			"rect": [
+				-40.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "decon",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"w:-27:glass"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:199:0"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Biocontainment lab one",
+			"rect": [
+				-28.0,
+				-32.0,
+				20.0,
+				10.0
+			],
+			"role": "biolab",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"s:-4:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Observation room one",
+			"rect": [
+				-8.0,
+				-32.0,
+				8.0,
+				10.0
+			],
+			"role": "observation",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 200.0,
+			"building": "lab1",
+			"doors": [
+				"s:15:glass"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:199:0"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Biocontainment lab two",
+			"rect": [
+				0.0,
+				-32.0,
+				20.0,
+				10.0
+			],
+			"role": "biolab",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"s:24:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Observation room two",
+			"rect": [
+				20.0,
+				-32.0,
+				8.0,
+				10.0
+			],
+			"role": "observation",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:29:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table",
+				"e:199:0",
+				"m:ultra_freezer",
+				"m:ultra_freezer",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 2,
+			"name": "Secure sample archive",
+			"rect": [
+				28.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "archive",
+			"sources": 6,
+			"tier": 3
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"w:-17:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Research office east",
+			"rect": [
+				30.0,
+				-22.0,
+				10.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"w:-7:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Senior scientist office",
+			"rect": [
+				30.0,
+				-12.0,
+				10.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:4:door"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:105:1",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Lab support room",
+			"rect": [
+				30.0,
+				-2.0,
+				10.0,
+				12.0
+			],
+			"role": "labsupport",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:16:open:3"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Freight landing",
+			"rect": [
+				30.0,
+				10.0,
+				10.0,
+				12.0
+			],
+			"role": "storage",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"n:-29:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three south restrooms",
+			"rect": [
+				-40.0,
+				22.0,
+				12.0,
+				10.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 3
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"n:-21:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:199:0"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Tissue culture lab",
+			"rect": [
+				-28.0,
+				22.0,
+				14.0,
+				10.0
+			],
+			"role": "biolab",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 60.0,
+			"building": "lab1",
+			"doors": [
+				"n:-11:door"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:105:1",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Imaging suite",
+			"rect": [
+				-14.0,
+				22.0,
+				6.0,
+				10.0
+			],
+			"role": "imaging",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"n:-4:open:3",
+				"s:-4:extopen"
+			],
+			"equipment": [
+				"e:111:0",
+				"e:122:0",
+				"e:180:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Skybridge access",
+			"rect": [
+				-8.0,
+				22.0,
+				8.0,
+				10.0
+			],
+			"role": "bridge_access",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"n:5:door"
+			],
+			"equipment": [
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:specimen_cooler",
+				"e:104:1",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Cryogenic store",
+			"rect": [
+				0.0,
+				22.0,
+				10.0,
+				10.0
+			],
+			"role": "cold",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"n:16:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Research data office",
+			"rect": [
+				10.0,
+				22.0,
+				12.0,
+				10.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 60.0,
+			"building": "lab1",
+			"doors": [
+				"n:25:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:0",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "IT closet",
+			"rect": [
+				22.0,
+				22.0,
+				6.0,
+				10.0
+			],
+			"role": "it",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"n:29:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:091:0",
+				"e:091:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three janitorial",
+			"rect": [
+				28.0,
+				22.0,
+				12.0,
+				10.0
+			],
+			"role": "janitor",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"n:-18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three restrooms",
+			"rect": [
+				-22.6000003814697,
+				-19.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 3
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"n:-12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three riser",
+			"rect": [
+				-14.5,
+				-19.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 83.5,
+			"building": "lab1",
+			"doors": [
+				"e:-7.5:door"
+			],
+			"equipment": [
+				"e:115:1",
+				"e:115:2",
+				"e:115:1",
+				"e:114:2",
+				"m:security_locker",
+				"e:111:1",
+				"e:122:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Lift lobby checkpoint",
+			"rect": [
+				-22.6000003814697,
+				-11.0,
+				12.1000003814697,
+				6.90000009536743
+			],
+			"role": "checkpoint",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"s:-24.8:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three electrical",
+			"rect": [
+				-27.0,
+				-10.0,
+				4.40000009536743,
+				8.5
+			],
+			"role": "electrical",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:18:door",
+				"s:20:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:199:0"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Vector production lab",
+			"rect": [
+				10.5,
+				-19.0,
+				16.5,
+				17.5
+			],
+			"role": "biolab",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:-20:door",
+				"e:6:door"
+			],
+			"equipment": [
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:storage_table",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Animal holding",
+			"rect": [
+				-27.0,
+				1.5,
+				16.5,
+				17.5
+			],
+			"role": "animal",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:-15:door"
+			],
+			"equipment": [
+				"m:mop_bucket",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:108:0",
+				"e:108:1",
+				"m:sharps_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Biohazard waste",
+			"rect": [
+				-10.5,
+				-19.0,
+				5.0,
+				8.5
+			],
+			"role": "waste",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:-15:door",
+				"s:5:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "PCR laboratory",
+			"rect": [
+				-2.5,
+				-19.0,
+				13.0,
+				8.5
+			],
+			"role": "chemlab",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:15:door"
+			],
+			"equipment": [
+				"m:autoclave",
+				"m:wash_station",
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:tool_drawers",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Autoclave room",
+			"rect": [
+				-10.5,
+				10.5,
+				5.0,
+				8.5
+			],
+			"role": "glasswash",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:15:door",
+				"n:4:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:analyzer",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Sequencing lab",
+			"rect": [
+				-2.5,
+				10.5,
+				13.0,
+				8.5
+			],
+			"role": "chemlab",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"s:18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "East restrooms level three",
+			"rect": [
+				14.5,
+				11.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 3
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"s:12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "East riser level three",
+			"rect": [
+				10.5,
+				11.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 73.8,
+			"building": "lab1",
+			"doors": [
+				"w:7.5:door"
+			],
+			"equipment": [
+				"e:115:1",
+				"e:115:2",
+				"e:115:1",
+				"e:114:2",
+				"m:security_locker",
+				"e:111:1",
+				"e:122:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Freight lift checkpoint",
+			"rect": [
+				10.5,
+				4.90000009536743,
+				12.1000003814697,
+				6.09999990463257
+			],
+			"role": "checkpoint",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"n:24.8:door"
+			],
+			"equipment": [
+				"m:air_handler",
+				"e:082:1",
+				"e:073:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three plant room",
+			"rect": [
+				22.6000003814697,
+				1.5,
+				4.40000009536743,
+				8.5
+			],
+			"role": "plant",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"e:-17:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Executive office one",
+			"rect": [
+				-40.0,
+				-22.0,
+				10.0,
+				10.0
+			],
+			"role": "exec",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 100.0,
+			"building": "lab1",
+			"doors": [
+				"e:-7:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Executive office two",
+			"rect": [
+				-40.0,
+				-12.0,
+				10.0,
+				10.0
+			],
+			"role": "exec",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"e:4:open:3"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Executive reception",
+			"rect": [
+				-40.0,
+				-2.0,
+				10.0,
+				12.0
+			],
+			"role": "exec_reception",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"e:16:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Chief science officer",
+			"rect": [
+				-40.0,
+				10.0,
+				10.0,
+				12.0
+			],
+			"role": "exec",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 260.0,
+			"building": "lab1",
+			"doors": [
+				"s:-26:glass",
+				"s:-18:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:microscope",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:sample_rack",
+				"m:clean_workbench",
+				"m:centrifuge",
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:110:2",
+				"e:199:0",
+				"e:199:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "REGENESIS research suite",
+			"rect": [
+				-40.0,
+				-32.0,
+				26.0,
+				10.0
+			],
+			"role": "regenesis",
+			"sources": 3,
+			"tier": 4
+		},
+		{
+			"area_m2": 180.0,
+			"building": "lab1",
+			"doors": [
+				"s:-5:door"
+			],
+			"equipment": [
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:110:2",
+				"e:199:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Containment laboratory",
+			"rect": [
+				-14.0,
+				-32.0,
+				18.0,
+				10.0
+			],
+			"role": "containment",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:10:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet",
+				"e:188:2"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Research control room",
+			"rect": [
+				4.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "control",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:22:vault"
+			],
+			"equipment": [
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:199:2",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Experimental sample storage",
+			"rect": [
+				16.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "vault_samples",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"s:29:vault"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:filing_cabinet",
+				"e:199:2",
+				"e:185:0",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Restricted data archive",
+			"rect": [
+				28.0,
+				-32.0,
+				12.0,
+				10.0
+			],
+			"role": "vault_data",
+			"sources": 3,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:-16:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:1",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Server room",
+			"rect": [
+				30.0,
+				-22.0,
+				10.0,
+				12.0
+			],
+			"role": "server",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:-4:door"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:061:1",
+				"m:tool_drawers",
+				"e:188:0",
+				"m:work_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Prototype workshop",
+			"rect": [
+				30.0,
+				-10.0,
+				10.0,
+				12.0
+			],
+			"role": "prototype",
+			"sources": 3,
+			"tier": 4
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"w:6:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:179:1",
+				"e:085:1",
+				"m:instrument_bench",
+				"m:work_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Facilities workshop",
+			"rect": [
+				30.0,
+				2.0,
+				10.0,
+				8.0
+			],
+			"role": "maintenance",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 120.0,
+			"building": "lab1",
+			"doors": [
+				"w:16:open:3"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Executive lift lobby",
+			"rect": [
+				30.0,
+				10.0,
+				10.0,
+				12.0
+			],
+			"role": "storage",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 160.0,
+			"building": "lab1",
+			"doors": [
+				"n:-27:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"e:057:1",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Secure conference room",
+			"rect": [
+				-40.0,
+				22.0,
+				16.0,
+				10.0
+			],
+			"role": "secure_conference",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"n:-20:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Executive restrooms",
+			"rect": [
+				-24.0,
+				22.0,
+				8.0,
+				10.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 4
+		},
+		{
+			"area_m2": 80.0,
+			"building": "lab1",
+			"doors": [
+				"n:-12:door"
+			],
+			"equipment": [
+				"e:090:1",
+				"e:090:3",
+				"m:filing_cabinet",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Records destruction room",
+			"rect": [
+				-16.0,
+				22.0,
+				8.0,
+				10.0
+			],
+			"role": "destruction",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 140.0,
+			"building": "lab1",
+			"doors": [
+				"n:-4:open:3"
+			],
+			"equipment": [
+				"e:048:0",
+				"e:048:0",
+				"e:046:1",
+				"e:057:1",
+				"e:052:2",
+				"e:053:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Executive lounge",
+			"rect": [
+				-8.0,
+				22.0,
+				14.0,
+				10.0
+			],
+			"role": "exec_lounge",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 180.0,
+			"building": "lab1",
+			"doors": [
+				"n:12:door",
+				"n:20:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"e:057:1",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Board room",
+			"rect": [
+				6.0,
+				22.0,
+				18.0,
+				10.0
+			],
+			"role": "conference",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 160.0,
+			"building": "lab1",
+			"doors": [
+				"n:28:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Legal and compliance",
+			"rect": [
+				24.0,
+				22.0,
+				16.0,
+				10.0
+			],
+			"role": "exec",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"n:-18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Level four restrooms",
+			"rect": [
+				-22.6000003814697,
+				-19.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 4
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"n:-12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Level four riser",
+			"rect": [
+				-14.5,
+				-19.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 83.5,
+			"building": "lab1",
+			"doors": [
+				"e:-7.5:door"
+			],
+			"equipment": [
+				"e:115:1",
+				"e:115:2",
+				"e:115:1",
+				"e:114:2",
+				"m:security_locker",
+				"e:111:1",
+				"e:122:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Upper lift lobby security",
+			"rect": [
+				-22.6000003814697,
+				-11.0,
+				12.1000003814697,
+				6.90000009536743
+			],
+			"role": "checkpoint",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"s:-24.8:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Level four electrical",
+			"rect": [
+				-27.0,
+				-10.0,
+				4.40000009536743,
+				8.5
+			],
+			"role": "electrical",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:18:door",
+				"s:20:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Subject observation ward",
+			"rect": [
+				10.5,
+				-19.0,
+				16.5,
+				17.5
+			],
+			"role": "ward",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 288.8,
+			"building": "lab1",
+			"doors": [
+				"n:-20:door",
+				"e:6:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:1",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Data analysis centre",
+			"rect": [
+				-27.0,
+				1.5,
+				16.5,
+				17.5
+			],
+			"role": "datacentre",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:-15:door"
+			],
+			"equipment": [
+				"e:109:2",
+				"m:wash_station",
+				"m:eyewash",
+				"m:staff_locker",
+				"e:108:0",
+				"e:108:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Level four decontamination",
+			"rect": [
+				-10.5,
+				-19.0,
+				5.0,
+				8.5
+			],
+			"role": "decon",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:-15:door",
+				"s:5:door"
+			],
+			"equipment": [
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:102:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:110:2",
+				"e:199:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Specimen dissection",
+			"rect": [
+				-2.5,
+				-19.0,
+				13.0,
+				8.5
+			],
+			"role": "dissection",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 42.5,
+			"building": "lab1",
+			"doors": [
+				"e:15:door"
+			],
+			"equipment": [
+				"e:090:1",
+				"m:filing_cabinet",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Document shredding",
+			"rect": [
+				-10.5,
+				10.5,
+				5.0,
+				8.5
+			],
+			"role": "destruction",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 110.5,
+			"building": "lab1",
+			"doors": [
+				"w:15:door",
+				"n:4:door"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:1",
+				"e:047:1",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Executive kitchen",
+			"rect": [
+				-2.5,
+				10.5,
+				13.0,
+				8.5
+			],
+			"role": "kitchen",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 64.8,
+			"building": "lab1",
+			"doors": [
+				"s:18.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "East restrooms level four",
+			"rect": [
+				14.5,
+				11.0,
+				8.10000038146973,
+				8.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 4
+		},
+		{
+			"area_m2": 32.0,
+			"building": "lab1",
+			"doors": [
+				"s:12.5:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1",
+				"e:085:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "East riser level four",
+			"rect": [
+				10.5,
+				11.0,
+				4.0,
+				8.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 73.8,
+			"building": "lab1",
+			"doors": [
+				"w:7.5:door"
+			],
+			"equipment": [
+				"e:124:2",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"m:weapon_crate",
+				"e:116:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Security operations",
+			"rect": [
+				10.5,
+				4.90000009536743,
+				12.1000003814697,
+				6.09999990463257
+			],
+			"role": "security_ops",
+			"sources": 3,
+			"tier": 4
+		},
+		{
+			"area_m2": 37.4,
+			"building": "lab1",
+			"doors": [
+				"n:24.8:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:179:1",
+				"e:085:1",
+				"m:instrument_bench",
+				"m:work_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Roof maintenance access",
+			"rect": [
+				22.6000003814697,
+				1.5,
+				4.40000009536743,
+				8.5
+			],
+			"role": "maintenance",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 101.5,
+			"building": "lab2",
+			"doors": [
+				"s:-40:open:3",
+				"s:-33:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"e:107:1",
+				"e:096:1",
+				"e:107:1",
+				"e:096:1",
+				"e:107:1",
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:1",
+				"m:med_cabinet",
+				"e:175:0",
+				"e:099:0"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Emergency treatment bays",
+			"rect": [
+				-44.5,
+				-15.5,
+				14.5,
+				7.0
+			],
+			"role": "er",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-27:door"
+			],
+			"equipment": [
+				"m:exam_chair",
+				"m:exam_chair",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Triage",
+			"rect": [
+				-30.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "triage",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"n:-18:ext",
+				"s:-18:open:4"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"e:048:3",
+				"e:034:2",
+				"m:personal_bag",
+				"e:042:1",
+				"e:042:2"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Patient reception",
+			"rect": [
+				-24.0,
+				-15.5,
+				12.0,
+				7.0
+			],
+			"role": "reception",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 98.0,
+			"building": "lab2",
+			"doors": [
+				"w:-12:open:4",
+				"s:-5:open:4"
+			],
+			"equipment": [
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:046:0",
+				"e:048:1",
+				"m:personal_bag",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Waiting area",
+			"rect": [
+				-12.0,
+				-15.5,
+				14.0,
+				7.0
+			],
+			"role": "waiting",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 38.5,
+			"building": "lab2",
+			"doors": [
+				"s:4.75:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Examination room 1",
+			"rect": [
+				2.0,
+				-15.5,
+				5.5,
+				7.0
+			],
+			"role": "exam",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 38.5,
+			"building": "lab2",
+			"doors": [
+				"s:10.25:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Examination room 2",
+			"rect": [
+				7.5,
+				-15.5,
+				5.5,
+				7.0
+			],
+			"role": "exam",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 38.5,
+			"building": "lab2",
+			"doors": [
+				"s:15.75:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Examination room 3",
+			"rect": [
+				13.0,
+				-15.5,
+				5.5,
+				7.0
+			],
+			"role": "exam",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 38.5,
+			"building": "lab2",
+			"doors": [
+				"s:21.25:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Examination room 4",
+			"rect": [
+				18.5,
+				-15.5,
+				5.5,
+				7.0
+			],
+			"role": "exam",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 38.5,
+			"building": "lab2",
+			"doors": [
+				"s:26.75:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Examination room 5",
+			"rect": [
+				24.0,
+				-15.5,
+				5.5,
+				7.0
+			],
+			"role": "exam",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 45.5,
+			"building": "lab2",
+			"doors": [
+				"s:32.75:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Supply storage",
+			"rect": [
+				29.5,
+				-15.5,
+				6.5,
+				7.0
+			],
+			"role": "medstore",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 59.5,
+			"building": "lab2",
+			"doors": [
+				"s:40:door"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:1",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Staff lounge",
+			"rect": [
+				36.0,
+				-15.5,
+				8.5,
+				7.0
+			],
+			"role": "breakroom",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 73.5,
+			"building": "lab2",
+			"doors": [
+				"n:-39:door"
+			],
+			"equipment": [
+				"e:102:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:1",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Resuscitation room",
+			"rect": [
+				-44.5,
+				8.5,
+				10.5,
+				7.0
+			],
+			"role": "resus",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-30:door"
+			],
+			"equipment": [
+				"e:102:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Minor procedures",
+			"rect": [
+				-34.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "procedure",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-22:door"
+			],
+			"equipment": [
+				"e:102:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Wound care",
+			"rect": [
+				-26.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "treatment",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"n:-12:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:privacy_screen",
+				"e:099:0"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "X-ray room",
+			"rect": [
+				-18.0,
+				8.5,
+				12.0,
+				7.0
+			],
+			"role": "xray",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-3:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Patient restrooms",
+			"rect": [
+				-6.0,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:4:door",
+				"s:4:extdoor"
+			],
+			"equipment": [
+				"e:109:1",
+				"m:wash_station",
+				"m:eyewash",
+				"m:staff_locker",
+				"e:108:0",
+				"e:108:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Decontamination intake",
+			"rect": [
+				0.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "decon",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:12:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Admissions office",
+			"rect": [
+				8.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:20:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Medical records",
+			"rect": [
+				16.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "records",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:28:door"
+			],
+			"equipment": [
+				"e:124:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"e:116:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Security post",
+			"rect": [
+				24.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "security",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:35:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:staff_locker",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:roll_cage",
+				"m:roll_cage"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Linen and laundry",
+			"rect": [
+				32.0,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "laundry",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 45.5,
+			"building": "lab2",
+			"doors": [
+				"n:41:door",
+				"s:41:extdoor"
+			],
+			"equipment": [
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Deliveries",
+			"rect": [
+				38.0,
+				8.5,
+				6.5,
+				7.0
+			],
+			"role": "loading",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"s:-40:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin",
+				"e:118:1",
+				"e:095:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Ambulance dispatch",
+			"rect": [
+				-44.5,
+				-1.29999995231628,
+				9.0,
+				7.0
+			],
+			"role": "dispatch",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:-27:open:3",
+				"s:-27:open:3"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"m:nurse_desk",
+				"p:office_chair",
+				"m:med_cabinet",
+				"m:filing_cabinet",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Emergency staff station",
+			"rect": [
+				-32.7000007629395,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "nurse_station",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"n:-18:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:clean_workbench",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Medication room",
+			"rect": [
+				-22.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "medprep",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 86.6,
+			"building": "lab2",
+			"doors": [
+				"s:-10:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"e:175:0",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Clean supply room",
+			"rect": [
+				-14.0,
+				-5.69999980926514,
+				7.59999990463257,
+				11.3999996185303
+			],
+			"role": "clean_utility",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 68.6,
+			"building": "lab2",
+			"doors": [
+				"s:-2.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Staff restrooms",
+			"rect": [
+				-6.40000009536743,
+				-3.09999990463257,
+				7.80000019073486,
+				8.80000019073486
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 111.7,
+			"building": "lab2",
+			"doors": [
+				"n:9:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:nurse_desk",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Outpatient pharmacy",
+			"rect": [
+				4.19999980926514,
+				-5.69999980926514,
+				9.80000019073486,
+				11.3999996185303
+			],
+			"role": "dispensary",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 68.4,
+			"building": "lab2",
+			"doors": [
+				"s:17:door"
+			],
+			"equipment": [
+				"m:wash_station",
+				"e:108:0",
+				"e:108:1",
+				"e:108:2",
+				"m:mop_bucket",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Soiled utility",
+			"rect": [
+				14.0,
+				-5.69999980926514,
+				6.0,
+				11.3999996185303
+			],
+			"role": "soiled_utility",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 144.8,
+			"building": "lab2",
+			"doors": [
+				"s:26:door",
+				"n:26:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Equipment store",
+			"rect": [
+				20.0,
+				-5.69999980926514,
+				12.6999998092651,
+				11.3999996185303
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"n:40:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:0",
+				"e:085:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Electrical room",
+			"rect": [
+				35.5,
+				-5.69999980926514,
+				9.0,
+				7.0
+			],
+			"role": "electrical",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 59.5,
+			"building": "lab2",
+			"doors": [
+				"s:-40:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Observation room A",
+			"rect": [
+				-44.5,
+				-15.5,
+				8.5,
+				7.0
+			],
+			"role": "observation_clinical",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-33.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 201",
+			"rect": [
+				-36.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-27.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 202",
+			"rect": [
+				-30.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-21.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 203",
+			"rect": [
+				-24.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-15.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 204",
+			"rect": [
+				-18.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-9.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 205",
+			"rect": [
+				-12.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-3.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 206",
+			"rect": [
+				-6.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:3.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 207",
+			"rect": [
+				0.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:9.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 208",
+			"rect": [
+				6.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:15.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 209",
+			"rect": [
+				12.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:21.0:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 210",
+			"rect": [
+				18.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"s:28:door"
+			],
+			"equipment": [
+				"e:102:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Treatment room A",
+			"rect": [
+				24.0,
+				-15.5,
+				8.0,
+				7.0
+			],
+			"role": "treatment",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:35:door"
+			],
+			"equipment": [
+				"e:102:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Treatment room B",
+			"rect": [
+				32.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "treatment",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 45.5,
+			"building": "lab2",
+			"doors": [
+				"s:41:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Observation room B",
+			"rect": [
+				38.0,
+				-15.5,
+				6.5,
+				7.0
+			],
+			"role": "observation_clinical",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-41.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 211",
+			"rect": [
+				-44.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-35.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 212",
+			"rect": [
+				-38.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-29.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 213",
+			"rect": [
+				-32.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-23.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 214",
+			"rect": [
+				-26.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-17.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 215",
+			"rect": [
+				-20.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:-11.5:door"
+			],
+			"equipment": [
+				"e:096:1",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:personal_bag",
+				"e:047:0",
+				"e:099:0"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient room 216",
+			"rect": [
+				-14.5,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "patient",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 59.5,
+			"building": "lab2",
+			"doors": [
+				"n:-4:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"m:shower"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Staff changing",
+			"rect": [
+				-8.5,
+				8.5,
+				8.5,
+				7.0
+			],
+			"role": "changing",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:3:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"e:175:0",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Clean utility",
+			"rect": [
+				0.0,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "clean_utility",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"n:9:door"
+			],
+			"equipment": [
+				"m:wash_station",
+				"e:108:0",
+				"e:108:1",
+				"e:108:2",
+				"m:mop_bucket",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Ward soiled utility",
+			"rect": [
+				6.0,
+				8.5,
+				6.0,
+				7.0
+			],
+			"role": "soiled_utility",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 70.0,
+			"building": "lab2",
+			"doors": [
+				"n:17:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Medical storage",
+			"rect": [
+				12.0,
+				8.5,
+				10.0,
+				7.0
+			],
+			"role": "medstore",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 74.9,
+			"building": "lab2",
+			"doors": [
+				"n:27:open:3"
+			],
+			"equipment": [
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:1",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:046:0",
+				"e:048:2",
+				"e:057:0",
+				"m:personal_bag",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Patient day room",
+			"rect": [
+				22.0,
+				8.5,
+				10.6999998092651,
+				7.0
+			],
+			"role": "dayroom",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 82.6,
+			"building": "lab2",
+			"doors": [
+				"n:36:door",
+				"n:42:door"
+			],
+			"equipment": [
+				"m:packing_table",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box",
+				"m:wrapped_pallet"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Service store",
+			"rect": [
+				32.7000007629395,
+				8.5,
+				11.8000001907349,
+				7.0
+			],
+			"role": "service",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"s:-40:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:staff_locker",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:roll_cage",
+				"m:roll_cage"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Ward linen store",
+			"rect": [
+				-44.5,
+				-1.29999995231628,
+				9.0,
+				7.0
+			],
+			"role": "laundry",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:-27:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Doctors' office",
+			"rect": [
+				-32.7000007629395,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"n:-18:door",
+				"s:-18:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:clean_workbench",
+				"e:175:2",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Medication preparation",
+			"rect": [
+				-22.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "medprep",
+			"sources": 3,
+			"tier": 2
+		},
+		{
+			"area_m2": 86.6,
+			"building": "lab2",
+			"doors": [
+				"n:-10:open:3",
+				"s:-10:open:3"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"m:nurse_desk",
+				"p:office_chair",
+				"m:med_cabinet",
+				"m:filing_cabinet",
+				"m:supply_cart"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Nurses' station",
+			"rect": [
+				-14.0,
+				-5.69999980926514,
+				7.59999990463257,
+				11.3999996185303
+			],
+			"role": "nurse_station",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 68.6,
+			"building": "lab2",
+			"doors": [
+				"s:-2.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Ward staff restrooms",
+			"rect": [
+				-6.40000009536743,
+				-3.09999990463257,
+				7.80000019073486,
+				8.80000019073486
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 88.9,
+			"building": "lab2",
+			"doors": [
+				"n:8:open:3"
+			],
+			"equipment": [
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Equipment bay",
+			"rect": [
+				4.19999980926514,
+				-5.69999980926514,
+				7.80000019073486,
+				11.3999996185303
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 114.0,
+			"building": "lab2",
+			"doors": [
+				"s:17:door"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:2",
+				"e:047:1",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Ward staff room",
+			"rect": [
+				12.0,
+				-5.69999980926514,
+				10.0,
+				11.3999996185303
+			],
+			"role": "breakroom",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:27:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Ward records",
+			"rect": [
+				22.0,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "records",
+			"sources": 3,
+			"tier": 2
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"n:40:door"
+			],
+			"equipment": [
+				"m:air_handler",
+				"e:082:1",
+				"e:085:1",
+				"e:073:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Ward plant room",
+			"rect": [
+				35.5,
+				-5.69999980926514,
+				9.0,
+				7.0
+			],
+			"role": "plant",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 101.5,
+			"building": "lab2",
+			"doors": [
+				"s:-37:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:biosafety_cabinet",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Clinical trial lab A",
+			"rect": [
+				-44.5,
+				-15.5,
+				14.5,
+				7.0
+			],
+			"role": "trial_lab",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 98.0,
+			"building": "lab2",
+			"doors": [
+				"s:-23:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"m:biosafety_cabinet",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Clinical trial lab B",
+			"rect": [
+				-30.0,
+				-15.5,
+				14.0,
+				7.0
+			],
+			"role": "trial_lab",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 70.0,
+			"building": "lab2",
+			"doors": [
+				"s:-11:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge",
+				"m:specimen_cooler"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Diagnostic laboratory",
+			"rect": [
+				-16.0,
+				-15.5,
+				10.0,
+				7.0
+			],
+			"role": "diagnostic",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 49.0,
+			"building": "lab2",
+			"doors": [
+				"s:-2.5:open:3",
+				"n:-2.5:extopen"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"e:095:1",
+				"m:weapon_crate",
+				"e:111:2"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Skybridge security post",
+			"rect": [
+				-6.0,
+				-15.5,
+				7.0,
+				7.0
+			],
+			"role": "bridge_security",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 91.0,
+			"building": "lab2",
+			"doors": [
+				"s:5:door",
+				"s:11:door"
+			],
+			"equipment": [
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"m:filing_cabinet",
+				"e:043:0",
+				"e:044:1",
+				"e:060:0"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Research administration",
+			"rect": [
+				1.0,
+				-15.5,
+				13.0,
+				7.0
+			],
+			"role": "openoffice",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"s:18:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial coordinator office",
+			"rect": [
+				14.0,
+				-15.5,
+				8.0,
+				7.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"s:26:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Consent and screening",
+			"rect": [
+				22.0,
+				-15.5,
+				8.0,
+				7.0
+			],
+			"role": "consent",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"s:34:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"e:177:2",
+				"e:104:0",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Restricted medication storage",
+			"rect": [
+				30.0,
+				-15.5,
+				8.0,
+				7.0
+			],
+			"role": "medvault",
+			"sources": 4,
+			"tier": 3
+		},
+		{
+			"area_m2": 45.5,
+			"building": "lab2",
+			"doors": [
+				"s:41:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:nurse_desk",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial pharmacy",
+			"rect": [
+				38.0,
+				-15.5,
+				6.5,
+				7.0
+			],
+			"role": "dispensary",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-40.5:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial treatment room 1",
+			"rect": [
+				-44.5,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "trial_treatment",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-32.5:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial treatment room 2",
+			"rect": [
+				-36.5,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "trial_treatment",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-24.5:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial treatment room 3",
+			"rect": [
+				-28.5,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "trial_treatment",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 101.5,
+			"building": "lab2",
+			"doors": [
+				"n:-17:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Controlled patient observation",
+			"rect": [
+				-20.5,
+				8.5,
+				14.5,
+				7.0
+			],
+			"role": "controlled_obs",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-2:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Observation control",
+			"rect": [
+				-6.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "obs_control",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"n:8:door"
+			],
+			"equipment": [
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:recovery_bed",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Patient holding",
+			"rect": [
+				2.0,
+				8.5,
+				12.0,
+				7.0
+			],
+			"role": "holding",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 70.0,
+			"building": "lab2",
+			"doors": [
+				"n:19:door"
+			],
+			"equipment": [
+				"m:clean_workbench",
+				"m:microscope",
+				"e:105:1",
+				"m:eyewash",
+				"m:wash_station",
+				"m:specimen_cooler",
+				"m:tool_drawers",
+				"m:lab_fridge"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Sample processing",
+			"rect": [
+				14.0,
+				8.5,
+				10.0,
+				7.0
+			],
+			"role": "diagnostic",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 60.9,
+			"building": "lab2",
+			"doors": [
+				"n:28:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 2,
+			"name": "Trial records",
+			"rect": [
+				24.0,
+				8.5,
+				8.69999980926514,
+				7.0
+			],
+			"role": "records",
+			"sources": 3,
+			"tier": 3
+		},
+		{
+			"area_m2": 82.6,
+			"building": "lab2",
+			"doors": [
+				"n:38:door"
+			],
+			"equipment": [
+				"e:097:0",
+				"m:wheel_chair",
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:097:0",
+				"m:wheel_chair",
+				"e:099:2"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Secure patient transfer",
+			"rect": [
+				32.7000007629395,
+				8.5,
+				11.8000001907349,
+				7.0
+			],
+			"role": "transfer",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"s:-40:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Trial monitoring",
+			"rect": [
+				-44.5,
+				-1.29999995231628,
+				9.0,
+				7.0
+			],
+			"role": "monitoring",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:-27:door"
+			],
+			"equipment": [
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:specimen_cooler",
+				"e:104:1",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Specimen cold room",
+			"rect": [
+				-32.7000007629395,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "cold",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"s:-18:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:0",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Trial data room",
+			"rect": [
+				-22.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "server",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 86.6,
+			"building": "lab2",
+			"doors": [
+				"n:-10:open:3",
+				"s:-10:open:3"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"m:nurse_desk",
+				"p:office_chair",
+				"m:med_cabinet",
+				"m:filing_cabinet",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Clinical staff base",
+			"rect": [
+				-14.0,
+				-5.69999980926514,
+				7.59999990463257,
+				11.3999996185303
+			],
+			"role": "nurse_station",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 68.6,
+			"building": "lab2",
+			"doors": [
+				"s:-2.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three staff restrooms",
+			"rect": [
+				-6.40000009536743,
+				-3.09999990463257,
+				7.80000019073486,
+				8.80000019073486
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 3
+		},
+		{
+			"area_m2": 111.7,
+			"building": "lab2",
+			"doors": [
+				"n:9:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 3,
+			"loose": 1,
+			"name": "Level three equipment storage",
+			"rect": [
+				4.19999980926514,
+				-5.69999980926514,
+				9.80000019073486,
+				11.3999996185303
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"s:18:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"e:175:0",
+				"m:supply_cart"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three clean utility",
+			"rect": [
+				14.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "clean_utility",
+			"sources": 2,
+			"tier": 3
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:27:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:2",
+				"m:trash_bin"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Trial investigator office",
+			"rect": [
+				22.0,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"n:40:door"
+			],
+			"equipment": [
+				"m:air_handler",
+				"e:082:1",
+				"e:085:1",
+				"e:073:1"
+			],
+			"floor": 3,
+			"loose": 0,
+			"name": "Level three plant room",
+			"rect": [
+				35.5,
+				-5.69999980926514,
+				9.0,
+				7.0
+			],
+			"role": "plant",
+			"sources": 1,
+			"tier": 3
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-41.5:door"
+			],
+			"equipment": [
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:2",
+				"m:med_cabinet",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Isolation room one",
+			"rect": [
+				-44.5,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "isolation",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:-35.5:door"
+			],
+			"equipment": [
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:2",
+				"m:med_cabinet",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Isolation room two",
+			"rect": [
+				-38.5,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "isolation",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 185.5,
+			"building": "lab2",
+			"doors": [
+				"s:-27:open:3",
+				"s:-12:open:3"
+			],
+			"equipment": [
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"e:107:2",
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:2",
+				"m:med_cabinet",
+				"e:175:2",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Intensive care unit",
+			"rect": [
+				-32.5,
+				-15.5,
+				26.5,
+				7.0
+			],
+			"role": "icu",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"s:-2:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Patient monitoring station",
+			"rect": [
+				-6.0,
+				-15.5,
+				8.0,
+				7.0
+			],
+			"role": "monitoring",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"s:8:door"
+			],
+			"equipment": [
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:102:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:110:2",
+				"e:199:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Experimental treatment suite A",
+			"rect": [
+				2.0,
+				-15.5,
+				12.0,
+				7.0
+			],
+			"role": "experimental",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"s:20:door"
+			],
+			"equipment": [
+				"m:biosafety_cabinet",
+				"m:biosafety_cabinet",
+				"m:ultra_freezer",
+				"m:specimen_cooler",
+				"e:102:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:110:2",
+				"e:199:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Experimental treatment suite B",
+			"rect": [
+				14.0,
+				-15.5,
+				12.0,
+				7.0
+			],
+			"role": "experimental",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:29:door"
+			],
+			"equipment": [
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:2",
+				"m:med_cabinet",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Isolation room three",
+			"rect": [
+				26.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "isolation",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 42.0,
+			"building": "lab2",
+			"doors": [
+				"s:35:door"
+			],
+			"equipment": [
+				"e:096:2",
+				"m:monitor_cart",
+				"m:iv_stand",
+				"e:101:2",
+				"m:med_cabinet",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Isolation room four",
+			"rect": [
+				32.0,
+				-15.5,
+				6.0,
+				7.0
+			],
+			"role": "isolation",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 45.5,
+			"building": "lab2",
+			"doors": [
+				"s:41:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"e:109:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Staff gowning",
+			"rect": [
+				38.0,
+				-15.5,
+				6.5,
+				7.0
+			],
+			"role": "gowning",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 59.5,
+			"building": "lab2",
+			"doors": [
+				"n:-40:vault"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"e:177:2",
+				"e:104:0",
+				"m:supply_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Secure pharmaceutical storage",
+			"rect": [
+				-44.5,
+				8.5,
+				8.5,
+				7.0
+			],
+			"role": "vault_pharma",
+			"sources": 4,
+			"tier": 4
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"n:-30:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table",
+				"e:185:0"
+			],
+			"floor": 4,
+			"loose": 2,
+			"name": "Clinical research records",
+			"rect": [
+				-36.0,
+				8.5,
+				12.0,
+				7.0
+			],
+			"role": "records_secure",
+			"sources": 5,
+			"tier": 4
+		},
+		{
+			"area_m2": 84.0,
+			"building": "lab2",
+			"doors": [
+				"n:-18:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Medical equipment storage",
+			"rect": [
+				-24.0,
+				8.5,
+				12.0,
+				7.0
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:-8:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"m:shower"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Staff preparation",
+			"rect": [
+				-12.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "changing",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 126.0,
+			"building": "lab2",
+			"doors": [
+				"n:0:open:3",
+				"n:10:door"
+			],
+			"equipment": [
+				"e:050:2",
+				"e:050:2",
+				"e:050:2",
+				"e:050:2",
+				"e:050:2",
+				"e:126:1",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"m:medical_bag",
+				"e:099:2"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Improvised quarantine ward",
+			"rect": [
+				-4.0,
+				8.5,
+				18.0,
+				7.0
+			],
+			"role": "makeshift",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 56.0,
+			"building": "lab2",
+			"doors": [
+				"n:18:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:051:0",
+				"e:044:2",
+				"m:trash_bin",
+				"e:049:0",
+				"e:050:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "On-call room",
+			"rect": [
+				14.0,
+				8.5,
+				8.0,
+				7.0
+			],
+			"role": "oncall",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 74.9,
+			"building": "lab2",
+			"doors": [
+				"n:27:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:179:1",
+				"e:085:1",
+				"m:instrument_bench",
+				"m:work_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Maintenance store",
+			"rect": [
+				22.0,
+				8.5,
+				10.6999998092651,
+				7.0
+			],
+			"role": "maintenance",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 82.6,
+			"building": "lab2",
+			"doors": [
+				"n:36:door"
+			],
+			"equipment": [
+				"e:109:2",
+				"m:wash_station",
+				"m:eyewash",
+				"m:staff_locker",
+				"e:108:0",
+				"e:108:1"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Decontamination showers",
+			"rect": [
+				32.7000007629395,
+				8.5,
+				11.8000001907349,
+				7.0
+			],
+			"role": "decon",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"s:-40:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"e:109:0"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Isolation anteroom",
+			"rect": [
+				-44.5,
+				-1.29999995231628,
+				9.0,
+				7.0
+			],
+			"role": "gowning",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:-27:open:3"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:monitor_cart",
+				"e:124:1",
+				"m:filing_cabinet"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "ICU central monitoring",
+			"rect": [
+				-32.7000007629395,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "monitoring",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"n:-18:door"
+			],
+			"equipment": [
+				"e:045:1",
+				"e:045:1",
+				"m:med_cabinet",
+				"m:medicine_fridge",
+				"m:clean_workbench",
+				"e:177:2",
+				"e:104:0",
+				"e:175:2",
+				"m:supply_cart"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Experimental drug preparation",
+			"rect": [
+				-22.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "drugprep",
+			"sources": 5,
+			"tier": 4
+		},
+		{
+			"area_m2": 86.6,
+			"building": "lab2",
+			"doors": [
+				"s:-10:door"
+			],
+			"equipment": [
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:ultra_freezer",
+				"m:lab_fridge",
+				"m:specimen_cooler",
+				"e:104:1",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Blood and sample bank",
+			"rect": [
+				-14.0,
+				-5.69999980926514,
+				7.59999990463257,
+				11.3999996185303
+			],
+			"role": "cold",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 68.6,
+			"building": "lab2",
+			"doors": [
+				"s:-2.5:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Level four staff restrooms",
+			"rect": [
+				-6.40000009536743,
+				-3.09999990463257,
+				7.80000019073486,
+				8.80000019073486
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 4
+		},
+		{
+			"area_m2": 111.7,
+			"building": "lab2",
+			"doors": [
+				"n:9:door"
+			],
+			"equipment": [
+				"e:079:1",
+				"e:079:1",
+				"m:shipping_crate",
+				"e:172:0",
+				"m:cardboard_box",
+				"m:work_cart",
+				"m:storage_table"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Ventilator store",
+			"rect": [
+				4.19999980926514,
+				-5.69999980926514,
+				9.80000019073486,
+				11.3999996185303
+			],
+			"role": "equipment",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 91.2,
+			"building": "lab2",
+			"doors": [
+				"s:18:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"e:044:1",
+				"e:048:0",
+				"e:057:1",
+				"m:filing_cabinet",
+				"e:184:1"
+			],
+			"floor": 4,
+			"loose": 1,
+			"name": "Clinical lead office",
+			"rect": [
+				14.0,
+				-5.69999980926514,
+				8.0,
+				11.3999996185303
+			],
+			"role": "exec",
+			"sources": 2,
+			"tier": 4
+		},
+		{
+			"area_m2": 122.0,
+			"building": "lab2",
+			"doors": [
+				"n:27:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table",
+				"e:185:0"
+			],
+			"floor": 4,
+			"loose": 2,
+			"name": "Trial outcome archive",
+			"rect": [
+				22.0,
+				-5.69999980926514,
+				10.6999998092651,
+				11.3999996185303
+			],
+			"role": "records_secure",
+			"sources": 4,
+			"tier": 4
+		},
+		{
+			"area_m2": 63.0,
+			"building": "lab2",
+			"doors": [
+				"n:40:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:179:1",
+				"e:085:1",
+				"m:instrument_bench",
+				"m:work_cart"
+			],
+			"floor": 4,
+			"loose": 0,
+			"name": "Maintenance and roof access",
+			"rect": [
+				35.5,
+				-5.69999980926514,
+				9.0,
+				7.0
+			],
+			"role": "maintenance",
+			"sources": 1,
+			"tier": 4
+		},
+		{
+			"area_m2": 117.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:-14:door",
+				"n:-14:door"
+			],
+			"equipment": [
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:medicine_fridge",
+				"e:192:1",
+				"m:pallet_jack"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Cold-chain storage",
+			"rect": [
+				-21.0,
+				-11.3999996185303,
+				13.0,
+				9.0
+			],
+			"role": "dist_cold",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 108.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:-2:door",
+				"n:-2:open:3"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:061:1",
+				"m:tool_drawers",
+				"e:179:0",
+				"m:work_cart",
+				"e:063:1"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Maintenance workshop",
+			"rect": [
+				-8.0,
+				-11.3999996185303,
+				12.0,
+				9.0
+			],
+			"role": "workshop",
+			"sources": 3,
+			"tier": 1
+		},
+		{
+			"area_m2": 90.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:9:door",
+				"n:9:open:3"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:094:1",
+				"m:tool_drawers",
+				"e:179:0",
+				"m:work_cart",
+				"m:forklift"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Forklift charging bay",
+			"rect": [
+				4.0,
+				-11.3999996185303,
+				10.0,
+				9.0
+			],
+			"role": "charging",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 29.7,
+			"building": "distribution_wing",
+			"doors": [
+				"s:20:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Dock supervisor",
+			"rect": [
+				18.3999996185303,
+				-11.3999996185303,
+				3.29999995231628,
+				9.0
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 135.2,
+			"building": "distribution_wing",
+			"doors": [
+				"n:-14:open:3",
+				"s:-14:extdoor"
+			],
+			"equipment": [
+				"m:nurse_desk",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"m:filing_cabinet",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Reception and dispatch",
+			"rect": [
+				-21.0,
+				0.600000023841858,
+				13.0,
+				10.3999996185303
+			],
+			"role": "dispatch_reception",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 83.2,
+			"building": "distribution_wing",
+			"doors": [
+				"n:-4:door"
+			],
+			"equipment": [
+				"m:staff_locker",
+				"m:staff_locker",
+				"m:staff_locker",
+				"e:047:1",
+				"m:shower"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Staff lockers",
+			"rect": [
+				-8.0,
+				0.600000023841858,
+				8.0,
+				10.3999996185303
+			],
+			"role": "changing",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 62.4,
+			"building": "distribution_wing",
+			"doors": [
+				"n:3:door"
+			],
+			"equipment": [
+				"m:toilet",
+				"m:toilet",
+				"m:toilet",
+				"m:wash_station",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Warehouse restrooms",
+			"rect": [
+				0.0,
+				0.600000023841858,
+				6.0,
+				10.3999996185303
+			],
+			"role": "restroom",
+			"sources": 0,
+			"tier": 1
+		},
+		{
+			"area_m2": 104.0,
+			"building": "distribution_wing",
+			"doors": [
+				"n:11:door"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:2",
+				"e:047:2",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Warehouse break room",
+			"rect": [
+				6.0,
+				0.600000023841858,
+				10.0,
+				10.3999996185303
+			],
+			"role": "breakroom",
+			"sources": 1,
+			"tier": 1
+		},
+		{
+			"area_m2": 59.3,
+			"building": "distribution_wing",
+			"doors": [
+				"n:19:door"
+			],
+			"equipment": [
+				"m:exam_bed",
+				"m:wash_station",
+				"m:iv_stand",
+				"m:med_cabinet",
+				"e:176:1",
+				"m:sharps_bin",
+				"m:supply_cart"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Warehouse first aid",
+			"rect": [
+				16.0,
+				0.600000023841858,
+				5.69999980926514,
+				10.3999996185303
+			],
+			"role": "firstaid",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 144.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:-13:door"
+			],
+			"equipment": [
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:042:1",
+				"e:058:0",
+				"e:058:0",
+				"e:042:2",
+				"e:058:2",
+				"e:042:1",
+				"m:filing_cabinet",
+				"e:044:1",
+				"e:060:0"
+			],
+			"floor": 2,
+			"loose": 2,
+			"name": "Warehouse offices",
+			"rect": [
+				-21.0,
+				-11.3999996185303,
+				16.0,
+				9.0
+			],
+			"role": "openoffice",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 81.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:0:door"
+			],
+			"equipment": [
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"m:filing_cabinet",
+				"e:045:1",
+				"e:045:1",
+				"m:storage_table"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Shipping records",
+			"rect": [
+				-5.0,
+				-11.3999996185303,
+				9.0,
+				9.0
+			],
+			"role": "records",
+			"sources": 3,
+			"tier": 2
+		},
+		{
+			"area_m2": 90.0,
+			"building": "distribution_wing",
+			"doors": [
+				"s:9:door"
+			],
+			"equipment": [
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"m:server_rack",
+				"e:190:0",
+				"e:189:0",
+				"m:storage_table",
+				"m:terminal",
+				"e:094:1"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "IT and server room",
+			"rect": [
+				4.0,
+				-11.3999996185303,
+				10.0,
+				9.0
+			],
+			"role": "server",
+			"sources": 2,
+			"tier": 2
+		},
+		{
+			"area_m2": 29.7,
+			"building": "distribution_wing",
+			"doors": [
+				"s:20:door"
+			],
+			"equipment": [
+				"m:electrical_panel",
+				"e:082:1"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Upper electrical cupboard",
+			"rect": [
+				18.3999996185303,
+				-11.3999996185303,
+				3.29999995231628,
+				9.0
+			],
+			"role": "riser",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 114.4,
+			"building": "distribution_wing",
+			"doors": [
+				"n:-15.5:door"
+			],
+			"equipment": [
+				"e:124:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"m:ammo_box",
+				"e:116:0"
+			],
+			"floor": 2,
+			"loose": 0,
+			"name": "Security monitoring",
+			"rect": [
+				-21.0,
+				0.600000023841858,
+				11.0,
+				10.3999996185303
+			],
+			"role": "security_monitor",
+			"sources": 3,
+			"tier": 2
+		},
+		{
+			"area_m2": 104.0,
+			"building": "distribution_wing",
+			"doors": [
+				"n:-5:door"
+			],
+			"equipment": [
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:filing_cabinet",
+				"e:044:1",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Logistics manager",
+			"rect": [
+				-10.0,
+				0.600000023841858,
+				10.0,
+				10.3999996185303
+			],
+			"role": "office",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 124.8,
+			"building": "distribution_wing",
+			"doors": [
+				"n:6:door"
+			],
+			"equipment": [
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:1",
+				"e:057:1"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Training room",
+			"rect": [
+				0.0,
+				0.600000023841858,
+				12.0,
+				10.3999996185303
+			],
+			"role": "meeting",
+			"sources": 0,
+			"tier": 2
+		},
+		{
+			"area_m2": 100.9,
+			"building": "distribution_wing",
+			"doors": [
+				"n:17:door"
+			],
+			"equipment": [
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"m:wall_cabinet",
+				"e:053:0",
+				"e:054:1",
+				"m:break_table",
+				"e:047:0",
+				"e:047:1",
+				"e:057:0",
+				"m:trash_bin"
+			],
+			"floor": 2,
+			"loose": 1,
+			"name": "Kitchenette",
+			"rect": [
+				12.0,
+				0.600000023841858,
+				9.69999980926514,
+				10.3999996185303
+			],
+			"role": "kitchen",
+			"sources": 1,
+			"tier": 2
+		},
+		{
+			"area_m2": 192.0,
+			"building": "distribution",
+			"doors": [
+				"s:-77.5:door"
+			],
+			"equipment": [
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:cold_chain_crate",
+				"m:medicine_fridge",
+				"e:192:1",
+				"m:pallet_jack"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Walk-in cold store",
+			"rect": [
+				-91.0,
+				-68.3000030517578,
+				16.0,
+				12.0
+			],
+			"role": "dist_cold",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 120.0,
+			"building": "distribution",
+			"doors": [
+				"s:-69:open:3"
+			],
+			"equipment": [
+				"m:instrument_bench",
+				"e:094:1",
+				"m:tool_drawers",
+				"e:179:0",
+				"m:work_cart",
+				"m:forklift"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Equipment and charging cage",
+			"rect": [
+				-75.0,
+				-68.3000030517578,
+				12.0,
+				10.0
+			],
+			"role": "charging",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 114.0,
+			"building": "distribution",
+			"doors": [
+				"w:-63:door",
+				"s:-18:door"
+			],
+			"equipment": [
+				"e:124:1",
+				"p:office_desk",
+				"m:terminal",
+				"p:office_chair",
+				"m:security_locker",
+				"e:095:1",
+				"m:ammo_box",
+				"e:116:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Warehouse security office",
+			"rect": [
+				-24.0,
+				-68.3000030517578,
+				11.3999996185303,
+				10.0
+			],
+			"role": "security_monitor",
+			"sources": 3,
+			"tier": 2
+		},
+		{
+			"area_m2": 110.0,
+			"building": "distribution",
+			"doors": [
+				"e:-51:door"
+			],
+			"equipment": [
+				"e:091:0",
+				"e:091:1",
+				"e:091:2",
+				"e:045:1",
+				"e:045:1",
+				"m:tool_drawers",
+				"e:177:0",
+				"e:071:0"
+			],
+			"floor": 1,
+			"loose": 0,
+			"name": "Hazardous goods store",
+			"rect": [
+				-91.0,
+				-56.2999992370605,
+				11.0,
+				10.0
+			],
+			"role": "chemstore",
+			"sources": 2,
+			"tier": 1
+		},
+		{
+			"area_m2": 91.3,
+			"building": "distribution",
+			"doors": [
+				"e:-42:door"
+			],
+			"equipment": [
+				"m:packing_table",
+				"m:roll_cage",
+				"m:roll_cage",
+				"m:pallet_jack",
+				"m:shipping_crate",
+				"m:cardboard_box",
+				"m:wrapped_pallet"
+			],
+			"floor": 1,
+			"loose": 1,
+			"name": "Goods-in inspection",
+			"rect": [
+				-91.0,
+				-46.2999992370605,
+				11.0,
+				8.30000019073486
+			],
+			"role": "receipt",
+			"sources": 1,
+			"tier": 1
+		}
+	]
+}

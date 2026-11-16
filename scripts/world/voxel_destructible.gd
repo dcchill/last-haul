@@ -213,5 +213,7 @@ func _add_face(tool: SurfaceTool, cell: Vector3i, face: int, span: Vector3i) -> 
 	var points: Array = FACE_CORNERS[face]
 	for index in TRIANGLE_INDICES:
 		tool.set_normal(FACE_NORMALS[face])
-		tool.add_vertex(center + points[index] * Vector3(span) * CELL_SIZE * 0.5)
+		var vertex: Vector3=center + points[index] * Vector3(span) * CELL_SIZE * 0.5
+		tool.set_uv(Vector2(vertex.x,vertex.y) if absf(FACE_NORMALS[face].z)>.5 else Vector2(vertex.z,vertex.y) if absf(FACE_NORMALS[face].x)>.5 else Vector2(vertex.x,vertex.z))
+		tool.add_vertex(vertex)
 

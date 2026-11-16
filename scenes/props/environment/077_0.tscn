@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/077_0_body.res" id="1_8qmhm"]
+
+[node name="Prop077" type="Node3D" unique_id=1647408997]
+metadata/catalog_id = "077"
+metadata/variant_index = 0.0
+metadata/variant_name = "Short"
+metadata/category = "Industrial & Factory Equipment"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "ceiling",
+"buildings": ["industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["workshop", "factory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 1.0,
+"support_elevation": 2.6
+}
+metadata/components = Array[String](["uprights", "crossrails", "chain_link"])
+metadata/bounds = AABB(-0.1025, 0, -0.0775, 0.205, 1.0400001, 0.155)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=104000074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.099999994, 0)
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_8qmhm")

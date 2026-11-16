@@ -1,0 +1,80 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/107_2_body.res" id="1_7gxou"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_l2uhq"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_07v66"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qky4b"]
+size = Vector3(0.075, 1.9, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_my1kd"]
+size = Vector3(0.075, 1.9, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7capj"]
+size = Vector3(2, 0.08, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_od007"]
+size = Vector3(2, 0.08, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hhg2x"]
+size = Vector3(0.1, 0.06, 0.65)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rw7g"]
+size = Vector3(0.1, 0.06, 0.65)
+
+[node name="Prop107" type="Node3D" unique_id=2041461541]
+metadata/catalog_id = "107"
+metadata/variant_index = 2.0
+metadata/variant_name = "Torn"
+metadata/category = "Medical & Laboratory Props"
+metadata/classifications = ["decorative", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["hospital", "research"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["medtac", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["ward", "treatment", "laboratory"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["uprights", "crossrails", "divider_feet", "curtain_folds"])
+metadata/bounds = AABB(-1.05, 0, -0.325, 2.1, 1.9, 0.65)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=941138723]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_7gxou")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1051942462]
+collision_mask = 0
+script = ExtResource("2_l2uhq")
+material = ExtResource("3_07v66")
+
+[node name="@CollisionShape3D@234" type="CollisionShape3D" parent="Collision_body_steel" unique_id=873164973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.95, 0)
+shape = SubResource("BoxShape3D_qky4b")
+
+[node name="@CollisionShape3D@235" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1395722260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.95, 0)
+shape = SubResource("BoxShape3D_my1kd")
+
+[node name="@CollisionShape3D@236" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1074533448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_7capj")
+
+[node name="@CollisionShape3D@237" type="CollisionShape3D" parent="Collision_body_steel" unique_id=876112698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86, 0)
+shape = SubResource("BoxShape3D_od007")
+
+[node name="@CollisionShape3D@238" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2105801361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.03, 0)
+shape = SubResource("BoxShape3D_hhg2x")
+
+[node name="@CollisionShape3D@239" type="CollisionShape3D" parent="Collision_body_steel" unique_id=2043331707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.03, 0)
+shape = SubResource("BoxShape3D_8rw7g")

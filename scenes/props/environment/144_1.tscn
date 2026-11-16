@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/144_1_body.res" id="1_rh4n2"]
+
+[node name="Prop144" type="Node3D" unique_id=741406429]
+metadata/catalog_id = "144"
+metadata/variant_index = 1.0
+metadata/variant_name = "Dry"
+metadata/category = "Nature, Overgrowth & Environmental Decay"
+metadata/classifications = ["decorative"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [2.0, 6.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["exterior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["garden", "wilderness"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.15,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["grass_blades"])
+metadata/bounds = AABB(-0.54, 0, -0.5125, 1.0030769, 0.46, 0.96617645)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=717972397]
+visibility_range_end = 160.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("1_rh4n2")

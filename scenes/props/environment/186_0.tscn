@@ -1,0 +1,94 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/searchable_furniture.gd" id="1_2lkqp"]
+[ext_resource type="Resource" path="res://resources/containers/environment/186.tres" id="2_0qc12"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_nnsee"]
+[ext_resource type="Resource" path="res://resources/environment_props/loot/186.tres" id="4_h18ig"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/186_0_body.res" id="5_ds14w"]
+[ext_resource type="ArrayMesh" path="res://resources/environment_props/meshes/186_0_panel.res" id="6_tjhgd"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="7_qiya0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2ia7s"]
+size = Vector3(0.48, 0.12, 0.045)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rmrf"]
+size = Vector3(0.55, 0.16, 0.42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3c2rm"]
+size = Vector3(0.5, 0.35, 0.3)
+
+[node name="Prop186" type="StaticBody3D" unique_id=1859398492 groups=["raid_entities"]]
+script = ExtResource("1_2lkqp")
+display_name = "Cash Register"
+opening = "drawer"
+loot_profile = "records"
+container_config = ExtResource("2_0qc12")
+opening_direction = -1.0
+panel_rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.1975)
+entity_id = "prop-186"
+kind = "container"
+material = ExtResource("3_nnsee")
+loot_table = ExtResource("4_h18ig")
+interaction_offset = Vector3(0, 0.3, -0.27750003)
+metadata/catalog_id = "186"
+metadata/variant_index = 0.0
+metadata/variant_name = "Old"
+metadata/category = "Loot Containers & Searchable Storage"
+metadata/classifications = ["decorative", "searchable", "interactive", "obstacle"]
+metadata/placement = {
+"attachment": "floor",
+"buildings": ["urban", "industrial"],
+"cluster": [1.0, 1.0],
+"conditions": ["abandoned", "weathered", "dry", "wet"],
+"environments": ["interior"],
+"factions": ["civilian", "neutral"],
+"keep_out_of": ["doorway", "navigation_route", "extraction", "spawn"],
+"rarity": 0.75,
+"rooms": ["office", "records", "reception"],
+"rotations": [0.0, 90.0, 180.0, 270.0],
+"service_clearance": 0.85,
+"support_elevation": 0.0
+}
+metadata/components = Array[String](["cash_drawer_case", "moving_panel", "handle_mount", "handle", "cash_tray", "coin_dividers", "register_housing", "register_keys", "mechanical_total"])
+metadata/bounds = AABB(-0.275, 0, -0.32750005, 0.55, 0.6, 0.5375)
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=599424500]
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("5_ds14w")
+
+[node name="MovingPanel" type="Node3D" parent="." unique_id=1599662632]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.1975)
+
+[node name="Mesh" type="MeshInstance3D" parent="MovingPanel" unique_id=1111593457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, 0.1975)
+visibility_range_end = 65.0
+visibility_range_end_margin = 10.0
+mesh = ExtResource("6_tjhgd")
+
+[node name="Collision_panel_steel" type="StaticBody3D" parent="MovingPanel" unique_id=1612716150]
+collision_mask = 0
+script = ExtResource("7_qiya0")
+material = ExtResource("3_nnsee")
+
+[node name="@CollisionShape3D@372" type="CollisionShape3D" parent="MovingPanel/Collision_panel_steel" unique_id=485651568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.022499993)
+shape = SubResource("BoxShape3D_2ia7s")
+
+[node name="Collision_body_steel" type="StaticBody3D" parent="." unique_id=1453344263]
+collision_mask = 0
+script = ExtResource("7_qiya0")
+material = ExtResource("3_nnsee")
+
+[node name="@CollisionShape3D@371" type="CollisionShape3D" parent="Collision_body_steel" unique_id=1999585099]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+shape = SubResource("BoxShape3D_2rmrf")
+
+[node name="Collision_body_paint" type="StaticBody3D" parent="." unique_id=1985306578]
+collision_mask = 0
+script = ExtResource("7_qiya0")
+material = ExtResource("3_nnsee")
+
+[node name="@CollisionShape3D@373" type="CollisionShape3D" parent="Collision_body_paint" unique_id=596267565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0.06)
+shape = SubResource("BoxShape3D_3c2rm")
