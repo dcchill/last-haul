@@ -118,6 +118,7 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	phase = Phase.ACTIVE
 	$ImpactPresenter.catalog = catalog
 	ballistics.impact.connect($ImpactPresenter.present)
+	ballistics.ricochet.connect($ImpactPresenter.ricochet)
 	for npc in npcs: shot_fired.connect(npc.hear_shot)
 	shot_fired.connect(player.shot_fired)
 	_build_loot()
@@ -170,13 +171,9 @@ func request_fire(player_id: String) -> bool:
 		return false
 	state.next_shot = gun.next_shot
 	shot_fired.emit(player_id, state.actor.global_position)
-	for pellet in range(gun.definition.pellets):
-		var kind := "rocket" if gun.definition.feed == "ROCKET" else "bullet"
-		var origin: Vector3 = state.actor.rifle.bones.muzzle_socket.global_position
-		var bullet := _spawn_projectile(origin, state.actor.aim_direction(), gun.definition.projectile_speed,
-			gun.definition.spread * (0.35 if gun.aiming else 1.0), gun.definition.damage * catalog.definitions[gun.fired_ammo].damage_multiplier, gun.definition.head_multiplier, state.actor.get_rid(), kind)
-		bullet.ammo_id = gun.fired_ammo
-		bullet.velocity += Vector3(state.actor.movement.velocity.x, 0.0 if state.actor.grounded else state.actor.movement.velocity.y, state.actor.movement.velocity.z)
+	var origin: Vector3 = state.actor.rifle.bones.muzzle_socket.global_position
+	_fire_weapon(gun, origin, state.actor.aim_direction(), state.actor.get_rid(),
+		Vector3(state.actor.movement.velocity.x, 0.0 if state.actor.grounded else state.actor.movement.velocity.y, state.actor.movement.velocity.z), state.actor.rifle)
 	_play_shot(gun, state.actor.global_position)
 	if gun.definition.feed not in ["SHELL", "ROCKET"]:
 		var casing: String = {"STANAG": "five_five_six_casing", "BARRET": "fifty_cal_casing"}.get(gun.definition.feed, "nine_mm_casing")
@@ -184,14 +181,32 @@ func request_fire(player_id: String) -> bool:
 			_drop_item(casing, state.actor.global_position)
 	return true
 
-func _spawn_projectile(origin: Vector3, direction: Vector3, speed: float, spread: float, damage: float, head: float, source: RID, kind: String = "bullet") -> Dictionary:
+func _fire_weapon(gun: WeaponState, origin: Vector3, direction: Vector3, source: RID, inherited_velocity := Vector3.ZERO, view: Node3D = null) -> void:
+	$ImpactPresenter.muzzle_flash(origin, direction, gun.suppressed(), view)
+	for pellet in range(gun.definition.pellets):
+		_spawn_projectile(origin, direction, gun.definition.projectile_speed,
+			gun.definition.spread * (0.35 if gun.aiming else 1.0), gun.definition.damage * catalog.definitions[gun.fired_ammo].damage_multiplier,
+			gun.definition.head_multiplier, source, "rocket" if gun.definition.feed == "ROCKET" else "bullet", gun.fired_ammo, inherited_velocity)
+
+func _spawn_projectile(origin: Vector3, direction: Vector3, speed: float, spread: float, damage: float, head: float, source: RID, kind: String = "bullet", ammo_id: String = "", inherited_velocity := Vector3.ZERO) -> Dictionary:
 	projectile_serial += 1
 	var projectile := ballistics.make_bullet(origin, direction, speed, spread, damage, head, projectile_serial, [source], kind)
+	projectile.ammo_id = ammo_id
+	projectile.velocity += inherited_velocity
 	projectile.source_entity_id = ""
 	for entity in entities.values():
 		if entity is CollisionObject3D and entity.get_rid() == source:
 			projectile.source_entity_id = entity.entity_id
 			break
+	if kind == "bullet":
+		var end: Vector3 = origin + projectile.velocity.normalized() * Ballistics.HITSCAN_METERS
+		var hit := _projectile_contact(projectile, origin, end)
+		if not hit.is_empty():
+			_resolve_projectile_contact(projectile, hit)
+			return projectile
+		projectile.position = end
+		projectile.previous = end
+		projectile.distance = Ballistics.HITSCAN_METERS
 	projectiles.append(projectile)
 	return projectile
 
@@ -428,25 +443,10 @@ func _step_projectile(projectile: Dictionary, _delta: float = 0.05) -> bool:
 		return false
 	var start: Vector3 = projectile.position
 	var end: Vector3 = start + projectile.velocity
-	var hit := ballistics.trace(get_world_3d(), start, end - start, start.distance_to(end), projectile.exclude)
-	# Match the source's swept contact on inflated humanoid bounding boxes.
-	for actor in [player] + npcs:
-		if actor.get_rid() in projectile.exclude or (actor is RaidGuard and actor.state == RaidGuard.State.DEAD):
-			continue
-		var bounds := AABB(actor.global_position + Vector3(-0.6, -0.3, -0.6), Vector3(1.2, 2.4, 1.2))
-		var contact: Variant = bounds.intersects_segment(start, end)
-		if contact is Vector3 and (hit.is_empty() or start.distance_squared_to(contact) < start.distance_squared_to(hit.position)):
-			hit = {"collider": actor, "position": contact, "normal": -projectile.velocity.normalized()}
+	var hit := _projectile_contact(projectile, start, end)
 	if not hit.is_empty():
-		projectile.position = hit.position
-		if projectile.kind in ["rocket", "impact"]:
-			_explode(hit.position, 3.0)
-		elif projectile.kind == "smoke":
-			_smoke_contact(projectile, hit)
-		else:
-			_apply_projectile_hit(hit.collider, projectile, hit)
-			var surface: MaterialDef = hit.collider.get("material")
-			ballistics.impact.emit(hit.position, hit.normal, surface.id if surface != null else "steel", "")
+		projectile.distance = float(projectile.get("distance", 0.0)) + start.distance_to(hit.position)
+		_resolve_projectile_contact(projectile, hit)
 		return false
 	Ballistics.advance(projectile)
 	if projectile.age > 100:
@@ -456,6 +456,33 @@ func _step_projectile(projectile: Dictionary, _delta: float = 0.05) -> bool:
 			_smoke_contact(projectile, {"position": projectile.position, "normal": Vector3.UP})
 		return false
 	return true
+
+func _projectile_contact(projectile: Dictionary, start: Vector3, end: Vector3) -> Dictionary:
+	var hit := ballistics.trace(get_world_3d(), start, end - start, start.distance_to(end), projectile.exclude)
+	# Match the source's swept contact on inflated humanoid bounding boxes.
+	for actor in [player] + npcs:
+		if actor.get_rid() in projectile.exclude or (actor is RaidGuard and actor.state == RaidGuard.State.DEAD):
+			continue
+		var bounds := AABB(actor.global_position + Vector3(-0.6, -0.3, -0.6), Vector3(1.2, 2.4, 1.2))
+		var contact: Variant = bounds.intersects_segment(start, end)
+		if contact is Vector3 and (hit.is_empty() or start.distance_squared_to(contact) < start.distance_squared_to(hit.position)):
+			hit = {"collider": actor, "position": contact, "normal": -projectile.velocity.normalized()}
+	return hit
+
+func _resolve_projectile_contact(projectile: Dictionary, hit: Dictionary) -> void:
+	projectile.position = hit.position
+	if projectile.kind in ["rocket", "impact"]:
+		_explode(hit.position, 3.0)
+	elif projectile.kind == "smoke":
+		_smoke_contact(projectile, hit)
+	else:
+		_apply_projectile_hit(hit.collider, projectile, hit)
+		var surface: MaterialDef = hit.collider.get("material")
+		ballistics.impact.emit(hit.position, hit.normal, surface.id if surface != null else "", "")
+		if not (hit.collider is RaidPlayer or hit.collider is RaidGuard) and Ballistics.can_ricochet(surface, hit.normal, projectile.velocity):
+			# Presentation uses its own RNG so effects never change shot spread.
+			if $ImpactPresenter.effects_rng.randf() < surface.ricochet:
+				ballistics.ricochet.emit(hit.position, hit.normal, projectile.velocity.normalized())
 
 func _apply_projectile_hit(target: Node, projectile: Dictionary, hit: Dictionary) -> Dictionary:
 	var source: Node = entities.get(projectile.get("source_entity_id", ""))
@@ -589,25 +616,28 @@ func _smoke_burst(origin: Vector3) -> void:
 	cloud.global_position = origin + Vector3.UP
 	get_tree().create_timer(4).timeout.connect(cloud.queue_free)
 
-func _show_projectile_tracer(start: Vector3, finish: Vector3, direction: Vector3) -> void:
+func _show_projectile_tracer(start: Vector3, finish: Vector3, direction: Vector3, distance: float) -> void:
 	var length := minf(start.distance_to(finish), 32.0)
-	if length < 0.001:
+	var opacity := Ballistics.tracer_opacity(distance)
+	if length < 0.001 or opacity <= 0.0:
 		return
 	var tracer := MeshInstance3D.new()
 	var mesh := BoxMesh.new()
-	mesh.size = Vector3(0.008, 0.008, length)
+	mesh.size = Vector3(0.035, 0.035, length)
 	tracer.mesh = mesh
-	var material := StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.albedo_color = Color(1, 0.7, 0.35, 0.7)
+	var material := ShaderMaterial.new()
+	material.shader = preload("res://assets/shaders/bullet_tracer.gdshader")
+	material.set_shader_parameter("start_distance", distance - length)
+	material.set_shader_parameter("segment_length", length)
+	material.set_shader_parameter("hitscan_distance", Ballistics.HITSCAN_METERS)
+	material.set_shader_parameter("fade_distance", Ballistics.TRACER_FADE_METERS)
 	tracer.material_override = material
 	add_child(tracer)
 	tracer.global_position = finish - direction * length * 0.5
-	if absf(direction.dot(Vector3.UP)) < 0.999:
-		tracer.basis = Basis.looking_at(direction, Vector3.UP)
+	tracer.basis = Basis.looking_at(direction, Vector3.RIGHT if absf(direction.dot(Vector3.UP)) > 0.999 else Vector3.UP)
+	tracer.reset_physics_interpolation()
 	var tween := create_tween()
-	tween.tween_property(material, "albedo_color:a", 0.0, 0.3)
+	tween.tween_method(func(value: float): material.set_shader_parameter("fade", value), 1.0, 0.0, 0.3)
 	tween.tween_callback(tracer.queue_free)
 
 func _play_shot(gun: WeaponState, origin: Vector3) -> void:
@@ -961,7 +991,8 @@ func gameplay_step() -> void:
 		if not _step_projectile(projectile):
 			projectiles.remove_at(index)
 		if not is_active(): return
-		_show_projectile_tracer(previous, projectile.position, (projectile.position - previous).normalized())
+		if projectile.kind == "bullet":
+			_show_projectile_tracer(previous, projectile.position, (projectile.position - previous).normalized(), projectile.distance)
 	projectiles.append_array(grenade_uses)
 	grenade_uses.clear()
 	for index in range(smoke_events.size() - 1, -1, -1):
@@ -986,8 +1017,9 @@ func gameplay_step() -> void:
 					weapon.reload()
 				elif weapon.fire():
 					shot_fired.emit(npc.entity_id, npc.global_position)
-					var gun := weapon.definition
-					_spawn_projectile(npc.global_position + Vector3.UP * 1.45, (target.eye_position() if target is RaidPlayer else target.global_position + Vector3.UP * 1.45) - (npc.global_position + Vector3.UP * 1.45), gun.projectile_speed, gun.spread, gun.damage, gun.head_multiplier, npc.get_rid())
+					var view: Node3D = npc.body.weapon_view
+					var origin: Vector3 = view.bones.muzzle_socket.global_position
+					_fire_weapon(weapon, origin, (target.eye_position() if target is RaidPlayer else target.global_position + Vector3.UP * 1.45) - origin, npc.get_rid(), npc.velocity * 0.05, view)
 	# Nearby NPCs may use ordinary doors, unlocked security doors, or emergency egress.
 	for entity in entities.values():
 		if not entity is RaidDoor or entity.open: continue

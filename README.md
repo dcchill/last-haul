@@ -49,6 +49,8 @@ Main menu **Settings ? Reset character** asks for confirmation, then clears char
 
 Menus release the mouse and show keyboard focus. Pause stops simulation; the loot panel does **not** stop the guard. Settings include mouse sensitivity, master volume, and fullscreen. Placeholder combat currently has visual/text feedback and procedural combat and material footstep sounds.
 
+Ordinary bullets hit instantly over the first 20 meters, then continue with projectile travel, drop, and drag. Tracers fade in between 20 and 25 meters and fade out behind the shot. Player, NPC, and mounted weapons produce muzzle flashes; suppressors hide the flash and light. Grazing hard-surface impacts can produce cosmetic ricochet sparks and sound, but bullets stop on impact. Rockets and grenades retain their projectile behavior.
+
 ## Organization and configuration
 
 | Folder | Purpose |

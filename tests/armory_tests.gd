@@ -27,6 +27,7 @@ func _run() -> void:
 	await _integration()
 	await _raid_outcomes()
 	await _physics_regressions()
+	check(await load("res://tests/hybrid_ballistics_tests.gd").new().run(self), "hybrid checks complete")
 	await load("res://tests/inventory_tests.gd").new().run(self)
 	print("ARMORY TESTS: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
@@ -314,8 +315,11 @@ func _integration() -> void:
 		check(raid.practice_grant(state.actor.entity_id, source.id), source.id + " available in practice")
 		check(not raid.player.rifle.bones.is_empty() and raid.player.rifle.clips.has("fire"), source.id + " rendered hierarchy and clips")
 		var muzzle: Vector3 = raid.player.rifle.bones.muzzle_socket.global_position
+		var serial := raid.projectile_serial
 		check(raid.request_fire(state.actor.entity_id), source.id + " fires through authority")
-		check(not raid.projectiles.is_empty() and raid.projectiles[0].position.is_equal_approx(muzzle), source.id + " projectile starts at muzzle")
+		check(raid.projectile_serial - serial == state.weapon.definition.pellets, source.id + " resolves every pellet")
+		for projectile in raid.projectiles:
+			check(is_equal_approx(projectile.position.distance_to(muzzle), 20.0 if projectile.kind == "bullet" else 0.0), source.id + " starts continuation at hybrid boundary")
 		raid.projectiles.clear()
 		state.next_shot = 0
 		state.weapon.next_shot = 0
@@ -363,7 +367,7 @@ func _integration() -> void:
 	mount.next_shot = 0
 	raid.gameplay_tick = 100
 	mount.authority_tick(raid)
-	check(mount.ammo == 1 and not raid.projectiles.is_empty(), "mounted weapon consumes ammo and launches projectile")
+	check(mount.ammo == 1, "mounted weapon consumes ammo on hybrid shot")
 	mount.powered = false
 	mount.authority_tick(raid)
 	check(mount.ammo == 1, "unpowered mount cannot fire")

@@ -19,10 +19,32 @@ var current_weapon: WeaponState
 var spin_angle := 0.0
 var autoplay := false
 var render_fraction := 0.0
+var flash_left := 0.0
 
 func _process(delta: float) -> void:
+	flash_left = maxf(0.0, flash_left - delta)
+	for name in ["fx", "firefx", "muzzleflash"]:
+		if bones.has(name): bones[name].visible = flash_left > 0.0
 	if autoplay:
 		animate_preview(delta)
+
+func muzzle_flash() -> bool:
+	var found := false
+	for name in ["fx", "firefx", "muzzleflash"]:
+		if not bones.has(name): continue
+		for mesh: MeshInstance3D in bones[name].find_children("*", "MeshInstance3D", true, false):
+			found = true
+			if not mesh.has_meta("flash_material"):
+				var material: StandardMaterial3D = mesh.material_override.duplicate()
+				material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+				material.emission_enabled = true
+				material.emission = Color(1.0, 0.55, 0.15)
+				material.emission_energy_multiplier = 3.0
+				mesh.material_override = material
+				mesh.set_meta("flash_material", true)
+		bones[name].visible = true
+	flash_left = 0.055
+	return found
 
 func _ready() -> void:
 	_rebuild()
@@ -184,7 +206,7 @@ func _update_parts(weapon: WeaponState, override_progress: float = -2.0) -> void
 		bones.rocket.visible = weapon.magazine > 0 or progress >= 0.28
 	for name in ["fx", "firefx", "muzzleflash"]:
 		if bones.has(name):
-			bones[name].visible = action == "fire" and action_time < 0.1 and not weapon.suppressed()
+			bones[name].visible = flash_left > 0.0 and not weapon.suppressed()
 	if not weapon.definition.can_aim:
 		if bones.has("barrel"):
 			bones.barrel.rotation_degrees.z = spin_angle
