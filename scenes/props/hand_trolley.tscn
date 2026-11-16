@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/hand_trolley.res" id="1_yqwyy"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_ged7l"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_o6wwm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eov3y"]
+size = Vector3(0.125, 1.375, 0.125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4qtq6"]
+size = Vector3(0.125, 1.375, 0.125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_unouk"]
+size = Vector3(0.875, 0.125, 0.125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2x4j2"]
+size = Vector3(0.875, 0.125, 0.75)
+
+[node name="HandTrolley" type="Node3D" unique_id=1093263287]
+metadata/prop_id = "hand_trolley"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=501725384]
+mesh = ExtResource("1_yqwyy")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1502628328]
+collision_mask = 0
+script = ExtResource("2_ged7l")
+material = ExtResource("3_o6wwm")
+
+[node name="@CollisionShape3D@71" type="CollisionShape3D" parent="Collision" unique_id=435296499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.8125, 0.25)
+shape = SubResource("BoxShape3D_eov3y")
+
+[node name="@CollisionShape3D@72" type="CollisionShape3D" parent="Collision" unique_id=694573940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0.8125, 0.25)
+shape = SubResource("BoxShape3D_4qtq6")
+
+[node name="@CollisionShape3D@73" type="CollisionShape3D" parent="Collision" unique_id=276514580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4375, 0.25)
+shape = SubResource("BoxShape3D_unouk")
+
+[node name="@CollisionShape3D@74" type="CollisionShape3D" parent="Collision" unique_id=727887898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0625, -0.125)
+shape = SubResource("BoxShape3D_2x4j2")

@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/plastic_barricade.res" id="1_ahddn"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_oncba"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_s2ayu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_set1t"]
+size = Vector3(0.375, 0.125, 0.875)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1uwk"]
+size = Vector3(0.375, 0.125, 0.875)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2ur7"]
+size = Vector3(2, 0.875, 0.375)
+
+[node name="PlasticBarricade" type="Node3D" unique_id=1984974834]
+metadata/prop_id = "plastic_barricade"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=471946483]
+mesh = ExtResource("1_ahddn")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=137273031]
+collision_mask = 0
+script = ExtResource("2_oncba")
+material = ExtResource("3_s2ayu")
+
+[node name="@CollisionShape3D@107" type="CollisionShape3D" parent="Collision" unique_id=762658272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.0625, 0)
+shape = SubResource("BoxShape3D_set1t")
+
+[node name="@CollisionShape3D@108" type="CollisionShape3D" parent="Collision" unique_id=42046773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.0625, 0)
+shape = SubResource("BoxShape3D_q1uwk")
+
+[node name="@CollisionShape3D@109" type="CollisionShape3D" parent="Collision" unique_id=477371004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 0)
+shape = SubResource("BoxShape3D_v2ur7")

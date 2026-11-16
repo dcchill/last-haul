@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/welding_cart.res" id="1_y4c2r"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_jyc4r"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_v3hd2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ptda"]
+size = Vector3(0.875, 0.125, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_krh1f"]
+size = Vector3(0.625, 0.625, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_052fe"]
+size = Vector3(0.375, 1.125, 0.375)
+
+[node name="WeldingCart" type="Node3D" unique_id=2083929521]
+metadata/prop_id = "welding_cart"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=44913749]
+mesh = ExtResource("1_y4c2r")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=411980668]
+collision_mask = 0
+script = ExtResource("2_jyc4r")
+material = ExtResource("3_v3hd2")
+
+[node name="@CollisionShape3D@68" type="CollisionShape3D" parent="Collision" unique_id=1423790789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3125, 0)
+shape = SubResource("BoxShape3D_4ptda")
+
+[node name="@CollisionShape3D@69" type="CollisionShape3D" parent="Collision" unique_id=41011992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6875, 0.125)
+shape = SubResource("BoxShape3D_krh1f")
+
+[node name="@CollisionShape3D@70" type="CollisionShape3D" parent="Collision" unique_id=1662036158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9375, 0.5)
+shape = SubResource("BoxShape3D_052fe")

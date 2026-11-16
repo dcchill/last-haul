@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/locker_bank.res" id="1_j5nrg"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_jv45a"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_26eym"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m3hln"]
+size = Vector3(1.875, 2, 0.625)
+
+[node name="LockerBank" type="Node3D" unique_id=771406879]
+metadata/prop_id = "locker_bank"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=686107098]
+mesh = ExtResource("1_j5nrg")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1103305240]
+collision_mask = 0
+script = ExtResource("2_jv45a")
+material = ExtResource("3_26eym")
+
+[node name="@CollisionShape3D@231" type="CollisionShape3D" parent="Collision" unique_id=189412439]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_m3hln")

@@ -21,6 +21,7 @@ var attack_left: float = 0.0
 var inventory: RaidInventory
 var weapon_state: WeaponState
 var corpse_id := ""
+var current_target: Node3D
 var armor_plates: ArmorPlates
 @onready var navigation: NavigationAgent3D = $NavigationAgent3D
 @onready var body: Node3D = $Visual
@@ -41,7 +42,7 @@ func _process(delta: float) -> void:
 func reset_visual() -> void:
 	body.pose(0)
 
-func can_see(player: RaidPlayer, ballistics: Ballistics) -> bool:
+func can_see(player: Node3D, ballistics: Ballistics) -> bool:
 	var offset := player.global_position - global_position
 	if offset.length() > archetype.sight_range:
 		return false
@@ -49,9 +50,9 @@ func can_see(player: RaidPlayer, ballistics: Ballistics) -> bool:
 		return false
 	return clear_sight(player, ballistics)
 
-func clear_sight(player: RaidPlayer, ballistics: Ballistics) -> bool:
+func clear_sight(player: Node3D, ballistics: Ballistics) -> bool:
 	var origin := global_position + Vector3.UP * 1.45
-	var destination := player.eye_position()
+	var destination := _eye(player)
 	var hit := ballistics.trace(get_world_3d(), origin, destination - origin, origin.distance_to(destination) + 0.1, [get_rid()])
 	return not hit.is_empty() and hit.collider == player
 
@@ -64,7 +65,26 @@ func hear(position: Vector3) -> void:
 func hear_shot(_player_id: String, position: Vector3) -> void:
 	hear(position)
 
-func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) -> bool:
+func _eye(actor: Node3D) -> Vector3:
+	return actor.eye_position() if actor is RaidPlayer else actor.global_position + Vector3.UP * 1.45
+
+func hostile_to(actor: Node3D) -> bool:
+	if actor is RaidPlayer: return true
+	return actor is RaidGuard and actor != self and actor.archetype.melee != archetype.melee
+
+func select_target(raid: RaidAuthority) -> Node3D:
+	var nearest: Node3D
+	var distance := INF
+	for actor in [raid.player] + raid.npcs:
+		if not hostile_to(actor) or (actor is RaidGuard and actor.state == State.DEAD): continue
+		var separation := global_position.distance_squared_to(actor.global_position)
+		if separation < distance and can_see(actor, raid.ballistics):
+			nearest = actor
+			distance = separation
+	current_target = nearest
+	return nearest
+
+func authority_tick(delta: float, player: Node3D, ballistics: Ballistics) -> bool:
 	if state == State.DEAD:
 		return false
 	attack_left = maxf(0.0, attack_left - delta)
@@ -133,6 +153,14 @@ func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) ->
 		var collision := move_and_collide(travel)
 		if collision == null:
 			break
+		if collision.get_normal().y < 0.8 and absf(travel.y) < 0.1 and not test_move(global_transform, Vector3.UP * 0.6):
+			var raised := Transform3D(global_basis, global_position + Vector3.UP * 0.6)
+			var horizontal := Vector3(travel.x, 0, travel.z)
+			if not test_move(raised, horizontal):
+				move_and_collide(Vector3.UP * 0.6)
+				move_and_collide(horizontal)
+				move_and_collide(Vector3.DOWN * 0.6)
+				break
 		travel = collision.get_remainder().slide(collision.get_normal())
 		velocity = velocity.slide(collision.get_normal())
 	if state in [State.ATTACK, State.TAKE_COVER] and sees and attack_left == 0.0:
@@ -140,7 +168,7 @@ func authority_tick(delta: float, player: RaidPlayer, ballistics: Ballistics) ->
 		return true
 	return false
 
-func choose_cover(player: RaidPlayer, ballistics: Ballistics) -> Vector3:
+func choose_cover(player: Node3D, ballistics: Ballistics) -> Vector3:
 	var best := global_position
 	var distance := 8.0
 	var map := navigation.get_navigation_map()
@@ -151,7 +179,7 @@ func choose_cover(player: RaidPlayer, ballistics: Ballistics) -> Vector3:
 		var path := NavigationServer3D.map_get_path(map, global_position, point, true)
 		if path.is_empty() or path[path.size() - 1].distance_to(point) > 1.0: continue
 		var low := point + Vector3.UP * 0.6
-		var shield := ballistics.trace(get_world_3d(), low, player.eye_position() - low, low.distance_to(player.eye_position()), [get_rid()])
+		var shield := ballistics.trace(get_world_3d(), low, _eye(player) - low, low.distance_to(_eye(player)), [get_rid()])
 		if shield.is_empty() or shield.collider == player: continue
 		best = point
 		distance = travel

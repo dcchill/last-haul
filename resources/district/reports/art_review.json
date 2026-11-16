@@ -1,0 +1,12 @@
+{
+  "review_type": "selected rendered views inspected by image-capable development agent",
+  "engine": "Godot 4.7.2 Forward+",
+  "reference_assets": 8,
+  "asset_capture_directory": ".godot/asset-review",
+  "showcase_capture_directory": ".godot/art-showcase",
+  "district_capture_directory": ".godot/district-review",
+  "reviewed_conditions": ["neutral asset lighting", "three-quarter reference silhouettes", "overcast exteriors and clinical interior", "dusk rail depot", "foggy scrapyard", "night contamination and checkpoint", "district overhead", "rain and high-quality local fog", "developer inspector overlay"],
+  "revisions": ["continuous vehicle profiles and wheel arches", "recessed glazing and functional components", "corrected medical monitor facing", "reduced distracting surface pattern", "separate opening furniture panels", "improved night practical lighting", "upper-floor access and warehouse mezzanines", "reserved door/stair approaches", "restored foliage transforms after headless baking"],
+  "technical_checks_are_not_art_approval": true,
+  "manual_acceptance_remaining": ["human art-direction review", "raid balance playtests", "reference hardware performance"]
+}

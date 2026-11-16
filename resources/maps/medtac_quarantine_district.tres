@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RaidMapDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/raid_map_definition.gd" id="1_pbvvg"]
+
+[resource]
+script = ExtResource("1_pbvvg")
+id = "medtac_quarantine_district"
+display_name = "Medtac Quarantine District"
+scene_path = "res://scenes/raid/district/district_19381.tscn"
+infection_seconds = 1500.0
+approved_layouts = Array[String](["res://scenes/raid/district/district_19381.tscn", "res://scenes/raid/district/district_43721.tscn", "res://scenes/raid/district/district_90217.tscn"])
+active_loose_loot = 48
+enemy_count = 28
+infected_count = 18

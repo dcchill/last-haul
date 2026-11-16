@@ -151,8 +151,9 @@ func run(t: SceneTree) -> void:
 	file.store_string(JSON.stringify(v4))
 	file.close()
 	var migrated := ProfileStore.new(catalog, legacy_path)
-	check.call(migrated.load_profile() and migrated.profile.version == 5 and migrated.profile.stash[0].state.ammo.size() == 9, "version 4 count migration preserves every round")
+	check.call(migrated.load_profile() and migrated.profile.version == ProfileStore.VERSION and migrated.profile.stash[0].state.ammo.size() == 9, "version 4 count migration preserves every round")
 	var app = load("res://scenes/main.tscn").instantiate()
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
 	app.test_profile_path = t.test_dir + "/inventory-world.json"
 	t.root.add_child(app)
 	for frame in range(3): await t.physics_frame
@@ -276,6 +277,7 @@ func run(t: SceneTree) -> void:
 
 func reload_integration(t: SceneTree) -> void:
 	var app = load("res://scenes/main.tscn").instantiate()
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
 	app.test_profile_path = t.test_dir + "/reload-regression.json"
 	t.root.add_child(app)
 	for frame in range(3): await t.process_frame

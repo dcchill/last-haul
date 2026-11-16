@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/tire_stack.res" id="1_473h1"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_g8upm"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_1v58r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqj0p"]
+size = Vector3(0.75, 1.5, 0.75)
+
+[node name="TireStack" type="Node3D" unique_id=1261769059]
+metadata/prop_id = "tire_stack"
+metadata/category = "Scrap"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=823900851]
+mesh = ExtResource("1_473h1")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=470056717]
+collision_mask = 0
+script = ExtResource("2_g8upm")
+material = ExtResource("3_1v58r")
+
+[node name="@CollisionShape3D@53" type="CollisionShape3D" parent="Collision" unique_id=1733887785]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_dqj0p")

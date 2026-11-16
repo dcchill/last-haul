@@ -1,0 +1,10 @@
+{
+  "medical": [["medkit", 5, 2], ["infection_suppressant", 3, 1]],
+  "specimen": [["sealed_specimen", 4, 1], ["sterile_lab_supplies", 4, 2]],
+  "records": [["research_notes", 6, 3], ["research_drive", 1, 1]],
+  "personal": [["food", 4, 2], ["personal_effects", 5, 3], ["face_cover", 1, 1], ["field_glasses", 1, 1]],
+  "technical": [["tool", 5, 2], ["salvage", 5, 4], ["lab_electronics", 2, 2]],
+  "security_gear": [["patrol", 1, 1], ["face_cover", 3, 1], ["field_glasses", 3, 1], ["small_pack", 1, 1]],
+  "weapons": [["m_four", 1, 1], ["pipe_pistol", 2, 1], ["reflex_sight", 3, 1], ["four_x_scope", 1, 1], ["vertical_grip", 2, 1], ["suppressor", 1, 1]],
+  "ammo": [["five_five_six", 6, 30], ["five_five_six_ap", 1, 12], ["nine_mm", 5, 24], ["shotgun_shell", 3, 12], ["fifty_cal", 1, 8], ["stanag_magazine", 2, 1]]
+}

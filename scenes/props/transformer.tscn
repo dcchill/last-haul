@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/transformer.res" id="1_ts5f4"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_mjrac"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_n5phy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iqmdg"]
+size = Vector3(1.75, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uerqq"]
+size = Vector3(1.25, 1.25, 0.875)
+
+[node name="Transformer" type="Node3D" unique_id=1170947162]
+metadata/prop_id = "transformer"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2012090268]
+mesh = ExtResource("1_ts5f4")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=706796241]
+collision_mask = 0
+script = ExtResource("2_mjrac")
+material = ExtResource("3_n5phy")
+
+[node name="@CollisionShape3D@84" type="CollisionShape3D" parent="Collision" unique_id=751002438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_iqmdg")
+
+[node name="@CollisionShape3D@85" type="CollisionShape3D" parent="Collision" unique_id=1953996244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_uerqq")

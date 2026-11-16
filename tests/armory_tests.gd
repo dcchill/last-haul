@@ -211,7 +211,7 @@ func _persistence() -> void:
 	file.close()
 	var migrated := ProfileStore.new(catalog, old_path)
 	check(migrated._valid_legacy(old), "legacy v2 accepted before conversion")
-	check(migrated.load_profile() and migrated.profile.version == 5 and migrated.profile.player_id == "legacy-player", "v2 migration preserves identity")
+	check(migrated.load_profile() and migrated.profile.version == ProfileStore.VERSION and migrated.profile.player_id == "legacy-player", "v2 migration preserves identity")
 	if migrated.profile.stash.is_empty():
 		print("MIGRATION ERROR: ", migrated.load_error)
 		return
@@ -229,7 +229,7 @@ func _persistence() -> void:
 	file.store_string(JSON.stringify(v3))
 	file.close()
 	var upgraded := ProfileStore.new(catalog, v3_path)
-	check(upgraded.load_profile() and upgraded.profile.version == 5, "old vanilla-equipment save upgrades")
+	check(upgraded.load_profile() and upgraded.profile.version == ProfileStore.VERSION, "old vanilla-equipment save upgrades")
 	var converted := false
 	var gun_preserved := false
 	for entry in upgraded.profile.stash:
@@ -301,6 +301,7 @@ func _persistence() -> void:
 
 func _integration() -> void:
 	var app = load("res://scenes/main.tscn").instantiate()
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
 	app.test_profile_path = test_dir + "/app.json"
 	root.add_child(app)
 	for frame in range(3): await process_frame
@@ -399,6 +400,7 @@ func _aim_at(actor: RaidPlayer, point: Vector3) -> void:
 
 func _raid_outcomes() -> void:
 	var app = load("res://scenes/main.tscn").instantiate()
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
 	app.test_profile_path = test_dir + "/outcomes.json"
 	root.add_child(app)
 	for frame in range(3): await physics_frame

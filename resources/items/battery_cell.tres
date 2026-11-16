@@ -3,11 +3,11 @@
 [resource]
 script = ExtResource("1")
 id = "battery_cell"
-display_name = "Veyra power cell"
-description = "Use from inventory to restore 90 seconds of robot power."
+display_name = "Legacy infection suppressant"
+description = "Legacy supply, converted to a MedTac suppressant when loading a historical profile."
 stack_limit = 1
 width = 1
 height = 2
 weight = 0.8
 value = 35
-battery_amount = 90.0
+infection_seconds = 180.0

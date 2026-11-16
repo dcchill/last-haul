@@ -2,7 +2,7 @@ class_name ProfileStore
 extends RefCounted
 
 signal problem(message: String)
-const VERSION := 5
+const VERSION := 6
 const STASH_DEF: ContainerDef = preload("res://resources/containers/stash.tres")
 var path: String
 var catalog: Catalog
@@ -98,6 +98,10 @@ func _valid_armory_grid(grid: RaidInventory, seen: Dictionary) -> bool:
 	return true
 
 func _valid_legacy(value: Variant) -> bool:
+	if value is Dictionary and value.get("version") == 5:
+		var candidate: Dictionary = value.duplicate(true)
+		candidate.version = VERSION
+		return valid(candidate)
 	if _valid_v4(value):
 		return true
 	if not _header_valid(value) or (value.get("version") != 1 and value.get("version") != 2 and value.get("version") != 3):
@@ -182,6 +186,14 @@ func _migrate(value: Dictionary) -> bool:
 		var backup_path := path + ".v%d-%s.bak" % [int(value.version), _new_id()]
 		if DirAccess.copy_absolute(path, backup_path) != OK:
 			return _fail("Could not back up the original profile for migration.")
+	if value.version == 5:
+		# Version 5 already has the complete nested layout and pending-result journal.
+		# Never send it through the older stash-only migration.
+		var upgraded: Dictionary = value.duplicate(true)
+		upgraded.version = VERSION
+		_convert_supplies(upgraded)
+		if not _write(upgraded): return _fail("Could not migrate medical supplies; original retained.")
+		return true
 	var inventory := RaidInventory.new(catalog.items, 10, 18)
 	for old in value.stash:
 		var encoded := _migrate_entry(old)
@@ -201,10 +213,18 @@ func _migrate(value: Dictionary) -> bool:
 			if not fitted:
 				return _fail("Migrated stash cannot fit; original save preserved.")
 	var candidate := {"version": VERSION, "player_id": value.player_id, "stash": inventory.snapshot(), "last_result": value.last_result.duplicate(true), "committed_raids": value.committed_raids.duplicate(), "starter_seeded": true, "stash_width": inventory.width, "stash_height": inventory.height, "staged": {}, "pending_result": {}}
+	_convert_supplies(candidate)
 	if not _write(candidate):
 		return _fail("Profile migration could not be saved; original retained.")
 	load_error = "Stash upgraded to the current equipment catalog; original backed up."
 	return true
+
+func _convert_supplies(value: Variant) -> void:
+	if value is Dictionary:
+		if value.get("id", "") == "battery_cell": value.id = "infection_suppressant"
+		for child in value.values(): _convert_supplies(child)
+	elif value is Array:
+		for child in value: _convert_supplies(child)
 
 func _migrate_entry(old: Dictionary, depth: int = 0) -> Dictionary:
 	if depth > InventoryPersistence.MAX_DEPTH:

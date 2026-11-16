@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldQualitySettings" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_quality_settings.gd" id="1_a44nw"]
+
+[resource]
+script = ExtResource("1_a44nw")
+level = 2
+detail_distance = 160.0
+shadow_distance = 140.0
+particle_budget = 2048
+local_shadow_budget = 4
+local_light_budget = 24

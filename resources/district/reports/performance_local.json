@@ -1,0 +1,26 @@
+{
+	"ai_moved": 26,
+	"ai_present": 28,
+	"duration_seconds": 600.00315,
+	"gpu": "NVIDIA GeForce RTX 4090",
+	"load_ms": 241.866,
+	"maximum_draw_calls": 2845.0,
+	"mean_ms": 3.08204429901832,
+	"note": "Protected health, replenished ammo, player/NPC collision exceptions prevent immortal crowd pinning; normal geometry and NPC/NPC collision active. Not a balance playtest.",
+	"p95_ms": 5.648,
+	"p99_ms": 6.582,
+	"peak_static_memory_mb": 203.801689147949,
+	"peak_video_memory_mb": 309.401504516602,
+	"player_distance_m": 1766.26110575721,
+	"projectiles": 1975,
+	"quality": "Medium",
+	"reference_hardware_verified": false,
+	"renderer": "forward_plus",
+	"resolution": [
+		1920,
+		1080
+	],
+	"route_legs": 14,
+	"seed": 19381,
+	"worst_ms": 99.135
+}

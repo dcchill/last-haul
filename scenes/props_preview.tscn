@@ -1,0 +1,1135 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/props/sedan.tscn" id="1_v3psy"]
+[ext_resource type="PackedScene" path="res://scenes/props/hatchback.tscn" id="2_n3plb"]
+[ext_resource type="PackedScene" path="res://scenes/props/station_wagon.tscn" id="3_d1m5r"]
+[ext_resource type="PackedScene" path="res://scenes/props/pickup.tscn" id="4_i0kbg"]
+[ext_resource type="PackedScene" path="res://scenes/props/panel_van.tscn" id="5_2to18"]
+[ext_resource type="PackedScene" path="res://scenes/props/flatbed_truck.tscn" id="6_pso34"]
+[ext_resource type="PackedScene" path="res://scenes/props/burned_sedan.tscn" id="7_5s2lg"]
+[ext_resource type="PackedScene" path="res://scenes/props/stripped_car_chassis.tscn" id="8_avk81"]
+[ext_resource type="PackedScene" path="res://scenes/props/short_shipping_container.tscn" id="9_dnc58"]
+[ext_resource type="PackedScene" path="res://scenes/props/long_shipping_container.tscn" id="10_nhmas"]
+[ext_resource type="PackedScene" path="res://scenes/props/open_shipping_container.tscn" id="11_jn6we"]
+[ext_resource type="PackedScene" path="res://scenes/props/wooden_crate.tscn" id="12_3pekw"]
+[ext_resource type="PackedScene" path="res://scenes/props/reinforced_crate.tscn" id="13_ga3ey"]
+[ext_resource type="PackedScene" path="res://scenes/props/cargo_case.tscn" id="14_koy15"]
+[ext_resource type="PackedScene" path="res://scenes/props/pallet.tscn" id="15_dg2oj"]
+[ext_resource type="PackedScene" path="res://scenes/props/loaded_pallet.tscn" id="16_bsamg"]
+[ext_resource type="PackedScene" path="res://scenes/props/loose_tire.tscn" id="17_svkts"]
+[ext_resource type="PackedScene" path="res://scenes/props/tire_stack.tscn" id="18_wwu2s"]
+[ext_resource type="PackedScene" path="res://scenes/props/detached_car_door.tscn" id="19_0hobe"]
+[ext_resource type="PackedScene" path="res://scenes/props/detached_hood.tscn" id="20_v1jb3"]
+[ext_resource type="PackedScene" path="res://scenes/props/engine_block.tscn" id="21_vfomd"]
+[ext_resource type="PackedScene" path="res://scenes/props/sheet_metal_heap.tscn" id="22_2o85j"]
+[ext_resource type="PackedScene" path="res://scenes/props/broken_pipe_heap.tscn" id="23_2kmfd"]
+[ext_resource type="PackedScene" path="res://scenes/props/rubble_heap.tscn" id="24_d27ql"]
+[ext_resource type="PackedScene" path="res://scenes/props/workbench.tscn" id="25_h12ch"]
+[ext_resource type="PackedScene" path="res://scenes/props/tool_cabinet.tscn" id="26_8x3ml"]
+[ext_resource type="PackedScene" path="res://scenes/props/tool_chest.tscn" id="27_xppsa"]
+[ext_resource type="PackedScene" path="res://scenes/props/shelving_unit.tscn" id="28_3myqr"]
+[ext_resource type="PackedScene" path="res://scenes/props/parts_bin.tscn" id="29_ba3xl"]
+[ext_resource type="PackedScene" path="res://scenes/props/welding_cart.tscn" id="30_elveq"]
+[ext_resource type="PackedScene" path="res://scenes/props/hand_trolley.tscn" id="31_mji0x"]
+[ext_resource type="PackedScene" path="res://scenes/props/hydraulic_jack.tscn" id="32_7h1m5"]
+[ext_resource type="PackedScene" path="res://scenes/props/generator.tscn" id="33_b3tuj"]
+[ext_resource type="PackedScene" path="res://scenes/props/air_compressor.tscn" id="34_cnr58"]
+[ext_resource type="PackedScene" path="res://scenes/props/electrical_cabinet.tscn" id="35_i1gtf"]
+[ext_resource type="PackedScene" path="res://scenes/props/transformer.tscn" id="36_r80oy"]
+[ext_resource type="PackedScene" path="res://scenes/props/ventilation_unit.tscn" id="37_ewul5"]
+[ext_resource type="PackedScene" path="res://scenes/props/radiator.tscn" id="38_fgd3p"]
+[ext_resource type="PackedScene" path="res://scenes/props/cable_reel.tscn" id="39_w4ifq"]
+[ext_resource type="PackedScene" path="res://scenes/props/portable_work_light.tscn" id="40_8hvx1"]
+[ext_resource type="PackedScene" path="res://scenes/props/concrete_barrier.tscn" id="41_dkkog"]
+[ext_resource type="PackedScene" path="res://scenes/props/plastic_barricade.tscn" id="42_bmh6c"]
+[ext_resource type="PackedScene" path="res://scenes/props/traffic_cone.tscn" id="43_eaw1v"]
+[ext_resource type="PackedScene" path="res://scenes/props/bollard.tscn" id="44_5idit"]
+[ext_resource type="PackedScene" path="res://scenes/props/guardrail_segment.tscn" id="45_s4e20"]
+[ext_resource type="PackedScene" path="res://scenes/props/road_sign.tscn" id="46_yuu6k"]
+[ext_resource type="PackedScene" path="res://scenes/props/fence_panel.tscn" id="47_xuhyt"]
+[ext_resource type="PackedScene" path="res://scenes/props/damaged_gate.tscn" id="48_2tn41"]
+[ext_resource type="PackedScene" path="res://scenes/props/oil_drum.tscn" id="49_1hrlo"]
+[ext_resource type="PackedScene" path="res://scenes/props/dented_drum.tscn" id="50_6s13d"]
+[ext_resource type="PackedScene" path="res://scenes/props/drum_cluster.tscn" id="51_3xyjx"]
+[ext_resource type="PackedScene" path="res://scenes/props/fuel_tank.tscn" id="52_03pon"]
+[ext_resource type="PackedScene" path="res://scenes/props/water_tote.tscn" id="53_cd8fl"]
+[ext_resource type="PackedScene" path="res://scenes/props/dumpster.tscn" id="54_qd4g6"]
+[ext_resource type="PackedScene" path="res://scenes/props/scrap_skip.tscn" id="55_xo4eg"]
+[ext_resource type="PackedScene" path="res://scenes/props/pipe_rack.tscn" id="56_we6hg"]
+[ext_resource type="PackedScene" path="res://scenes/props/guard_booth.tscn" id="57_ra0tc"]
+[ext_resource type="PackedScene" path="res://scenes/props/loading_ramp.tscn" id="58_8c71q"]
+[ext_resource type="PackedScene" path="res://scenes/props/metal_stairs.tscn" id="59_uwylq"]
+[ext_resource type="PackedScene" path="res://scenes/props/awning.tscn" id="60_qbpeh"]
+[ext_resource type="PackedScene" path="res://scenes/props/bench.tscn" id="61_mdeyx"]
+[ext_resource type="PackedScene" path="res://scenes/props/locker_bank.tscn" id="62_33gsj"]
+[ext_resource type="PackedScene" path="res://scenes/props/industrial_sink.tscn" id="63_m8rql"]
+[ext_resource type="PackedScene" path="res://scenes/props/overturned_shelving.tscn" id="64_4x8bi"]
+[ext_resource type="Script" path="res://scripts/world/prop_preview_camera.gd" id="65_4xyxg"]
+
+[sub_resource type="Environment" id="Environment_aotdw"]
+background_mode = 1
+background_color = Color(0.1254902, 0.18039216, 0.1882353, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.65882355, 0.7411765, 0.75686276, 1)
+ambient_light_energy = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1bg1"]
+albedo_color = Color(0.22352941, 0.2627451, 0.23921569, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ikyum"]
+size = Vector3(132, 0.25, 140)
+
+[node name="WorldPropGallery" type="Node3D" unique_id=958636526]
+
+[node name="@WorldEnvironment@249" type="WorldEnvironment" parent="." unique_id=455767211]
+environment = SubResource("Environment_aotdw")
+
+[node name="@DirectionalLight3D@250" type="DirectionalLight3D" parent="." unique_id=1307734865]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_color = Color(1, 0.90588236, 0.76862746, 1)
+light_energy = 1.2
+shadow_enabled = true
+directional_shadow_max_distance = 180.0
+
+[node name="@MeshInstance3D@251" type="MeshInstance3D" parent="." unique_id=412979159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+material_override = SubResource("StandardMaterial3D_m1bg1")
+mesh = SubResource("BoxMesh_ikyum")
+
+[node name="Sedan" type="Node3D" parent="." unique_id=912431307 instance=ExtResource("1_v3psy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, -56)
+metadata/prop_id = "sedan"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@252" type="Label3D" parent="." unique_id=1431568267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "01 / Sedan"
+font_size = 24
+
+[node name="@Label3D@253" type="Label3D" parent="." unique_id=514599852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, -63)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "VEHICLES"
+font_size = 36
+
+[node name="Hatchback" type="Node3D" parent="." unique_id=1957485485 instance=ExtResource("2_n3plb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -56)
+metadata/prop_id = "hatchback"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@254" type="Label3D" parent="." unique_id=1587019933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "02 / Hatchback"
+font_size = 24
+
+[node name="StationWagon" type="Node3D" parent="." unique_id=1206282499 instance=ExtResource("3_d1m5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -56)
+metadata/prop_id = "station_wagon"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@255" type="Label3D" parent="." unique_id=1683039482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "03 / Station wagon"
+font_size = 24
+
+[node name="Pickup" type="Node3D" parent="." unique_id=495307529 instance=ExtResource("4_i0kbg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -56)
+metadata/prop_id = "pickup"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@256" type="Label3D" parent="." unique_id=1438812145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "04 / Pickup"
+font_size = 24
+
+[node name="PanelVan" type="Node3D" parent="." unique_id=2137074756 instance=ExtResource("5_2to18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -56)
+metadata/prop_id = "panel_van"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@257" type="Label3D" parent="." unique_id=1707784588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "05 / Panel van"
+font_size = 24
+
+[node name="FlatbedTruck" type="Node3D" parent="." unique_id=1305627290 instance=ExtResource("6_pso34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -56)
+metadata/prop_id = "flatbed_truck"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@258" type="Label3D" parent="." unique_id=555158195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "06 / Flatbed truck"
+font_size = 24
+
+[node name="BurnedSedan" type="Node3D" parent="." unique_id=1211203797 instance=ExtResource("7_5s2lg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -56)
+metadata/prop_id = "burned_sedan"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@259" type="Label3D" parent="." unique_id=887792572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "07 / Burned sedan"
+font_size = 24
+
+[node name="StrippedCarChassis" type="Node3D" parent="." unique_id=1772488752 instance=ExtResource("8_avk81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -56)
+metadata/prop_id = "stripped_car_chassis"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@260" type="Label3D" parent="." unique_id=1713951847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, -50.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "08 / Stripped car chassis"
+font_size = 24
+
+[node name="ShortShippingContainer" type="Node3D" parent="." unique_id=8874380 instance=ExtResource("9_dnc58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, -40)
+metadata/prop_id = "short_shipping_container"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@261" type="Label3D" parent="." unique_id=1508209909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "09 / Short shipping container"
+font_size = 24
+
+[node name="@Label3D@262" type="Label3D" parent="." unique_id=69338323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, -47)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "CARGO"
+font_size = 36
+
+[node name="LongShippingContainer" type="Node3D" parent="." unique_id=739010930 instance=ExtResource("10_nhmas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -40)
+metadata/prop_id = "long_shipping_container"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@263" type="Label3D" parent="." unique_id=128243764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "10 / Long shipping container"
+font_size = 24
+
+[node name="OpenShippingContainer" type="Node3D" parent="." unique_id=1341505500 instance=ExtResource("11_jn6we")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -40)
+metadata/prop_id = "open_shipping_container"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@264" type="Label3D" parent="." unique_id=876853153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "11 / Open shipping container"
+font_size = 24
+
+[node name="WoodenCrate" type="Node3D" parent="." unique_id=1818811673 instance=ExtResource("12_3pekw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -40)
+metadata/prop_id = "wooden_crate"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@265" type="Label3D" parent="." unique_id=1437482240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "12 / Wooden crate"
+font_size = 24
+
+[node name="ReinforcedCrate" type="Node3D" parent="." unique_id=450015672 instance=ExtResource("13_ga3ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -40)
+metadata/prop_id = "reinforced_crate"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@266" type="Label3D" parent="." unique_id=518403826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "13 / Reinforced crate"
+font_size = 24
+
+[node name="CargoCase" type="Node3D" parent="." unique_id=1859173135 instance=ExtResource("14_koy15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -40)
+metadata/prop_id = "cargo_case"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@267" type="Label3D" parent="." unique_id=1407645717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "14 / Cargo case"
+font_size = 24
+
+[node name="Pallet" type="Node3D" parent="." unique_id=1502345326 instance=ExtResource("15_dg2oj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -40)
+metadata/prop_id = "pallet"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@268" type="Label3D" parent="." unique_id=1379308656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "15 / Pallet"
+font_size = 24
+
+[node name="LoadedPallet" type="Node3D" parent="." unique_id=1492386904 instance=ExtResource("16_bsamg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -40)
+metadata/prop_id = "loaded_pallet"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@269" type="Label3D" parent="." unique_id=858245999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, -34.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "16 / Loaded pallet"
+font_size = 24
+
+[node name="LooseTire" type="Node3D" parent="." unique_id=787365243 instance=ExtResource("17_svkts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, -24)
+metadata/prop_id = "loose_tire"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@270" type="Label3D" parent="." unique_id=773077710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "17 / Loose tire"
+font_size = 24
+
+[node name="@Label3D@271" type="Label3D" parent="." unique_id=1977995529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, -31)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "SCRAP"
+font_size = 36
+
+[node name="TireStack" type="Node3D" parent="." unique_id=1261769059 instance=ExtResource("18_wwu2s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -24)
+metadata/prop_id = "tire_stack"
+metadata/category = "Scrap"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@272" type="Label3D" parent="." unique_id=271941584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "18 / Tire stack"
+font_size = 24
+
+[node name="DetachedCarDoor" type="Node3D" parent="." unique_id=475945691 instance=ExtResource("19_0hobe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -24)
+metadata/prop_id = "detached_car_door"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@273" type="Label3D" parent="." unique_id=1706967060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "19 / Detached car door"
+font_size = 24
+
+[node name="DetachedHood" type="Node3D" parent="." unique_id=462758075 instance=ExtResource("20_v1jb3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -24)
+metadata/prop_id = "detached_hood"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@274" type="Label3D" parent="." unique_id=1486517726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "20 / Detached hood"
+font_size = 24
+
+[node name="EngineBlock" type="Node3D" parent="." unique_id=2127380029 instance=ExtResource("21_vfomd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -24)
+metadata/prop_id = "engine_block"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@275" type="Label3D" parent="." unique_id=1761414331]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "21 / Engine block"
+font_size = 24
+
+[node name="SheetMetalHeap" type="Node3D" parent="." unique_id=855459328 instance=ExtResource("22_2o85j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -24)
+metadata/prop_id = "sheet_metal_heap"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@276" type="Label3D" parent="." unique_id=114568426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "22 / Sheet metal heap"
+font_size = 24
+
+[node name="BrokenPipeHeap" type="Node3D" parent="." unique_id=1119908227 instance=ExtResource("23_2kmfd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -24)
+metadata/prop_id = "broken_pipe_heap"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@277" type="Label3D" parent="." unique_id=1100055396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "23 / Broken pipe heap"
+font_size = 24
+
+[node name="RubbleHeap" type="Node3D" parent="." unique_id=1213831195 instance=ExtResource("24_d27ql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -24)
+metadata/prop_id = "rubble_heap"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@278" type="Label3D" parent="." unique_id=1123480883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, -18.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "24 / Rubble heap"
+font_size = 24
+
+[node name="Workbench" type="Node3D" parent="." unique_id=269828439 instance=ExtResource("25_h12ch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, -8)
+metadata/prop_id = "workbench"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@279" type="Label3D" parent="." unique_id=59416355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "25 / Workbench"
+font_size = 24
+
+[node name="@Label3D@280" type="Label3D" parent="." unique_id=894775681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, -15)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "WORKSHOP"
+font_size = 36
+
+[node name="ToolCabinet" type="Node3D" parent="." unique_id=152403309 instance=ExtResource("26_8x3ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, -8)
+metadata/prop_id = "tool_cabinet"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@281" type="Label3D" parent="." unique_id=706887425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "26 / Tool cabinet"
+font_size = 24
+
+[node name="ToolChest" type="Node3D" parent="." unique_id=1833790565 instance=ExtResource("27_xppsa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -8)
+metadata/prop_id = "tool_chest"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@282" type="Label3D" parent="." unique_id=941429443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "27 / Tool chest"
+font_size = 24
+
+[node name="ShelvingUnit" type="Node3D" parent="." unique_id=589987963 instance=ExtResource("28_3myqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+metadata/prop_id = "shelving_unit"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@283" type="Label3D" parent="." unique_id=1514143798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "28 / Shelving unit"
+font_size = 24
+
+[node name="PartsBin" type="Node3D" parent="." unique_id=476195341 instance=ExtResource("29_ba3xl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+metadata/prop_id = "parts_bin"
+metadata/category = "Workshop"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@284" type="Label3D" parent="." unique_id=440607377]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "29 / Parts bin"
+font_size = 24
+
+[node name="WeldingCart" type="Node3D" parent="." unique_id=2083929521 instance=ExtResource("30_elveq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, -8)
+metadata/prop_id = "welding_cart"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@285" type="Label3D" parent="." unique_id=986656125]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "30 / Welding cart"
+font_size = 24
+
+[node name="HandTrolley" type="Node3D" parent="." unique_id=1093263287 instance=ExtResource("31_mji0x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, -8)
+metadata/prop_id = "hand_trolley"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@286" type="Label3D" parent="." unique_id=1819212211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "31 / Hand trolley"
+font_size = 24
+
+[node name="HydraulicJack" type="Node3D" parent="." unique_id=2080857997 instance=ExtResource("32_7h1m5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -8)
+metadata/prop_id = "hydraulic_jack"
+metadata/category = "Workshop"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@287" type="Label3D" parent="." unique_id=97575068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, -2.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "32 / Hydraulic jack"
+font_size = 24
+
+[node name="Generator" type="Node3D" parent="." unique_id=1067654819 instance=ExtResource("33_b3tuj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, 8)
+metadata/prop_id = "generator"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@288" type="Label3D" parent="." unique_id=1486551629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "33 / Generator"
+font_size = 24
+
+[node name="@Label3D@289" type="Label3D" parent="." unique_id=503081340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, 1)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "UTILITIES"
+font_size = 36
+
+[node name="AirCompressor" type="Node3D" parent="." unique_id=1276267143 instance=ExtResource("34_cnr58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 8)
+metadata/prop_id = "air_compressor"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@290" type="Label3D" parent="." unique_id=595912908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "34 / Air compressor"
+font_size = 24
+
+[node name="ElectricalCabinet" type="Node3D" parent="." unique_id=354548910 instance=ExtResource("35_i1gtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 8)
+metadata/prop_id = "electrical_cabinet"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@291" type="Label3D" parent="." unique_id=1155913017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "35 / Electrical cabinet"
+font_size = 24
+
+[node name="Transformer" type="Node3D" parent="." unique_id=1170947162 instance=ExtResource("36_r80oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+metadata/prop_id = "transformer"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@292" type="Label3D" parent="." unique_id=140121653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "36 / Transformer"
+font_size = 24
+
+[node name="VentilationUnit" type="Node3D" parent="." unique_id=1408861683 instance=ExtResource("37_ewul5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+metadata/prop_id = "ventilation_unit"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@293" type="Label3D" parent="." unique_id=607311447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "37 / Ventilation unit"
+font_size = 24
+
+[node name="Radiator" type="Node3D" parent="." unique_id=1190001564 instance=ExtResource("38_fgd3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 8)
+metadata/prop_id = "radiator"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@294" type="Label3D" parent="." unique_id=2030614645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "38 / Radiator"
+font_size = 24
+
+[node name="CableReel" type="Node3D" parent="." unique_id=495919263 instance=ExtResource("39_w4ifq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 8)
+metadata/prop_id = "cable_reel"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@295" type="Label3D" parent="." unique_id=2030325214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "39 / Cable reel"
+font_size = 24
+
+[node name="PortableWorkLight" type="Node3D" parent="." unique_id=1228019892 instance=ExtResource("40_8hvx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, 8)
+metadata/prop_id = "portable_work_light"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@296" type="Label3D" parent="." unique_id=1693488391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, 13.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "40 / Portable work light"
+font_size = 24
+
+[node name="ConcreteBarrier" type="Node3D" parent="." unique_id=1002165382 instance=ExtResource("41_dkkog")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, 24)
+metadata/prop_id = "concrete_barrier"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@297" type="Label3D" parent="." unique_id=771870429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "41 / Concrete barrier"
+font_size = 24
+
+[node name="@Label3D@298" type="Label3D" parent="." unique_id=1677601697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, 17)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "ROADSIDE"
+font_size = 36
+
+[node name="PlasticBarricade" type="Node3D" parent="." unique_id=1984974834 instance=ExtResource("42_bmh6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 24)
+metadata/prop_id = "plastic_barricade"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@299" type="Label3D" parent="." unique_id=717645367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "42 / Plastic barricade"
+font_size = 24
+
+[node name="TrafficCone" type="Node3D" parent="." unique_id=468033832 instance=ExtResource("43_eaw1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 24)
+metadata/prop_id = "traffic_cone"
+metadata/category = "Roadside"
+metadata/collision_mode = "none"
+
+[node name="@Label3D@300" type="Label3D" parent="." unique_id=742458874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "43 / Traffic cone"
+font_size = 24
+
+[node name="Bollard" type="Node3D" parent="." unique_id=699525101 instance=ExtResource("44_5idit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 24)
+metadata/prop_id = "bollard"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@301" type="Label3D" parent="." unique_id=722885226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "44 / Bollard"
+font_size = 24
+
+[node name="GuardrailSegment" type="Node3D" parent="." unique_id=1798212951 instance=ExtResource("45_s4e20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 24)
+metadata/prop_id = "guardrail_segment"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@302" type="Label3D" parent="." unique_id=2093931278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "45 / Guardrail segment"
+font_size = 24
+
+[node name="RoadSign" type="Node3D" parent="." unique_id=1553962699 instance=ExtResource("46_yuu6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 24)
+metadata/prop_id = "road_sign"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@303" type="Label3D" parent="." unique_id=991570209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "46 / Road sign"
+font_size = 24
+
+[node name="FencePanel" type="Node3D" parent="." unique_id=187573358 instance=ExtResource("47_xuhyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 24)
+metadata/prop_id = "fence_panel"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@304" type="Label3D" parent="." unique_id=727103847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "47 / Fence panel"
+font_size = 24
+
+[node name="DamagedGate" type="Node3D" parent="." unique_id=760592070 instance=ExtResource("48_2tn41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, 24)
+metadata/prop_id = "damaged_gate"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@305" type="Label3D" parent="." unique_id=235906458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, 29.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "48 / Damaged gate"
+font_size = 24
+
+[node name="OilDrum" type="Node3D" parent="." unique_id=1198893292 instance=ExtResource("49_1hrlo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, 40)
+metadata/prop_id = "oil_drum"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@306" type="Label3D" parent="." unique_id=1378022539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "49 / Oil drum"
+font_size = 24
+
+[node name="@Label3D@307" type="Label3D" parent="." unique_id=1977333075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, 33)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "INDUSTRIAL STORAGE"
+font_size = 36
+
+[node name="DentedDrum" type="Node3D" parent="." unique_id=1773132291 instance=ExtResource("50_6s13d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 40)
+metadata/prop_id = "dented_drum"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@308" type="Label3D" parent="." unique_id=266013186]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "50 / Dented drum"
+font_size = 24
+
+[node name="DrumCluster" type="Node3D" parent="." unique_id=1046290466 instance=ExtResource("51_3xyjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 40)
+metadata/prop_id = "drum_cluster"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@309" type="Label3D" parent="." unique_id=294381437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "51 / Drum cluster"
+font_size = 24
+
+[node name="FuelTank" type="Node3D" parent="." unique_id=1281909047 instance=ExtResource("52_03pon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 40)
+metadata/prop_id = "fuel_tank"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@310" type="Label3D" parent="." unique_id=1282732561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "52 / Fuel tank"
+font_size = 24
+
+[node name="WaterTote" type="Node3D" parent="." unique_id=321614699 instance=ExtResource("53_cd8fl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 40)
+metadata/prop_id = "water_tote"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@311" type="Label3D" parent="." unique_id=419125240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "53 / Water tote"
+font_size = 24
+
+[node name="Dumpster" type="Node3D" parent="." unique_id=1263725538 instance=ExtResource("54_qd4g6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 40)
+metadata/prop_id = "dumpster"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@312" type="Label3D" parent="." unique_id=1736781700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "54 / Dumpster"
+font_size = 24
+
+[node name="ScrapSkip" type="Node3D" parent="." unique_id=563947300 instance=ExtResource("55_xo4eg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 40)
+metadata/prop_id = "scrap_skip"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@313" type="Label3D" parent="." unique_id=506393363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "55 / Scrap skip"
+font_size = 24
+
+[node name="PipeRack" type="Node3D" parent="." unique_id=2031511906 instance=ExtResource("56_we6hg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, 40)
+metadata/prop_id = "pipe_rack"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@314" type="Label3D" parent="." unique_id=1127811635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, 45.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "56 / Pipe rack"
+font_size = 24
+
+[node name="GuardBooth" type="Node3D" parent="." unique_id=1001898527 instance=ExtResource("57_ra0tc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0, 56)
+metadata/prop_id = "guard_booth"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@315" type="Label3D" parent="." unique_id=1357552723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "57 / Guard booth"
+font_size = 24
+
+[node name="@Label3D@316" type="Label3D" parent="." unique_id=1864713234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, 49)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "DEPOT FIXTURES"
+font_size = 36
+
+[node name="LoadingRamp" type="Node3D" parent="." unique_id=582555786 instance=ExtResource("58_8c71q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 56)
+metadata/prop_id = "loading_ramp"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@317" type="Label3D" parent="." unique_id=349662275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "58 / Loading ramp"
+font_size = 24
+
+[node name="MetalStairs" type="Node3D" parent="." unique_id=1264403693 instance=ExtResource("59_uwylq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 56)
+metadata/prop_id = "metal_stairs"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@318" type="Label3D" parent="." unique_id=659814607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "59 / Metal stairs"
+font_size = 24
+
+[node name="Awning" type="Node3D" parent="." unique_id=1581447505 instance=ExtResource("60_qbpeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 56)
+metadata/prop_id = "awning"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@319" type="Label3D" parent="." unique_id=1611544787]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "60 / Awning"
+font_size = 24
+
+[node name="Bench" type="Node3D" parent="." unique_id=1932974414 instance=ExtResource("61_mdeyx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 56)
+metadata/prop_id = "bench"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@320" type="Label3D" parent="." unique_id=528946085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "61 / Bench"
+font_size = 24
+
+[node name="LockerBank" type="Node3D" parent="." unique_id=771406879 instance=ExtResource("62_33gsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 56)
+metadata/prop_id = "locker_bank"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@321" type="Label3D" parent="." unique_id=834062437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "62 / Locker bank"
+font_size = 24
+
+[node name="IndustrialSink" type="Node3D" parent="." unique_id=1884170632 instance=ExtResource("63_m8rql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 56)
+metadata/prop_id = "industrial_sink"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@322" type="Label3D" parent="." unique_id=402576184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "63 / Industrial sink"
+font_size = 24
+
+[node name="OverturnedShelving" type="Node3D" parent="." unique_id=458126806 instance=ExtResource("64_4x8bi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, 56)
+metadata/prop_id = "overturned_shelving"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="@Label3D@323" type="Label3D" parent="." unique_id=2004585438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0.5, 61.5)
+pixel_size = 0.015
+billboard = 1
+no_depth_test = true
+modulate = Color(0.8156863, 0.78039217, 0.64705884, 1)
+text = "64 / Overturned shelving"
+font_size = 24
+
+[node name="Camera" type="Camera3D" parent="." unique_id=596634992]
+transform = Transform3D(0.8017459, -0.36103734, 0.4762936, 0, 0.7969239, 0.60407966, -0.59766513, -0.48431838, 0.63893044, 82, 104, 110)
+current = true
+far = 400.0
+script = ExtResource("65_4xyxg")

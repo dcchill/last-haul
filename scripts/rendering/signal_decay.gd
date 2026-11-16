@@ -2,6 +2,8 @@ class_name SignalDecay
 extends CanvasLayer
 
 @export var environment_path: NodePath = ^"../WorldEnvironment"
+## District atmosphere owns its fog independently of the optional screen effect.
+@export var manages_environment := true
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -86,7 +88,7 @@ func refresh() -> void:
 		return
 	screen.visible = is_active()
 	var effective_strength := strength * 2.0
-	if world_environment != null and sensor_environment != null:
+	if manages_environment and world_environment != null and sensor_environment != null:
 		world_environment.environment = sensor_environment if is_active() else original_environment
 		sensor_environment.fog_enabled = true
 		sensor_environment.fog_mode = Environment.FOG_MODE_DEPTH

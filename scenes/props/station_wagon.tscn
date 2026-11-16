@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/station_wagon.res" id="1_l3hxc"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_22ir3"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_j7fy0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c4dn"]
+size = Vector3(1.75, 0.5, 4.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bye43"]
+size = Vector3(1.5, 0.875, 3)
+
+[node name="StationWagon" type="Node3D" unique_id=1206282499]
+metadata/prop_id = "station_wagon"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=382113774]
+mesh = ExtResource("1_l3hxc")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1853341336]
+collision_mask = 0
+script = ExtResource("2_22ir3")
+material = ExtResource("3_j7fy0")
+
+[node name="@CollisionShape3D@6" type="CollisionShape3D" parent="Collision" unique_id=464756857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_5c4dn")
+
+[node name="@CollisionShape3D@7" type="CollisionShape3D" parent="Collision" unique_id=561227384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4375, 0.125)
+shape = SubResource("BoxShape3D_bye43")

@@ -2,7 +2,10 @@ class_name Catalog
 extends RefCounted
 
 const PATHS: Array[String] = [
-	"res://resources/items/battery_cell.tres", "res://resources/materials/medical_partition.tres",
+	"res://resources/items/research_notes.tres", "res://resources/items/sealed_specimen.tres",
+	"res://resources/items/sterile_lab_supplies.tres", "res://resources/items/personal_effects.tres",
+	"res://resources/items/battery_cell.tres", "res://resources/items/infection_suppressant.tres",
+	"res://resources/items/medtac_keycard.tres", "res://resources/items/research_drive.tres", "res://resources/items/lab_electronics.tres", "res://resources/materials/medical_partition.tres",
 	"res://resources/items/field_knife.tres", "res://resources/items/face_cover.tres", "res://resources/items/field_glasses.tres",
 	"res://resources/items/small_pack.tres",
 "res://resources/items/large_pack.tres",
@@ -52,8 +55,8 @@ func load_all() -> String:
 		if item.weight == 0:
 			item.weight = 3.0 if item.kind == "weapon" else 2.0 if item.kind == "armor" else 0.01 if item.kind == "ammo" else 0.25
 	for definition in definitions.values():
-		if definition is ItemDef and (not is_finite(definition.battery_amount) or definition.battery_amount < 0):
-			return "Invalid battery restoration amount"
+		if definition is ItemDef and (not is_finite(definition.infection_seconds) or definition.infection_seconds < 0):
+			return "Invalid infection treatment amount"
 		if definition is ItemDef and definition.stack_limit < 1:
 			return "Item stack limit must be positive"
 		if definition is AmmoDef and (not is_finite(definition.damage) or definition.damage < 0):

@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/raid_navigation_region.gd" id="1_dwtku"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_11r1v"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_6oekb"]
+[ext_resource type="Texture2D" path="res://assets/medtac/surface_4.png" id="4_u2gy6"]
+[ext_resource type="PackedScene" path="res://scenes/props/medtac/detail/work_cart.tscn" id="5_853bp"]
+[ext_resource type="PackedScene" path="res://scenes/props/medtac/detail/instrument_bench.tscn" id="6_us6qg"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hapk6"]
+vertices = PackedVector3Array(-4, 0.45, -1.5, -3.75, 0.45, -1.75, -3.5, 0.45, -3.5, -4, 0.45, -4, -1.5, 0.45, -4, -1.5, 0.45, -3.5, 4, 0.45, 4, 4, 0.45, 3.25, 3.5, 0.45, 3.75, 0.75, 0.45, -3.5, 4, 0.45, -4, 1.5, 0.45, 1.5, 4, 0.45, 1.75, 4, 0.45, -1.5, 1, 0.45, -1.5, -1.5, 0.45, -1.5, -4, 0.45, 4, 1.25, 0.45, 3.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 2, 4), PackedInt32Array(4, 2, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(5, 4, 9), PackedInt32Array(9, 4, 10), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 14), PackedInt32Array(1, 15, 0), PackedInt32Array(0, 15, 11), PackedInt32Array(0, 11, 17), PackedInt32Array(0, 17, 16), PackedInt32Array(8, 6, 17), PackedInt32Array(17, 6, 16), PackedInt32Array(5, 9, 15), PackedInt32Array(15, 9, 14), PackedInt32Array(15, 14, 11)]
+geometry_parsed_geometry_type = 1
+agent_height = 2.0
+agent_max_climb = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11ika"]
+albedo_color = Color(0.47333333, 0.48333335, 0.45333335, 1)
+albedo_texture = ExtResource("4_u2gy6")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yj2ts"]
+size = Vector3(9, 0.3, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cft3v"]
+size = Vector3(9, 0.3, 9)
+
+[node name="CoverArrangement" type="Node3D" unique_id=934652930]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=336868513]
+navigation_mesh = SubResource("NavigationMesh_hapk6")
+script = ExtResource("1_dwtku")
+
+[node name="Detail928" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1522011482]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+script = ExtResource("2_11r1v")
+material = ExtResource("3_6oekb")
+
+[node name="Mesh" type="MeshInstance3D" parent="NavigationRegion3D/Detail928" unique_id=1792829936]
+material_override = SubResource("StandardMaterial3D_11ika")
+mesh = SubResource("BoxMesh_yj2ts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Detail928" unique_id=901862740]
+shape = SubResource("BoxShape3D_cft3v")
+
+[node name="Detail931" type="Node3D" parent="NavigationRegion3D" unique_id=1108937025 instance=ExtResource("5_853bp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.6)
+metadata/bounds = AABB(-0.65, 0, -0.4, 1.3, 1.3000001, 0.8)
+metadata/medtac_prop_id = "work_cart"
+
+[node name="Detail933" type="Node3D" parent="NavigationRegion3D" unique_id=1345916517 instance=ExtResource("6_us6qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, -2.6)
+metadata/bounds = AABB(-1.25, 0, -0.55, 2.5, 1.45, 1.1)
+metadata/medtac_prop_id = "instrument_bench"
+
+[node name="Detail935" type="Node3D" parent="NavigationRegion3D" unique_id=231658191 instance=ExtResource("5_853bp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 2.6)
+metadata/bounds = AABB(-0.65, 0, -0.4, 1.3, 1.3000001, 0.8)
+metadata/medtac_prop_id = "work_cart"
+
+[node name="Cover0" type="Marker3D" parent="." unique_id=38693679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -1.4999999)
+
+[node name="Cover1" type="Marker3D" parent="." unique_id=1542418116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, -1.4999999)
+
+[node name="Cover3" type="Marker3D" parent="." unique_id=56892136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 3.6999998)

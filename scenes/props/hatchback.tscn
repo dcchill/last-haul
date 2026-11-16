@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/hatchback.res" id="1_ni8fe"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_fjdev"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_4eqne"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3hgo7"]
+size = Vector3(1.75, 0.5, 3.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qx0tb"]
+size = Vector3(1.5, 0.875, 1.75)
+
+[node name="Hatchback" type="Node3D" unique_id=1957485485]
+metadata/prop_id = "hatchback"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1684206582]
+mesh = ExtResource("1_ni8fe")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=313813756]
+collision_mask = 0
+script = ExtResource("2_fjdev")
+material = ExtResource("3_4eqne")
+
+[node name="@CollisionShape3D@4" type="CollisionShape3D" parent="Collision" unique_id=2147431761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_3hgo7")
+
+[node name="@CollisionShape3D@5" type="CollisionShape3D" parent="Collision" unique_id=321096725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4375, 0.125)
+shape = SubResource("BoxShape3D_qx0tb")

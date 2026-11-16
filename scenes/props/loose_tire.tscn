@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/loose_tire.res" id="1_bmdxl"]
+
+[node name="LooseTire" type="Node3D" unique_id=787365243]
+metadata/prop_id = "loose_tire"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=453741174]
+mesh = ExtResource("1_bmdxl")

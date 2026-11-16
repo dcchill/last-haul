@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/radiator.res" id="1_cg2tr"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_kdlx2"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_hq5f8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yj2ga"]
+size = Vector3(0.25, 0.25, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aa01v"]
+size = Vector3(0.25, 0.25, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ud21y"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d508e"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7lbfc"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2vlw4"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mkwuo"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lrly8"]
+size = Vector3(0.125, 1, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nhwf7"]
+size = Vector3(0.125, 1, 0.375)
+
+[node name="Radiator" type="Node3D" unique_id=1190001564]
+metadata/prop_id = "radiator"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=560483483]
+mesh = ExtResource("1_cg2tr")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1935678001]
+collision_mask = 0
+script = ExtResource("2_kdlx2")
+material = ExtResource("3_hq5f8")
+
+[node name="@CollisionShape3D@87" type="CollisionShape3D" parent="Collision" unique_id=1049361616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.625, 0.125, 0)
+shape = SubResource("BoxShape3D_yj2ga")
+
+[node name="@CollisionShape3D@88" type="CollisionShape3D" parent="Collision" unique_id=501855556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.125, 0)
+shape = SubResource("BoxShape3D_aa01v")
+
+[node name="@CollisionShape3D@89" type="CollisionShape3D" parent="Collision" unique_id=904811028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.625, 0)
+shape = SubResource("BoxShape3D_ud21y")
+
+[node name="@CollisionShape3D@90" type="CollisionShape3D" parent="Collision" unique_id=341271108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.625, 0)
+shape = SubResource("BoxShape3D_d508e")
+
+[node name="@CollisionShape3D@91" type="CollisionShape3D" parent="Collision" unique_id=1242393364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0.625, 0)
+shape = SubResource("BoxShape3D_7lbfc")
+
+[node name="@CollisionShape3D@92" type="CollisionShape3D" parent="Collision" unique_id=1915593427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("BoxShape3D_2vlw4")
+
+[node name="@CollisionShape3D@93" type="CollisionShape3D" parent="Collision" unique_id=276486874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.625, 0)
+shape = SubResource("BoxShape3D_mkwuo")
+
+[node name="@CollisionShape3D@94" type="CollisionShape3D" parent="Collision" unique_id=1655659277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.625, 0)
+shape = SubResource("BoxShape3D_lrly8")
+
+[node name="@CollisionShape3D@95" type="CollisionShape3D" parent="Collision" unique_id=1647692019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.625, 0)
+shape = SubResource("BoxShape3D_nhwf7")

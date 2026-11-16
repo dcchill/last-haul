@@ -1,0 +1,1808 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/medtac_variant_slot.gd" id="1_gkwrl"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/exterior_0.tscn" id="2_gtlod"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/exterior_1.tscn" id="3_7jmks"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/exterior_2.tscn" id="4_aouuc"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/clinical_0.tscn" id="5_c1nln"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/clinical_1.tscn" id="6_dpjb3"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/clinical_2.tscn" id="7_b8el7"]
+[ext_resource type="Script" path="res://scripts/world/medtac_breakable.gd" id="8_8uagy"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="9_2yx14"]
+[ext_resource type="Texture2D" path="res://assets/medtac/surface_4.png" id="10_2acwd"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/laboratory_0.tscn" id="11_6cxbx"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/laboratory_1.tscn" id="12_m4ye5"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/laboratory_2.tscn" id="13_3pchp"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/warehouse_0.tscn" id="14_w14ph"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/warehouse_1.tscn" id="15_oethm"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/warehouse_2.tscn" id="16_kp8yk"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/basement_0.tscn" id="17_37bgm"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/basement_1.tscn" id="18_77gh3"]
+[ext_resource type="PackedScene" path="res://scenes/raid/medtac/variants/basement_2.tscn" id="19_cbx3q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32kf2"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_txvxx"]
+size = Vector3(0.035, 0.9, 0.035)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5mdv"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrapa"]
+size = Vector3(1.2, 0.16, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tu1a4"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_gx2a8"]
+size = Vector3(1.05, 0.045, 0.32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7t2en"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2mca"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jm41"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfcdk"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rpl2u"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmw7y"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw8el"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6oaj"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rxwm7"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0het"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62vuo"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1enh"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40hfi"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0hsf"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw5ng"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p5nq"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy5gj"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hb65g"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfrmx"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a32rh"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ypuu"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afo17"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ij7ml"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac0ye"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr0iy"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpec4"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg1jp"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cu2l"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22b75"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te0ab"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dud5"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xem8g"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cp5rg"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hghu"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnx5u"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xfar"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dpse2"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eudax"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_iootl"]
+size = Vector3(0.035, 3.05, 0.035)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlg78"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn35j"]
+albedo_color = Color(0.89411765, 0.8352941, 0.6901961, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.89411765, 0.8352941, 0.6901961, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vfnsg"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnuil"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt2s8"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aeh5h"]
+albedo_color = Color(0.89411765, 0.8352941, 0.6901961, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.89411765, 0.8352941, 0.6901961, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xvk4"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gw0cc"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qoqkq"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxorx"]
+albedo_color = Color(0.89411765, 0.8352941, 0.6901961, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.89411765, 0.8352941, 0.6901961, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bv0dc"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gxl8"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3sudr"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v057t"]
+albedo_color = Color(0.89411765, 0.8352941, 0.6901961, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.89411765, 0.8352941, 0.6901961, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nr3el"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6u14"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ypkl"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wnve"]
+albedo_color = Color(0.89411765, 0.8352941, 0.6901961, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.89411765, 0.8352941, 0.6901961, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8wf4s"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vayqc"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5srwa"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_th37o"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qllkk"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24okj"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j38gs"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deh7l"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f4ib"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3vrv2"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4s4h"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wb2e"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ctss"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxtoj"]
+albedo_color = Color(0.3766667, 0.4, 0.38, 1)
+albedo_texture = ExtResource("10_2acwd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8d3g0"]
+albedo_color = Color(0.70980394, 0.85882354, 0.81960785, 1)
+roughness = 0.92
+emission_enabled = true
+emission = Color(0.70980394, 0.85882354, 0.81960785, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_diw3i"]
+size = Vector3(1.2, 0.22, 0.45)
+
+[node name="RaidVariation" type="Node3D" unique_id=1776830915]
+
+[node name="slot-00" type="Node3D" parent="." unique_id=2076345932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 130)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-00"
+variants = Array[PackedScene]([ExtResource("2_gtlod"), ExtResource("3_7jmks"), ExtResource("4_aouuc")])
+
+[node name="CoverPortal11982" type="NavigationLink3D" parent="." unique_id=2085939603]
+start_position = Vector3(-144, 0.5, 130)
+end_position = Vector3(-147, 0.5, 130)
+
+[node name="CoverPortal11983" type="NavigationLink3D" parent="." unique_id=1723721719]
+start_position = Vector3(-156, 0.5, 130)
+end_position = Vector3(-153, 0.5, 130)
+
+[node name="CoverPortal11984" type="NavigationLink3D" parent="." unique_id=788187375]
+start_position = Vector3(-150, 0.5, 136)
+end_position = Vector3(-150, 0.5, 133)
+
+[node name="CoverPortal11985" type="NavigationLink3D" parent="." unique_id=602219884]
+start_position = Vector3(-150, 0.5, 124)
+end_position = Vector3(-150, 0.5, 127)
+
+[node name="slot-01" type="Node3D" parent="." unique_id=1406124842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 0, 150)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-01"
+variants = Array[PackedScene]([ExtResource("2_gtlod"), ExtResource("3_7jmks"), ExtResource("4_aouuc")])
+
+[node name="CoverPortal11990" type="NavigationLink3D" parent="." unique_id=913685835]
+start_position = Vector3(-64, 0.5, 150)
+end_position = Vector3(-67, 0.5, 150)
+
+[node name="CoverPortal11991" type="NavigationLink3D" parent="." unique_id=937106479]
+start_position = Vector3(-76, 0.5, 150)
+end_position = Vector3(-73, 0.5, 150)
+
+[node name="CoverPortal11992" type="NavigationLink3D" parent="." unique_id=1408280286]
+start_position = Vector3(-70, 0.5, 156)
+end_position = Vector3(-70, 0.5, 153)
+
+[node name="CoverPortal11993" type="NavigationLink3D" parent="." unique_id=1252803462]
+start_position = Vector3(-70, 0.5, 144)
+end_position = Vector3(-70, 0.5, 147)
+
+[node name="slot-02" type="Node3D" parent="." unique_id=893063142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 155)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-02"
+variants = Array[PackedScene]([ExtResource("2_gtlod"), ExtResource("3_7jmks"), ExtResource("4_aouuc")])
+
+[node name="CoverPortal11998" type="NavigationLink3D" parent="." unique_id=2120296654]
+start_position = Vector3(106, 0.5, 155)
+end_position = Vector3(103, 0.5, 155)
+
+[node name="CoverPortal11999" type="NavigationLink3D" parent="." unique_id=1756142692]
+start_position = Vector3(94, 0.5, 155)
+end_position = Vector3(97, 0.5, 155)
+
+[node name="CoverPortal12000" type="NavigationLink3D" parent="." unique_id=2003487341]
+start_position = Vector3(100, 0.5, 161)
+end_position = Vector3(100, 0.5, 158)
+
+[node name="CoverPortal12001" type="NavigationLink3D" parent="." unique_id=2077323076]
+start_position = Vector3(100, 0.5, 149)
+end_position = Vector3(100, 0.5, 152)
+
+[node name="slot-03" type="Node3D" parent="." unique_id=1929410020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 255, 0, 140)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-03"
+variants = Array[PackedScene]([ExtResource("2_gtlod"), ExtResource("3_7jmks"), ExtResource("4_aouuc")])
+
+[node name="CoverPortal12006" type="NavigationLink3D" parent="." unique_id=1967399963]
+start_position = Vector3(261, 0.5, 140)
+end_position = Vector3(258, 0.5, 140)
+
+[node name="CoverPortal12007" type="NavigationLink3D" parent="." unique_id=1457671234]
+start_position = Vector3(249, 0.5, 140)
+end_position = Vector3(252, 0.5, 140)
+
+[node name="CoverPortal12008" type="NavigationLink3D" parent="." unique_id=2085423995]
+start_position = Vector3(255, 0.5, 146)
+end_position = Vector3(255, 0.5, 143)
+
+[node name="CoverPortal12009" type="NavigationLink3D" parent="." unique_id=1147703272]
+start_position = Vector3(255, 0.5, 134)
+end_position = Vector3(255, 0.5, 137)
+
+[node name="slot-04" type="Node3D" parent="." unique_id=1155893984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220, 0, 8)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-04"
+variants = Array[PackedScene]([ExtResource("5_c1nln"), ExtResource("6_dpjb3"), ExtResource("7_b8el7")])
+
+[node name="fixture-211" type="StaticBody3D" parent="." unique_id=487483637]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220, 4.25, 8)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-211"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12013" type="Node3D" parent="fixture-211" unique_id=645622270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-211/Detail12013" unique_id=380287738]
+material_override = SubResource("StandardMaterial3D_32kf2")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12015" type="Node3D" parent="fixture-211" unique_id=36462625]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-211/Detail12015" unique_id=1506348379]
+material_override = SubResource("StandardMaterial3D_o5mdv")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-211" unique_id=1536067915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-211/Diffuser" unique_id=1592707555]
+material_override = SubResource("StandardMaterial3D_tu1a4")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-211" unique_id=2074430570]
+shape = SubResource("BoxShape3D_7t2en")
+
+[node name="Light" type="OmniLight3D" parent="fixture-211" unique_id=1198707178]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12023" type="NavigationLink3D" parent="." unique_id=1493637220]
+start_position = Vector3(-214, 0.5, 8)
+end_position = Vector3(-217, 0.5, 8)
+
+[node name="CoverPortal12024" type="NavigationLink3D" parent="." unique_id=1278182085]
+start_position = Vector3(-226, 0.5, 8)
+end_position = Vector3(-223, 0.5, 8)
+
+[node name="CoverPortal12025" type="NavigationLink3D" parent="." unique_id=1391332878]
+start_position = Vector3(-220, 0.5, 14)
+end_position = Vector3(-220, 0.5, 11)
+
+[node name="CoverPortal12026" type="NavigationLink3D" parent="." unique_id=1682997866]
+start_position = Vector3(-220, 0.5, 2)
+end_position = Vector3(-220, 0.5, 5)
+
+[node name="slot-05" type="Node3D" parent="." unique_id=757356144]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180, 0, 8)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-05"
+variants = Array[PackedScene]([ExtResource("5_c1nln"), ExtResource("6_dpjb3"), ExtResource("7_b8el7")])
+
+[node name="fixture-212" type="StaticBody3D" parent="." unique_id=1422813610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180, 4.25, 8)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-212"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12030" type="Node3D" parent="fixture-212" unique_id=1226551638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-212/Detail12030" unique_id=107738533]
+material_override = SubResource("StandardMaterial3D_o2mca")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12032" type="Node3D" parent="fixture-212" unique_id=1688869180]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-212/Detail12032" unique_id=664408262]
+material_override = SubResource("StandardMaterial3D_6jm41")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-212" unique_id=400980273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-212/Diffuser" unique_id=1523756226]
+material_override = SubResource("StandardMaterial3D_qfcdk")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-212" unique_id=1950819140]
+shape = SubResource("BoxShape3D_rpl2u")
+
+[node name="Light" type="OmniLight3D" parent="fixture-212" unique_id=803403902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12040" type="NavigationLink3D" parent="." unique_id=1669129247]
+start_position = Vector3(-174, 0.5, 8)
+end_position = Vector3(-177, 0.5, 8)
+
+[node name="CoverPortal12041" type="NavigationLink3D" parent="." unique_id=1465006101]
+start_position = Vector3(-186, 0.5, 8)
+end_position = Vector3(-183, 0.5, 8)
+
+[node name="CoverPortal12042" type="NavigationLink3D" parent="." unique_id=1750049597]
+start_position = Vector3(-180, 0.5, 14)
+end_position = Vector3(-180, 0.5, 11)
+
+[node name="CoverPortal12043" type="NavigationLink3D" parent="." unique_id=362172733]
+start_position = Vector3(-180, 0.5, 2)
+end_position = Vector3(-180, 0.5, 5)
+
+[node name="slot-06" type="Node3D" parent="." unique_id=1989752247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 8)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-06"
+variants = Array[PackedScene]([ExtResource("5_c1nln"), ExtResource("6_dpjb3"), ExtResource("7_b8el7")])
+
+[node name="fixture-213" type="StaticBody3D" parent="." unique_id=2078013976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 4.25, 8)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-213"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12047" type="Node3D" parent="fixture-213" unique_id=300192579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-213/Detail12047" unique_id=920005602]
+material_override = SubResource("StandardMaterial3D_lmw7y")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12049" type="Node3D" parent="fixture-213" unique_id=2028119742]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-213/Detail12049" unique_id=714061726]
+material_override = SubResource("StandardMaterial3D_pw8el")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-213" unique_id=1558346916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-213/Diffuser" unique_id=2105681867]
+material_override = SubResource("StandardMaterial3D_j6oaj")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-213" unique_id=484019113]
+shape = SubResource("BoxShape3D_rxwm7")
+
+[node name="Light" type="OmniLight3D" parent="fixture-213" unique_id=1702975508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12057" type="NavigationLink3D" parent="." unique_id=1161435992]
+start_position = Vector3(-94, 0.5, 8)
+end_position = Vector3(-97, 0.5, 8)
+
+[node name="CoverPortal12058" type="NavigationLink3D" parent="." unique_id=491104022]
+start_position = Vector3(-106, 0.5, 8)
+end_position = Vector3(-103, 0.5, 8)
+
+[node name="CoverPortal12059" type="NavigationLink3D" parent="." unique_id=592713125]
+start_position = Vector3(-100, 0.5, 14)
+end_position = Vector3(-100, 0.5, 11)
+
+[node name="CoverPortal12060" type="NavigationLink3D" parent="." unique_id=2132437280]
+start_position = Vector3(-100, 0.5, 2)
+end_position = Vector3(-100, 0.5, 5)
+
+[node name="slot-07" type="Node3D" parent="." unique_id=1839670472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 8)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-07"
+variants = Array[PackedScene]([ExtResource("5_c1nln"), ExtResource("6_dpjb3"), ExtResource("7_b8el7")])
+
+[node name="fixture-214" type="StaticBody3D" parent="." unique_id=1061956146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 4.25, 8)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-214"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12064" type="Node3D" parent="fixture-214" unique_id=983850696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-214/Detail12064" unique_id=211000453]
+material_override = SubResource("StandardMaterial3D_a0het")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12066" type="Node3D" parent="fixture-214" unique_id=2085102509]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-214/Detail12066" unique_id=1679061185]
+material_override = SubResource("StandardMaterial3D_62vuo")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-214" unique_id=1418974287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-214/Diffuser" unique_id=997067409]
+material_override = SubResource("StandardMaterial3D_a1enh")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-214" unique_id=875666086]
+shape = SubResource("BoxShape3D_40hfi")
+
+[node name="Light" type="OmniLight3D" parent="fixture-214" unique_id=1772648184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12074" type="NavigationLink3D" parent="." unique_id=1445701762]
+start_position = Vector3(-54, 0.5, 8)
+end_position = Vector3(-57, 0.5, 8)
+
+[node name="CoverPortal12075" type="NavigationLink3D" parent="." unique_id=852396686]
+start_position = Vector3(-66, 0.5, 8)
+end_position = Vector3(-63, 0.5, 8)
+
+[node name="CoverPortal12076" type="NavigationLink3D" parent="." unique_id=1967352158]
+start_position = Vector3(-60, 0.5, 14)
+end_position = Vector3(-60, 0.5, 11)
+
+[node name="CoverPortal12077" type="NavigationLink3D" parent="." unique_id=1417211956]
+start_position = Vector3(-60, 0.5, 2)
+end_position = Vector3(-60, 0.5, 5)
+
+[node name="slot-08" type="Node3D" parent="." unique_id=2010752431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -210, 0, -124)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-08"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-215" type="StaticBody3D" parent="." unique_id=125537003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -210, 4.25, -124)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-215"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12081" type="Node3D" parent="fixture-215" unique_id=385465662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-215/Detail12081" unique_id=117236112]
+material_override = SubResource("StandardMaterial3D_s0hsf")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12083" type="Node3D" parent="fixture-215" unique_id=1463409811]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-215/Detail12083" unique_id=717524997]
+material_override = SubResource("StandardMaterial3D_xw5ng")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-215" unique_id=1787124700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-215/Diffuser" unique_id=1515371629]
+material_override = SubResource("StandardMaterial3D_5p5nq")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-215" unique_id=1357576206]
+shape = SubResource("BoxShape3D_oy5gj")
+
+[node name="Light" type="OmniLight3D" parent="fixture-215" unique_id=1709910849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12091" type="NavigationLink3D" parent="." unique_id=360110679]
+start_position = Vector3(-204, 0.5, -124)
+end_position = Vector3(-207, 0.5, -124)
+
+[node name="CoverPortal12092" type="NavigationLink3D" parent="." unique_id=1825422060]
+start_position = Vector3(-216, 0.5, -124)
+end_position = Vector3(-213, 0.5, -124)
+
+[node name="CoverPortal12093" type="NavigationLink3D" parent="." unique_id=37721031]
+start_position = Vector3(-210, 0.5, -118)
+end_position = Vector3(-210, 0.5, -121)
+
+[node name="CoverPortal12094" type="NavigationLink3D" parent="." unique_id=695525318]
+start_position = Vector3(-210, 0.5, -130)
+end_position = Vector3(-210, 0.5, -127)
+
+[node name="slot-09" type="Node3D" parent="." unique_id=52054953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, -124)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-09"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-216" type="StaticBody3D" parent="." unique_id=912905885]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 4.25, -124)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-216"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12098" type="Node3D" parent="fixture-216" unique_id=78023094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-216/Detail12098" unique_id=1257652062]
+material_override = SubResource("StandardMaterial3D_hb65g")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12100" type="Node3D" parent="fixture-216" unique_id=227677546]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-216/Detail12100" unique_id=1976200981]
+material_override = SubResource("StandardMaterial3D_bfrmx")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-216" unique_id=677181046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-216/Diffuser" unique_id=1615862758]
+material_override = SubResource("StandardMaterial3D_a32rh")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-216" unique_id=1671861349]
+shape = SubResource("BoxShape3D_8ypuu")
+
+[node name="Light" type="OmniLight3D" parent="fixture-216" unique_id=917702612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12108" type="NavigationLink3D" parent="." unique_id=237883418]
+start_position = Vector3(-144, 0.5, -124)
+end_position = Vector3(-147, 0.5, -124)
+
+[node name="CoverPortal12109" type="NavigationLink3D" parent="." unique_id=1984889055]
+start_position = Vector3(-156, 0.5, -124)
+end_position = Vector3(-153, 0.5, -124)
+
+[node name="CoverPortal12110" type="NavigationLink3D" parent="." unique_id=1282256250]
+start_position = Vector3(-150, 0.5, -118)
+end_position = Vector3(-150, 0.5, -121)
+
+[node name="CoverPortal12111" type="NavigationLink3D" parent="." unique_id=1968057954]
+start_position = Vector3(-150, 0.5, -130)
+end_position = Vector3(-150, 0.5, -127)
+
+[node name="slot-10" type="Node3D" parent="." unique_id=1959682257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -124)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-10"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-217" type="StaticBody3D" parent="." unique_id=1210431846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 4.25, -124)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-217"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12115" type="Node3D" parent="fixture-217" unique_id=1457080048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-217/Detail12115" unique_id=941942213]
+material_override = SubResource("StandardMaterial3D_afo17")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12117" type="Node3D" parent="fixture-217" unique_id=1126999559]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-217/Detail12117" unique_id=1632108112]
+material_override = SubResource("StandardMaterial3D_ij7ml")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-217" unique_id=1955896129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-217/Diffuser" unique_id=495804826]
+material_override = SubResource("StandardMaterial3D_ac0ye")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-217" unique_id=1550164232]
+shape = SubResource("BoxShape3D_vr0iy")
+
+[node name="Light" type="OmniLight3D" parent="fixture-217" unique_id=1461116175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12125" type="NavigationLink3D" parent="." unique_id=1930556309]
+start_position = Vector3(-84, 0.5, -124)
+end_position = Vector3(-87, 0.5, -124)
+
+[node name="CoverPortal12126" type="NavigationLink3D" parent="." unique_id=274119747]
+start_position = Vector3(-96, 0.5, -124)
+end_position = Vector3(-93, 0.5, -124)
+
+[node name="CoverPortal12127" type="NavigationLink3D" parent="." unique_id=1836058318]
+start_position = Vector3(-90, 0.5, -118)
+end_position = Vector3(-90, 0.5, -121)
+
+[node name="CoverPortal12128" type="NavigationLink3D" parent="." unique_id=621583020]
+start_position = Vector3(-90, 0.5, -130)
+end_position = Vector3(-90, 0.5, -127)
+
+[node name="slot-11" type="Node3D" parent="." unique_id=1830052735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -210, 0, -86)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-11"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-218" type="StaticBody3D" parent="." unique_id=1951691615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -210, 4.25, -86)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-218"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12132" type="Node3D" parent="fixture-218" unique_id=906805420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-218/Detail12132" unique_id=1948665675]
+material_override = SubResource("StandardMaterial3D_mpec4")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12134" type="Node3D" parent="fixture-218" unique_id=1892152994]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-218/Detail12134" unique_id=1934022440]
+material_override = SubResource("StandardMaterial3D_wg1jp")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-218" unique_id=333763988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-218/Diffuser" unique_id=1692152658]
+material_override = SubResource("StandardMaterial3D_2cu2l")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-218" unique_id=1876932366]
+shape = SubResource("BoxShape3D_22b75")
+
+[node name="Light" type="OmniLight3D" parent="fixture-218" unique_id=1096633334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12142" type="NavigationLink3D" parent="." unique_id=593645446]
+start_position = Vector3(-204, 0.5, -86)
+end_position = Vector3(-207, 0.5, -86)
+
+[node name="CoverPortal12143" type="NavigationLink3D" parent="." unique_id=276303287]
+start_position = Vector3(-216, 0.5, -86)
+end_position = Vector3(-213, 0.5, -86)
+
+[node name="CoverPortal12144" type="NavigationLink3D" parent="." unique_id=203062051]
+start_position = Vector3(-210, 0.5, -80)
+end_position = Vector3(-210, 0.5, -83)
+
+[node name="CoverPortal12145" type="NavigationLink3D" parent="." unique_id=1507287829]
+start_position = Vector3(-210, 0.5, -92)
+end_position = Vector3(-210, 0.5, -89)
+
+[node name="slot-12" type="Node3D" parent="." unique_id=918921270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, -86)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-12"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-219" type="StaticBody3D" parent="." unique_id=1722915720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 4.25, -86)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-219"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12149" type="Node3D" parent="fixture-219" unique_id=49898694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-219/Detail12149" unique_id=1398857073]
+material_override = SubResource("StandardMaterial3D_te0ab")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12151" type="Node3D" parent="fixture-219" unique_id=1785844230]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-219/Detail12151" unique_id=332971559]
+material_override = SubResource("StandardMaterial3D_2dud5")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-219" unique_id=349999423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-219/Diffuser" unique_id=1506894140]
+material_override = SubResource("StandardMaterial3D_xem8g")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-219" unique_id=1229292943]
+shape = SubResource("BoxShape3D_cp5rg")
+
+[node name="Light" type="OmniLight3D" parent="fixture-219" unique_id=2041362843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12159" type="NavigationLink3D" parent="." unique_id=1603733499]
+start_position = Vector3(-144, 0.5, -86)
+end_position = Vector3(-147, 0.5, -86)
+
+[node name="CoverPortal12160" type="NavigationLink3D" parent="." unique_id=1730149586]
+start_position = Vector3(-156, 0.5, -86)
+end_position = Vector3(-153, 0.5, -86)
+
+[node name="CoverPortal12161" type="NavigationLink3D" parent="." unique_id=1719555885]
+start_position = Vector3(-150, 0.5, -80)
+end_position = Vector3(-150, 0.5, -83)
+
+[node name="CoverPortal12162" type="NavigationLink3D" parent="." unique_id=1908505162]
+start_position = Vector3(-150, 0.5, -92)
+end_position = Vector3(-150, 0.5, -89)
+
+[node name="slot-13" type="Node3D" parent="." unique_id=970566825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 0, -86)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-13"
+variants = Array[PackedScene]([ExtResource("11_6cxbx"), ExtResource("12_m4ye5"), ExtResource("13_3pchp")])
+
+[node name="fixture-220" type="StaticBody3D" parent="." unique_id=564954898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90, 4.25, -86)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-220"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12166" type="Node3D" parent="fixture-220" unique_id=965115723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-220/Detail12166" unique_id=1233163022]
+material_override = SubResource("StandardMaterial3D_8hghu")
+mesh = SubResource("BoxMesh_txvxx")
+
+[node name="Detail12168" type="Node3D" parent="fixture-220" unique_id=234729201]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-220/Detail12168" unique_id=61408605]
+material_override = SubResource("StandardMaterial3D_qnx5u")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-220" unique_id=821616777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-220/Diffuser" unique_id=744236526]
+material_override = SubResource("StandardMaterial3D_5xfar")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-220" unique_id=1433303128]
+shape = SubResource("BoxShape3D_dpse2")
+
+[node name="Light" type="OmniLight3D" parent="fixture-220" unique_id=1564595334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12176" type="NavigationLink3D" parent="." unique_id=1716597358]
+start_position = Vector3(-84, 0.5, -86)
+end_position = Vector3(-87, 0.5, -86)
+
+[node name="CoverPortal12177" type="NavigationLink3D" parent="." unique_id=333628192]
+start_position = Vector3(-96, 0.5, -86)
+end_position = Vector3(-93, 0.5, -86)
+
+[node name="CoverPortal12178" type="NavigationLink3D" parent="." unique_id=856772350]
+start_position = Vector3(-90, 0.5, -80)
+end_position = Vector3(-90, 0.5, -83)
+
+[node name="CoverPortal12179" type="NavigationLink3D" parent="." unique_id=1709131873]
+start_position = Vector3(-90, 0.5, -92)
+end_position = Vector3(-90, 0.5, -89)
+
+[node name="slot-14" type="Node3D" parent="." unique_id=1817254737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -145)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-14"
+variants = Array[PackedScene]([ExtResource("14_w14ph"), ExtResource("15_oethm"), ExtResource("16_kp8yk")])
+
+[node name="fixture-221" type="StaticBody3D" parent="." unique_id=839658469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 7, -145)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-221"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12183" type="Node3D" parent="fixture-221" unique_id=1920734160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-221/Detail12183" unique_id=260251245]
+material_override = SubResource("StandardMaterial3D_eudax")
+mesh = SubResource("BoxMesh_iootl")
+
+[node name="Detail12185" type="Node3D" parent="fixture-221" unique_id=1064836779]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-221/Detail12185" unique_id=1111731869]
+material_override = SubResource("StandardMaterial3D_wlg78")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-221" unique_id=2015135604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-221/Diffuser" unique_id=1489108450]
+material_override = SubResource("StandardMaterial3D_jn35j")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-221" unique_id=1416701670]
+shape = SubResource("BoxShape3D_vfnsg")
+
+[node name="Light" type="OmniLight3D" parent="fixture-221" unique_id=136224509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.9019608, 0.77254903, 0.6039216, 1)
+light_energy = 3.2
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 23.0
+
+[node name="CoverPortal12193" type="NavigationLink3D" parent="." unique_id=517130122]
+start_position = Vector3(106, 0.5, -145)
+end_position = Vector3(103, 0.5, -145)
+
+[node name="CoverPortal12194" type="NavigationLink3D" parent="." unique_id=83819819]
+start_position = Vector3(94, 0.5, -145)
+end_position = Vector3(97, 0.5, -145)
+
+[node name="CoverPortal12195" type="NavigationLink3D" parent="." unique_id=1635672466]
+start_position = Vector3(100, 0.5, -139)
+end_position = Vector3(100, 0.5, -142)
+
+[node name="CoverPortal12196" type="NavigationLink3D" parent="." unique_id=84858903]
+start_position = Vector3(100, 0.5, -151)
+end_position = Vector3(100, 0.5, -148)
+
+[node name="slot-15" type="Node3D" parent="." unique_id=1307740809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 0, -145)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-15"
+variants = Array[PackedScene]([ExtResource("14_w14ph"), ExtResource("15_oethm"), ExtResource("16_kp8yk")])
+
+[node name="fixture-222" type="StaticBody3D" parent="." unique_id=1461835111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140, 7, -145)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-222"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12200" type="Node3D" parent="fixture-222" unique_id=1043027150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-222/Detail12200" unique_id=547729784]
+material_override = SubResource("StandardMaterial3D_qnuil")
+mesh = SubResource("BoxMesh_iootl")
+
+[node name="Detail12202" type="Node3D" parent="fixture-222" unique_id=2032418727]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-222/Detail12202" unique_id=1728417857]
+material_override = SubResource("StandardMaterial3D_bt2s8")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-222" unique_id=709623618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-222/Diffuser" unique_id=361218491]
+material_override = SubResource("StandardMaterial3D_aeh5h")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-222" unique_id=1398297971]
+shape = SubResource("BoxShape3D_2xvk4")
+
+[node name="Light" type="OmniLight3D" parent="fixture-222" unique_id=415097362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.9019608, 0.77254903, 0.6039216, 1)
+light_energy = 3.2
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 23.0
+
+[node name="CoverPortal12210" type="NavigationLink3D" parent="." unique_id=1497205684]
+start_position = Vector3(146, 0.5, -145)
+end_position = Vector3(143, 0.5, -145)
+
+[node name="CoverPortal12211" type="NavigationLink3D" parent="." unique_id=1104423637]
+start_position = Vector3(134, 0.5, -145)
+end_position = Vector3(137, 0.5, -145)
+
+[node name="CoverPortal12212" type="NavigationLink3D" parent="." unique_id=1257068820]
+start_position = Vector3(140, 0.5, -139)
+end_position = Vector3(140, 0.5, -142)
+
+[node name="CoverPortal12213" type="NavigationLink3D" parent="." unique_id=1485689129]
+start_position = Vector3(140, 0.5, -151)
+end_position = Vector3(140, 0.5, -148)
+
+[node name="slot-16" type="Node3D" parent="." unique_id=953684318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 0, -145)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-16"
+variants = Array[PackedScene]([ExtResource("14_w14ph"), ExtResource("15_oethm"), ExtResource("16_kp8yk")])
+
+[node name="fixture-223" type="StaticBody3D" parent="." unique_id=712606048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, 7, -145)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-223"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12217" type="Node3D" parent="fixture-223" unique_id=1576966763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-223/Detail12217" unique_id=375979565]
+material_override = SubResource("StandardMaterial3D_gw0cc")
+mesh = SubResource("BoxMesh_iootl")
+
+[node name="Detail12219" type="Node3D" parent="fixture-223" unique_id=1121389745]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-223/Detail12219" unique_id=511924508]
+material_override = SubResource("StandardMaterial3D_qoqkq")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-223" unique_id=1195410827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-223/Diffuser" unique_id=1547732082]
+material_override = SubResource("StandardMaterial3D_hxorx")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-223" unique_id=511627753]
+shape = SubResource("BoxShape3D_bv0dc")
+
+[node name="Light" type="OmniLight3D" parent="fixture-223" unique_id=1064217636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.9019608, 0.77254903, 0.6039216, 1)
+light_energy = 3.2
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 23.0
+
+[node name="CoverPortal12227" type="NavigationLink3D" parent="." unique_id=2118844933]
+start_position = Vector3(186, 0.5, -145)
+end_position = Vector3(183, 0.5, -145)
+
+[node name="CoverPortal12228" type="NavigationLink3D" parent="." unique_id=1949554981]
+start_position = Vector3(174, 0.5, -145)
+end_position = Vector3(177, 0.5, -145)
+
+[node name="CoverPortal12229" type="NavigationLink3D" parent="." unique_id=2114878618]
+start_position = Vector3(180, 0.5, -139)
+end_position = Vector3(180, 0.5, -142)
+
+[node name="CoverPortal12230" type="NavigationLink3D" parent="." unique_id=1859774318]
+start_position = Vector3(180, 0.5, -151)
+end_position = Vector3(180, 0.5, -148)
+
+[node name="slot-17" type="Node3D" parent="." unique_id=1760893466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 0, -145)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-17"
+variants = Array[PackedScene]([ExtResource("14_w14ph"), ExtResource("15_oethm"), ExtResource("16_kp8yk")])
+
+[node name="fixture-224" type="StaticBody3D" parent="." unique_id=1888103908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220, 7, -145)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-224"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12234" type="Node3D" parent="fixture-224" unique_id=245060776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-224/Detail12234" unique_id=1277846794]
+material_override = SubResource("StandardMaterial3D_8gxl8")
+mesh = SubResource("BoxMesh_iootl")
+
+[node name="Detail12236" type="Node3D" parent="fixture-224" unique_id=1466244335]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-224/Detail12236" unique_id=459574404]
+material_override = SubResource("StandardMaterial3D_3sudr")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-224" unique_id=817742188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-224/Diffuser" unique_id=61566203]
+material_override = SubResource("StandardMaterial3D_v057t")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-224" unique_id=517955348]
+shape = SubResource("BoxShape3D_nr3el")
+
+[node name="Light" type="OmniLight3D" parent="fixture-224" unique_id=955029675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.9019608, 0.77254903, 0.6039216, 1)
+light_energy = 3.2
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 23.0
+
+[node name="CoverPortal12244" type="NavigationLink3D" parent="." unique_id=1992164904]
+start_position = Vector3(226, 0.5, -145)
+end_position = Vector3(223, 0.5, -145)
+
+[node name="CoverPortal12245" type="NavigationLink3D" parent="." unique_id=671156020]
+start_position = Vector3(214, 0.5, -145)
+end_position = Vector3(217, 0.5, -145)
+
+[node name="CoverPortal12246" type="NavigationLink3D" parent="." unique_id=386556439]
+start_position = Vector3(220, 0.5, -139)
+end_position = Vector3(220, 0.5, -142)
+
+[node name="CoverPortal12247" type="NavigationLink3D" parent="." unique_id=1003693720]
+start_position = Vector3(220, 0.5, -151)
+end_position = Vector3(220, 0.5, -148)
+
+[node name="slot-18" type="Node3D" parent="." unique_id=1093830993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 0, -83)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-18"
+variants = Array[PackedScene]([ExtResource("14_w14ph"), ExtResource("15_oethm"), ExtResource("16_kp8yk")])
+
+[node name="fixture-225" type="StaticBody3D" parent="." unique_id=1619624753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 7, -83)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-225"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12251" type="Node3D" parent="fixture-225" unique_id=1446978777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.625, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-225/Detail12251" unique_id=621048488]
+material_override = SubResource("StandardMaterial3D_d6u14")
+mesh = SubResource("BoxMesh_iootl")
+
+[node name="Detail12253" type="Node3D" parent="fixture-225" unique_id=1444420818]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-225/Detail12253" unique_id=1748306112]
+material_override = SubResource("StandardMaterial3D_1ypkl")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-225" unique_id=864677493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-225/Diffuser" unique_id=637817320]
+material_override = SubResource("StandardMaterial3D_5wnve")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-225" unique_id=1254629863]
+shape = SubResource("BoxShape3D_8wf4s")
+
+[node name="Light" type="OmniLight3D" parent="fixture-225" unique_id=1100776960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.9019608, 0.77254903, 0.6039216, 1)
+light_energy = 3.2
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 23.0
+
+[node name="CoverPortal12261" type="NavigationLink3D" parent="." unique_id=1060834110]
+start_position = Vector3(156, 0.5, -83)
+end_position = Vector3(153, 0.5, -83)
+
+[node name="CoverPortal12262" type="NavigationLink3D" parent="." unique_id=2084487663]
+start_position = Vector3(144, 0.5, -83)
+end_position = Vector3(147, 0.5, -83)
+
+[node name="CoverPortal12263" type="NavigationLink3D" parent="." unique_id=191454087]
+start_position = Vector3(150, 0.5, -77)
+end_position = Vector3(150, 0.5, -80)
+
+[node name="CoverPortal12264" type="NavigationLink3D" parent="." unique_id=1383535319]
+start_position = Vector3(150, 0.5, -89)
+end_position = Vector3(150, 0.5, -86)
+
+[node name="slot-19" type="Node3D" parent="." unique_id=1378294720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182, -10, -92)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-19"
+variants = Array[PackedScene]([ExtResource("17_37bgm"), ExtResource("18_77gh3"), ExtResource("19_cbx3q")])
+
+[node name="fixture-226" type="StaticBody3D" parent="." unique_id=1867738150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182, -5.75, -92)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-226"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12268" type="Node3D" parent="fixture-226" unique_id=607697961]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-226/Detail12268" unique_id=143139584]
+material_override = SubResource("StandardMaterial3D_vayqc")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-226" unique_id=1961410721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-226/Diffuser" unique_id=1747682647]
+material_override = SubResource("StandardMaterial3D_5srwa")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-226" unique_id=1316958254]
+shape = SubResource("BoxShape3D_th37o")
+
+[node name="Light" type="OmniLight3D" parent="fixture-226" unique_id=1476727708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12276" type="NavigationLink3D" parent="." unique_id=980266696]
+start_position = Vector3(-176, -9.5, -92)
+end_position = Vector3(-179, -9.5, -92)
+
+[node name="CoverPortal12277" type="NavigationLink3D" parent="." unique_id=40418201]
+start_position = Vector3(-188, -9.5, -92)
+end_position = Vector3(-185, -9.5, -92)
+
+[node name="CoverPortal12278" type="NavigationLink3D" parent="." unique_id=2011103804]
+start_position = Vector3(-182, -9.5, -86)
+end_position = Vector3(-182, -9.5, -89)
+
+[node name="CoverPortal12279" type="NavigationLink3D" parent="." unique_id=1277355205]
+start_position = Vector3(-182, -9.5, -98)
+end_position = Vector3(-182, -9.5, -95)
+
+[node name="slot-20" type="Node3D" parent="." unique_id=1239382678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144, -10, -92)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-20"
+variants = Array[PackedScene]([ExtResource("17_37bgm"), ExtResource("18_77gh3"), ExtResource("19_cbx3q")])
+
+[node name="fixture-227" type="StaticBody3D" parent="." unique_id=232841726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -144, -5.75, -92)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-227"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12283" type="Node3D" parent="fixture-227" unique_id=217980063]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-227/Detail12283" unique_id=1936888376]
+material_override = SubResource("StandardMaterial3D_qllkk")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-227" unique_id=1737284689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-227/Diffuser" unique_id=1120072687]
+material_override = SubResource("StandardMaterial3D_24okj")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-227" unique_id=277145730]
+shape = SubResource("BoxShape3D_j38gs")
+
+[node name="Light" type="OmniLight3D" parent="fixture-227" unique_id=1233461936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12291" type="NavigationLink3D" parent="." unique_id=1234158447]
+start_position = Vector3(-138, -9.5, -92)
+end_position = Vector3(-141, -9.5, -92)
+
+[node name="CoverPortal12292" type="NavigationLink3D" parent="." unique_id=344138664]
+start_position = Vector3(-150, -9.5, -92)
+end_position = Vector3(-147, -9.5, -92)
+
+[node name="CoverPortal12293" type="NavigationLink3D" parent="." unique_id=1992995506]
+start_position = Vector3(-144, -9.5, -86)
+end_position = Vector3(-144, -9.5, -89)
+
+[node name="CoverPortal12294" type="NavigationLink3D" parent="." unique_id=168005353]
+start_position = Vector3(-144, -9.5, -98)
+end_position = Vector3(-144, -9.5, -95)
+
+[node name="slot-21" type="Node3D" parent="." unique_id=964600498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -10, -92)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-21"
+variants = Array[PackedScene]([ExtResource("17_37bgm"), ExtResource("18_77gh3"), ExtResource("19_cbx3q")])
+
+[node name="fixture-228" type="StaticBody3D" parent="." unique_id=1523829865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -5.75, -92)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-228"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12298" type="Node3D" parent="fixture-228" unique_id=1055776969]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-228/Detail12298" unique_id=1411936611]
+material_override = SubResource("StandardMaterial3D_deh7l")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-228" unique_id=1700972169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-228/Diffuser" unique_id=391340642]
+material_override = SubResource("StandardMaterial3D_6f4ib")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-228" unique_id=73165193]
+shape = SubResource("BoxShape3D_3vrv2")
+
+[node name="Light" type="OmniLight3D" parent="fixture-228" unique_id=641616150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12306" type="NavigationLink3D" parent="." unique_id=787054723]
+start_position = Vector3(-100, -9.5, -92)
+end_position = Vector3(-103, -9.5, -92)
+
+[node name="CoverPortal12307" type="NavigationLink3D" parent="." unique_id=1796538516]
+start_position = Vector3(-112, -9.5, -92)
+end_position = Vector3(-109, -9.5, -92)
+
+[node name="CoverPortal12308" type="NavigationLink3D" parent="." unique_id=993250938]
+start_position = Vector3(-106, -9.5, -86)
+end_position = Vector3(-106, -9.5, -89)
+
+[node name="CoverPortal12309" type="NavigationLink3D" parent="." unique_id=35196581]
+start_position = Vector3(-106, -9.5, -98)
+end_position = Vector3(-106, -9.5, -95)
+
+[node name="slot-22" type="Node3D" parent="." unique_id=293190896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68, -10, -92)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-22"
+variants = Array[PackedScene]([ExtResource("17_37bgm"), ExtResource("18_77gh3"), ExtResource("19_cbx3q")])
+
+[node name="fixture-229" type="StaticBody3D" parent="." unique_id=2000172684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68, -5.75, -92)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-229"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12313" type="Node3D" parent="fixture-229" unique_id=992815720]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-229/Detail12313" unique_id=1909493075]
+material_override = SubResource("StandardMaterial3D_k4s4h")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-229" unique_id=1871886816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-229/Diffuser" unique_id=1108611417]
+material_override = SubResource("StandardMaterial3D_0wb2e")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-229" unique_id=2136073391]
+shape = SubResource("BoxShape3D_0ctss")
+
+[node name="Light" type="OmniLight3D" parent="fixture-229" unique_id=2096797300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12321" type="NavigationLink3D" parent="." unique_id=187932501]
+start_position = Vector3(-62, -9.5, -92)
+end_position = Vector3(-65, -9.5, -92)
+
+[node name="CoverPortal12322" type="NavigationLink3D" parent="." unique_id=1702506523]
+start_position = Vector3(-74, -9.5, -92)
+end_position = Vector3(-71, -9.5, -92)
+
+[node name="CoverPortal12323" type="NavigationLink3D" parent="." unique_id=1180794116]
+start_position = Vector3(-68, -9.5, -86)
+end_position = Vector3(-68, -9.5, -89)
+
+[node name="CoverPortal12324" type="NavigationLink3D" parent="." unique_id=1193891623]
+start_position = Vector3(-68, -9.5, -98)
+end_position = Vector3(-68, -9.5, -95)
+
+[node name="slot-23" type="Node3D" parent="." unique_id=1037132117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -10, -60)
+script = ExtResource("1_gkwrl")
+slot_id = "slot-23"
+variants = Array[PackedScene]([ExtResource("17_37bgm"), ExtResource("18_77gh3"), ExtResource("19_cbx3q")])
+
+[node name="fixture-230" type="StaticBody3D" parent="." unique_id=1744938372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -5.75, -60)
+script = ExtResource("8_8uagy")
+entity_id = "fixture-230"
+material = ExtResource("9_2yx14")
+kind = "light"
+protected = true
+
+[node name="Detail12328" type="Node3D" parent="fixture-230" unique_id=183881833]
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-230/Detail12328" unique_id=1108854313]
+material_override = SubResource("StandardMaterial3D_jxtoj")
+mesh = SubResource("BoxMesh_mrapa")
+
+[node name="Diffuser" type="Node3D" parent="fixture-230" unique_id=1991996007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="fixture-230/Diffuser" unique_id=1570351723]
+material_override = SubResource("StandardMaterial3D_8d3g0")
+mesh = SubResource("BoxMesh_gx2a8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="fixture-230" unique_id=1711490724]
+shape = SubResource("BoxShape3D_diw3i")
+
+[node name="Light" type="OmniLight3D" parent="fixture-230" unique_id=1765501507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+light_color = Color(0.72156864, 0.827451, 0.8117647, 1)
+light_energy = 2.4
+distance_fade_enabled = true
+distance_fade_begin = 35.0
+distance_fade_length = 12.0
+omni_range = 13.0
+
+[node name="CoverPortal12336" type="NavigationLink3D" parent="." unique_id=1922990369]
+start_position = Vector3(21, -9.5, -60)
+end_position = Vector3(18, -9.5, -60)
+
+[node name="CoverPortal12337" type="NavigationLink3D" parent="." unique_id=1930958022]
+start_position = Vector3(9, -9.5, -60)
+end_position = Vector3(12, -9.5, -60)
+
+[node name="CoverPortal12338" type="NavigationLink3D" parent="." unique_id=2103392679]
+start_position = Vector3(15, -9.5, -54)
+end_position = Vector3(15, -9.5, -57)
+
+[node name="CoverPortal12339" type="NavigationLink3D" parent="." unique_id=620647132]
+start_position = Vector3(15, -9.5, -66)
+end_position = Vector3(15, -9.5, -63)

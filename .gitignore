@@ -11,4 +11,7 @@ addons/zylann.voxel/
 export_credentials.cfg
 .DS_Store
 Thumbs.db
-docs/
+docs/*
+!docs/world-generation.md
+!docs/art-direction.md
+!docs/district-verification.md

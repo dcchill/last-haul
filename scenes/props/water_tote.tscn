@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/water_tote.res" id="1_28o51"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_3pa78"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_1vmco"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_deoa1"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyubq"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dafwl"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7k3t"]
+size = Vector3(1.25, 1.125, 1)
+
+[node name="WaterTote" type="Node3D" unique_id=321614699]
+metadata/prop_id = "water_tote"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1468947239]
+mesh = ExtResource("1_28o51")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=528949921]
+collision_mask = 0
+script = ExtResource("2_3pa78")
+material = ExtResource("3_1vmco")
+
+[node name="@CollisionShape3D@154" type="CollisionShape3D" parent="Collision" unique_id=1235685018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.125, 0)
+shape = SubResource("BoxShape3D_deoa1")
+
+[node name="@CollisionShape3D@155" type="CollisionShape3D" parent="Collision" unique_id=118414606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_vyubq")
+
+[node name="@CollisionShape3D@156" type="CollisionShape3D" parent="Collision" unique_id=1449245189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.125, 0)
+shape = SubResource("BoxShape3D_dafwl")
+
+[node name="@CollisionShape3D@157" type="CollisionShape3D" parent="Collision" unique_id=18842820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9375, 0)
+shape = SubResource("BoxShape3D_i7k3t")

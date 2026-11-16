@@ -8,6 +8,12 @@ signal health_changed(player_id: String, health: float)
 signal shot_fired(player_id: String, position: Vector3)
 enum Phase { DEPLOYING, ACTIVE, SUCCESS, FAILURE }
 @export var depot := false
+@export var map_definition: RaidMapDefinition
+@export var raid_seed := -1
+var random := RandomNumberGenerator.new()
+var extraction_zones: Array[ExtractionZone] = []
+var spawn_markers: Array[Marker3D] = []
+var keycard_spawned := false
 var phase := Phase.DEPLOYING
 var raid_id := ""
 var player: RaidPlayer
@@ -40,7 +46,19 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	player.settings = settings
 	signal_decay.configure(settings)
 	entities.clear()
-	var registered: Array = [player, guard, extraction]
+	random.seed = raid_seed if raid_seed >= 0 else int(Time.get_ticks_usec())
+	var dressing:=get_node_or_null("Dressing")
+	if dressing!=null: dressing.configure(random.seed)
+	extraction_zones.clear()
+	spawn_markers.clear()
+	var registered: Array = [player, guard]
+	for node in find_children("*", "", true, false):
+		if node is ExtractionZone:
+			extraction_zones.append(node)
+			registered.append(node)
+		if node is Marker3D and node.is_in_group(map_definition.spawn_group if map_definition != null else "raid_spawns"): spawn_markers.append(node)
+		if node is RaidDoor: registered.append(node)
+		if node is MedTacBreakable: registered.append(node)
 	for node in get_tree().get_nodes_in_group("raid_entities"):
 		if is_ancestor_of(node):
 			registered.append(node)
@@ -57,14 +75,31 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 		mag.rounds = 30
 		pack.add("stanag_magazine", 1, mag)
 	participants[player_id] = RaidParticipant.new(player, catalog, pack, loadout.get("weapon", "m_four"), loadout.get("armor", ""), [], loadout)
+	var participant: RaidParticipant = participants[player_id]
+	participant.infection_capacity = map_definition.infection_seconds if map_definition != null else RaidParticipant.INFECTION_CAPACITY
+	participant.infection_remaining = participant.infection_capacity
+	if map_definition != null:
+		var definition_error := map_definition.validation_error()
+		if not definition_error.is_empty(): return definition_error
+		if spawn_markers.size() != map_definition.insertion_count or extraction_zones.size() != map_definition.extraction_count: return "Map insertion/extraction count mismatch"
+		var insertion := spawn_markers[random.randi_range(0, spawn_markers.size() - 1)]
+		player.global_transform = insertion.global_transform
+		player.previous_position = player.global_position
+		participant.insertion_id = insertion.name
+		# Generated from the baked ground-floor/outdoor navigation routes at build time.
+		for identity in insertion.get_meta("assigned_extracts", []): participant.assigned_extracts.append(identity)
+		if participant.assigned_extracts.size() != map_definition.assigned_extraction_count: return "Insertion is missing its far-side extracts"
+	else:
+		for zone in extraction_zones: participant.assigned_extracts.append(zone.entity_id)
 	npcs = [guard]
-	if depot:
+	if depot or map_definition != null:
 		for node in get_children():
 			if node is RaidGuard and node != guard:
 				npcs.append(node)
 				if entities.has(node.entity_id): return "Duplicate NPC ID: " + node.entity_id
 				entities[node.entity_id] = node
-	if not practice and not depot:
+	if map_definition!=null and npcs.size()!=map_definition.enemy_count: return "Map encounter count does not match its baked scene"
+	if not practice and not depot and map_definition == null:
 		var zombie: RaidGuard = preload("res://scenes/npcs/guard.tscn").instantiate()
 		zombie.entity_id = "zombie-01"
 		zombie.archetype = catalog.definitions.zombie
@@ -73,6 +108,11 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 		npcs.append(zombie)
 		entities[zombie.entity_id] = zombie
 	for npc in npcs: _initialize_npc(npc)
+	if dressing!=null:
+		for npc in npcs:
+			for marker in get_tree().get_nodes_in_group("medtac_cover")+get_tree().get_nodes_in_group("district_cover"):
+				if is_ancestor_of(marker) and marker.global_position.distance_to(npc.home_position)<24:
+					npc.cover_points.append(marker.global_position)
 	raid_id = ProfileStore._new_id()
 	phase = Phase.ACTIVE
 	$ImpactPresenter.catalog = catalog
@@ -80,7 +120,7 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	for npc in npcs: shot_fired.connect(npc.hear_shot)
 	shot_fired.connect(player.shot_fired)
 	_build_loot()
-	if not practice and not depot:
+	if not practice and not depot and map_definition == null:
 		for contents: RaidInventory in containers.values():
 			for id in ["small_pack", "field_rig", "food", "medkit", "field_knife", "face_cover", "field_glasses", "maska", "five_five_six_ap"]:
 				contents.add(id, 8 if id == "five_five_six_ap" else 1)
@@ -94,7 +134,7 @@ func is_active() -> bool:
 	return phase == Phase.ACTIVE
 
 func _allowed(player_id: String) -> bool:
-	return is_active() and participants.has(player_id) and participants[player_id].health > 0 and (practice or participants[player_id].battery > 0)
+	return is_active() and participants.has(player_id) and participants[player_id].health > 0 and (practice or participants[player_id].infection_remaining > 0)
 
 func request_input(player_id: String, trigger: bool, aim: bool, customizing: bool = false) -> bool:
 	if not _allowed(player_id):
@@ -140,6 +180,11 @@ func request_fire(player_id: String) -> bool:
 func _spawn_projectile(origin: Vector3, direction: Vector3, speed: float, spread: float, damage: float, head: float, source: RID, kind: String = "bullet") -> Dictionary:
 	projectile_serial += 1
 	var projectile := ballistics.make_bullet(origin, direction, speed, spread, damage, head, projectile_serial, [source], kind)
+	projectile.source_entity_id = ""
+	for entity in entities.values():
+		if entity is CollisionObject3D and entity.get_rid() == source:
+			projectile.source_entity_id = entity.entity_id
+			break
 	projectiles.append(projectile)
 	return projectile
 
@@ -261,13 +306,13 @@ func request_use(player_id: String, identity: String) -> bool:
 	var entry := state.entry_for(identity)
 	if entry.is_empty(): return false
 	var definition: ItemDef = catalog.items[entry.id]
-	if definition.heal_amount <= 0 and definition.stamina_amount <= 0 and definition.battery_amount <= 0: return false
-	if definition.battery_amount > 0 and state.battery >= RaidParticipant.BATTERY_CAPACITY: return false
+	if definition.heal_amount <= 0 and definition.stamina_amount <= 0 and definition.infection_seconds <= 0: return false
+	if definition.infection_seconds > 0 and state.infection_remaining >= state.infection_capacity: return false
 	if state.health >= 20 and definition.heal_amount > 0: return false
 	var source := state.owner_of(identity)
 	var service := inventory_service(player_id)
 	if not service.submit(service.request("consume", source, null, identity, Vector2i(-1, -1), false, 1)).ok: return false
-	state.battery = minf(RaidParticipant.BATTERY_CAPACITY, state.battery + definition.battery_amount)
+	state.infection_remaining = minf(state.infection_capacity, state.infection_remaining + definition.infection_seconds)
 	state.health = minf(20.0, state.health + definition.heal_amount)
 	state.stamina = minf(100.0, state.stamina + definition.stamina_amount)
 	return true
@@ -398,6 +443,9 @@ func _step_projectile(projectile: Dictionary, _delta: float = 0.05) -> bool:
 	return true
 
 func _apply_projectile_hit(target: Node, projectile: Dictionary, hit: Dictionary) -> Dictionary:
+	var source: Node = entities.get(projectile.get("source_entity_id", ""))
+	if target is RaidGuard and source is RaidGuard and not source.hostile_to(target):
+		return {"outcome": "friendly_block", "damage": 0.0, "continues": false, "energy": 0.0}
 	var damage: float = projectile.damage
 	if target is VoxelDestructible:
 		var surface: MaterialDef = target.material
@@ -410,6 +458,9 @@ func _apply_projectile_hit(target: Node, projectile: Dictionary, hit: Dictionary
 	return {"outcome": "hit", "damage": damage, "continues": false, "energy": 0.0}
 
 func _apply_damage(target: Node, damage: float, _material: MaterialDef = null, bypass_armor: bool = false, ammunition: AmmoDef = null) -> void:
+	if target is MedTacBreakable:
+		target.damage(damage)
+		return
 	if target is RaidPlayer and participants.has(target.entity_id):
 		var state: RaidParticipant = participants[target.entity_id]
 		state.refresh_armor(catalog)
@@ -451,7 +502,7 @@ func _exposure(origin: Vector3, target: Node3D) -> float:
 
 func _explode(origin: Vector3, power: float) -> void:
 	var diameter := power * 2.0
-	for target in [player] + npcs + entities.values().filter(func(value): return value is RaidEntity and value.kind == "target"):
+	for target in [player] + npcs + entities.values().filter(func(value): return (value is RaidEntity and value.kind == "target") or value is MedTacBreakable):
 		var distance: float = target.global_position.distance_to(origin) / diameter
 		if distance > 1:
 			continue
@@ -585,6 +636,48 @@ func _drop_item(id: String, origin: Vector3) -> void:
 	containers[drop.entity_id] = contents
 
 func _build_loot() -> void:
+	if map_definition != null:
+		var loot_rng:=RandomNumberGenerator.new()
+		loot_rng.seed=hash(str(random.seed)+":loot")
+		var card_rng:=RandomNumberGenerator.new()
+		card_rng.seed=hash(str(random.seed)+":keycard")
+		var loose_rng:=RandomNumberGenerator.new()
+		loose_rng.seed=hash(str(random.seed)+":loose")
+		var loose: Array[RaidLootPickup]=[]
+		for entity in entities.values():
+			if entity is RaidLootPickup: loose.append(entity)
+		for i in range(loose.size()):
+			var swap:=loose_rng.randi_range(i,loose.size()-1)
+			var previous:=loose[i]
+			loose[i]=loose[swap]
+			loose[swap]=previous
+		for i in range(loose.size()):
+			var entity:=loose[i]
+			containers.erase(entity.entity_id)
+			entity.available=i<map_definition.active_loose_loot
+			entity.visible=entity.available
+			for child in entity.get_children():
+				if child is CollisionShape3D: child.set_deferred("disabled",not entity.available)
+			if entity.available:
+				var contents:=RaidInventory.new(catalog.items,4,4)
+				contents.add(entity.item_id,entity.amount)
+				containers[entity.entity_id]=contents
+		var candidates: Array[RaidEntity] = []
+		for entity in entities.values():
+			if not entity is RaidEntity or entity.kind != "container": continue
+			if entity is RaidLootPickup: continue
+			var contents := RaidInventory.new(catalog.items, 10, 6)
+			if entity is SearchableFurniture: contents.display_name=entity.display_name
+			for id: String in entity.guaranteed_items:
+				contents.add(id, int(entity.guaranteed_items[id]))
+			if entity.loot_table != null and not entity.loot_table.generate(contents, loot_rng):
+				push_error("Invalid MedTac loot table: " + entity.entity_id)
+			containers[entity.entity_id] = contents
+			if entity.keycard_candidate: candidates.append(entity)
+		keycard_spawned = card_rng.randf() < 0.1 and not candidates.is_empty()
+		if keycard_spawned:
+			containers[candidates[card_rng.randi_range(0, candidates.size() - 1)].entity_id].add("medtac_keycard", 1)
+		return
 	for entity in entities.values():
 		if entity is RaidEntity and entity.kind == "container" and not entity.entity_id.begins_with("battery-"):
 			var contents := RaidInventory.new(catalog.items, 10, 6)
@@ -600,7 +693,7 @@ func _build_loot() -> void:
 		for index in range(2):
 			var identity := "battery-%d" % index
 			var contents := RaidInventory.new(catalog.items, 1, 2)
-			contents.add("battery_cell", 1)
+			contents.add("infection_suppressant", 1)
 			containers[identity] = contents
 		return
 	# Six fixed crates partition the complete roster; resets are deterministic.
@@ -654,11 +747,67 @@ func _container_reachable(player_id: String, container_id: String) -> bool:
 		return false
 	var direction: Vector3 = container.global_position + (container.interaction_offset if container is RaidEntity else Vector3.UP * 0.4) - actor.eye_position()
 	var hit := ballistics.trace(get_world_3d(), actor.eye_position(), direction, direction.length() + 0.1, [actor.get_rid()])
-	return not hit.is_empty() and hit.collider == container
+	return not hit.is_empty() and interaction_owner(hit.collider) == container
+
+func interaction_owner(node: Node) -> Node:
+	while node!=null and node!=self:
+		if node is RaidEntity or node is MountedArmory or node is RaidDoor: return node
+		node=node.get_parent()
+	return null
+
+func interaction_prompt(identity: String) -> String:
+	var entity: Node=entities.get(identity)
+	if entity is RaidLootPickup: return "[E] Pick up "+catalog.items[entity.item_id].display_name
+	if entity is SearchableFurniture: return "[E] Search "+entity.display_name
+	if entity is RaidDoor: return "[E] Open door" if not entity.open else "[E] Close door"
+	return "[E] Interact" if entity!=null else ""
+
+func request_pickup(player_id: String, entity_id: String) -> bool:
+	if not _container_reachable(player_id,entity_id): return false
+	var pickup:=entities.get(entity_id) as RaidLootPickup
+	if pickup==null or not pickup.available or participants[player_id].actor.interaction_id()!=entity_id: return false
+	var state: RaidParticipant=participants[player_id]
+	var source: RaidInventory=containers[entity_id]
+	if source.slots.size()!=1: return false
+	var service:=InventoryTransactions.new()
+	service.actor_id=player_id
+	service.roots=[state.inventory,state.pockets,source]
+	service.roots.append_array(state.equipment.roots())
+	service.authorize=func(_grid): return _allowed(player_id) and _container_reachable(player_id,entity_id) and pickup.available
+	for target in state.reload_grids()+[state.inventory]+state.equipment.storages():
+		if service.submit(service.request("loot",source,target,source.slots[0].uid)).ok:
+			pickup.collect_visual()
+			refresh_inventory(player_id)
+			return true
+	notice.emit("No space for "+catalog.items[pickup.item_id].display_name)
+	return false
 
 func request_interact(player_id: String, entity_id: String) -> bool:
 	if not _allowed(player_id):
 		return false
+	if entities.get(entity_id) is RaidLootPickup: return request_pickup(player_id,entity_id)
+	if entities.get(entity_id) is RaidDoor:
+		var door: RaidDoor = entities[entity_id]
+		var actor := participants[player_id].actor
+		if actor.global_position.distance_to(door.global_position) > 3.5 or actor.interaction_id() != entity_id: return false
+		var inside := door.is_inside(actor)
+		if door.restricted and not door.unlocked and not inside:
+			var state: RaidParticipant = participants[player_id]
+			var card := ""
+			# Only the participant's carried roots are searched, never an open loot container.
+			for carried in [state.inventory, state.pockets] + state.equipment.roots():
+				for grid in carried.all_grids():
+					if not grid.accessible: continue
+					for entry in grid.slots:
+						if entry.id == "medtac_keycard": card = entry.uid
+			if card.is_empty():
+				notice.emit("Research access requires a single-use MedTac keycard")
+				return false
+			var service := inventory_service(player_id)
+			if not service.submit(service.request("consume", state.owner_of(card), null, card, Vector2i(-1, -1), false, 1)).ok: return false
+			door.unlocked = true
+		door.activate(inside)
+		return true
 	if entities.get(entity_id) is MountedArmory:
 		return request_mount_power(player_id, entity_id)
 	if not _container_reachable(player_id, entity_id):
@@ -666,6 +815,7 @@ func request_interact(player_id: String, entity_id: String) -> bool:
 	if participants[player_id].actor.interaction_id() != entity_id:
 		return false
 	participants[player_id].opened_container = entity_id
+	if entities[entity_id] is SearchableFurniture: entities[entity_id].open_furniture()
 	containers[entity_id].begin_search()
 	container_opened.emit(player_id, entity_id)
 	return true
@@ -699,19 +849,24 @@ func request_abandon(player_id: String) -> bool:
 	_finish(false, "Practice ended" if practice else "Raid abandoned | gear and loot lost")
 	return true
 
-func request_extract(player_id: String, zone_id: String = "extraction-01") -> bool:
-	if practice or not _allowed(player_id) or zone_id != extraction.entity_id:
-		return false
-	if not extraction.overlaps_body(participants[player_id].actor):
-		return false
-	participants[player_id].extracting = true
-	return true
+func request_extract(player_id: String, zone_id: String = "") -> bool:
+	if practice or not _allowed(player_id): return false
+	var state: RaidParticipant = participants[player_id]
+	for zone in extraction_zones:
+		if not zone_id.is_empty() and zone_id != zone.entity_id: continue
+		if zone.entity_id not in state.assigned_extracts or not zone.overlaps_body(state.actor): continue
+		if state.active_extract != zone.entity_id: state.extraction_left = map_definition.extraction_seconds if map_definition!=null else RaidParticipant.EXTRACTION_SECONDS
+		state.active_extract = zone.entity_id
+		state.extracting = true
+		return true
+	return false
 
 func _update_extraction(player_id: String, delta: float) -> void:
 	var state: RaidParticipant = participants[player_id]
 	if not request_extract(player_id):
 		state.extracting = false
-		state.extraction_left = RaidParticipant.EXTRACTION_SECONDS
+		state.active_extract = ""
+		state.extraction_left = map_definition.extraction_seconds if map_definition!=null else RaidParticipant.EXTRACTION_SECONDS
 		return
 	state.extraction_left = maxf(0, state.extraction_left - delta)
 	if state.extraction_left < 0.00001:
@@ -725,6 +880,10 @@ func _finish(success: bool, reason: String) -> void:
 		if state.weapon != null:
 			state.weapon.cancel_reload()
 	result = {"raid_id": raid_id, "success": success, "reason": reason, "practice": practice}
+	if map_definition != null: result.map_id = map_definition.id
+	if has_meta("layout_seed"):
+		result.layout_seed=get_meta("layout_seed")
+		result.raid_seed=random.seed
 	finished.emit(result)
 
 func _physics_process(delta: float) -> void:
@@ -743,7 +902,7 @@ func gameplay_step() -> void:
 		state.actor.authority_movement_tick()
 		if not is_active(): return
 		if not practice:
-			_update_battery(state, 0.05)
+			_update_infection(state, 0.05)
 			if not is_active(): return
 		if state.weapon != null:
 			state.weapon.advance_tick()
@@ -772,9 +931,12 @@ func gameplay_step() -> void:
 	if not practice:
 		for npc in npcs:
 			if npc.weapon_state != null: npc.weapon_state.advance_tick()
-			if not npc.authority_tick(0.05, player, ballistics): continue
+			var target := npc.select_target(self)
+			# A missing visible target still permits patrol/investigation movement.
+			if not npc.authority_tick(0.05, target if target != null else player, ballistics): continue
+			if target == null: continue
 			if npc.archetype.melee:
-				_apply_damage(player, npc.archetype.damage)
+				_apply_damage(target, npc.archetype.damage)
 			elif npc.weapon_state != null:
 				var weapon := npc.weapon_state
 				if weapon.magazine == 0:
@@ -782,7 +944,15 @@ func gameplay_step() -> void:
 				elif weapon.fire():
 					shot_fired.emit(npc.entity_id, npc.global_position)
 					var gun := weapon.definition
-					_spawn_projectile(npc.global_position + Vector3.UP * 1.45, player.eye_position() - (npc.global_position + Vector3.UP * 1.45), gun.projectile_speed, gun.spread, gun.damage, gun.head_multiplier, npc.get_rid())
+					_spawn_projectile(npc.global_position + Vector3.UP * 1.45, (target.eye_position() if target is RaidPlayer else target.global_position + Vector3.UP * 1.45) - (npc.global_position + Vector3.UP * 1.45), gun.projectile_speed, gun.spread, gun.damage, gun.head_multiplier, npc.get_rid())
+	# Nearby NPCs may use ordinary doors, unlocked security doors, or emergency egress.
+	for entity in entities.values():
+		if not entity is RaidDoor or entity.open: continue
+		for npc in npcs:
+			if npc.state == RaidGuard.State.DEAD or npc.global_position.distance_to(entity.global_position) > 2.8: continue
+			if not entity.restricted or entity.unlocked or entity.is_inside(npc):
+				entity.activate(entity.is_inside(npc))
+				break
 	for container_id: String in containers:
 		var contents: RaidInventory = containers[container_id]
 		var active_search := false
@@ -800,16 +970,27 @@ func gameplay_step() -> void:
 	for id in participants:
 		_update_extraction(id, 0.05)
 
-func _update_battery(state: RaidParticipant, delta: float) -> void:
-	state.battery = maxf(0.0, state.battery - delta * (1.5 if state.actor.sprinting else 1.0))
-	if state.battery <= 0:
-		_finish(false, "Battery depleted - robot shutdown | gear and loot lost")
-	elif state.battery <= 60 and state.battery_warning < 2:
-		state.battery_warning = 2
-		notice.emit("CRITICAL POWER - less than one minute. Extract or use a battery cell.")
-	elif state.battery <= 120 and state.battery_warning < 1:
-		state.battery_warning = 1
-		notice.emit("LOW POWER - two minutes remaining.")
+func _update_infection(state: RaidParticipant, delta: float) -> void:
+	state.infection_remaining = maxf(0.0, state.infection_remaining - delta)
+	if state.infection_remaining <= 0:
+		_finish(false, "You turned | gear and loot lost")
+	elif state.infection_remaining <= 60 and state.infection_warning < 2:
+		state.infection_warning = 2
+		notice.emit("TURNING IMMINENT - less than one minute. Extract or use a suppressant.")
+	elif state.infection_remaining <= 120 and state.infection_warning < 1:
+		state.infection_warning = 1
+		notice.emit("INFECTION ADVANCING - two minutes remaining.")
+
+func compass_text(player_id: String) -> String:
+	var state: RaidParticipant = participants[player_id]
+	var heading := fposmod(-rad_to_deg(state.actor.rotation.y), 360.0)
+	var result_text := "COMPASS %03d°  %s" % [roundi(heading) % 360, ["N", "NE", "E", "SE", "S", "SW", "W", "NW"][posmod(roundi(heading / 45), 8)]]
+	for zone in extraction_zones:
+		if zone.entity_id not in state.assigned_extracts: continue
+		var offset := zone.global_position - state.actor.global_position
+		var bearing := fposmod(rad_to_deg(atan2(offset.x, -offset.z)), 360.0)
+		result_text += "\n%s  %03d°" % [zone.display_name, roundi(bearing) % 360]
+	return result_text
 
 func catalog_material(id: String) -> MaterialDef:
 	return catalog.definitions[id]

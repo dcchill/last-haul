@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "medtac_keycard"
+display_name = "MedTac single-use research credential"
+description = "One-time security credential. Unlocks one basement entrance for this raid. Lost on use."
+stack_limit = 1
+width = 1
+height = 1
+rarity = "rare"
+weight = 0.02
+value = 800
+

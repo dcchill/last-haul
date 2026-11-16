@@ -1,0 +1,30 @@
+[gd_scene format=4]
+
+[ext_resource type="Texture2D" path="res://assets/medtac/materials.png" id="1_04k8x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_617mq"]
+albedo_texture = ExtResource("1_04k8x")
+roughness = 0.85
+texture_filter = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m0ul7"]
+_surfaces = [{
+"aabb": AABB(-0.12, 0, -0.16, 0.24, 0.0285, 0.32),
+"attribute_data": PackedByteArray("MzN/P5mZ+T0zM38/zcxMO83MYD/NzEw7zcxgP5mZ+T0zM38/zcxMO83MYD/NzEw7MzN/P5mZ+T3NzGA/mZn5PTMzfz+Zmfk9MzN/P83MTDvNzGA/zcxMO83MYD+Zmfk9MzN/P83MTDvNzGA/zcxMOzMzfz+Zmfk9zcxgP5mZ+T0zM38/mZn5PTMzfz/NzEw7zcxgP83MTDvNzGA/mZn5PTMzfz+Zmfk9zcxgP83MTDszM38/zcxMO83MYD/NzEw7MzN/P5mZ+T3NzGA/mZn5PTMzHz+Zmfk9MzMfP83MTDvNzAA/zcxMO83MAD+Zmfk9MzMfP83MTDvNzAA/zcxMOzMzHz+Zmfk9zcwAP5mZ+T0zMx8/mZn5PTMzHz/NzEw7zcwAP83MTDvNzAA/mZn5PTMzHz/NzEw7zcwAP83MTDszMx8/mZn5Pc3MAD+Zmfk9MzMfP5mZ+T0zMx8/zcxMO83MAD/NzEw7zcwAP5mZ+T0zMx8/mZn5Pc3MAD/NzEw7MzMfP83MTDvNzAA/zcxMOzMzHz+Zmfk9zcwAP5mZ+T0="),
+"format": 34359742487,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAFAAcACAAJAAoACwAIAAoADAANAA4ADgANAA8AEAARABIAEwAUABUAFgAXABgAGAAXABkAGgAbABwAHQAaABwAHgAfACAAIAAfACEAIgAjACQAJQAiACQAJgAnACgAKAAnACkAKgArACwALQAuAC8AMAAxADIAMgAxADMA"),
+"material": SubResource("StandardMaterial3D_617mq"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 52,
+"vertex_data": PackedByteArray("j8L1PaabxDwK1yM+j8L1PaabxDwK1yO+j8L1PQAAAAAK1yO+j8L1PQAAAAAK1yM+j8L1vaabxDwK1yM+j8L1vQAAAAAK1yM+j8L1vaabxDwK1yO+j8L1vQAAAAAK1yO+j8L1PaabxDwK1yM+j8L1vaabxDwK1yM+j8L1vaabxDwK1yO+j8L1PaabxDwK1yO+j8L1vQAAAAAK1yO+j8L1vQAAAAAK1yM+j8L1PQAAAAAK1yO+j8L1PQAAAAAK1yM+j8L1vaabxDwK1yM+j8L1PaabxDwK1yM+j8L1PQAAAAAK1yM+j8L1vQAAAAAK1yM+j8L1vaabxDwK1yM+j8L1PQAAAAAK1yM+j8L1vaabxDwK1yO+j8L1vQAAAAAK1yO+j8L1PaabxDwK1yO+j8L1PQAAAAAK1yO+CtejPdV46TwK16O9CtejPdV46TyQwvW9CtejPRODwDyQwvW9CtejPRODwDwK16O9CtejvdV46TwK16O9CtejvRODwDwK16O9CtejvdV46TyQwvW9CtejvRODwDyQwvW9CtejPdV46TwK16O9CtejvdV46TwK16O9CtejvdV46TyQwvW9CtejPdV46TyQwvW9CtejvRODwDyQwvW9CtejvRODwDwK16O9CtejPRODwDyQwvW9CtejPRODwDwK16O9CtejvdV46TwK16O9CtejPdV46TwK16O9CtejPRODwDwK16O9CtejvRODwDwK16O9CtejvdV46TwK16O9CtejPRODwDwK16O9CtejvdV46TyQwvW9CtejvRODwDyQwvW9CtejPdV46TyQwvW9CtejPRODwDyQwvW9////f/9//7////9//3//v////3//f/+/////f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//38AAAAA/7//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID//////38AgP//////fwCA//////9/AID//////38AgP///3//f/+/////f/9//7////9//3//v////3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9/AAAAAP+//38AAAAA/7//fwAAAAD/v/9/AAAAAP+//3//f/9/AID/f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCA//////9/AID//////38AgP//////fwCA//////9/AIA=")
+}]
+
+[node name="PickupResearchNotes" type="Node3D" unique_id=1152100494]
+metadata/bounds = AABB(-0.12, 0, -0.16, 0.24, 0.028500002, 0.32)
+metadata/medtac_prop_id = "pickup_research_notes"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1856302013]
+visibility_range_end = 100.0
+mesh = SubResource("ArrayMesh_m0ul7")

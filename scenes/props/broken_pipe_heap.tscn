@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/broken_pipe_heap.res" id="1_tq0o0"]
+
+[node name="BrokenPipeHeap" type="Node3D" unique_id=1119908227]
+metadata/prop_id = "broken_pipe_heap"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1931217562]
+mesh = ExtResource("1_tq0o0")

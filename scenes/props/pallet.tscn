@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/pallet.res" id="1_43se8"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_wq8er"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_baylk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2o43q"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abmiv"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j3hmb"]
+size = Vector3(0.25, 0.25, 1.25)
+
+[node name="Pallet" type="Node3D" unique_id=1502345326]
+metadata/prop_id = "pallet"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1465821986]
+mesh = ExtResource("1_43se8")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=2041527631]
+collision_mask = 0
+script = ExtResource("2_wq8er")
+material = ExtResource("3_baylk")
+
+[node name="@CollisionShape3D@45" type="CollisionShape3D" parent="Collision" unique_id=1827154394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.125, 0)
+shape = SubResource("BoxShape3D_2o43q")
+
+[node name="@CollisionShape3D@46" type="CollisionShape3D" parent="Collision" unique_id=1843711766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_abmiv")
+
+[node name="@CollisionShape3D@47" type="CollisionShape3D" parent="Collision" unique_id=476146275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.125, 0)
+shape = SubResource("BoxShape3D_j3hmb")

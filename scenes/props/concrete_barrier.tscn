@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/concrete_barrier.res" id="1_1wmwc"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_pop4l"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_feev2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xr3wk"]
+size = Vector3(2.5, 0.25, 0.875)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e57an"]
+size = Vector3(2.5, 0.375, 0.625)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n5vig"]
+size = Vector3(2.5, 0.5, 0.375)
+
+[node name="ConcreteBarrier" type="Node3D" unique_id=1002165382]
+metadata/prop_id = "concrete_barrier"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1170474959]
+mesh = ExtResource("1_1wmwc")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1159304098]
+collision_mask = 0
+script = ExtResource("2_pop4l")
+material = ExtResource("3_feev2")
+
+[node name="@CollisionShape3D@104" type="CollisionShape3D" parent="Collision" unique_id=41282676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_xr3wk")
+
+[node name="@CollisionShape3D@105" type="CollisionShape3D" parent="Collision" unique_id=797004133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4375, 0)
+shape = SubResource("BoxShape3D_e57an")
+
+[node name="@CollisionShape3D@106" type="CollisionShape3D" parent="Collision" unique_id=1113003599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_n5vig")

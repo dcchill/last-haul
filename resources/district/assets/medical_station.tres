@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldAssetDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_asset_definition.gd" id="1_tpdsk"]
+
+[resource]
+script = ExtResource("1_tpdsk")
+id = "medical_station"
+scene_path = "res://scenes/props/district/medical_station.tscn"
+expected_size = Vector3(2.2, 2.15, 0.9)
+dimension_tolerance = 0.4
+required_components = Array[String](["base", "pedestal", "mattress", "monitor", "monitor_trace", "iv_bag", "iv_line", "casters", "iv", "monitor"])
+source_file = "res://tools/district_asset_author.gd"

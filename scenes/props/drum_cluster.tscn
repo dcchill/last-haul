@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/drum_cluster.res" id="1_bpc6m"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_a36vk"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_xedmc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pgk6v"]
+size = Vector3(0.625, 0.875, 0.625)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w2wpr"]
+size = Vector3(0.625, 0.875, 0.625)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wa3pv"]
+size = Vector3(0.625, 0.875, 0.625)
+
+[node name="DrumCluster" type="Node3D" unique_id=1046290466]
+metadata/prop_id = "drum_cluster"
+metadata/category = "Industrial storage"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=112103757]
+mesh = ExtResource("1_bpc6m")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=97421131]
+collision_mask = 0
+script = ExtResource("2_a36vk")
+material = ExtResource("3_xedmc")
+
+[node name="@CollisionShape3D@145" type="CollisionShape3D" parent="Collision" unique_id=2144824254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375, 0.4375, 0.375)
+shape = SubResource("BoxShape3D_pgk6v")
+
+[node name="@CollisionShape3D@146" type="CollisionShape3D" parent="Collision" unique_id=1176994822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.375, 0.4375, 0.375)
+shape = SubResource("BoxShape3D_w2wpr")
+
+[node name="@CollisionShape3D@147" type="CollisionShape3D" parent="Collision" unique_id=311811221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4375, -0.375)
+shape = SubResource("BoxShape3D_wa3pv")

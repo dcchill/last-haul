@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldAssetDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_asset_definition.gd" id="1_x2s5w"]
+
+[resource]
+script = ExtResource("1_x2s5w")
+id = "warehouse_facade"
+scene_path = "res://scenes/props/district/warehouse_facade.tscn"
+expected_size = Vector3(12.4, 6.75, 0.9)
+dimension_tolerance = 0.4
+required_components = Array[String](["plinth", "supports", "wall", "lintel", "seams", "roller_shutter", "loading_door", "cornice", "supports", "trim", "damage", "exposed_rebar"])
+source_file = "res://tools/district_asset_author.gd"

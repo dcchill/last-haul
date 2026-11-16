@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="WorldArtDirection" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_art_direction.gd" id="1_8wcv1"]
+
+[resource]
+script = ExtResource("1_8wcv1")

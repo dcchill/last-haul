@@ -150,9 +150,9 @@ func _root_text(value: String, at: Vector2) -> void:
 func show_home() -> void:
 	_clear("home")
 	_text("LAST HAUL", 40)
-	_text("VEYRA DEPOT  /  SALVAGE RUN", 21)
-	_text("Stage gear for an eight-minute raid. Death, shutdown or abandonment loses carried gear. Extract by staying in the green zone for 15 seconds.")
-	_button("Enter raid — Veyra Depot", app.deploy, not app.profile.writable or not app.loadout_ready())
+	_text(app.selected_map.display_name.to_upper()+"  /  OUTBREAK ORIGIN", 21)
+	_text("Stage gear for %s. You have %d minutes before turning. Suppressants buy time. Death, turning or abandonment loses carried gear. Follow your compass to an assigned extract and stay for %d seconds."%[app.selected_map.display_name,int(app.selected_map.infection_seconds/60),int(app.selected_map.extraction_seconds)])
+	_button("Enter raid - "+app.selected_map.display_name, app.deploy, not app.profile.writable or not app.loadout_ready())
 	_button("Practice armory — all equipment", func(): app.deploy(true))
 	_button("Inventory / stage loadout", show_inventory)
 	_button("Save stash layout", app._save_stash_layout, not app.profile.writable)
@@ -371,18 +371,18 @@ func show_settings(from_raid: bool) -> void:
 	fullscreen.button_pressed = app.settings.fullscreen
 	panel.add_child(fullscreen)
 	var sensor := CheckButton.new()
-	sensor.text = "Sensor treatment"
+	sensor.text = "Visual treatment"
 	sensor.button_pressed = app.settings.sensor_enabled
 	panel.add_child(sensor)
-	_text("Sensor strength")
+	_text("Visual strength")
 	var strength := HSlider.new()
 	strength.max_value = 1.0
 	strength.step = 0.05
 	strength.value = app.settings.sensor_strength
-	strength.accessibility_name = "Sensor strength"
+	strength.accessibility_name = "Visual strength"
 	panel.add_child(strength)
 	var flicker := CheckButton.new()
-	flicker.text = "Sensor flicker"
+	flicker.text = "Visual flicker"
 	flicker.button_pressed = app.settings.sensor_flicker
 	panel.add_child(flicker)
 	_text("Pixelation")
@@ -392,6 +392,12 @@ func show_settings(from_raid: bool) -> void:
 		pixels.add_item("Off" if size == 1 else "%dx" % size, size)
 	pixels.select(app.settings.sensor_pixel_size - 1)
 	panel.add_child(pixels)
+	_text("World quality")
+	var quality:=OptionButton.new()
+	quality.accessibility_name="World quality"
+	for title in ["Low","Medium","High"]: quality.add_item(title)
+	quality.select(app.settings.world_quality)
+	panel.add_child(quality)
 	_button("Apply and save", func():
 		app.settings.sensitivity = sensitivity.value
 		app.settings.volume = volume.value
@@ -400,9 +406,14 @@ func show_settings(from_raid: bool) -> void:
 		app.settings.sensor_strength = strength.value
 		app.settings.sensor_flicker = flicker.button_pressed
 		app.settings.sensor_pixel_size = pixels.get_selected_id()
+		app.settings.world_quality=quality.selected
 		app.settings.apply()
 		if app.raid != null:
 			app.raid.signal_decay.configure(app.settings)
+			var atmosphere:=app.raid.get_node_or_null("Atmosphere") as DistrictAtmosphere
+			if atmosphere!=null:
+				atmosphere.quality=WorldQualitySettings.make(app.settings.world_quality)
+				atmosphere.apply()
 		show_notice("Settings saved" if app.settings.save_settings() == OK else "Could not save settings"))
 	if not from_raid and app.raid == null:
 		_button("Reset character", _confirm_reset_character, not app.profile.writable)
@@ -422,7 +433,7 @@ func _confirm_reset_character() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.physical_keycode == KEY_F8 and app.raid != null:
-			show_notice("Sensor treatment ON" if app.raid.signal_decay.toggle_comparison() else "Sensor treatment OFF (F8 compares)")
+			show_notice("Visual treatment ON" if app.raid.signal_decay.toggle_comparison() else "Visual treatment OFF (F8 compares)")
 			get_viewport().set_input_as_handled()
 			return
 		if event.is_action_pressed("inventory_toggle"):
@@ -466,7 +477,7 @@ func _process(_delta: float) -> void:
 	if gun != null:
 		ammo = "%s  %d/%d  %s" % [gun.definition.display_name, gun.magazine, gun.definition.magazine_size, "RELOADING" if gun.reload_left > 0 else ""]
 	var objective := "Practice / [B] all equipment / reset" if app.raid.practice else "Scavenge or extract / stay in green zone for 15 seconds"
-	var prompt := "[E] Interact" if not app.raid.player.interaction_id().is_empty() else ""
+	var prompt: String = app.raid.interaction_prompt(app.raid.player.interaction_id())
 	if participant.extracting:
 		prompt = "EXTRACTING %.1fs" % participant.extraction_left
 	var bar := ""
@@ -474,9 +485,11 @@ func _process(_delta: float) -> void:
 		var entry := participant.entry_for(participant.quickbar[index])
 		var name: String = entry.id if not entry.is_empty() else "-"
 		bar += "%s%d %s%s  " % ["[" if index == participant.selected else "", index + 1, name, "]" if index == participant.selected else ""]
-	var seconds := ceili(participant.battery / (1.5 if app.raid.player.sprinting else 1.0))
-	var power := "PRACTICE / unlimited power" if app.raid.practice else "POWER %d%% / %d:%02d%s" % [ceili(participant.battery / 4.8), int(seconds / 60.0), seconds % 60, " / LOW" if participant.battery <= 120 else ""]
-	hud.text = power + "\nLAST HAUL / VEYRA DEPOT\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
+	var seconds := ceili(participant.infection_remaining)
+	var clock_display := "PRACTICE / infection disabled" if app.raid.practice else "TIME TO TURN %02d:%02d%s" % [int(seconds / 60.0), seconds % 60, " / TURNING IMMINENT" if seconds <= 60 else " / INFECTION ADVANCING" if seconds <= 120 else ""]
+	var map_name: String = app.raid.map_definition.display_name if app.raid.map_definition != null else "PRACTICE" if app.raid.practice else "DEPOT TEST FIXTURE"
+	objective = app.raid.compass_text(app.profile.profile.player_id) if not app.raid.practice else objective
+	hud.text = clock_display + "\nLAST HAUL / " + map_name + "\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
 	hud.add_theme_font_size_override("font_size", 15)
 	crosshair.visible = app.raid.player.aim_blend < 0.7
 

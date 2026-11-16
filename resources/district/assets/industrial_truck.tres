@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldAssetDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_asset_definition.gd" id="1_trxum"]
+
+[resource]
+script = ExtResource("1_trxum")
+id = "industrial_truck"
+scene_path = "res://scenes/props/district/industrial_truck.tscn"
+expected_size = Vector3(2.7, 2.95, 6.8)
+dimension_tolerance = 0.4
+required_components = Array[String](["wheels", "chassis", "cab", "glazing", "bumper", "lamps", "damage", "windscreen", "side_windows", "handles", "bed_rails", "bed", "bed_ribs", "windscreen_divider", "grille", "grille_slats"])
+source_file = "res://tools/district_asset_author.gd"

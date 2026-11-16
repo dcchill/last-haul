@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/wooden_crate.res" id="1_nsrfv"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_0enc0"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_eobol"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmnxc"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="WoodenCrate" type="Node3D" unique_id=1818811673]
+metadata/prop_id = "wooden_crate"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=403390754]
+mesh = ExtResource("1_nsrfv")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=2115840783]
+collision_mask = 0
+script = ExtResource("2_0enc0")
+material = ExtResource("3_eobol")
+
+[node name="@CollisionShape3D@42" type="CollisionShape3D" parent="Collision" unique_id=1119446539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("BoxShape3D_tmnxc")

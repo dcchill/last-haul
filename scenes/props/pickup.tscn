@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/pickup.res" id="1_r1no4"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_b6ond"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_70aa7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0mxus"]
+size = Vector3(1.75, 0.5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vpkfa"]
+size = Vector3(1.5, 0.875, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrrli"]
+size = Vector3(0.125, 0.5, 1.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0203c"]
+size = Vector3(0.125, 0.5, 1.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asole"]
+size = Vector3(1.75, 0.5, 0.125)
+
+[node name="Pickup" type="Node3D" unique_id=495307529]
+metadata/prop_id = "pickup"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=122223081]
+mesh = ExtResource("1_r1no4")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1105545564]
+collision_mask = 0
+script = ExtResource("2_b6ond")
+material = ExtResource("3_70aa7")
+
+[node name="@CollisionShape3D@8" type="CollisionShape3D" parent="Collision" unique_id=169970414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_0mxus")
+
+[node name="@CollisionShape3D@9" type="CollisionShape3D" parent="Collision" unique_id=191145549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4375, -0.875)
+shape = SubResource("BoxShape3D_vpkfa")
+
+[node name="@CollisionShape3D@10" type="CollisionShape3D" parent="Collision" unique_id=391802421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.875, 1.25, 1.125)
+shape = SubResource("BoxShape3D_mrrli")
+
+[node name="@CollisionShape3D@11" type="CollisionShape3D" parent="Collision" unique_id=978694336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875, 1.25, 1.125)
+shape = SubResource("BoxShape3D_0203c")
+
+[node name="@CollisionShape3D@12" type="CollisionShape3D" parent="Collision" unique_id=1189718652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 2)
+shape = SubResource("BoxShape3D_asole")

@@ -49,6 +49,7 @@ func run() -> void:
 	check(not restored.sensor_enabled and not restored.sensor_flicker and is_equal_approx(restored.sensor_strength, 0.4), "settings round trip")
 	check(restored.sensor_pixel_size == 4, "pixelation setting round trip")
 	app = load("res://scenes/main.tscn").instantiate()
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
 	app.settings = SettingsStore.new(directory + "/app-settings.cfg")
 	app.test_profile_path = directory + "/profile.json"
 	root.add_child(app)
@@ -245,7 +246,7 @@ func view(raid: RaidAuthority, at: Vector3, target: Vector3, aiming: bool = fals
 
 func rendered_views(raid: RaidAuthority) -> void:
 	var state: RaidParticipant = raid.participants[raid.player.entity_id]
-	check(state.weapon != null and raid.npcs.size() == 2, "real scav and zombie scene with weapon")
+	check(state.weapon != null and raid.depot and raid.npcs.size() == 4 and raid.npcs.filter(func(npc): return npc.archetype.melee).size() == 2, "depot render fixture has two scavs, two infected and equipped weapon")
 	for size in [Vector2i(1280, 720), Vector2i(1600, 900)]:
 		DisplayServer.window_set_size(size)
 		root.size = size

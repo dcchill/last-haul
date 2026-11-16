@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/bollard.res" id="1_0wo17"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_f7y25"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_eu1l1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lec5u"]
+size = Vector3(0.5, 0.125, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ocuwq"]
+size = Vector3(0.25, 0.875, 0.25)
+
+[node name="Bollard" type="Node3D" unique_id=699525101]
+metadata/prop_id = "bollard"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=10431003]
+mesh = ExtResource("1_0wo17")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=194759773]
+collision_mask = 0
+script = ExtResource("2_f7y25")
+material = ExtResource("3_eu1l1")
+
+[node name="@CollisionShape3D@110" type="CollisionShape3D" parent="Collision" unique_id=1804953295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0625, 0)
+shape = SubResource("BoxShape3D_lec5u")
+
+[node name="@CollisionShape3D@111" type="CollisionShape3D" parent="Collision" unique_id=1964534737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5625, 0)
+shape = SubResource("BoxShape3D_ocuwq")

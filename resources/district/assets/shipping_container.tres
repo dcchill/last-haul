@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldAssetDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_asset_definition.gd" id="1_1xnmx"]
+
+[resource]
+script = ExtResource("1_1xnmx")
+id = "shipping_container"
+scene_path = "res://scenes/props/district/shipping_container.tscn"
+expected_size = Vector3(3.8, 2.72, 6.2)
+dimension_tolerance = 0.4
+required_components = Array[String](["floor", "roof", "back", "sidewalls", "corrugation", "corner_castings", "door", "locking_rods", "opening", "corner_castings", "locking_rods"])
+source_file = "res://tools/district_asset_author.gd"

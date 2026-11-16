@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/reinforced_crate.res" id="1_ismux"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_jb7ph"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_i04or"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h7xmw"]
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="ReinforcedCrate" type="Node3D" unique_id=450015672]
+metadata/prop_id = "reinforced_crate"
+metadata/category = "Cargo"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1513543778]
+mesh = ExtResource("1_ismux")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=589577173]
+collision_mask = 0
+script = ExtResource("2_jb7ph")
+material = ExtResource("3_i04or")
+
+[node name="@CollisionShape3D@43" type="CollisionShape3D" parent="Collision" unique_id=2145093960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("BoxShape3D_h7xmw")

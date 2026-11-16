@@ -1,0 +1,1218 @@
+[
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.4375
+			],
+			"size": [
+				2.375,
+				1.875,
+				4.875
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "sedan",
+		"name": "Sedan",
+		"scene": "res://scenes/props/sedan.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-1.9375
+			],
+			"size": [
+				2.375,
+				1.875,
+				3.875
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "hatchback",
+		"name": "Hatchback",
+		"scene": "res://scenes/props/hatchback.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.5625
+			],
+			"size": [
+				2.375,
+				1.875,
+				5.125
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "station_wagon",
+		"name": "Station wagon",
+		"scene": "res://scenes/props/station_wagon.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.6875
+			],
+			"size": [
+				2.375,
+				1.875,
+				5.375
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "pickup",
+		"name": "Pickup",
+		"scene": "res://scenes/props/pickup.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.6875
+			],
+			"size": [
+				2.375,
+				2.25,
+				5.375
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "panel_van",
+		"name": "Panel van",
+		"scene": "res://scenes/props/panel_van.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-3.1875
+			],
+			"size": [
+				2.375,
+				2.25,
+				6.375
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "flatbed_truck",
+		"name": "Flatbed truck",
+		"scene": "res://scenes/props/flatbed_truck.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.4375
+			],
+			"size": [
+				2.375,
+				2.0,
+				4.875
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "burned_sedan",
+		"name": "Burned sedan",
+		"scene": "res://scenes/props/burned_sedan.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.1875,
+				0.0,
+				-2.0
+			],
+			"size": [
+				2.0625,
+				1.375,
+				4.0
+			]
+		},
+		"category": "Vehicles",
+		"collision_mode": "static",
+		"id": "stripped_car_chassis",
+		"name": "Stripped car chassis",
+		"scene": "res://scenes/props/stripped_car_chassis.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.3125,
+				0.0,
+				-3.3125
+			],
+			"size": [
+				2.625,
+				2.625,
+				6.3125
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "short_shipping_container",
+		"name": "Short shipping container",
+		"scene": "res://scenes/props/short_shipping_container.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.3125,
+				0.0,
+				-6.3125
+			],
+			"size": [
+				2.625,
+				2.625,
+				12.3125
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "long_shipping_container",
+		"name": "Long shipping container",
+		"scene": "res://scenes/props/long_shipping_container.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-2.25,
+				0.0,
+				-3.4375
+			],
+			"size": [
+				4.5,
+				2.625,
+				6.4375
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "open_shipping_container",
+		"name": "Open shipping container",
+		"scene": "res://scenes/props/open_shipping_container.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.75
+			],
+			"size": [
+				1.25,
+				1.25,
+				1.5
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "wooden_crate",
+		"name": "Wooden crate",
+		"scene": "res://scenes/props/wooden_crate.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.6875,
+				0.0,
+				-0.75
+			],
+			"size": [
+				1.375,
+				1.25,
+				1.5
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "reinforced_crate",
+		"name": "Reinforced crate",
+		"scene": "res://scenes/props/reinforced_crate.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.6875,
+				0.0,
+				-0.5625
+			],
+			"size": [
+				1.375,
+				0.75,
+				1.0
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "cargo_case",
+		"name": "Cargo case",
+		"scene": "res://scenes/props/cargo_case.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.5,
+				0.375,
+				1.25
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "pallet",
+		"name": "Pallet",
+		"scene": "res://scenes/props/pallet.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.5,
+				2.12500023841858,
+				1.25
+			]
+		},
+		"category": "Cargo",
+		"collision_mode": "static",
+		"id": "loaded_pallet",
+		"name": "Loaded pallet",
+		"scene": "res://scenes/props/loaded_pallet.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5,
+				0.0,
+				-0.5
+			],
+			"size": [
+				1.0,
+				0.375,
+				1.0
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "loose_tire",
+		"name": "Loose tire",
+		"scene": "res://scenes/props/loose_tire.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5,
+				0.0,
+				-0.5
+			],
+			"size": [
+				1.125,
+				1.5,
+				1.0
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "static",
+		"id": "tire_stack",
+		"name": "Tire stack",
+		"scene": "res://scenes/props/tire_stack.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				1.25,
+				0.25,
+				1.375
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "detached_car_door",
+		"name": "Detached car door",
+		"scene": "res://scenes/props/detached_car_door.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.5,
+				0.25,
+				1.25
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "detached_hood",
+		"name": "Detached hood",
+		"scene": "res://scenes/props/detached_hood.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5,
+				0.0,
+				-0.5
+			],
+			"size": [
+				1.0,
+				0.75,
+				1.0
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "engine_block",
+		"name": "Engine block",
+		"scene": "res://scenes/props/engine_block.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0,
+				0.0,
+				-0.375
+			],
+			"size": [
+				2.0,
+				0.625,
+				1.0
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "sheet_metal_heap",
+		"name": "Sheet metal heap",
+		"scene": "res://scenes/props/sheet_metal_heap.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5,
+				0.0,
+				-0.75
+			],
+			"size": [
+				1.0,
+				0.5,
+				1.75
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "broken_pipe_heap",
+		"name": "Broken pipe heap",
+		"scene": "res://scenes/props/broken_pipe_heap.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				1.5,
+				0.5,
+				0.875
+			]
+		},
+		"category": "Scrap",
+		"collision_mode": "none",
+		"id": "rubble_heap",
+		"name": "Rubble heap",
+		"scene": "res://scenes/props/rubble_heap.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.125,
+				0.0,
+				-0.5
+			],
+			"size": [
+				2.25,
+				1.375,
+				1.0
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "workbench",
+		"name": "Workbench",
+		"scene": "res://scenes/props/workbench.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.6875,
+				0.0,
+				-0.6875
+			],
+			"size": [
+				1.375,
+				1.875,
+				1.125
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "tool_cabinet",
+		"name": "Tool cabinet",
+		"scene": "res://scenes/props/tool_cabinet.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5625,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.125,
+				0.875,
+				1.0
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "tool_chest",
+		"name": "Tool chest",
+		"scene": "res://scenes/props/tool_chest.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0,
+				0.0,
+				-0.375
+			],
+			"size": [
+				2.0,
+				2.0,
+				0.75
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "shelving_unit",
+		"name": "Shelving unit",
+		"scene": "res://scenes/props/shelving_unit.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.4375,
+				0.0,
+				-0.375
+			],
+			"size": [
+				0.875,
+				0.5,
+				0.8125
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "none",
+		"id": "parts_bin",
+		"name": "Parts bin",
+		"scene": "res://scenes/props/parts_bin.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.25,
+				1.75,
+				1.3125
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "welding_cart",
+		"name": "Welding cart",
+		"scene": "res://scenes/props/welding_cart.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.5
+			],
+			"size": [
+				1.25,
+				1.5,
+				1.0
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "static",
+		"id": "hand_trolley",
+		"name": "Hand trolley",
+		"scene": "res://scenes/props/hand_trolley.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.25,
+				0.0,
+				-0.5
+			],
+			"size": [
+				0.5,
+				0.5,
+				1.5
+			]
+		},
+		"category": "Workshop",
+		"collision_mode": "none",
+		"id": "hydraulic_jack",
+		"name": "Hydraulic jack",
+		"scene": "res://scenes/props/hydraulic_jack.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.5625
+			],
+			"size": [
+				1.5,
+				1.5,
+				1.0625
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "generator",
+		"name": "Generator",
+		"scene": "res://scenes/props/generator.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.375
+			],
+			"size": [
+				1.5,
+				1.25,
+				0.75
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "air_compressor",
+		"name": "Air compressor",
+		"scene": "res://scenes/props/air_compressor.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.687500059604645,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.37500011920929,
+				2.125,
+				1.0
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "electrical_cabinet",
+		"name": "Electrical cabinet",
+		"scene": "res://scenes/props/electrical_cabinet.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.875,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.75,
+				1.875,
+				1.25
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "transformer",
+		"name": "Transformer",
+		"scene": "res://scenes/props/transformer.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.8125
+			],
+			"size": [
+				1.5,
+				1.375,
+				1.4375
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "ventilation_unit",
+		"name": "Ventilation unit",
+		"scene": "res://scenes/props/ventilation_unit.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.875,
+				0.0,
+				-0.1875
+			],
+			"size": [
+				1.75,
+				1.125,
+				0.375
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "radiator",
+		"name": "Radiator",
+		"scene": "res://scenes/props/radiator.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.6875
+			],
+			"size": [
+				1.25,
+				1.0,
+				1.375
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "cable_reel",
+		"name": "Cable reel",
+		"scene": "res://scenes/props/cable_reel.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.5,
+				0.0,
+				-0.375
+			],
+			"size": [
+				1.0,
+				2.375,
+				0.75
+			]
+		},
+		"category": "Utilities",
+		"collision_mode": "static",
+		"id": "portable_work_light",
+		"name": "Portable work light",
+		"scene": "res://scenes/props/portable_work_light.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.25,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				2.5,
+				1.125,
+				0.875
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "concrete_barrier",
+		"name": "Concrete barrier",
+		"scene": "res://scenes/props/concrete_barrier.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				2.0,
+				1.0,
+				0.875
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "plastic_barricade",
+		"name": "Plastic barricade",
+		"scene": "res://scenes/props/plastic_barricade.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.3125,
+				0.0,
+				-0.3125
+			],
+			"size": [
+				0.625,
+				0.875,
+				0.625
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "none",
+		"id": "traffic_cone",
+		"name": "Traffic cone",
+		"scene": "res://scenes/props/traffic_cone.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.25,
+				0.0,
+				-0.25
+			],
+			"size": [
+				0.5,
+				1.0,
+				0.5
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "bollard",
+		"name": "Bollard",
+		"scene": "res://scenes/props/bollard.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.5,
+				0.0,
+				-0.0625
+			],
+			"size": [
+				3.0,
+				1.0,
+				0.3125
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "guardrail_segment",
+		"name": "Guardrail segment",
+		"scene": "res://scenes/props/guardrail_segment.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.625,
+				0.0,
+				-0.1875
+			],
+			"size": [
+				1.25,
+				2.625,
+				0.3125
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "road_sign",
+		"name": "Road sign",
+		"scene": "res://scenes/props/road_sign.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.5625,
+				0.0,
+				-0.0625
+			],
+			"size": [
+				3.125,
+				2.0,
+				0.125
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "fence_panel",
+		"name": "Fence panel",
+		"scene": "res://scenes/props/fence_panel.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.625,
+				0.0,
+				-0.125
+			],
+			"size": [
+				3.25,
+				2.25,
+				0.25
+			]
+		},
+		"category": "Roadside",
+		"collision_mode": "static",
+		"id": "damaged_gate",
+		"name": "Damaged gate",
+		"scene": "res://scenes/props/damaged_gate.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.375,
+				0.0,
+				-0.375
+			],
+			"size": [
+				0.75,
+				1.125,
+				0.75
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "oil_drum",
+		"name": "Oil drum",
+		"scene": "res://scenes/props/oil_drum.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.375,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				0.75,
+				1.125,
+				0.8125
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "dented_drum",
+		"name": "Dented drum",
+		"scene": "res://scenes/props/dented_drum.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.75
+			],
+			"size": [
+				1.5,
+				1.125,
+				1.5
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "drum_cluster",
+		"name": "Drum cluster",
+		"scene": "res://scenes/props/drum_cluster.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.5625,
+				0.0,
+				-0.625
+			],
+			"size": [
+				2.8125,
+				1.875,
+				1.25
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "fuel_tank",
+		"name": "Fuel tank",
+		"scene": "res://scenes/props/fuel_tank.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.75,
+				0.0,
+				-0.625
+			],
+			"size": [
+				1.5,
+				1.625,
+				1.25
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "water_tote",
+		"name": "Water tote",
+		"scene": "res://scenes/props/water_tote.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.125,
+				0.0,
+				-0.8125
+			],
+			"size": [
+				2.25,
+				1.5,
+				1.5625
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "dumpster",
+		"name": "Dumpster",
+		"scene": "res://scenes/props/dumpster.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.3125,
+				0.0,
+				-0.9375
+			],
+			"size": [
+				2.625,
+				1.25,
+				1.875
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "scrap_skip",
+		"name": "Scrap skip",
+		"scene": "res://scenes/props/scrap_skip.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.25,
+				0.0,
+				-0.875
+			],
+			"size": [
+				2.5,
+				1.75,
+				1.75
+			]
+		},
+		"category": "Industrial storage",
+		"collision_mode": "static",
+		"id": "pipe_rack",
+		"name": "Pipe rack",
+		"scene": "res://scenes/props/pipe_rack.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.25,
+				0.0,
+				-1.25
+			],
+			"size": [
+				2.5,
+				2.75,
+				2.5
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "guard_booth",
+		"name": "Guard booth",
+		"scene": "res://scenes/props/guard_booth.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0625,
+				0.0,
+				-1.5
+			],
+			"size": [
+				2.125,
+				0.75,
+				3.0
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "loading_ramp",
+		"name": "Loading ramp",
+		"scene": "res://scenes/props/loading_ramp.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.9375,
+				0.0,
+				-1.5
+			],
+			"size": [
+				1.875,
+				2.5,
+				3.0
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "metal_stairs",
+		"name": "Metal stairs",
+		"scene": "res://scenes/props/metal_stairs.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.75,
+				0.0,
+				-1.0
+			],
+			"size": [
+				3.5,
+				3.125,
+				2.0
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "awning",
+		"name": "Awning",
+		"scene": "res://scenes/props/awning.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0,
+				0.0,
+				-0.375
+			],
+			"size": [
+				2.0,
+				1.25,
+				0.8125
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "bench",
+		"name": "Bench",
+		"scene": "res://scenes/props/bench.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.9375,
+				0.0,
+				-0.5625
+			],
+			"size": [
+				1.875,
+				2.0,
+				0.875
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "locker_bank",
+		"name": "Locker bank",
+		"scene": "res://scenes/props/locker_bank.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-0.8125,
+				0.0,
+				-0.4375
+			],
+			"size": [
+				1.625,
+				1.625,
+				0.875
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "industrial_sink",
+		"name": "Industrial sink",
+		"scene": "res://scenes/props/industrial_sink.tscn"
+	},
+	{
+		"bounds": {
+			"position": [
+				-1.0625,
+				0.0,
+				-1.0
+			],
+			"size": [
+				2.125,
+				0.75,
+				2.0
+			]
+		},
+		"category": "Depot fixtures",
+		"collision_mode": "static",
+		"id": "overturned_shelving",
+		"name": "Overturned shelving",
+		"scene": "res://scenes/props/overturned_shelving.tscn"
+	}
+]

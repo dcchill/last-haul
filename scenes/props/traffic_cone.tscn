@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/traffic_cone.res" id="1_ctr15"]
+
+[node name="TrafficCone" type="Node3D" unique_id=468033832]
+metadata/prop_id = "traffic_cone"
+metadata/category = "Roadside"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1940771544]
+mesh = ExtResource("1_ctr15")

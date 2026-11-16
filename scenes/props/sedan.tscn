@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/sedan.res" id="1_165cg"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_xjfep"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_1kojq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmvpv"]
+size = Vector3(1.75, 0.5, 4.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0m5r"]
+size = Vector3(1.5, 0.875, 2.25)
+
+[node name="Sedan" type="Node3D" unique_id=912431307]
+metadata/prop_id = "sedan"
+metadata/category = "Vehicles"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1045106788]
+mesh = ExtResource("1_165cg")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1115323822]
+collision_mask = 0
+script = ExtResource("2_xjfep")
+material = ExtResource("3_1kojq")
+
+[node name="@CollisionShape3D@2" type="CollisionShape3D" parent="Collision" unique_id=1841559365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_dmvpv")
+
+[node name="@CollisionShape3D@3" type="CollisionShape3D" parent="Collision" unique_id=1709213925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4375, 0.125)
+shape = SubResource("BoxShape3D_g0m5r")

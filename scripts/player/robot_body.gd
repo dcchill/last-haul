@@ -108,6 +108,6 @@ func _process(delta: float) -> void:
 	if actor.grounded and not was_grounded: landing = 0.08
 	was_grounded = actor.grounded
 	var speed := Vector2(actor.velocity.x, actor.velocity.z).length() if actor.authority.is_active() else 0.0
-	pose(delta, speed, actor.crouching, state.battery <= 60, state.battery <= 0 or state.health <= 0)
+	pose(delta, speed, actor.crouching, state.infection_remaining <= 60, state.infection_remaining <= 0 or state.health <= 0)
 	actor.camera.rotation.z += sin(damage_left * 45) * damage_left * 0.12
-	actor.camera.rotation.x += boot_left * 0.12 + (0.45 if state.battery <= 0 or state.health <= 0 else 0.0)
+	actor.camera.rotation.x += boot_left * 0.12 + (0.45 if state.infection_remaining <= 0 or state.health <= 0 else 0.0)

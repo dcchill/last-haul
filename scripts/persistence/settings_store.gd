@@ -10,6 +10,7 @@ var sensor_enabled := true
 var sensor_strength := 0.85
 var sensor_flicker := true
 var sensor_pixel_size := 2
+var world_quality := 1
 
 func _init(settings_path: String = "user://settings.cfg") -> void:
 	path = settings_path
@@ -26,6 +27,8 @@ func load_settings() -> void:
 	var strength: Variant = config.get_value("settings", "sensor_strength", sensor_strength)
 	var flicker: Variant = config.get_value("settings", "sensor_flicker", sensor_flicker)
 	var pixels: Variant = config.get_value("settings", "sensor_pixel_size", sensor_pixel_size)
+	var quality: Variant = config.get_value("settings", "world_quality", world_quality)
+	if quality is int and quality>=0 and quality<=2: world_quality=quality
 	if pixels is int and pixels >= 1 and pixels <= 4:
 		sensor_pixel_size = pixels
 	if sensor is bool:
@@ -58,4 +61,5 @@ func save_settings() -> Error:
 	config.set_value("settings", "sensor_strength", sensor_strength)
 	config.set_value("settings", "sensor_flicker", sensor_flicker)
 	config.set_value("settings", "sensor_pixel_size", sensor_pixel_size)
+	config.set_value("settings", "world_quality", world_quality)
 	return config.save(path)

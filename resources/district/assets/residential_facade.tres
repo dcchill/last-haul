@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="WorldAssetDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/world_asset_definition.gd" id="1_wxnqk"]
+
+[resource]
+script = ExtResource("1_wxnqk")
+id = "residential_facade"
+scene_path = "res://scenes/props/district/residential_facade.tscn"
+expected_size = Vector3(9.4, 7.2, 0.9)
+dimension_tolerance = 0.4
+required_components = Array[String](["plinth", "supports", "spandrel", "piers", "window_recess", "window_trim", "sills", "windows", "cornice", "supports", "trim", "damage", "exposed_rebar"])
+source_file = "res://tools/district_asset_author.gd"

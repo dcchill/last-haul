@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/workbench.res" id="1_dvn8r"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_d3wgm"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_pn057"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nm58r"]
+size = Vector3(0.25, 0.875, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odejd"]
+size = Vector3(0.25, 0.875, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3whwg"]
+size = Vector3(0.25, 0.875, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_130kc"]
+size = Vector3(0.25, 0.875, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aaket"]
+size = Vector3(2.25, 0.25, 1)
+
+[node name="Workbench" type="Node3D" unique_id=269828439]
+metadata/prop_id = "workbench"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1635513392]
+mesh = ExtResource("1_dvn8r")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1298025959]
+collision_mask = 0
+script = ExtResource("2_d3wgm")
+material = ExtResource("3_pn057")
+
+[node name="@CollisionShape3D@54" type="CollisionShape3D" parent="Collision" unique_id=410845819]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.875, 0.4375, -0.3125)
+shape = SubResource("BoxShape3D_nm58r")
+
+[node name="@CollisionShape3D@55" type="CollisionShape3D" parent="Collision" unique_id=733100349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.875, 0.4375, 0.3125)
+shape = SubResource("BoxShape3D_odejd")
+
+[node name="@CollisionShape3D@56" type="CollisionShape3D" parent="Collision" unique_id=1048742711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875, 0.4375, -0.3125)
+shape = SubResource("BoxShape3D_3whwg")
+
+[node name="@CollisionShape3D@57" type="CollisionShape3D" parent="Collision" unique_id=1753262399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875, 0.4375, 0.3125)
+shape = SubResource("BoxShape3D_130kc")
+
+[node name="@CollisionShape3D@58" type="CollisionShape3D" parent="Collision" unique_id=771243019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_aaket")

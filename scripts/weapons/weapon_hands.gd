@@ -16,9 +16,9 @@ var prop_return: Dictionary = {}
 
 func _ready() -> void:
 	var glove := StandardMaterial3D.new()
-	glove.albedo_color = Color("303c3c")
+	glove.albedo_color = Color("373e35")
 	var sleeve := StandardMaterial3D.new()
-	sleeve.albedo_color = Color("d5ac3e")
+	sleeve.albedo_color = Color("515b4b")
 	for side in ["right", "left"]:
 		var parts: Dictionary = {}
 		for kind in ["glove", "sleeve"]:
@@ -32,6 +32,27 @@ func _ready() -> void:
 			add_child(visual)
 			parts[kind] = visual
 		hands[side] = parts
+		if side == "left":
+			var bandage := MeshInstance3D.new()
+			var cuff := BoxMesh.new()
+			cuff.size = Vector3(0.102, 0.092, 0.028)
+			bandage.mesh = cuff
+			bandage.position.z = 0.064
+			bandage.layers = 2
+			var cloth := StandardMaterial3D.new()
+			cloth.albedo_color = Color("a99a80")
+			bandage.material_override = cloth
+			parts.glove.add_child(bandage)
+			var stain := MeshInstance3D.new()
+			var patch := BoxMesh.new()
+			patch.size = Vector3(0.038, 0.004, 0.018)
+			stain.mesh = patch
+			stain.position = Vector3(0.015, 0.048, 0.064)
+			stain.layers = 2
+			var blood := StandardMaterial3D.new()
+			blood.albedo_color = Color("704b42")
+			stain.material_override = blood
+			parts.glove.add_child(stain)
 
 func bind(data: WeaponHandProfile) -> void:
 	profile = data

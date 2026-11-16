@@ -36,6 +36,7 @@ var previous_position := Vector3.ZERO
 var footstep_distance := 0.0
 var footstep_audio: AudioStreamPlayer3D
 var hand_rig: WeaponHands
+var body_visual: Node3D
 
 func _ready() -> void:
 	$CollisionShape3D.shape = $CollisionShape3D.shape.duplicate()
@@ -46,9 +47,9 @@ func _ready() -> void:
 	hand_rig.name = "Hands"
 	camera.add_child(hand_rig)
 	hand_rig.visible = false
-	var robot := preload("res://scripts/player/robot_body.gd").new()
-	robot.name = "RobotBody"
-	add_child(robot)
+	body_visual = preload("res://scripts/player/human_body.gd").new()
+	body_visual.name = "HumanBody"
+	add_child(body_visual)
 	footstep_audio = AudioStreamPlayer3D.new()
 	footstep_audio.stream = ArmoryAudio.make_sound("footstep")
 	footstep_audio.volume_db = -20
@@ -161,7 +162,12 @@ func _process(delta: float) -> void:
 	if previous_position.distance_to(global_position) > 1.5:
 		previous_position = global_position
 	var interpolated := previous_position.lerp(global_position, clampf(authority.accumulator / 0.05, 0, 1))
-	camera.position = Vector3(0, 1.27 if crouching else 1.62, 0) + global_basis.inverse() * (interpolated - global_position)
+	var render_offset := global_basis.inverse() * (interpolated - global_position)
+	camera.position = Vector3(0, 1.27 if crouching else 1.62, 0) + render_offset
+	# Camera and body must occupy the same rendered simulation instant. Leaving
+	# the body at the newest tick puts it in front of the smoothed sprint camera.
+	body_visual.position = render_offset
+	if is_instance_valid(armor_visuals): armor_visuals.position = render_offset
 	var gun := state.weapon
 	if gun != null:
 		animate_weapon(delta, gun.aiming, gun)
@@ -326,8 +332,9 @@ func _set_crouching(value: bool) -> void:
 
 func interaction_id() -> String:
 	var hit := Ballistics.new().trace(get_world_3d(), eye_position(), aim_direction(), 3.5, [get_rid()])
-	if not hit.is_empty() and (hit.collider is RaidEntity or hit.collider is MountedArmory):
-		return hit.collider.entity_id
+	if not hit.is_empty():
+		var target:=authority.interaction_owner(hit.collider)
+		if target!=null: return target.entity_id
 	return ""
 
 func refresh_armor_visuals() -> void:

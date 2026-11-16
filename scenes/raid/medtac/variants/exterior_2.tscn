@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/raid_navigation_region.gd" id="1_xenlw"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_2rnyx"]
+[ext_resource type="Resource" path="res://resources/materials/concrete.tres" id="3_uerc7"]
+[ext_resource type="Texture2D" path="res://assets/medtac/surface_4.png" id="4_5nfjd"]
+[ext_resource type="PackedScene" path="res://scenes/props/medtac/detail/roll_cage.tscn" id="5_d442n"]
+[ext_resource type="PackedScene" path="res://scenes/props/medtac/detail/work_cart.tscn" id="6_cadj6"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_gltcr"]
+vertices = PackedVector3Array(-4, 0.45, -4, -3.75, 0.45, -3.5, -1.75, 0.45, -3.75, 3.75, 0.45, 4, 3.5, 0.45, 3.75, 1.5, 0.45, 3.5, -4, 0.45, 4, -3.5, 0.45, -1.5, 1.25, 0.45, -3.25, 4, 0.45, -3.25, 4, 0.45, -4, 1.5, 0.45, 1.75, 2, 0.45, 1.5, 2, 0.45, -1.5, 1.25, 0.45, -1.75, -1.5, 0.45, -1.75, 3.75, 0.45, 1.75, 4, 0.45, -1.75)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(1, 7, 0), PackedInt32Array(0, 7, 6), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 2), PackedInt32Array(12, 11, 13), PackedInt32Array(13, 11, 14), PackedInt32Array(14, 15, 8), PackedInt32Array(8, 15, 2), PackedInt32Array(15, 14, 7), PackedInt32Array(7, 14, 11), PackedInt32Array(7, 11, 5), PackedInt32Array(7, 5, 6), PackedInt32Array(2, 0, 10), PackedInt32Array(3, 4, 16), PackedInt32Array(17, 3, 16), PackedInt32Array(12, 13, 16), PackedInt32Array(16, 13, 17)]
+geometry_parsed_geometry_type = 1
+agent_height = 2.0
+agent_max_climb = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11ika"]
+albedo_color = Color(0.47333333, 0.48333335, 0.45333335, 1)
+albedo_texture = ExtResource("4_5nfjd")
+roughness = 0.9
+uv1_scale = Vector3(0.22, 0.22, 0.22)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yj2ts"]
+size = Vector3(9, 0.3, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cft3v"]
+size = Vector3(9, 0.3, 9)
+
+[node name="CoverArrangement" type="Node3D" unique_id=1636246208]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1039228686]
+navigation_mesh = SubResource("NavigationMesh_gltcr")
+script = ExtResource("1_xenlw")
+
+[node name="Detail808" type="StaticBody3D" parent="NavigationRegion3D" unique_id=329915594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
+script = ExtResource("2_2rnyx")
+material = ExtResource("3_uerc7")
+
+[node name="Mesh" type="MeshInstance3D" parent="NavigationRegion3D/Detail808" unique_id=2074275513]
+material_override = SubResource("StandardMaterial3D_11ika")
+mesh = SubResource("BoxMesh_yj2ts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Detail808" unique_id=431614382]
+shape = SubResource("BoxShape3D_cft3v")
+
+[node name="Detail811" type="Node3D" parent="NavigationRegion3D" unique_id=1839397467 instance=ExtResource("5_d442n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.6)
+metadata/bounds = AABB(-0.6, 0, -0.45, 1.2, 2, 0.9)
+metadata/medtac_prop_id = "roll_cage"
+
+[node name="Detail813" type="Node3D" parent="NavigationRegion3D" unique_id=1108937025 instance=ExtResource("6_cadj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, -2.6)
+metadata/bounds = AABB(-0.65, 0, -0.4, 1.3, 1.3000001, 0.8)
+metadata/medtac_prop_id = "work_cart"
+
+[node name="Detail815" type="Node3D" parent="NavigationRegion3D" unique_id=1156433548 instance=ExtResource("5_d442n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 2.6)
+metadata/bounds = AABB(-0.6, 0, -0.45, 1.2, 2, 0.9)
+metadata/medtac_prop_id = "roll_cage"
+
+[node name="Cover0" type="Marker3D" parent="." unique_id=1660762440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -1.4999999)
+
+[node name="Cover1" type="Marker3D" parent="." unique_id=472111584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, -1.4999999)
+
+[node name="Cover3" type="Marker3D" parent="." unique_id=1340057808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 3.6999998)

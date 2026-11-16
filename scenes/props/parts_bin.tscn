@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/parts_bin.res" id="1_xrruv"]
+
+[node name="PartsBin" type="Node3D" unique_id=476195341]
+metadata/prop_id = "parts_bin"
+metadata/category = "Workshop"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1108445433]
+mesh = ExtResource("1_xrruv")

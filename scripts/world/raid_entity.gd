@@ -4,6 +4,9 @@ extends StaticBody3D
 @export var entity_id: String = ""
 @export_enum("target", "container") var kind: String = "target"
 @export var material: MaterialDef
+@export var loot_table: LootTable
+@export var guaranteed_items: Dictionary = {}
+@export var keycard_candidate := false
 @export var loot: LootDef
 @export var interaction_offset := Vector3(0, 0.4, 0)
 @export var max_health: float = 100.0

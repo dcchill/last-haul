@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/engine_block.res" id="1_kswdu"]
+
+[node name="EngineBlock" type="Node3D" unique_id=2127380029]
+metadata/prop_id = "engine_block"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=589605747]
+mesh = ExtResource("1_kswdu")

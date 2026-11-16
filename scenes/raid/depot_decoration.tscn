@@ -1,0 +1,125 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/props/sedan.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/props/pickup.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/props/short_shipping_container.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/props/loaded_pallet.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/props/reinforced_crate.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/props/pallet.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/props/tire_stack.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/props/engine_block.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/props/sheet_metal_heap.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/props/broken_pipe_heap.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/props/workbench.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/props/tool_cabinet.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://scenes/props/generator.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/props/electrical_cabinet.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/props/concrete_barrier.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://scenes/props/traffic_cone.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://scenes/props/bollard.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/props/oil_drum.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://scenes/props/dented_drum.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://scenes/props/water_tote.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://scenes/props/dumpster.tscn" id="21"]
+[ext_resource type="PackedScene" path="res://scenes/props/locker_bank.tscn" id="22"]
+[ext_resource type="PackedScene" path="res://scenes/props/bench.tscn" id="23"]
+[ext_resource type="PackedScene" path="res://scenes/props/parts_bin.tscn" id="24"]
+
+[node name="Decoration" type="Node3D"]
+
+[node name="Sedan" parent="." instance=ExtResource("1")]
+position = Vector3(-13, 0, 3)
+rotation = Vector3(0, 0, 0)
+
+[node name="Pickup" parent="." instance=ExtResource("2")]
+position = Vector3(12, 0, 7.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="ShortShippingContainer" parent="." instance=ExtResource("3")]
+position = Vector3(11.5, 0, 14)
+rotation = Vector3(0, 1.5707963267948966, 0)
+
+[node name="LoadedPallet" parent="." instance=ExtResource("4")]
+position = Vector3(-13, 0, -15)
+rotation = Vector3(0, 0, 0)
+
+[node name="ReinforcedCrate" parent="." instance=ExtResource("5")]
+position = Vector3(-13, 0, -12)
+rotation = Vector3(0, 0, 0)
+
+[node name="Pallet" parent="." instance=ExtResource("6")]
+position = Vector3(-13, 0, -10)
+rotation = Vector3(0, 0, 0)
+
+[node name="TireStack" parent="." instance=ExtResource("7")]
+position = Vector3(-13, 0, 6.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="EngineBlock" parent="." instance=ExtResource("8")]
+position = Vector3(-13, 0, 8.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="SheetMetalHeap" parent="." instance=ExtResource("9")]
+position = Vector3(-12.5, 0, -1.75)
+rotation = Vector3(0, 0, 0)
+
+[node name="BrokenPipeHeap" parent="." instance=ExtResource("10")]
+position = Vector3(-12.5, 0, -2.75)
+rotation = Vector3(0, 0, 0)
+
+[node name="Workbench" parent="." instance=ExtResource("11")]
+position = Vector3(-13, 0, -6)
+rotation = Vector3(0, -1.5707963267948966, 0)
+
+[node name="ToolCabinet" parent="." instance=ExtResource("12")]
+position = Vector3(-13.5, 0, -8.5)
+rotation = Vector3(0, -1.5707963267948966, 0)
+
+[node name="Generator" parent="." instance=ExtResource("13")]
+position = Vector3(13.5, 0, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="ElectricalCabinet" parent="." instance=ExtResource("14")]
+position = Vector3(13.5, 0, -0.5)
+rotation = Vector3(0, -1.5707963267948966, 0)
+
+[node name="ConcreteBarrier" parent="." instance=ExtResource("15")]
+position = Vector3(10, 0, 17)
+rotation = Vector3(0, 0, 0)
+
+[node name="TrafficCone" parent="." instance=ExtResource("16")]
+position = Vector3(8, 0, 16.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="Bollard" parent="." instance=ExtResource("17")]
+position = Vector3(14, 0, 10.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="OilDrum" parent="." instance=ExtResource("18")]
+position = Vector3(-13, 0, -16.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="DentedDrum" parent="." instance=ExtResource("19")]
+position = Vector3(-12, 0, -16.5)
+rotation = Vector3(0, 0, 0)
+
+[node name="WaterTote" parent="." instance=ExtResource("20")]
+position = Vector3(6, 0, 17)
+rotation = Vector3(0, 0, 0)
+
+[node name="Dumpster" parent="." instance=ExtResource("21")]
+position = Vector3(14, 0, 4)
+rotation = Vector3(0, 1.5707963267948966, 0)
+
+[node name="LockerBank" parent="." instance=ExtResource("22")]
+position = Vector3(12.125, 0.25, -5)
+rotation = Vector3(0, -1.5707963267948966, 0)
+
+[node name="Bench" parent="." instance=ExtResource("23")]
+position = Vector3(12.25, 0.25, -9)
+rotation = Vector3(0, -1.5707963267948966, 0)
+
+[node name="PartsBin" parent="." instance=ExtResource("24")]
+position = Vector3(-13, 1.125, -6)
+rotation = Vector3(0, 0, 0)
+

@@ -45,11 +45,67 @@ func _run() -> void:
 	app.home()
 	await process_frame
 	app.deploy(false)
-	if app.raid == null or not app.raid.depot or app.raid.npcs.size() != 4 or app.raid.containers["battery-0"].count("battery_cell") != 1:
+	if app.raid==null or app.raid.map_definition.id!="medtac_quarantine_district" or app.raid.npcs.size()!=28 or app.raid.containers.size()!=144:
+		push_error("Export cannot deploy quarantine district with actors and typed loot")
+		quit(1)
+		return
+	if app.raid.get_node_or_null("Atmosphere")==null or app.raid.get_meta("tactical_report",{}).get("errors",["missing"]).size()!=0:
+		push_error("Export is missing district atmosphere or validated tactical data")
+		quit(1)
+		return
+	print("EXPORTED DISTRICT: curated layout, 28 actors, 144 loot sources and atmosphere")
+	app.raid.request_abandon(id)
+	app.home()
+	await process_frame
+	app.selected_map=load("res://resources/maps/medtac_labs.tres")
+	app.deploy(false)
+	if app.raid == null or app.raid.map_definition == null or app.raid.npcs.size() != 22 or app.raid.extraction_zones.size() != 4 or app.raid.spawn_markers.size() != 7:
+		push_error("Export cannot deploy MedTac Labs")
+		quit(1)
+		return
+	if not app.raid.player.has_node("HumanBody") or not app.raid.containers.has("basement-research-0"):
+		push_error("Export cannot load human player and restricted laboratory content")
+		quit(1)
+		return
+	print("EXPORTED MEDTAC: seven insertions, four extracts, 22 enemies and human player loaded from PCK")
+	if app.raid.containers.size()!=160 or app.raid.get_node("Dressing")==null:
+		push_error("Export cannot assemble detailed loot and raid variations")
+		quit(1)
+		return
+	for slot in app.raid.find_children("*","",true,false):
+		if slot is MedTacVariantSlot and (slot.variants.size()!=3 or slot.active==null):
+			push_error("Export cannot load a cover arrangement")
+			quit(1)
+			return
+		if slot is Label3D:
+			push_error("Export contains floating MedTac text")
+			quit(1)
+			return
+	print("EXPORTED MEDTAC DETAIL: typed loot, 24 cover slots, textured props and physical signs loaded")
+	app.raid.request_abandon(id)
+	app.home()
+	await process_frame
+	app.normal_raid_scene = load("res://scenes/raid/veyra_depot.tscn")
+	app.deploy(false)
+	if app.raid == null or not app.raid.depot or app.raid.npcs.size() != 4 or app.raid.containers["battery-0"].count("infection_suppressant") != 1:
 		push_error("Export cannot deploy Veyra Depot")
 		quit(1)
 		return
-	print("EXPORTED DEPOT: four enemies, voxel map, robot and power cells loaded from PCK")
+	print("EXPORTED DEPOT FIXTURE: four enemies, voxel map, human and supplies loaded from PCK")
+	var props: Array = JSON.parse_string(FileAccess.get_file_as_string("res://resources/world_props/catalog.json"))
+	if props.size() != 64 or app.raid.get_node("NavigationRegion3D/Decoration").get_child_count() != 24:
+		push_error("Export cannot load world prop catalog and depot dressing")
+		quit(1)
+		return
+	for entry: Dictionary in props:
+		var prop: Node3D = load(entry.scene).instantiate()
+		if prop.get_node("Mesh").mesh == null:
+			push_error("Export cannot load " + entry.id)
+			prop.free()
+			quit(1)
+			return
+		prop.free()
+	print("EXPORTED WORLD PROPS: 64 baked meshes and 24 depot instances loaded from PCK")
 	app.free()
 	for frame in range(3):
 		await process_frame

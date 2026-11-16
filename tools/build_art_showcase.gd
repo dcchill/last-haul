@@ -1,0 +1,50 @@
+extends SceneTree
+
+func _initialize() -> void: call_deferred("run")
+
+func run() -> void:
+	var author:=DistrictSceneAuthor.new()
+	var scene:=author.begin("ArtDirectionShowcase")
+	var street:=author.section("AbandonedStreet")
+	author.box(street,Vector3(0,-.2,0),Vector3(80,.4,70),"dirt")
+	author.box(street,Vector3(-16,.015,0),Vector3(9,.03,60),"asphalt",false)
+	for z in range(-25,26,5): author.box(street,Vector3(-16,.04,z),Vector3(.12,.015,2.5),"warning",false)
+	author.asset(street,"damaged_car",Vector3(-17,0,-5),.15)
+	author.asset(street,"industrial_truck",Vector3(-14,0,12),-.15)
+	author.asset(street,"residential_facade",Vector3(-24,0,-12),PI*.5)
+	for z in [-18,2,18]: author.cover_asset(street,"concrete_barricade",Vector3(-12,0,z))
+	author.sign_board(street,"checkpoint",Vector3(-16,3,-22))
+	for x in [-22,-10]: author.box(street,Vector3(x,.12,0),Vector3(.3,.24,60),"concrete")
+	for z in [-20,0,20]:
+		author.box(street,Vector3(-23,1.1,z),Vector3(.5,2.2,.5),"concrete")
+		author.box(street,Vector3(-24,1.1,z+5),Vector3(.2,2.2,9),"steel")
+	var medical:=author.building(street,Vector3(3,0,-17),"medical",true)
+	author.sign_board(medical,"medical",Vector3(0,2.7,8.2),4)
+	var industrial:=author.section("IndustrialYard",Vector3(15,0,11))
+	author.asset(industrial,"warehouse_facade",Vector3(0,0,-5))
+	author.asset(industrial,"industrial_press",Vector3(0,0,0))
+	author.cover_asset(industrial,"shipping_container",Vector3(8,0,0))
+	author.cover_asset(industrial,"concrete_barricade",Vector3(-4,0,5),PI*.5)
+	author.asset(industrial,"industrial_truck",Vector3(-7,0,-2))
+	author.lamp(industrial,Vector3(0,5,-4),true)
+	var steam:=DistrictAtmosphere.emitter("steam",32); steam.position=Vector3(-1,3.6,0); author.add(industrial,steam)
+	var decay:=author.section("ContaminatedServiceArea",Vector3(0,0,23))
+	author.asset(decay,"medical_station",Vector3(0,0,0))
+	author.asset(decay,"specimen_cooler",Vector3(3,0,1),0,false)
+	author.decay(decay,Vector3.ZERO)
+	author.sign_board(decay,"evacuation",Vector3(1,2.8,-3),4)
+	author.box(decay,Vector3(0,1.8,-5),Vector3(12,3.6,.3),"concrete")
+	for x in [-3,3]:
+		author.box(decay,Vector3(x,2.4,-4.7),Vector3(.25,.25,5),"rust",false)
+		author.lamp(decay,Vector3(x,3,-4.5),true)
+	author.asset(decay,"recovery_bed",Vector3(-3,0,1),0,false)
+	author.finish()
+	var camera:=Camera3D.new(); camera.position=Vector3(-30,9,29); camera.rotation_degrees=Vector3(-12,-35,0); camera.current=true
+	author.add(scene,camera,"ReviewCamera")
+	var packed:=PackedScene.new()
+	DirAccess.make_dir_recursive_absolute("res://scenes/review")
+	if packed.pack(scene)!=OK or ResourceSaver.save(packed,"res://scenes/review/art_direction_showcase.tscn")!=OK:
+		push_error("Cannot save art showcase"); quit(1); return
+	scene.free()
+	print("ART SHOWCASE: abandoned street, medical interior, industrial yard, contamination")
+	quit()

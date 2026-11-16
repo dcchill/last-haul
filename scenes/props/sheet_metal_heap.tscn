@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/sheet_metal_heap.res" id="1_nltno"]
+
+[node name="SheetMetalHeap" type="Node3D" unique_id=855459328]
+metadata/prop_id = "sheet_metal_heap"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1423158985]
+mesh = ExtResource("1_nltno")

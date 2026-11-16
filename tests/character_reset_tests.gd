@@ -41,7 +41,7 @@ func run() -> void:
 	var preferences := FileAccess.get_file_as_string(app.settings.path)
 	var old_player: String = app.profile.profile.player_id
 	app.stash_view.add("small_pack", 1)
-	app.stash_view.slots.back().storage.add("battery_cell", 1)
+	app.stash_view.slots.back().storage.add("infection_suppressant", 1)
 	app.stash_view.add("tool", 2)
 	app._save_stash_layout()
 	var no_loot: Array[Dictionary] = []
@@ -68,7 +68,7 @@ func run() -> void:
 	app.profile.path = original_path + "/missing/profile.json"
 	check(not app.reset_character() and app.profile.profile == before and app.pending_save, "failed reset write leaves character and pending state intact")
 	app.profile.path = original_path
-	check(possessions().has("battery_cell") and possessions().get("tool") == 2, "failed reset keeps nested and staged inventories")
+	check(possessions().has("infection_suppressant") and possessions().get("tool") == 2, "failed reset keeps nested and staged inventories")
 	reset_button().pressed.emit()
 	await settle()
 	for node in app.ui.screen.get_children():
@@ -96,7 +96,7 @@ func run() -> void:
 	app.ui._confirm_reset_character()
 	check(not app.ui.screen.get_children().any(func(node): return node is ConfirmationDialog), "raid settings cannot open reset confirmation")
 	var participant: RaidParticipant = app.raid.participants[app.profile.profile.player_id]
-	check(participant.health == 20 and participant.battery > 479, "reset character starts raid at full health and power")
+	check(participant.health == 20 and participant.infection_remaining > 1199, "reset character starts raid at full health and infection time")
 	app.ui._resume()
 	app.raid.request_abandon(app.profile.profile.player_id)
 	app.home()

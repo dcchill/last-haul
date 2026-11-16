@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/detached_hood.res" id="1_t7l1s"]
+
+[node name="DetachedHood" type="Node3D" unique_id=462758075]
+metadata/prop_id = "detached_hood"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1818904078]
+mesh = ExtResource("1_t7l1s")

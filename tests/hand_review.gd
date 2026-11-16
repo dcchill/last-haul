@@ -57,6 +57,7 @@ func run() -> void:
 			await RenderingServer.frame_post_draw
 			var image := root.get_texture().get_image()
 			image.resize(384, 216, Image.INTERPOLATE_LANCZOS)
+			image.convert(sheet.get_format())
 			sheet.blit_rect(image, Rect2i(0, 0, 384, 216), Vector2i(index % 4 * 384, index / 4 * 216))
 		sheet.save_png("res://.godot/hand_review/" + str(source.id) + ".png")
 		# A second sheet covers the largest legal attachment configuration and
@@ -91,6 +92,7 @@ func run() -> void:
 			await RenderingServer.frame_post_draw
 			var image := root.get_texture().get_image()
 			image.resize(384, 216, Image.INTERPOLATE_LANCZOS)
+			image.convert(sheet.get_format())
 			sheet.blit_rect(image, Rect2i(0, 0, 384, 216), Vector2i(index % 4 * 384, index / 4 * 216))
 		sheet.save_png("res://.godot/hand_review/" + str(source.id) + "-attachments.png")
 		print("HAND REVIEW: ", source.id)

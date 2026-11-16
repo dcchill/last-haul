@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/guardrail_segment.res" id="1_kpte5"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_eni62"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_7hs87"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cv6w1"]
+size = Vector3(0.25, 1, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fujl1"]
+size = Vector3(0.25, 1, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_25icg"]
+size = Vector3(3, 0.25, 0.125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fg6v"]
+size = Vector3(3, 0.125, 0.125)
+
+[node name="GuardrailSegment" type="Node3D" unique_id=1798212951]
+metadata/prop_id = "guardrail_segment"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2111805295]
+mesh = ExtResource("1_kpte5")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=606282186]
+collision_mask = 0
+script = ExtResource("2_eni62")
+material = ExtResource("3_7hs87")
+
+[node name="@CollisionShape3D@112" type="CollisionShape3D" parent="Collision" unique_id=1197144609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0.5, 0.125)
+shape = SubResource("BoxShape3D_cv6w1")
+
+[node name="@CollisionShape3D@113" type="CollisionShape3D" parent="Collision" unique_id=1130420426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.5, 0.125)
+shape = SubResource("BoxShape3D_fujl1")
+
+[node name="@CollisionShape3D@114" type="CollisionShape3D" parent="Collision" unique_id=211554903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("BoxShape3D_25icg")
+
+[node name="@CollisionShape3D@115" type="CollisionShape3D" parent="Collision" unique_id=605506610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9375, 0)
+shape = SubResource("BoxShape3D_7fg6v")

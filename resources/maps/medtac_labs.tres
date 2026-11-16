@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RaidMapDefinition" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/raid_map_definition.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "medtac_labs"
+display_name = "MedTac Labs"
+scene_path = "res://scenes/raid/medtac_labs.tscn"
+infection_seconds = 1200.0
+

@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/ventilation_unit.res" id="1_ntfll"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_bjx70"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_xcr37"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_inc3i"]
+size = Vector3(1.5, 1, 1.25)
+
+[node name="VentilationUnit" type="Node3D" unique_id=1408861683]
+metadata/prop_id = "ventilation_unit"
+metadata/category = "Utilities"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=951762162]
+mesh = ExtResource("1_ntfll")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1085364559]
+collision_mask = 0
+script = ExtResource("2_bjx70")
+material = ExtResource("3_xcr37")
+
+[node name="@CollisionShape3D@86" type="CollisionShape3D" parent="Collision" unique_id=367577435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_inc3i")

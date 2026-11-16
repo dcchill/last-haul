@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "sealed_specimen"
+display_name = "Sealed research specimen"
+description = "A tagged specimen from an abandoned trial. Research salvage; cannot be used as medicine."
+stack_limit = 1
+width = 1
+height = 2
+weight = 0.4
+value = 150

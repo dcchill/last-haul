@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = "lab_electronics"
+display_name = "Precision laboratory electronics"
+description = "Shielded controllers salvaged from MedTac instruments."
+rarity = "uncommon"
+width = 2
+height = 1
+weight = 0.5
+value = 220
+

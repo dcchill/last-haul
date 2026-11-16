@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/tool_cabinet.res" id="1_h3k35"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_x4s0q"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_dq0va"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bv43d"]
+size = Vector3(1.25, 1.75, 0.75)
+
+[node name="ToolCabinet" type="Node3D" unique_id=152403309]
+metadata/prop_id = "tool_cabinet"
+metadata/category = "Workshop"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1353169709]
+mesh = ExtResource("1_h3k35")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=442462077]
+collision_mask = 0
+script = ExtResource("2_x4s0q")
+material = ExtResource("3_dq0va")
+
+[node name="@CollisionShape3D@59" type="CollisionShape3D" parent="Collision" unique_id=330227644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("BoxShape3D_bv43d")

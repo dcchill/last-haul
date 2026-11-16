@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/road_sign.res" id="1_m072h"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_4ws1r"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_yyx7q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_603ru"]
+size = Vector3(0.25, 2, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2vb7j"]
+size = Vector3(1.25, 0.875, 0.125)
+
+[node name="RoadSign" type="Node3D" unique_id=1553962699]
+metadata/prop_id = "road_sign"
+metadata/category = "Roadside"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1782081138]
+mesh = ExtResource("1_m072h")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=22941635]
+collision_mask = 0
+script = ExtResource("2_4ws1r")
+material = ExtResource("3_yyx7q")
+
+[node name="@CollisionShape3D@116" type="CollisionShape3D" parent="Collision" unique_id=324950572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_603ru")
+
+[node name="@CollisionShape3D@117" type="CollisionShape3D" parent="Collision" unique_id=1621452088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1875, 0)
+shape = SubResource("BoxShape3D_2vb7j")

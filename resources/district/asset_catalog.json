@@ -1,0 +1,42 @@
+[
+	{
+		"definition": "res://resources/district/assets/damaged_car.tres",
+		"id": "damaged_car",
+		"scene": "res://scenes/props/district/damaged_car.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/industrial_truck.tres",
+		"id": "industrial_truck",
+		"scene": "res://scenes/props/district/industrial_truck.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/industrial_press.tres",
+		"id": "industrial_press",
+		"scene": "res://scenes/props/district/industrial_press.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/medical_station.tres",
+		"id": "medical_station",
+		"scene": "res://scenes/props/district/medical_station.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/concrete_barricade.tres",
+		"id": "concrete_barricade",
+		"scene": "res://scenes/props/district/concrete_barricade.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/shipping_container.tres",
+		"id": "shipping_container",
+		"scene": "res://scenes/props/district/shipping_container.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/residential_facade.tres",
+		"id": "residential_facade",
+		"scene": "res://scenes/props/district/residential_facade.tscn"
+	},
+	{
+		"definition": "res://resources/district/assets/warehouse_facade.tres",
+		"id": "warehouse_facade",
+		"scene": "res://scenes/props/district/warehouse_facade.tscn"
+	}
+]

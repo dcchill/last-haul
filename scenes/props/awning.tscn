@@ -1,0 +1,39 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/awning.res" id="1_thcih"]
+[ext_resource type="Script" path="res://scripts/world/decorative_prop.gd" id="2_t267x"]
+[ext_resource type="Resource" path="res://resources/materials/steel.tres" id="3_ynj72"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_21mts"]
+size = Vector3(0.25, 2.75, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ir1r"]
+size = Vector3(0.25, 2.75, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_icocw"]
+size = Vector3(3.5, 0.25, 2)
+
+[node name="Awning" type="Node3D" unique_id=1581447505]
+metadata/prop_id = "awning"
+metadata/category = "Depot fixtures"
+metadata/collision_mode = "static"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=29690209]
+mesh = ExtResource("1_thcih")
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=1452732507]
+collision_mask = 0
+script = ExtResource("2_t267x")
+material = ExtResource("3_ynj72")
+
+[node name="@CollisionShape3D@218" type="CollisionShape3D" parent="Collision" unique_id=390279790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.375, 0.75)
+shape = SubResource("BoxShape3D_21mts")
+
+[node name="@CollisionShape3D@219" type="CollisionShape3D" parent="Collision" unique_id=55475455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.375, 0.75)
+shape = SubResource("BoxShape3D_8ir1r")
+
+[node name="@CollisionShape3D@220" type="CollisionShape3D" parent="Collision" unique_id=206434399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.875, 0)
+shape = SubResource("BoxShape3D_icocw")

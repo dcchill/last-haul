@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-15",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "forward_plus",
+  "full_regression_with_rendered_captures_and_pck_export": "passed",
+  "full_regression_log": ".godot/geometry-full-suite.log",
+  "surface_geometry_revision": {
+    "district_surface_failures": 0,
+    "prop_meshes_checked": 147,
+    "coplanar_overlaps": 0,
+    "baked_layouts_rebuilt": [19381, 43721, 90217],
+    "rendered_reviews_refreshed": true,
+    "performance_soak_rerun": false
+  },
+  "district_checks": 863,
+  "district_failures": 0,
+  "native_gltf_roundtrip_checks": 6,
+  "native_gltf_roundtrip_failures": 0,
+  "graph_seeds_checked": 200,
+  "physically_validated_layouts": [19381, 43721, 90217],
+  "reference_assets": 8,
+  "reference_asset_technical_failures": 0,
+  "captures": {"asset_views": 48, "art_showcase": 40, "district": 34},
+  "performance_report": "resources/district/reports/performance_local.json",
+  "reference_hardware_verified": false,
+  "human_art_and_balance_approval": "outstanding",
+  "notes": ["Rendered views were inspected separately from geometry checks.", "Performance harness conditions and the 99 ms worst-frame outlier are recorded in the performance report and documentation."]
+}

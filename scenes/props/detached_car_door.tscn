@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://resources/world_props/detached_car_door.res" id="1_ojk10"]
+
+[node name="DetachedCarDoor" type="Node3D" unique_id=475945691]
+metadata/prop_id = "detached_car_door"
+metadata/category = "Scrap"
+metadata/collision_mode = "none"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=44450670]
+mesh = ExtResource("1_ojk10")

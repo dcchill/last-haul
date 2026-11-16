@@ -3,6 +3,9 @@ extends Node
 var catalog := Catalog.new()
 var profile: ProfileStore
 var settings := SettingsStore.new()
+var selected_map: RaidMapDefinition = preload("res://resources/maps/medtac_quarantine_district.tres")
+# Explicit override for compact regression scenes; normal play follows map data.
+var normal_raid_scene: PackedScene
 var raid: RaidAuthority
 var pending_save := false
 var ui: PrototypeUI
@@ -10,10 +13,17 @@ var loadout: Dictionary = {}
 var stash_view: RaidInventory
 var staging_transactions: InventoryTransactions
 var test_profile_path := ""
+var requested_layout_seed := -1
+var requested_raid_seed := -1
 
 func _ready() -> void:
 	_install_input()
 	var args := OS.get_cmdline_user_args()
+	for flag in ["--layout-seed","--raid-seed"]:
+		var index:=args.find(flag)
+		if index>=0 and index+1<args.size() and args[index+1].is_valid_int():
+			if flag=="--layout-seed": requested_layout_seed=int(args[index+1])
+			else: requested_raid_seed=int(args[index+1])
 	var test_path_index := args.find("--test-profile")
 	if test_path_index >= 0 and test_path_index + 1 < args.size():
 		test_profile_path = args[test_path_index + 1]
@@ -151,8 +161,27 @@ func deploy(practice_mode: bool = false) -> void:
 		if catalog.definitions.get(entry.id) is WeaponDef and catalog.definitions[entry.id].armory:
 			weapon = entry.id
 			break
-	raid = (preload("res://scenes/raid/test_yard.tscn") if practice_mode else preload("res://scenes/raid/veyra_depot.tscn")).instantiate()
+	var layout_path := selected_map.scene_path
+	if not practice_mode and normal_raid_scene==null and not selected_map.approved_layouts.is_empty():
+		if requested_layout_seed>=0:
+			var matches:=selected_map.approved_layouts.filter(func(path): return path.get_file().get_basename().ends_with("_"+str(requested_layout_seed)))
+			if matches.is_empty(): ui.show_notice("That layout seed is not an approved map"); return
+			layout_path=matches[0]
+		else: layout_path=selected_map.approved_layouts.pick_random()
+	var destination: PackedScene = preload("res://scenes/raid/test_yard.tscn") if practice_mode else normal_raid_scene if normal_raid_scene != null else load(layout_path)
+	raid = destination.instantiate()
+	if not practice_mode and normal_raid_scene==null: raid.map_definition=selected_map
+	if requested_raid_seed>=0: raid.raid_seed=requested_raid_seed
+	get_viewport().use_occlusion_culling=not practice_mode and raid.map_definition!=null
+	# Complete the static/variant navigation assembly before actors start moving.
+	var navigation_map:=get_viewport().find_world_3d().navigation_map
+	NavigationServer3D.map_set_use_async_iterations(navigation_map,false)
+	NavigationServer3D.map_force_update(navigation_map)
 	add_child(raid)
+	var atmosphere:=raid.get_node_or_null("Atmosphere") as DistrictAtmosphere
+	if atmosphere!=null:
+		atmosphere.quality=WorldQualitySettings.make(settings.world_quality)
+		atmosphere.apply()
 	var raid_loadout := {"pack": pack, "weapon": weapon, "practice": practice_mode}
 	if not practice_mode:
 		raid_loadout.pockets = InventoryPersistence.decode(loadout.pockets.serialize(), catalog.items, {})
