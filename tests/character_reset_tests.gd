@@ -78,7 +78,7 @@ func run() -> void:
 	check(app.ui.mode == "home" and not app.pending_save, "confirmed reset returns home and clears pending save")
 	check(app.profile.profile.player_id != old_player, "reset creates a fresh character identity")
 	check(app.profile.profile.last_result.is_empty() and app.profile.profile.committed_raids.is_empty() and app.profile.profile.pending_result.is_empty(), "raid history and pending rewards cleared")
-	check(possessions() == {"m_four": 1, "patrol": 1, "five_five_six": 60, "stanag_magazine": 2}, "only the original starter kit remains across stash and staged gear")
+	check(possessions() == {"m_four": 1, "carrier_single": 1, "five_five_six": 60, "stanag_magazine": 2}, "only the original starter kit remains across stash and staged gear")
 	check(not app.loadout.gear.slots.primary.slots.is_empty() and not app.loadout.gear.slots.body_armor.slots.is_empty(), "starter equipment is staged normally")
 	for entry in app.loadout.pockets.slots:
 		if entry.id == "stanag_magazine": check(entry.state.rounds == 30, "starter magazine has thirty rounds")
@@ -96,7 +96,7 @@ func run() -> void:
 	app.ui._confirm_reset_character()
 	check(not app.ui.screen.get_children().any(func(node): return node is ConfirmationDialog), "raid settings cannot open reset confirmation")
 	var participant: RaidParticipant = app.raid.participants[app.profile.profile.player_id]
-	check(participant.health == 20 and participant.infection_remaining > 1199, "reset character starts raid at full health and infection time")
+	check(participant.health == 200 and participant.infection_remaining > 1199, "reset character starts raid at full health and infection time")
 	app.ui._resume()
 	app.raid.request_abandon(app.profile.profile.player_id)
 	app.home()

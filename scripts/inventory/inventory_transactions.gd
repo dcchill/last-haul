@@ -5,6 +5,7 @@ var roots: Array[RaidInventory] = []
 var actor_id := ""
 var authorize: Callable
 var handle_operation: Callable
+var defer_plate_change: Callable
 var results: Dictionary = {}
 
 func grids() -> Dictionary:
@@ -51,6 +52,8 @@ func submit(request: Dictionary, preview := false) -> Dictionary:
 			ok = InventoryManager.move(source, index, target,
 				Vector2i(int(request.get("x", -1)), int(request.get("y", -1))),
 				bool(request.get("rotated", source.slots[index].rotated)), int(request.get("quantity", -1)), preview)
+		elif operation in ["insert_plate", "remove_plate"] and target != null:
+			ok = defer_plate_change.call(request, source, target) if defer_plate_change.is_valid() and not preview else PlateInventory.change(request, source, target, preview)
 		elif operation == "consume":
 			var amount := int(request.get("quantity", 1))
 			if amount > 0 and amount <= int(source.slots[index].quantity) and not source.slots[index].has("storage"):

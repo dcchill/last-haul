@@ -2094,10 +2094,35 @@ size = Vector2(0.792, 0.2)
 script = ExtResource("23_3grj7")
 rolls = Vector2i(2, 4)
 entries = Array[Dictionary]([{
-"id": "patrol",
-"max": 1.0,
+"id": "carrier_single",
+"max": 1,
 "min": 1,
-"weight": 1.0
+"weight": 0.85
+}, {
+"id": "carrier_dual",
+"max": 1,
+"min": 1,
+"weight": 0.14
+}, {
+"id": "carrier_triple",
+"max": 1,
+"min": 1,
+"weight": 0.01
+}, {
+"id": "plate_steel",
+"max": 1,
+"min": 1,
+"weight": 2.1
+}, {
+"id": "plate_ceramic",
+"max": 1,
+"min": 1,
+"weight": 0.75
+}, {
+"id": "plate_composite",
+"max": 1,
+"min": 1,
+"weight": 0.15
 }, {
 "id": "face_cover",
 "max": 1.0,

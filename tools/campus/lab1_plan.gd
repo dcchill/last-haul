@@ -15,7 +15,7 @@ static func R(title: String, x0: float, z0: float, x1: float, z1: float, role: S
 static func plan() -> Dictionary:
 	return {
 		"id": "lab1", "title": "Lab 1 Research", "origin": Vector3(51.5, 0, -36), "bounds": Rect2(-40, -32, 80, 64), "style": "curtain",
-		"atrium": Rect2(-8, -8, 16, 16),
+		"atrium": Rect2(-8, -8, 16, 16), "roof_failure": Rect2(15, -14, 5, 4),
 		"cores": [
 			{"kind": "stair", "id": "StairA", "rect": Rect2(-27, -19, 4.4, 9), "landing": "n", "top": 4},
 			{"kind": "stair", "id": "StairB", "rect": Rect2(22.6, 10, 4.4, 9), "landing": "s", "top": 5},
@@ -49,7 +49,7 @@ static func floor_1() -> Dictionary:
 		R("Conference room A", 20, -32, 40, -22, "conference", ["s:25:door"]),
 		R("Conference room B", 30, -22, 40, -8, "conference", ["w:-15:door"]),
 		R("Staff break room", 30, -8, 40, 6, "breakroom", ["w:-1:open"]),
-		R("Facilities storage", 30, 6, 40, 12, "storage", ["w:9:door"]),
+		R("Facilities storage", 30, 6, 40, 12, "storage", ["w:9:door"], {"fire": true}),
 		R("Service entrance", 30, 12, 40, 22, "service_entry", ["e:17:extdoor", "w:17:open:3"]),
 		R("Janitorial store", -40, 22, -28, 32, "janitor", ["n:-29:door"]),
 		R("Public restrooms", -28, 22, -18, 32, "restroom", ["n:-23:door"]),

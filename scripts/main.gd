@@ -71,13 +71,13 @@ func prepare_loadout() -> void:
 			grid.changed.connect(gear._changed)
 	loadout = {"pack": pack, "pockets": pockets, "gear": gear, "weapon": "", "armor": ""}
 	if saved.is_empty() and profile.profile.pending_result.is_empty():
-		for id in ["m_four", "patrol", "stanag_magazine", "stanag_magazine", "five_five_six"]:
+		for id in ["m_four", "carrier_single", "stanag_magazine", "stanag_magazine", "five_five_six"]:
 			for index in range(stash_view.slots.size()):
 				if stash_view.slots[index].id != id:
 					continue
 				var destination := pack
 				if id == "m_four": destination = gear.slots.primary
-				elif id == "patrol": destination = gear.slots.body_armor
+				elif id == "carrier_single": destination = gear.slots.body_armor
 				elif id == "five_five_six" or id == "stanag_magazine": destination = pockets
 				if not InventoryManager.move(stash_view, index, destination):
 					InventoryManager.move(stash_view, index, pack)
@@ -142,7 +142,7 @@ func deploy(practice_mode: bool = false) -> void:
 	var pack := RaidInventory.new(catalog.items, 10, 18 if practice_mode else 6)
 	if practice_mode:
 		pack.add("m_four", 1)
-		pack.add("patrol", 1)
+		pack.insert_instance(PlateInventory.loaded("carrier_single", "plate_steel", catalog.items))
 		pack.add("field_rig", 1)
 		pack.add("five_five_six", 64)
 		for rounds in [30, 30]:

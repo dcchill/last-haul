@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ArmorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/armor_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "carrier_dual"
+display_name = "Dual plate carrier"
+plate_slots = 2
+carrier_weight = 0.75
+max_durability = 0
+color = Color(0.33725, 0.38039, 0.41961, 1)

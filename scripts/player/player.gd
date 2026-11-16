@@ -260,12 +260,13 @@ func drive_movement(input: Vector2, jump: bool, sprint: bool, _delta: float) -> 
 	var state := participant()
 	if state != null:
 		burden = weight_rules.burden(state.total_weight())
-		sprinting = sprinting and state.stamina > 0
+		sprinting = sprinting and state.stamina > 0 and state.pending_plate.is_empty()
 		if sprinting:
 			state.stamina = maxf(0, state.stamina - weight_rules.sprint_drain * lerpf(1, weight_rules.heavy_drain_multiplier, burden) * 0.05)
 		else:
 			state.stamina = minf(weight_rules.stamina_capacity, state.stamina + weight_rules.recovery * lerpf(1, weight_rules.heavy_recovery_multiplier, burden) * 0.05)
 	var speed_scale := lerpf(1, weight_rules.sprint_multiplier if sprinting else weight_rules.walk_multiplier, burden)
+	if state != null: speed_scale *= state.armor.movement_multiplier()
 	var displacement := movement.integrate(input, rotation.y, grounded, sprinting, jump, crouching, 0.6, speed_scale, lerpf(1, weight_rules.jump_multiplier, burden))
 	var before_position := global_position
 	previous_position = before_position
@@ -298,7 +299,7 @@ func drive_movement(input: Vector2, jump: bool, sprint: bool, _delta: float) -> 
 		if not was_grounded and fall_distance > 0:
 			motion.land(minf(1, fall_distance / 4.0))
 			if fall_distance > 3 and authority != null:
-				authority._apply_damage(self, ceilf(fall_distance - 3), null, true)
+				authority._apply_damage(self, ceilf(fall_distance - 3) * 10.0, null, true)
 		fall_distance = 0
 	velocity = (global_position - before_position) * 20
 	if grounded and authority != null and authority.is_active():

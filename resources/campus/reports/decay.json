@@ -1,0 +1,105 @@
+{
+	"decals": {
+		"distribution/1": 43,
+		"distribution_wing/1": 95,
+		"distribution_wing/2": 71,
+		"exterior/1": 2,
+		"lab1/1": 260,
+		"lab1/2": 260,
+		"lab1/3": 260,
+		"lab1/4": 260,
+		"lab2/1": 260,
+		"lab2/2": 259,
+		"lab2/3": 215,
+		"lab2/4": 166
+	},
+	"profiles": {
+		"1": {
+			"boarded": 0.15,
+			"broken": 0.3,
+			"cont": 0.15,
+			"dust": 0.1,
+			"scav": 0.9,
+			"trash": 0.9,
+			"wet": 0.7
+		},
+		"2": {
+			"boarded": 0.08,
+			"broken": 0.22,
+			"cont": 0.4,
+			"dust": 0.25,
+			"scav": 0.55,
+			"trash": 0.55,
+			"wet": 0.45
+		},
+		"3": {
+			"boarded": 0.03,
+			"broken": 0.12,
+			"cont": 0.75,
+			"dust": 0.55,
+			"scav": 0.15,
+			"trash": 0.2,
+			"wet": 0.3
+		},
+		"4": {
+			"boarded": 0.0,
+			"broken": 0.08,
+			"cont": 0.95,
+			"dust": 0.7,
+			"scav": 0.05,
+			"trash": 0.08,
+			"wet": 0.45
+		}
+	},
+	"windows": {
+		"distribution_wing/1": {
+			"boarded": 3,
+			"intact": 16,
+			"shattered": 13
+		},
+		"distribution_wing/2": {
+			"boarded": 2,
+			"intact": 29,
+			"shattered": 8
+		},
+		"lab1/1": {
+			"boarded": 21,
+			"intact": 88,
+			"shattered": 39
+		},
+		"lab1/2": {
+			"boarded": 5,
+			"intact": 82,
+			"shattered": 40
+		},
+		"lab1/3": {
+			"boarded": 7,
+			"intact": 84,
+			"shattered": 9
+		},
+		"lab1/4": {
+			"intact": 108,
+			"shattered": 8
+		},
+		"lab2/1": {
+			"boarded": 10,
+			"intact": 52,
+			"shattered": 27
+		},
+		"lab2/2": {
+			"boarded": 4,
+			"intact": 72,
+			"shattered": 21
+		},
+		"lab2/3": {
+			"barred": 7,
+			"boarded": 1,
+			"intact": 89,
+			"shattered": 15
+		},
+		"lab2/4": {
+			"intact": 61,
+			"shattered": 6
+		}
+	}
+}

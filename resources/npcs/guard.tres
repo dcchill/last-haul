@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NPCDef" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/npc_def.gd" id="1"]
-[ext_resource type="Resource" path="res://resources/armor/vest.tres" id="2"]
+[ext_resource type="Resource" path="res://resources/armor/carrier_single.tres" id="2"]
 
 [resource]
 script = ExtResource("1")

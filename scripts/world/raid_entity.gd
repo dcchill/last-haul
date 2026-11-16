@@ -14,6 +14,6 @@ var health: float
 var remaining: int = 0
 
 func _ready() -> void:
-	health = max_health
+	health = max_health * 10.0
 	if loot != null:
 		remaining = loot.quantity

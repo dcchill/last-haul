@@ -27,7 +27,7 @@ var armor_plates: ArmorPlates
 @onready var body: Node3D = $Visual
 
 func _ready() -> void:
-	health = archetype.health
+	health = archetype.health * 10.0
 	if archetype.armor != null:
 		armor_plates = ArmorPlates.new(archetype.armor)
 	last_heard = global_position

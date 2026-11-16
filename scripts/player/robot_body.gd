@@ -16,7 +16,7 @@ var clock := 0.0
 var boot_left := 1.2
 var damage_left := 0.0
 var landing := 0.0
-var previous_health := 20.0
+var previous_health := RaidParticipant.MAX_HEALTH
 var was_grounded := false
 var face_state := "normal"
 

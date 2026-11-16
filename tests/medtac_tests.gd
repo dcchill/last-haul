@@ -275,7 +275,7 @@ func migration_checks() -> void:
 	file.store_string(JSON.stringify(saved))
 	file.close()
 	var restored:=ProfileStore.new(app.catalog,path)
-	check(restored.load_profile() and restored.profile.version==6,"version five medical migration succeeds")
+	check(restored.load_profile() and restored.profile.version==ProfileStore.VERSION,"version five medical migration succeeds")
 	check(restored.profile.staged.pack.slots[0].storage.slots[0].id=="infection_suppressant" and restored.profile.staged.pack.slots[1].id=="infection_suppressant","nested and staged legacy supplies converted")
 	check(restored.profile.pending_result.items[0].id=="infection_suppressant" and restored.profile.pending_result.result.raid_id=="migration-pending","pending reward survives conversion")
 	check(restored.profile.staged.pack.slots[1].uid==saved.staged.pack.slots[1].uid and JSON.parse_string(JSON.stringify(restored.profile.stash))==JSON.parse_string(JSON.stringify(saved.stash)),"migration retains item identities and unrelated possessions")

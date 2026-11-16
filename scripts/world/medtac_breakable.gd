@@ -7,12 +7,12 @@ extends StaticBody3D
 @export_enum("glass", "light", "barricade") var kind := "glass"
 @export var navigation_link: NodePath
 @export var protected := false
-var health := 12.0
+var health := 120.0
 var broken := false
 var light_enabled := true
 
 func _ready() -> void:
-	health = max_health
+	health = max_health * 10.0
 	add_to_group("medtac_breakables")
 	if kind=="light":
 		for mesh in find_children("*","MeshInstance3D",true,false):

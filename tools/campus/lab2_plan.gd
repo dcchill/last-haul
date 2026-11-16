@@ -20,7 +20,7 @@ static func patient_rooms(first: int, x0: float, z0: float, z1: float, count: in
 
 static func plan() -> Dictionary:
 	return {
-		"id": "lab2", "title": "Lab 2 Clinical", "origin": Vector3(50, 0, 45.6), "bounds": Rect2(-44.5, -15.5, 89, 31), "style": "ribbon",
+		"id": "lab2", "title": "Lab 2 Clinical", "origin": Vector3(50, 0, 45.6), "bounds": Rect2(-44.5, -15.5, 89, 31), "style": "ribbon", "roof_failure": Rect2(3, 10, 5, 4),
 		"cores": [
 			{"kind": "stair", "id": "StairWest", "rect": Rect2(-44.5, -5.7, 9, 4.4), "landing": "e", "top": 4},
 			{"kind": "stair", "id": "StairEast", "rect": Rect2(35.5, 1.3, 9, 4.4), "landing": "w", "top": 5},
@@ -56,7 +56,7 @@ static func floor_1() -> Dictionary:
 		R("Admissions office", 8, 8.5, 16, 15.5, "office", ["n:12:door"]),
 		R("Medical records", 16, 8.5, 24, 15.5, "records", ["n:20:door"]),
 		R("Security post", 24, 8.5, 32, 15.5, "security", ["n:28:door"]),
-		R("Linen and laundry", 32, 8.5, 38, 15.5, "laundry", ["n:35:door"]),
+		R("Linen and laundry", 32, 8.5, 38, 15.5, "laundry", ["n:35:door"], {"fire": true}),
 		R("Deliveries", 38, 8.5, 44.5, 15.5, "loading", ["n:41:door", "s:41:extdoor"]),
 		R("Ambulance dispatch", -44.5, -1.3, -35.5, 5.7, "dispatch", ["s:-40:door"]),
 		R("Emergency staff station", -32.7, -5.7, -22, 5.7, "nurse_station", ["n:-27:open:3", "s:-27:open:3"]),

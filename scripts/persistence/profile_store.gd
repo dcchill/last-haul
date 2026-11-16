@@ -2,7 +2,8 @@ class_name ProfileStore
 extends RefCounted
 
 signal problem(message: String)
-const VERSION := 6
+const VERSION := 7
+const VESTS := {"patrol": ["carrier_single", "plate_steel"], "vest": ["carrier_single", "plate_ceramic"], "sentinel": ["carrier_dual", "plate_steel"], "bastion": ["carrier_dual", "plate_ceramic"], "juggernaut": ["carrier_triple", "plate_composite"]}
 const STASH_DEF: ContainerDef = preload("res://resources/containers/stash.tres")
 var path: String
 var catalog: Catalog
@@ -98,15 +99,15 @@ func _valid_armory_grid(grid: RaidInventory, seen: Dictionary) -> bool:
 	return true
 
 func _valid_legacy(value: Variant) -> bool:
-	if value is Dictionary and value.get("version") == 5:
+	var historical := ProfileStore.new(_historical_catalog(), path)
+	if value is Dictionary and (value.get("version") == 5 or value.get("version") == 6):
 		var candidate: Dictionary = value.duplicate(true)
 		candidate.version = VERSION
-		return valid(candidate)
-	if _valid_v4(value):
-		return true
+		return historical.valid(candidate)
+	if historical._valid_v4(value): return true
 	if not _header_valid(value) or (value.get("version") != 1 and value.get("version") != 2 and value.get("version") != 3):
 		return false
-	var legacy_items := catalog.items.duplicate()
+	var legacy_items := historical.catalog.items.duplicate()
 	# Validate historical footprints without registering removed items for play.
 	for tier in ArmoryContent.REMOVED_ARMOR_TIERS:
 		for slot in ["helmet", "chestplate", "leggings", "boots"]:
@@ -165,7 +166,7 @@ func load_profile(_starter_loadout: String = "standard") -> bool:
 func _starter_profile() -> Dictionary:
 	var inventory := RaidInventory.new(catalog.items, STASH_DEF.dimensions.x, STASH_DEF.dimensions.y)
 	inventory.add("m_four", 1)
-	inventory.add("patrol", 1)
+	inventory.insert_instance(PlateInventory.loaded("carrier_single", "plate_steel", catalog.items))
 	inventory.add("five_five_six", 60)
 	for rounds in [30, 30]:
 		var state := ArmoryInstance.fresh("stanag_magazine", catalog.items)
@@ -186,19 +187,24 @@ func _migrate(value: Dictionary) -> bool:
 		var backup_path := path + ".v%d-%s.bak" % [int(value.version), _new_id()]
 		if DirAccess.copy_absolute(path, backup_path) != OK:
 			return _fail("Could not back up the original profile for migration.")
-	if value.version == 5:
+	if value.version == 5 or value.version == 6:
 		# Version 5 already has the complete nested layout and pending-result journal.
 		# Never send it through the older stash-only migration.
 		var upgraded: Dictionary = value.duplicate(true)
 		upgraded.version = VERSION
 		_convert_supplies(upgraded)
-		if not _write(upgraded): return _fail("Could not migrate medical supplies; original retained.")
+		_convert_armor(upgraded)
+		if not _repair_armor_layout(upgraded) or not _write(upgraded): return _fail("Could not migrate armor; original retained.")
 		return true
 	var inventory := RaidInventory.new(catalog.items, 10, 18)
+	var converted_entries: Array[Dictionary] = []
 	for old in value.stash:
 		var encoded := _migrate_entry(old)
 		if encoded.is_empty():
 			return _fail("Invalid nested legacy item; original preserved.")
+		converted_entries.append(encoded)
+		_rehome_item(encoded, converted_entries)
+	for encoded in converted_entries:
 		var entry := InventoryPersistence.decode_item(encoded, catalog.items, {})
 		if entry.is_empty():
 			return _fail("Invalid legacy item metadata; original preserved.")
@@ -233,16 +239,17 @@ func _migrate_entry(old: Dictionary, depth: int = 0) -> Dictionary:
 	var replacement := ArmoryContent.removed_armor_replacement(id)
 	if not replacement.is_empty():
 		id = replacement
-	if not catalog.items.has(id):
+	var historical := _historical_catalog()
+	if not historical.items.has(id):
 		return {}
 	var encoded := old.duplicate(true)
 	encoded.id = id
-	encoded.state = old.get("state", ArmoryInstance.fresh(id, catalog.items)).duplicate(true)
+	encoded.state = old.get("state", ArmoryInstance.fresh(id, historical.items)).duplicate(true)
 	if not replacement.is_empty():
 		var identity: String = encoded.state.get("instance_id", _new_id())
-		encoded.state = ArmoryInstance.fresh(id, catalog.items)
+		encoded.state = ArmoryInstance.fresh(id, historical.items)
 		encoded.state.instance_id = identity
-		var armor: ArmorDef = catalog.definitions[id]
+		var armor: ArmorDef = historical.definitions[id]
 		encoded.state.wear = mini(armor.max_durability, int(old.get("state", {}).get("wear", 0)))
 	encoded.x = int(old.get("x", 0))
 	encoded.y = int(old.get("y", 0))
@@ -259,6 +266,7 @@ func _migrate_entry(old: Dictionary, depth: int = 0) -> Dictionary:
 				return {}
 			children.append(migrated)
 		encoded.storage.slots = children
+	_convert_armor(encoded)
 	return encoded
 
 func _fail(message: String) -> bool:
@@ -354,3 +362,83 @@ func commit_result(result: Dictionary, loot: Array[Dictionary], equipment: Array
 	candidate.committed_raids.append(result.raid_id)
 	candidate.pending_result = {}
 	return _write(candidate)
+
+func _historical_catalog() -> Catalog:
+	var historical := Catalog.new()
+	historical.items = catalog.items.duplicate()
+	historical.definitions = catalog.definitions.duplicate()
+	for id in VESTS:
+		var armor: ArmorDef = load("res://resources/armor/" + id + ".tres")
+		historical.definitions[id] = armor
+		var item := historical._inventory_item(armor, 1, 2, 3, "armor")
+		item.equipment_slots = PackedStringArray(["body_armor"])
+		item.weight = 2.0
+		historical.items[id] = item
+	return historical
+
+func _convert_armor(value: Variant) -> void:
+	if value is Dictionary:
+		if VESTS.has(value.get("id", "")):
+			var old: ArmorDef = load("res://resources/armor/" + str(value.id) + ".tres")
+			var ratio := 1.0 - float(value.get("state", {}).get("wear", 0)) / old.max_durability
+			var mapping: Array = VESTS[value.id]
+			var loaded := PlateInventory.loaded(mapping[0], mapping[1], catalog.items, ratio)
+			var identity: String = value.get("state", {}).get("instance_id", value.get("uid", _new_id()))
+			value.id = mapping[0]
+			value.uid = identity
+			value.state = loaded.state
+			value.state.instance_id = identity
+			value.erase("durability")
+		for key in value:
+			if key != "metadata": _convert_armor(value[key])
+	elif value is Array:
+		for child in value: _convert_armor(child)
+
+func _encoded_weight(entry: Dictionary) -> float:
+	var total: float = catalog.items[entry.id].weight * int(entry.get("quantity", 1))
+	if entry.has("storage"):
+		for child in entry.storage.slots: total += _encoded_weight(child)
+	var state: Dictionary = entry.get("state", {})
+	for child in [state.get("magazine", {})] + state.get("attachments", {}).values() + state.get("plates", []):
+		if not child.is_empty(): total += _encoded_weight(child)
+	for id in state.get("ammo", []): total += catalog.items[id].weight
+	if catalog.items.has(state.get("chamber", "")): total += catalog.items[state.chamber].weight
+	return total
+
+func _rehome_item(entry: Dictionary, overflow: Array[Dictionary]) -> void:
+	if entry.has("storage"): _rehome_grid(entry.storage, overflow)
+
+func _rehome_grid(encoded: Dictionary, overflow: Array[Dictionary]) -> void:
+	for entry in encoded.slots: _rehome_item(entry, overflow)
+	var config_path: String = encoded.get("config", "")
+	if config_path.is_empty(): return
+	var config: ContainerDef = load(config_path)
+	if config.weight_limit <= 0: return
+	var weight := 0.0
+	for entry in encoded.slots: weight += _encoded_weight(entry)
+	while weight > config.weight_limit + 0.00001 and not encoded.slots.is_empty():
+		var entry: Dictionary = encoded.slots.pop_back()
+		weight -= _encoded_weight(entry)
+		overflow.append(entry)
+		if encoded.has("search_order"): encoded.search_order.erase(entry.get("uid", entry.get("state", {}).get("instance_id", "")))
+		encoded.discovered = mini(int(encoded.get("discovered", 0)), encoded.slots.size())
+
+func _repair_armor_layout(candidate: Dictionary) -> bool:
+	var overflow: Array[Dictionary] = []
+	for entry in candidate.stash: _rehome_item(entry, overflow)
+	for grid in candidate.staged.values(): _rehome_grid(grid, overflow)
+	if not candidate.pending_result.is_empty():
+		var pending_overflow: Array[Dictionary] = []
+		for entry in candidate.pending_result.items: _rehome_item(entry, pending_overflow)
+		candidate.pending_result.items.append_array(pending_overflow)
+	var stash := InventoryPersistence.decode_entries(candidate.stash, catalog.items, Vector2i(int(candidate.stash_width), int(candidate.stash_height)))
+	if stash == null: return false
+	for encoded in overflow:
+		var entry := InventoryPersistence.decode_item(encoded, catalog.items, {})
+		if entry.is_empty(): return false
+		while not stash.add_entry(entry):
+			if stash.height >= 128: return false
+			stash.height += 1
+	candidate.stash = stash.snapshot()
+	candidate.stash_height = stash.height
+	return true

@@ -35,6 +35,8 @@ static func weight(entry: Dictionary, definitions: Dictionary) -> float:
 		total += weight(state.magazine, definitions)
 	for attachment in state.get("attachments", {}).values():
 		total += weight(attachment, definitions)
+	for plate in state.get("plates", []):
+		if not plate.is_empty(): total += weight(plate, definitions)
 	for ammo in state.get("ammo", []):
 		if definitions.has(ammo):
 			total += definitions[ammo].weight

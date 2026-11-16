@@ -9,7 +9,8 @@ var equipment: EquipmentComponent
 var pockets: RaidInventory
 var transactions: InventoryTransactions
 var stamina := 100.0
-var health := 20.0
+const MAX_HEALTH := 200.0
+var health := MAX_HEALTH
 const EXTRACTION_SECONDS := 15.0
 const INFECTION_CAPACITY := 1200.0
 var infection_capacity := INFECTION_CAPACITY
@@ -26,6 +27,7 @@ var quickbar: Array[String] = []
 var selected := 0
 var armor_slots: Dictionary = {}
 var weapons: Dictionary = {}
+var pending_plate: Dictionary = {}
 var clock := 0
 var next_shot := 0
 var grenade_cooldown := 0

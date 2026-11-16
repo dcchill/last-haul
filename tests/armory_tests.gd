@@ -36,7 +36,7 @@ func _definitions() -> void:
 	for source in ArmoryContent.DATA.data.guns:
 		var gun: WeaponDef = catalog.definitions[source.id]
 		check(gun.interval_ticks == int(source.interval) and gun.reload_ticks == int(source.reload_ticks), source.id + " timing matches source")
-		check(gun.damage == source.damage and gun.pellets == int(source.pellets) and gun.magazine_size == int(source.capacity), source.id + " damage, pellets, feed capacity")
+		check(gun.damage == source.damage * 10.0 and gun.pellets == int(source.pellets) and gun.magazine_size == int(source.capacity), source.id + " scaled damage, pellets, feed capacity")
 		check(gun.automatic == source.automatic and gun.projectile_speed == source.speed and gun.head_multiplier == source.head_multiplier, source.id + " fire mode, velocity, head multiplier")
 		check(ResourceLoader.exists(gun.model_path) and ResourceLoader.exists(gun.texture_path) and ResourceLoader.exists(gun.animation_path), source.id + " presentation assets available offline")
 		var clips: Dictionary = load(gun.animation_path).data.animations
@@ -169,14 +169,7 @@ func _references() -> void:
 			if tick == int(fixtures.data.movement[name][sample].tick):
 				check(absf(z - float(fixtures.data.movement[name][sample].z)) < 0.001, name + " movement source fixture tick %d" % tick)
 				sample = mini(sample + 1, fixtures.data.movement[name].size() - 1)
-	for armor in fixtures.data.armor:
-		check(is_equal_approx(ArmorPlates.reduce(armor.damage, armor.armor, armor.toughness), armor.result), "Minecraft armor fixture")
-	var armor := ArmorPlates.new(catalog.definitions.patrol)
-	armor.absorb(8)
-	check(armor.entries.chestplate.state.wear == 2, "armor wear uses incoming damage / 4")
-	armor.entries.chestplate.state.wear = armor.definition.max_durability - 1
-	check(armor.absorb(4) == 4 and armor.points() == 0, "broken armor stops protecting")
-	check(armor.movement_multiplier() == 1, "Minecraft armor has no weight slow")
+	load("res://tests/armor_tests.gd").new().run(self)
 	var results: Array[Dictionary] = []
 	for fps in [30, 60, 144]:
 		var accumulator := 0.0
@@ -215,7 +208,7 @@ func _persistence() -> void:
 	if migrated.profile.stash.is_empty():
 		print("MIGRATION ERROR: ", migrated.load_error)
 		return
-	check(migrated.profile.stash[0].id == "m_four" and migrated.profile.stash[1].id == "vest" and migrated.profile.stash[2].quantity == 60, "legacy gun, armor and ammo mappings")
+	check(migrated.profile.stash[0].id == "m_four" and migrated.profile.stash[1].id == "carrier_single" and migrated.profile.stash[2].quantity == 60, "legacy gun, armor and ammo mappings")
 	check(migrated.profile.committed_raids.has("old-raid"), "migration preserves outcome ledger")
 	var v3 := store.profile.duplicate(true)
 	v3.version = 3
@@ -235,7 +228,7 @@ func _persistence() -> void:
 	for entry in upgraded.profile.stash:
 		check(ArmoryContent.removed_armor_replacement(entry.id).is_empty(), "upgraded stash contains no vanilla item")
 		if entry.state.get("instance_id", "") == "old-vanilla-armor":
-			converted = entry.id == "patrol" and entry.state.wear == 7
+			converted = entry.id == "carrier_single" and is_equal_approx(entry.state.plates[0].state.wear, 180.0 * 7 / 60)
 		if entry.state.get("instance_id", "") == equipped_id:
 			gun_preserved = entry.state.magazine.state.rounds == 17 and entry.state.attachments.optic.id == "four_x_scope"
 	check(converted and gun_preserved, "v3 conversion keeps armor condition and gun attachments/ammunition")
@@ -313,7 +306,8 @@ func _integration() -> void:
 	var state: RaidParticipant = raid.participants[app.profile.profile.player_id]
 	raid.set_physics_process(false)
 	raid.player.accepts_local_input = false
-	check(state.health == 20 and raid.mounts.size() == 2, "Minecraft health and mounted practice stations")
+	check(state.health == 200 and raid.mounts.size() == 2, "full health and mounted practice stations")
+	await load("res://tests/armor_tests.gd").new().integration(self, raid, state)
 	check(not raid.request_fire("stranger") and not raid.request_reload("stranger"), "authority rejects unknown player")
 	for source in ArmoryContent.DATA.data.guns:
 		state.inventory.slots.clear()
@@ -375,7 +369,7 @@ func _integration() -> void:
 	check(mount.ammo == 1, "unpowered mount cannot fire")
 	state.health = 3
 	raid._apply_damage(raid.player, 100, null, true)
-	check(state.health == 20 and raid.is_active(), "practice death restores health")
+	check(state.health == 200 and raid.is_active(), "practice death restores health")
 	check(raid.practice_reset(state.actor.entity_id), "practice reset")
 	check(app.profile.profile == original_profile, "practice never debits or mutates stash")
 	raid.request_abandon(state.actor.entity_id)
@@ -438,7 +432,7 @@ func _raid_outcomes() -> void:
 	var equipped_instance: String = state.weapon.instance_id
 	state.weapon.data.attachments.optic = {"id": "four_x_scope", "quantity": 1, "state": ArmoryInstance.fresh("four_x_scope", catalog.items)}
 	state.refresh_armor(catalog)
-	state.armor.entries.chestplate.state.wear = 9
+	state.armor.entries.chestplate.state.plates[0].state.wear = 9.0
 	raid.player.global_position = Vector3(-10, 0.02, 11)
 	for frame in range(5): await physics_frame
 	raid._update_extraction(id, 1)
@@ -456,8 +450,8 @@ func _raid_outcomes() -> void:
 	for entry in app.profile.profile.stash:
 		if entry.id == "m_four" and entry.state.instance_id == equipped_instance:
 			saved_gun = entry.state.magazine.state.rounds == 7 and entry.state.attachments.optic.id == "four_x_scope"
-		elif entry.id == "patrol":
-			saved_armor = entry.state.wear == 9
+		elif entry.id == "carrier_single":
+			saved_armor = entry.state.plates[0].state.wear == 9
 	check(saved_gun and saved_armor, "extraction persists loaded magazine, optic and armor wear")
 	var stash_before: Array = app.profile.profile.stash.duplicate(true)
 	app.retry_save()
@@ -574,11 +568,11 @@ func _physics_regressions() -> void:
 		state.armor_slots.clear()
 		state.inventory.add(source.id, 1)
 		var armor_entry: Dictionary = state.inventory.slots.back()
-		check(raid.request_equip_armor("physics-player", armor_entry.state.instance_id) and state.armor.points() == source.points, "equip " + str(source.id))
-		check(raid.request_unequip_armor("physics-player", source.slot) and state.armor.points() == 0, "unequip " + str(source.id))
+		check(raid.request_equip_armor("physics-player", armor_entry.state.instance_id) and state.armor.protection() == 0, "equip " + str(source.id))
+		check(raid.request_unequip_armor("physics-player", source.slot) and state.armor.protection() == 0, "unequip " + str(source.id))
 	state.inventory.slots.clear()
 	state.inventory.add("maska", 1)
-	check(raid.request_equip_armor("physics-player", state.inventory.slots[0].state.instance_id) and state.armor.points() == 0, "Maska remains cosmetic when equipped")
+	check(raid.request_equip_armor("physics-player", state.inventory.slots[0].state.instance_id) and state.armor.protection() == 0, "Maska remains cosmetic when equipped")
 	raid.player.toggle_maska()
 	check(raid.player.maska_open and raid.player.maska_view.clips.has("open"), "Maska opening animation comes from the closed model")
 	# A physical wall occludes the same blast rays that were previously exposed.
@@ -601,13 +595,13 @@ func _physics_regressions() -> void:
 			wall.blast(wall.global_position + Vector3(0, 0, 0.6), 3)
 			check(wall.remaining_cells() < cells, "explosions destroy eligible voxel cells")
 			break
-	state.health = 20
+	state.health = 200
 	raid.projectiles.clear()
 	raid.player.global_position = Vector3(10, 6, 10)
 	raid.player.movement.velocity = Vector3.ZERO
 	raid.player.move_input = Vector2.ZERO
 	for tick in range(45): raid.gameplay_step()
-	check(raid.player.grounded and state.health < 20 and state.health > 10, "physical fall applies Minecraft fall damage")
+	check(raid.player.grounded and state.health < 200 and state.health > 100, "physical fall applies scaled fall damage")
 	raid.player._set_crouching(true)
 	var roof := StaticBody3D.new()
 	var roof_collision := CollisionShape3D.new()

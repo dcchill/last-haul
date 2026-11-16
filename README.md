@@ -24,9 +24,9 @@ godot --path . --editor
 godot --path .
 ```
 
-The project uses the Forward+ renderer and Jolt physics. The default viewport is 1280×720 and scales with the window. World quality defaults to Medium; use 1920×1080 for the district performance benchmark.
+The project uses the Forward+ renderer and Jolt physics. The default viewport is 1280Ã—720 and scales with the window. World quality defaults to Medium; use 1920Ã—1080 for the district performance benchmark.
 
-The game includes an optional visual treatment: 2×2 pixelation, ordered dithering, restrained banding, gray-green grading, distance haze, and rare faint flickers. Settings offers Pixelation **Off / 2x / 3x / 4x**, overall strength, enable, and flicker controls. Larger pixels reduce small details; the HUD stays crisp. Press **F8** in a raid (including pause) for a temporary on/off comparison. See [sensor tuning and runtime controls](docs/signal-decay.md).
+The game includes an optional visual treatment: 2Ã—2 pixelation, ordered dithering, restrained banding, gray-green grading, distance haze, and rare faint flickers. Settings offers Pixelation **Off / 2x / 3x / 4x**, overall strength, enable, and flicker controls. Larger pixels reduce small details; the HUD stays crisp. Press **F8** in a raid (including pause) for a temporary on/off comparison. See [sensor tuning and runtime controls](docs/signal-decay.md).
 
 ## Controls
 
@@ -65,6 +65,8 @@ Menus release the mouse and show keyboard focus. Pause stops simulation; the loo
 | `assets/` | Original textures, shaders, physical signs and source art; baked props live in scenes/resources |
 | `tests/`, `docs/` | Dependency-free checks and architecture/networking notes |
 
+Armor uses one-, two-, and three-slot plate carriers. Insert or remove steel, ceramic, and composite plates through inventory context actions. Each raid change takes three seconds, blocks attacks and sprinting, and cancels on damage; press **X** to cancel. Base changes are immediate. Only the first installed plate protects each hit; depleted plates disappear. Torso shots and melee consume protection, while headshots, leg shots and falls bypass it.
+
 Open `.tres` assets in the Inspector to change rifle capacity/timing/range, round damage, material impact color/multiplier, vest protection, crate contents, item stack limits, or guard health/perception/movement/attack values. Definitions never hold live inventory, health, or ammo state. Add new definitions to `Catalog.PATHS`; keep content IDs unique and stable. Existing saves refer to item IDs, so changing an ID requires migrating those saves.
 
 Scene entities use explicit `entity_id` values, including the extraction zone. Duplicates or missing references block deployment. The player's stable ID is generated once in the profile. Targets and containers reset each deployment; the stash does not.
@@ -84,7 +86,7 @@ its [authoring pipeline](MEDTAC_MAP.md#authoring) when regenerating that map.
 
 ## Saves and authority
 
-Profiles live at `user://profile.json`; settings at `user://settings.cfg`. On Windows, `user://` normally resolves to `%APPDATA%/Godot/app_userdata/Last Haul/`. The version 6 profile stores the stash, staged equipment and inventories, physical item identities, nested contents, ammunition order, chamber state and committed raid IDs. Versions 1-5 migrate with an original-file backup. Validated temporary writes, backup recovery and corrupt-main preservation remain enabled. Completed results are journaled before credit and retained for retry when the stash is full. A disk failure that prevents journaling still requires retry before quitting.
+Profiles live at `user://profile.json`; settings at `user://settings.cfg`. On Windows, `user://` normally resolves to `%APPDATA%/Godot/app_userdata/Last Haul/`. The version 7 profile stores the stash, staged equipment and inventories, physical item identities, nested contents, ammunition order, chamber state and committed raid IDs. Versions 1-6 migrate with an original-file backup. Validated temporary writes, backup recovery and corrupt-main preservation remain enabled. Completed results are journaled before credit and retained for retry when the stash is full. A disk failure that prevents journaling still requires retry before quitting.
 
 See [inventory controls, architecture and migration](docs/inventory.md) for exact rules, editable resources and recovery behavior.
 

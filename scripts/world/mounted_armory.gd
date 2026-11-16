@@ -46,7 +46,7 @@ func authority_tick(authority: RaidAuthority) -> void:
 	next_shot = authority.gameplay_tick + (20 if item_id == "mounted_rpg" else 2)
 	var direction := -global_basis.z
 	var origin := global_position + Vector3.UP * 0.65 + direction * (2.0 if item_id == "mounted_rpg" else 1.1)
-	authority._spawn_projectile(origin, direction + Vector3.UP * 0.01, 4 if item_id == "mounted_rpg" else 8, 2, 3 if item_id == "mounted_rpg" else 4, 1.5, get_rid(), "rocket" if item_id == "mounted_rpg" else "bullet")
+	authority._spawn_projectile(origin, direction + Vector3.UP * 0.01, 4 if item_id == "mounted_rpg" else 8, 2, 30 if item_id == "mounted_rpg" else 40, 1.5, get_rid(), "rocket" if item_id == "mounted_rpg" else "bullet")
 	authority._play_tone(global_position, "explosion")
 	if item_id == "mounted_minigun":
 		authority._drop_item("nine_mm_casing", global_position)

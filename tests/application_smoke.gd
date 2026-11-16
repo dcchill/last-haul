@@ -149,7 +149,7 @@ func run() -> void:
 			app.ui.loot_container_grid.selected_index = 0
 			app.ui.loot_container_grid.slot_selected.emit(0)
 			check(app.ui.loot_container_grid.selected_index == 0, "loot selection stays visible")
-		check(state.inventory.add("patrol", 1), "add armor for loot equipment test")
+		check(state.inventory.add("carrier_single", 1), "add armor for loot equipment test")
 		var armor_index := state.inventory.find_instance(state.inventory.slots.back().state.instance_id)
 		var armor_id: String = state.inventory.slots[armor_index].state.instance_id
 		app.ui._equip_loot({"inventory": state.inventory, "index": armor_index}, "chestplate")
@@ -183,6 +183,32 @@ func run() -> void:
 		app.ui._sort_pack()
 		app.ui._close_container()
 		check(app.ui.mode == "hud", "loot container closes")
+	# Exercise the same context action, progress UI and authoritative timer used in play.
+	check(raid.practice_grant(id, "plate_steel"), "practice grants loose plates")
+	var plate_owner: RaidInventory = state.inventory
+	var loose_plate: Dictionary = {}
+	for entry in plate_owner.slots:
+		if entry.id == "plate_steel": loose_plate = entry; break
+	app.ui.show_inventory(true)
+	await settle()
+	app.ui.workspace.action("context", plate_owner, loose_plate.uid, Vector2(400, 300))
+	var plate_action := -1
+	for i in range(app.ui.workspace.context.item_count):
+		if app.ui.workspace.context.get_item_text(i).to_lower().begins_with("insert: body armor"):
+			plate_action = i
+			break
+	check(plate_action >= 0, "inventory context offers equipped carrier slot")
+	if plate_action >= 0:
+		app.ui.workspace.context.hide()
+		app.ui.workspace.menu_actions[plate_action].call()
+		await settle()
+		check(not state.pending_plate.is_empty() and app.ui.workspace.cancel_plate.visible, "inventory displays plate progress and cancellation")
+		await capture("armor-changing")
+		app.ui.show_hud()
+		raid.set_physics_process(false)
+		for tick in range(60): raid.gameplay_step()
+		check(state.pending_plate.is_empty() and state.armor.protection() > 0, "closing inventory allows timed insertion to finish")
+		raid.set_physics_process(true)
 	app.ui.show_practice()
 	await settle()
 	await capture("armory")

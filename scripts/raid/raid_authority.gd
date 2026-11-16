@@ -69,7 +69,7 @@ func deploy(player_id: String, data: Catalog, settings: SettingsStore, loadout: 
 	var pack: RaidInventory = loadout.get("pack", RaidInventory.new(catalog.items, 10, 6))
 	if loadout.is_empty():
 		pack.add("m_four", 1)
-		pack.add("patrol", 1)
+		pack.insert_instance(PlateInventory.loaded("carrier_single", "plate_steel", catalog.items))
 		pack.add("five_five_six", 60)
 		var mag := ArmoryInstance.fresh("stanag_magazine", catalog.items)
 		mag.rounds = 30
@@ -142,6 +142,11 @@ func request_input(player_id: String, trigger: bool, aim: bool, customizing: boo
 		return false
 	var state: RaidParticipant = participants[player_id]
 	state.last_input = gameplay_tick
+	if not state.pending_plate.is_empty():
+		if state.weapon != null:
+			state.weapon.trigger = false
+			state.weapon.aiming = false
+		return false
 	if state.weapon == null:
 		return request_melee(player_id) if trigger else false
 	var gun := state.weapon
@@ -158,6 +163,7 @@ func request_fire(player_id: String) -> bool:
 		return false
 	var state: RaidParticipant = participants[player_id]
 	var gun := state.weapon
+	if not state.pending_plate.is_empty(): return false
 	if gun == null:
 		return request_melee(player_id)
 	if not gun.fire():
@@ -191,6 +197,7 @@ func _spawn_projectile(origin: Vector3, direction: Vector3, speed: float, spread
 
 func request_reload(player_id: String, magazine_id: String = "auto") -> bool:
 	if not _allowed(player_id) or participants[player_id].weapon == null: return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var gun: WeaponState = participants[player_id].weapon
 	if gun.reload(magazine_id): return true
 	if gun.reload_end > 0:
@@ -208,6 +215,7 @@ func request_reload(player_id: String, magazine_id: String = "auto") -> bool:
 func request_select(player_id: String, index: int) -> bool:
 	if not _allowed(player_id):
 		return false
+	participants[player_id].pending_plate.clear()
 	var selected: bool = participants[player_id].select(index, catalog)
 	if selected:
 		player.refresh_view()
@@ -220,6 +228,8 @@ func inventory_service(player_id: String) -> InventoryTransactions:
 	if not state.opened_container.is_empty() and containers.has(state.opened_container):
 		state.transactions.roots.append(containers[state.opened_container])
 	var participant_ref: WeakRef = weakref(state)
+	state.transactions.defer_plate_change = func(request: Dictionary, source: RaidInventory, target: RaidInventory):
+		return request_plate_change(player_id, request, source, target)
 	state.transactions.authorize = func(grid: RaidInventory):
 		var current: RaidParticipant = participant_ref.get_ref()
 		if current == null: return false
@@ -303,23 +313,25 @@ func request_magazine_load(player_id: String, instance_id: String, unload: bool 
 
 func request_use(player_id: String, identity: String) -> bool:
 	if not _allowed(player_id): return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var state: RaidParticipant = participants[player_id]
 	var entry := state.entry_for(identity)
 	if entry.is_empty(): return false
 	var definition: ItemDef = catalog.items[entry.id]
 	if definition.heal_amount <= 0 and definition.stamina_amount <= 0 and definition.infection_seconds <= 0: return false
 	if definition.infection_seconds > 0 and state.infection_remaining >= state.infection_capacity: return false
-	if state.health >= 20 and definition.heal_amount > 0: return false
+	if state.health >= RaidParticipant.MAX_HEALTH and definition.heal_amount > 0: return false
 	var source := state.owner_of(identity)
 	var service := inventory_service(player_id)
 	if not service.submit(service.request("consume", source, null, identity, Vector2i(-1, -1), false, 1)).ok: return false
 	state.infection_remaining = minf(state.infection_capacity, state.infection_remaining + definition.infection_seconds)
-	state.health = minf(20.0, state.health + definition.heal_amount)
+	state.health = minf(RaidParticipant.MAX_HEALTH, state.health + definition.heal_amount * 10.0)
 	state.stamina = minf(100.0, state.stamina + definition.stamina_amount)
 	return true
 
 func request_melee(player_id: String) -> bool:
 	if not _allowed(player_id): return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var state: RaidParticipant = participants[player_id]
 	var slot: RaidInventory = state.equipment.slots.melee
 	if slot.slots.is_empty() or state.next_shot > gameplay_tick: return false
@@ -333,6 +345,7 @@ func request_melee(player_id: String) -> bool:
 func request_attachment(player_id: String, slot: String, incoming_id: String = "") -> bool:
 	if not _allowed(player_id) or slot not in ["optic", "muzzle", "grip"]:
 		return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var state: RaidParticipant = participants[player_id]
 	var gun := state.weapon
 	if gun == null or not gun.customizing or gun.reload_end > 0 or gun.cycling_bolt():
@@ -373,6 +386,7 @@ func request_attachment(player_id: String, slot: String, incoming_id: String = "
 func request_grenade(player_id: String, kind: String = "") -> bool:
 	if not _allowed(player_id):
 		return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var state: RaidParticipant = participants[player_id]
 	if state.grenade_cooldown > gameplay_tick or not state.pending_throw.is_empty():
 		return false
@@ -450,12 +464,12 @@ func _apply_projectile_hit(target: Node, projectile: Dictionary, hit: Dictionary
 	var damage: float = projectile.damage
 	if target is VoxelDestructible:
 		var surface: MaterialDef = target.material
-		var scaled := damage * surface.damage_multiplier * 600.0 / maxf(1.0, surface.resistance)
+		var scaled := damage * surface.damage_multiplier * 60.0 / maxf(1.0, surface.resistance)
 		target.damage_at(hit.position - hit.normal * 0.01, scaled, projectile.velocity.normalized())
 	if (target is RaidPlayer or target is RaidGuard) and Ballistics.headshot(target, hit.position):
 		damage *= float(projectile.head_multiplier)
 	var ammunition: AmmoDef = catalog.definitions.get(projectile.get("ammo_id", ""))
-	_apply_damage(target, damage, null, false, ammunition)
+	_apply_damage(target, damage, null, (target is RaidPlayer or target is RaidGuard) and not Ballistics.torso_hit(target, hit.position), ammunition)
 	return {"outcome": "hit", "damage": damage, "continues": false, "energy": 0.0}
 
 func _apply_damage(target: Node, damage: float, _material: MaterialDef = null, bypass_armor: bool = false, ammunition: AmmoDef = null) -> void:
@@ -464,14 +478,16 @@ func _apply_damage(target: Node, damage: float, _material: MaterialDef = null, b
 		return
 	if target is RaidPlayer and participants.has(target.entity_id):
 		var state: RaidParticipant = participants[target.entity_id]
+		if damage > 0: state.pending_plate.clear()
 		state.refresh_armor(catalog)
 		var applied := damage if bypass_armor else _protected_damage(state.armor, damage, ammunition)
 		state.refresh_armor(catalog)
+		state.equipment.slots.body_armor._notify()
 		state.health = maxf(0, state.health - applied)
 		health_changed.emit(target.entity_id, state.health)
 		if state.health <= 0:
 			if practice:
-				state.health = 20
+				state.health = RaidParticipant.MAX_HEALTH
 				notice.emit("Practice: health restored")
 			else:
 				_finish(false, "Killed in action | gear and loot lost")
@@ -508,7 +524,7 @@ func _explode(origin: Vector3, power: float) -> void:
 		if distance > 1:
 			continue
 		var force: float = (1.0 - distance) * _exposure(origin, target)
-		var damage := floorf((force * force + force) * 0.5 * 7.0 * diameter + 1.0)
+		var damage := floorf((force * force + force) * 0.5 * 7.0 * diameter + 1.0) * 10.0
 		_apply_damage(target, damage)
 		if target is RaidPlayer:
 			target.movement.velocity += (target.eye_position() - origin).normalized() * force * participants[target.entity_id].armor.knockback_multiplier()
@@ -899,6 +915,7 @@ func _update_extraction(player_id: String, delta: float) -> void:
 		_finish(true, "Extraction complete")
 
 func _finish(success: bool, reason: String) -> void:
+	for state in participants.values(): state.pending_plate.clear()
 	if not is_active():
 		return
 	phase = Phase.SUCCESS if success else Phase.FAILURE
@@ -962,7 +979,7 @@ func gameplay_step() -> void:
 			if not npc.authority_tick(0.05, target if target != null else player, ballistics): continue
 			if target == null: continue
 			if npc.archetype.melee:
-				_apply_damage(target, npc.archetype.damage)
+				_apply_damage(target, npc.archetype.damage * 10.0)
 			elif npc.weapon_state != null:
 				var weapon := npc.weapon_state
 				if weapon.magazine == 0:
@@ -996,6 +1013,7 @@ func gameplay_step() -> void:
 			state.opened_container = ""
 	if not is_active(): return
 	for id in participants:
+		_update_plate_change(participants[id])
 		_update_extraction(id, 0.05)
 
 func _update_infection(state: RaidParticipant, delta: float) -> void:
@@ -1042,6 +1060,7 @@ func _spawn_mount(id: String, at: Vector3, heading: int, filled: bool = false) -
 func request_place(player_id: String) -> bool:
 	if not _allowed(player_id):
 		return false
+	if not participants[player_id].pending_plate.is_empty(): return false
 	var state: RaidParticipant = participants[player_id]
 	var entry := state.held_entry()
 	if entry.is_empty() or catalog.items[entry.id].kind != "mount":
@@ -1120,19 +1139,20 @@ func practice_grant(player_id: String, id: String) -> bool:
 func practice_reset(player_id: String) -> bool:
 	if not practice or not _allowed(player_id):
 		return false
-	participants[player_id].health = 20
+	participants[player_id].health = RaidParticipant.MAX_HEALTH
 	projectiles.clear()
 	for entity in entities.values():
 		if entity is RaidEntity and entity.kind == "target":
-			entity.health = entity.max_health
+			entity.health = entity.max_health * 10.0
 			entity.collision_layer = 1
 			entity.get_node("MeshInstance3D").visible = true
-	guard.health = 20
-	guard.armor_plates = ArmorPlates.new(catalog.definitions.vest)
+	_initialize_npc(guard)
+	guard.health = 200
 	guard.state = RaidGuard.State.IDLE
 	guard.collision_layer = 1
 	guard.reset_visual()
 	var state: RaidParticipant = participants[player_id]
+	state.pending_plate.clear()
 	if state.weapon != null: state.weapon.cancel_reload()
 	for root in [state.inventory, state.pockets] + state.equipment.roots():
 		for grid in root.all_grids():
@@ -1151,20 +1171,24 @@ func practice_reset(player_id: String) -> bool:
 					else:
 						entry.state.rounds = definition.magazine_size if definition.magazine_id.is_empty() else 0
 						entry.state.erase("ammo")
-				elif kind == "armor": entry.state.wear = 0
+				elif kind == "plate": entry.state.wear = 0.0
+				elif kind == "armor":
+					for plate in entry.state.get("plates", []):
+						if not plate.is_empty(): plate.state.wear = 0.0
 				Ammunition.normalize(entry, catalog.items)
 			grid._notify()
 	state.refresh_armor(catalog)
 	return true
 
 func _initialize_npc(npc: RaidGuard) -> void:
-	npc.health = npc.archetype.health
+	npc.health = npc.archetype.health * 10.0
 	npc.inventory = RaidInventory.new(catalog.items, 10, 12)
 	npc.inventory.display_name = "Zombie remains" if npc.archetype.melee else "Scav equipment"
 	if npc.archetype.melee:
 		for id in npc.archetype.carried_items: npc.inventory.add(id, 1)
 	else:
-		for id in ["m_four", "vest", "small_pack", "field_rig", "medkit"]: npc.inventory.add(id, 1)
+		for id in ["m_four", "small_pack", "field_rig", "medkit"]: npc.inventory.add(id, 1)
+		npc.inventory.insert_instance(PlateInventory.loaded("carrier_single", "plate_steel", catalog.items))
 		var gun: Dictionary = npc.inventory.slots[0]
 		var magazine := ItemInstance.create(catalog.items.stanag_magazine, catalog.items)
 		magazine.state.rounds = 30
@@ -1178,7 +1202,7 @@ func _initialize_npc(npc: RaidGuard) -> void:
 		npc.armor_plates = ArmorPlates.new()
 		npc.armor_plates.definitions = catalog.definitions
 		for entry in npc.inventory.slots:
-			if entry.id == "vest": npc.armor_plates.entries.chestplate = entry
+			if entry.id == "carrier_single": npc.armor_plates.entries.chestplate = entry
 
 func _spawn_storage(contents: RaidInventory, origin: Vector3, title: String) -> String:
 	var drop := RaidEntity.new()
@@ -1229,6 +1253,7 @@ func request_drop(player_id: String, identity: String) -> bool:
 
 func practice_clear(player_id: String) -> void:
 	if not practice or not _allowed(player_id): return
+	participants[player_id].pending_plate.clear()
 	var state: RaidParticipant = participants[player_id]
 	for root in [state.inventory, state.pockets] + state.equipment.roots():
 		root.slots.clear()
@@ -1238,5 +1263,48 @@ func practice_clear(player_id: String) -> void:
 
 
 func _protected_damage(armor: ArmorPlates, damage: float, ammunition: AmmoDef) -> float:
-	var protected := armor.absorb(damage)
-	return lerpf(protected, damage, ammunition.bypass) if ammunition != null else protected
+	return armor.absorb(damage, true, ammunition.bypass if ammunition != null else 0.0)
+
+func _carried_grid(state: RaidParticipant, grid: RaidInventory) -> bool:
+	for root in [state.inventory, state.pockets] + state.equipment.roots():
+		if grid in root.all_grids(): return true
+	return false
+
+func request_plate_change(player_id: String, request: Dictionary, source: RaidInventory, target: RaidInventory) -> bool:
+	if not _allowed(player_id): return false
+	var state: RaidParticipant = participants[player_id]
+	if not state.pending_plate.is_empty() or not state.pending_throw.is_empty(): return false
+	if state.weapon != null and (state.weapon.reload_end > 0 or state.weapon.cycling_bolt()): return false
+	if not _carried_grid(state, source) or not _carried_grid(state, target): return false
+	if not PlateInventory.change(request, source, target, true): return false
+	var watched: Dictionary = {}
+	for grid: RaidInventory in [source, target]:
+		var ancestor := grid
+		while ancestor != null:
+			watched[ancestor] = ancestor.revision
+			ancestor = ancestor.parent_inventory.get_ref() if ancestor.parent_inventory != null else null
+	state.pending_plate = {"request": request.duplicate(true), "source": source, "target": target,
+		"watched": watched, "end": gameplay_tick + 60}
+	if state.weapon != null:
+		state.weapon.trigger = false
+		state.weapon.aiming = false
+	return true
+
+func cancel_plate_change(player_id: String) -> void:
+	if participants.has(player_id): participants[player_id].pending_plate.clear()
+
+func _update_plate_change(state: RaidParticipant) -> void:
+	if state.pending_plate.is_empty(): return
+	var pending: Dictionary = state.pending_plate
+	for grid: RaidInventory in pending.watched:
+		if grid.revision != pending.watched[grid] or not grid.is_accessible():
+			state.pending_plate.clear()
+			return
+	if not _carried_grid(state, pending.source) or not _carried_grid(state, pending.target):
+		state.pending_plate.clear()
+		return
+	if gameplay_tick < int(pending.end): return
+	state.pending_plate = {}
+	var ok := PlateInventory.change(pending.request, pending.source, pending.target)
+	refresh_inventory(state.actor.entity_id)
+	notice.emit("Plate changed" if ok else "Plate change cancelled: inventory unavailable or full")

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlateDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/plate_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "plate_steel"
+display_name = "Steel armor plate"
+reduction = 0.45
+capacity = 180.0
+weight = 3.0
+movement_cost = 0.03

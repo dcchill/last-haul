@@ -125,7 +125,7 @@ static func decode_item(encoded: Variant, definitions: Dictionary, seen: Diction
 	elif definition.container != null:
 		entry.storage = ItemInstance.create(definition, definitions).storage
 	Ammunition.normalize(entry, definitions)
-	for nested in [entry.state.get("magazine", {})] + entry.state.get("attachments", {}).values():
+	for nested in [entry.state.get("magazine", {})] + entry.state.get("attachments", {}).values() + entry.state.get("plates", []):
 		if nested.is_empty():
 			continue
 		for identity in ArmoryInstance.ids(nested.state):

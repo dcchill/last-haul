@@ -23,8 +23,9 @@ const PATHS: Array[String] = [
 	"res://resources/weapons/attachments/balanced_compensator.tres",
 	"res://resources/weapons/attachments/precision_stock.tres",
 	"res://resources/weapons/attachments/heavy_barrel.tres",
-	"res://resources/materials/concrete.tres", "res://resources/armor/patrol.tres", "res://resources/armor/vest.tres",
-	"res://resources/armor/sentinel.tres", "res://resources/armor/bastion.tres", "res://resources/armor/juggernaut.tres",
+	"res://resources/materials/concrete.tres", "res://resources/armor/carrier_single.tres",
+	"res://resources/armor/carrier_dual.tres", "res://resources/armor/carrier_triple.tres",
+	"res://resources/armor/plate_steel.tres", "res://resources/armor/plate_ceramic.tres", "res://resources/armor/plate_composite.tres",
 	"res://resources/loot/crate.tres", "res://resources/npcs/guard.tres", "res://resources/npcs/zombie.tres"]
 var definitions: Dictionary = {}
 var items: Dictionary = {}
@@ -45,6 +46,10 @@ func load_all() -> String:
 			items[definition.id] = _inventory_item(definition, 1, 2, 5, "weapon")
 		elif definition is ArmorDef:
 			items[definition.id] = _inventory_item(definition, 1, 2, 3, "armor")
+			items[definition.id].weight = definition.carrier_weight
+		elif definition is PlateDef:
+			items[definition.id] = _inventory_item(definition, 1, 2, 2, "plate")
+			items[definition.id].weight = definition.weight
 		elif definition is AttachmentDef:
 			items[definition.id] = _inventory_item(definition, 1, 1, 1, "attachment")
 	for item: ItemDef in items.values():
@@ -83,7 +88,12 @@ func load_all() -> String:
 					return "Invalid weapon handling property"
 		if definition is MaterialDef and (not is_finite(definition.damage_multiplier) or definition.damage_multiplier < 0):
 			return "Invalid material damage multiplier"
+		if definition is PlateDef:
+			for value in [definition.reduction, definition.capacity, definition.weight, definition.movement_cost]:
+				if not is_finite(value) or value <= 0: return "Invalid plate property"
+			if definition.reduction > 1 or definition.movement_cost > 0.09: return "Invalid plate fraction"
 		if definition is ArmorDef:
+			if definition.plate_slots < 0 or definition.plate_slots > 3: return "Invalid carrier capacity"
 			for value in [definition.resistance, definition.ricochet, definition.plate_durability, definition.plate_weight, definition.carrier_weight, definition.durability_loss]:
 				if not is_finite(value) or value < 0:
 					return "Invalid armor plate property"
@@ -141,14 +151,18 @@ func load_all() -> String:
 			return "Invalid container: " + item.id
 		if item.icon == null:
 			var icon_kind := item.kind if item.kind in ["weapon", "ammo", "magazine", "armor", "backpack", "rig", "medical", "food", "melee", "attachment", "grenade"] else "item"
-			item.icon = load("res://assets/inventory/" + icon_kind + ".svg")
+			item.icon = load("res://assets/inventory/" + ("armor" if item.kind == "plate" else icon_kind) + ".svg")
+		if item.id == "carrier_dual": item.rarity = "rare"
+		elif item.id == "carrier_triple": item.rarity = "legendary"
+		elif item.id == "plate_ceramic": item.rarity = "uncommon"
+		elif item.id == "plate_composite": item.rarity = "rare"
 	return ""
 
 func _inventory_item(definition: Resource, stack_limit: int, width: int, height: int, kind: String) -> ItemDef:
 	var item := ItemDef.new()
 	item.id = definition.id
 	item.display_name = definition.id.replace("_", " ").capitalize()
-	if definition is AmmoDef or definition is WeaponDef or definition is AttachmentDef or definition is ArmorDef:
+	if definition is AmmoDef or definition is WeaponDef or definition is AttachmentDef or definition is ArmorDef or definition is PlateDef:
 		item.display_name = definition.display_name
 	item.stack_limit = stack_limit
 	item.width = width

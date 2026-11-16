@@ -1,112 +1,112 @@
 {
 	"floors": {
 		"distribution/1": {
-			"baseline": 936.282157053927,
+			"baseline": 749.025725643141,
 			"containers": 24,
-			"empty": 1,
+			"empty": 7,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 4,
-			"loose_value": 62.1345029239766
+			"loose_value": 47.2155688622754
 		},
 		"distribution_wing/1": {
-			"baseline": 903.709747406898,
+			"baseline": 710.025802976681,
 			"containers": 14,
-			"empty": 1,
+			"empty": 3,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 3,
-			"loose_value": 32.3099415204678
+			"loose_value": 47.2155688622754
 		},
 		"distribution_wing/2": {
-			"baseline": 1642.0806102552,
-			"containers": 12,
-			"empty": 0,
+			"baseline": 1099.0887193898,
+			"containers": 11,
+			"empty": 1,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 7,
-			"loose_value": 156.578947368421
+			"loose_value": 84.4910179640719
 		},
 		"exterior/1": {
-			"baseline": 758.92807320183,
+			"baseline": 592.656716417911,
 			"containers": 16,
-			"empty": 0,
+			"empty": 4,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 0,
 			"loose_value": 0.0
 		},
 		"lab1/1": {
-			"baseline": 3296.87994531469,
+			"baseline": 2442.74268488837,
 			"containers": 43,
-			"empty": 1,
+			"empty": 9,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 23,
-			"loose_value": 248.538011695906
+			"loose_value": 203.77245508982
 		},
 		"lab1/2": {
-			"baseline": 6036.86313705661,
+			"baseline": 4682.78099103988,
 			"containers": 45,
-			"empty": 3,
-			"locked": 0,
-			"locked_bonus": 0.0,
-			"loose": 21,
-			"loose_value": 231.140350877193
-		},
-		"lab1/3": {
-			"baseline": 7458.88180272109,
-			"containers": 48,
-			"empty": 6,
-			"locked": 5,
-			"locked_bonus": 1015.625,
-			"loose": 19,
-			"loose_value": 365.350877192982
-		},
-		"lab1/4": {
-			"baseline": 13260.7347413099,
-			"containers": 45,
-			"empty": 11,
-			"locked": 10,
-			"locked_bonus": 4526.18208770196,
-			"loose": 15,
-			"loose_value": 661.111111111111
-		},
-		"lab2/1": {
-			"baseline": 2549.20364174907,
-			"containers": 38,
-			"empty": 2,
+			"empty": 5,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 20,
-			"loose_value": 253.508771929825
+			"loose_value": 320.568862275449
+		},
+		"lab1/3": {
+			"baseline": 6338.03569966038,
+			"containers": 48,
+			"empty": 5,
+			"locked": 5,
+			"locked_bonus": 918.75,
+			"loose": 16,
+			"loose_value": 265.898203592814
+		},
+		"lab1/4": {
+			"baseline": 11158.6936036978,
+			"containers": 45,
+			"empty": 4,
+			"locked": 10,
+			"locked_bonus": 3138.00543321954,
+			"loose": 15,
+			"loose_value": 812.604790419162
+		},
+		"lab2/1": {
+			"baseline": 2267.90385925451,
+			"containers": 38,
+			"empty": 7,
+			"locked": 0,
+			"locked_bonus": 0.0,
+			"loose": 20,
+			"loose_value": 218.682634730539
 		},
 		"lab2/2": {
-			"baseline": 3554.39129766488,
+			"baseline": 2966.0839667966,
 			"containers": 42,
-			"empty": 3,
+			"empty": 6,
 			"locked": 0,
 			"locked_bonus": 0.0,
 			"loose": 28,
-			"loose_value": 437.426900584795
+			"loose_value": 328.023952095808
 		},
 		"lab2/3": {
-			"baseline": 7227.50425170068,
+			"baseline": 6180.10384292088,
 			"containers": 50,
 			"empty": 4,
 			"locked": 1,
-			"locked_bonus": 87.5,
+			"locked_bonus": 77.5384615384615,
 			"loose": 15,
-			"loose_value": 375.292397660819
+			"loose_value": 457.245508982036
 		},
 		"lab2/4": {
-			"baseline": 8485.64534760022,
+			"baseline": 7691.91653162458,
 			"containers": 43,
-			"empty": 10,
+			"empty": 2,
 			"locked": 7,
-			"locked_bonus": 2833.91881673828,
+			"locked_bonus": 2077.72463946752,
 			"loose": 16,
-			"loose_value": 765.497076023392
+			"loose_value": 484.580838323353
 		},
 		"skybridge/3": {
 			"baseline": 0.0,
@@ -121,14 +121,14 @@
 	"lab_floor_ratio": {
 		"1": 1.0,
 		"2": 1.62,
-		"3": 2.43,
-		"4": 3.65
+		"3": 2.58,
+		"4": 3.93
 	},
 	"lab_floor_value": {
-		"1": 6348.1303706895,
-		"2": 10259.8216861835,
-		"3": 15427.0293292756,
-		"4": 23172.9882760447
+		"1": 5133.10163396324,
+		"2": 8297.45777220774,
+		"3": 13241.2832551561,
+		"4": 20147.7957640649
 	},
 	"targets": {
 		"1": 1.0,

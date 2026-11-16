@@ -5,7 +5,7 @@ const ROOT := "res://resources/create_armory/"
 const INVENTORY_DATA = preload("res://resources/inventory_content.json")
 const DATA = preload("res://resources/create_armory/content.json")
 const MIGRATIONS := {"rifle": "m_four", "rifle_round": "five_five_six", "pistol": "pipe_pistol", "magazine": "stanag_magazine"}
-const ARMOR_IDS := ["patrol", "vest", "sentinel", "bastion", "juggernaut"]
+const ARMOR_IDS := ["carrier_single", "carrier_dual", "carrier_triple"]
 # Save compatibility only: these IDs are never added to the playable catalog.
 const REMOVED_ARMOR_TIERS := {"leather": "patrol", "chainmail": "vest", "iron": "sentinel", "gold": "vest", "diamond": "bastion", "netherite": "juggernaut"}
 
@@ -57,7 +57,7 @@ static func install(catalog: Catalog) -> void:
 		gun.reload_seconds = gun.reload_ticks / 20.0
 		gun.automatic = data.automatic
 		gun.pellets = int(data.pellets)
-		gun.damage = data.damage
+		gun.damage = data.damage * 10.0
 		gun.projectile_speed = data.speed
 		gun.muzzle_velocity = data.speed * 20.0
 		gun.spread = data.spread

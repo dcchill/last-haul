@@ -7,7 +7,7 @@ var blocked := false
 func set_blocked(value: bool) -> void:
 	blocked=value
 	broken=false
-	health=max_health
+	health=max_health * 10.0
 	for node in find_children("*","",true,false):
 		if node is CollisionShape3D: node.set_deferred("disabled",not blocked)
 		if node is GeometryInstance3D: node.visible=blocked

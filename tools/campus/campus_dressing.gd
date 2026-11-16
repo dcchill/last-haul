@@ -575,6 +575,7 @@ func roof(kit, node: Node3D, bounds: Rect2, data: Dictionary) -> void:
 	var blocked: Array[Rect2] = []
 	for core: Dictionary in data.cores: blocked.append((core.rect as Rect2).grow(2.5))
 	if data.has("atrium"): blocked.append((data.atrium as Rect2).grow(1.5))
+	if data.has("roof_failure"): blocked.append((data.roof_failure as Rect2).grow(2.0))
 	var specs := ["m:air_handler", "e:027:1", "e:027:0", "e:038:1", "e:026:1", "e:093:0", "m:air_handler", "e:027:2", "e:085:1"]
 	for i in specs.size() * 2:
 		var at := Vector2(k.rng.randf_range(bounds.position.x + 3, bounds.end.x - 3), k.rng.randf_range(bounds.position.y + 3, bounds.end.y - 3))

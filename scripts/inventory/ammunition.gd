@@ -43,8 +43,15 @@ static func valid_state(entry: Dictionary, items: Dictionary, depth := 0) -> boo
 			if not attached is Dictionary or not valid_state(attached, items, depth + 1): return false
 			var definition: Resource = items[attached.id].definition
 			if not definition is AttachmentDef or definition.slot != slot or not definition.supports(item.definition): return false
+	if item.kind == "plate":
+		if not item.definition is PlateDef: return false
+		if state.size() != 2 or not state.has("instance_id") or not state.has("wear"): return false
+		var wear: Variant = state.get("wear")
+		if not (wear is float or wear is int) or not is_finite(float(wear)) or wear < 0 or wear >= item.definition.capacity: return false
 	if item.kind == "armor" and item.definition is ArmorDef:
-		if not InventoryPersistence.whole(state.get("wear"), 0, item.definition.max_durability): return false
+		if item.definition.plate_slots > 0:
+			if not PlateInventory.valid_carrier(state, item.definition, items, depth): return false
+		elif not InventoryPersistence.whole(state.get("wear"), 0, item.definition.max_durability): return false
 	return true
 
 static func normalize(entry: Dictionary, items: Dictionary) -> void:
@@ -55,7 +62,7 @@ static func normalize(entry: Dictionary, items: Dictionary) -> void:
 	var state: Dictionary = entry.get("state", {})
 	if state.has("instance_id"):
 		entry.uid = state.instance_id
-	if items[entry.id].kind == "armor": entry.erase("durability")
+	if items[entry.id].kind in ["armor", "plate"]: entry.erase("durability")
 	if state.has("rounds"):
 		sequence(state, default_ammo(entry.id, items))
 	if items[entry.id].kind == "weapon":
@@ -64,6 +71,9 @@ static func normalize(entry: Dictionary, items: Dictionary) -> void:
 		normalize(state.magazine, items)
 	for attachment in state.get("attachments", {}).values():
 		normalize(attachment, items)
+
+	for plate in state.get("plates", []):
+		if not plate.is_empty(): normalize(plate, items)
 
 static func caliber(id: String, items: Dictionary) -> String:
 	if not items.has(id):

@@ -29,7 +29,7 @@ static func wing() -> Dictionary:
 				R("Reception and dispatch", -21, .6, -8, 11, "dispatch_reception", ["n:-14:open:3", "s:-14:extdoor"]),
 				R("Staff lockers", -8, .6, 0, 11, "changing", ["n:-4:door"]),
 				R("Warehouse restrooms", 0, .6, 6, 11, "restroom", ["n:3:door"]),
-				R("Warehouse break room", 6, .6, 16, 11, "breakroom", ["n:11:door"]),
+				R("Warehouse break room", 6, .6, 16, 11, "breakroom", ["n:11:door"], {"fire": true}),
 				R("Warehouse first aid", 16, .6, 21.7, 11, "firstaid", ["n:19:door"]),
 			], "facade_doors": [{"side": "w", "pos": -.9, "kind": "extdoor", "width": 2.0}, {"side": "e", "pos": -.9, "kind": "extdoor", "width": 2.0}],
 			"story": [["papers", Vector2(-14, 4), 10], ["stain", Vector2(5, -.9), 1.0]],

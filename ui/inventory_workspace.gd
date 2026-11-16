@@ -18,6 +18,8 @@ var context: PopupMenu
 var menu_actions: Array[Callable] = []
 var status: Label
 var summary: Label
+var plate_progress: Label
+var cancel_plate: Button
 var body: HBoxContainer
 var right_column: VBoxContainer
 var drag_window: Control
@@ -48,6 +50,9 @@ func setup(application: Node, owner_ui: PrototypeUI, raid_mode: bool, target: Ra
 	button(header, "Character", func(): ui.show_inventory(in_raid))
 	if not in_raid: button(header, "Stash", func(): right_column.visible = not right_column.visible)
 	button(header, "Close [Esc]", close)
+	if in_raid:
+		plate_progress = label(column, "", 14)
+		cancel_plate = button(column, "Cancel plate change [X]", func(): app.raid.cancel_plate_change(app.profile.profile.player_id))
 	body = HBoxContainer.new()
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 12)
@@ -252,6 +257,7 @@ func action(kind: String, source: RaidInventory, identity: String, at: Vector2) 
 			context.clear()
 			menu_actions.clear()
 			menu("Inspect", func(): inspect(entry))
+			plate_actions(source, entry)
 			menu("Quick transfer", func(): transfer(source, identity))
 			if not item.equipment_slots.is_empty(): menu("Unequip" if not source.equipment_slot.is_empty() else "Equip", func(): equip(source, identity))
 			if entry.has("storage"): menu("Open", func(): open_storage(entry.storage))
@@ -366,6 +372,11 @@ func _process(_delta: float) -> void:
 		summary.text = "  %.2f kg%s" % [ui.state().total_weight() if in_raid else pack.total_weight() + pockets.total_weight() + gear.total_weight(), " | Stamina %d" % int(ui.state().stamina) if in_raid else ""]
 		if in_raid and not app.raid.practice:
 			summary.text += " | TIME TO TURN %02d:%02d" % [int(ui.state().infection_remaining / 60), ceili(ui.state().infection_remaining) % 60]
+	if in_raid:
+		var pending: Dictionary = ui.state().pending_plate
+		cancel_plate.visible = not pending.is_empty()
+		plate_progress.visible = not pending.is_empty()
+		if not pending.is_empty(): plate_progress.text = "Changing plate: %.1fs remaining" % maxf(0, (pending.end - app.raid.gameplay_tick) * 0.05)
 	if loot != null and in_raid and ui.state().opened_container.is_empty(): close()
 	for window in windows.duplicate():
 		if is_instance_valid(window) and not app.inventory_service().grids().has(window.get_meta("storage")):
@@ -405,3 +416,37 @@ func assign_quick_slot(identity: String) -> void:
 		dialog.queue_free())
 	dialog.canceled.connect(dialog.queue_free)
 	dialog.popup_centered(Vector2i(280, 120))
+
+func plate_grids() -> Array[RaidInventory]:
+	var roots: Array[RaidInventory] = [pack, pockets]
+	roots.append_array(gear.roots())
+	if not in_raid: roots.append(app.stash_view)
+	var result: Array[RaidInventory] = []
+	for root in roots:
+		for grid in root.all_grids():
+			if grid.is_accessible() and grid.searched: result.append(grid)
+	return result
+
+func plate_actions(source: RaidInventory, entry: Dictionary) -> void:
+	var available := plate_grids()
+	if source not in available: return
+	var definition: Resource = app.catalog.items[entry.id].definition
+	if definition is PlateDef:
+		for target in available:
+			for carrier in target.slots:
+				if not carrier.state.has("plates"): continue
+				for slot in range(carrier.state.plates.size()):
+					if not carrier.state.plates[slot].is_empty(): continue
+					var request: Dictionary = app.inventory_service().request("insert_plate", source, target, entry.uid)
+					request.carrier_uid = carrier.uid
+					request.plate_slot = slot
+					menu("Insert: %s / %s / slot %d" % [target.display_name, app.catalog.items[carrier.id].display_name, slot + 1], func(): submit(request))
+	elif definition is ArmorDef and definition.plate_slots > 0:
+		for slot in range(entry.state.plates.size()):
+			if entry.state.plates[slot].is_empty(): continue
+			for target in available:
+				if not target.equipment_slot.is_empty(): continue
+				var request: Dictionary = app.inventory_service().request("remove_plate", source, target, entry.uid)
+				request.plate_slot = slot
+				if PlateInventory.change(request, source, target, true):
+					menu("Remove slot %d to %s" % [slot + 1, target.display_name], func(): submit(request))

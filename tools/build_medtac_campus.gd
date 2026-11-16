@@ -36,6 +36,11 @@ func run() -> void:
 	t1 = k.lap("exterior", t1)
 	k.finish()
 	t1 = k.lap("finish", t1)
+	# Exterior panes are numerous small meshes; cull them with distance.
+	for pane in scene.find_children("*", "MedTacBreakable", true, false):
+		if pane.get_meta("exterior_pane", false):
+			for mesh in pane.find_children("*", "MeshInstance3D", true, false): mesh.visibility_range_end = 70
+	write_json("res://resources/campus/reports/decay.json", {"profiles": k.decayer.PROFILES, "decals": k.decayer.decal_count, "windows": k.window_states})
 	var timing: Array = []
 	for key in k.prof: timing.append([key, k.prof[key] / 1000])
 	timing.sort_custom(func(a, b): return a[1] > b[1])

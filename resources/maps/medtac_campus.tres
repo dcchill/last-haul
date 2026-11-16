@@ -8,6 +8,6 @@ id = "medtac_campus"
 display_name = "MedTac Research Campus"
 scene_path = "res://scenes/raid/campus/medtac_campus.tscn"
 infection_seconds = 1500.0
-active_loose_loot = 85
+active_loose_loot = 83
 enemy_count = 36
 infected_count = 26

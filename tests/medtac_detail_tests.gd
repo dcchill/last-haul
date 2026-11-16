@@ -164,9 +164,9 @@ func breakable_checks(breakables: Array[MedTacBreakable]) -> void:
 	var glass:=breakables.filter(func(p): return p.kind=="glass")[0] as MedTacBreakable
 	var fixture:=breakables.filter(func(p): return p.kind=="light" and not p.protected)[0] as MedTacBreakable
 	var emergency:=breakables.filter(func(p): return p.kind=="light" and p.protected)[0] as MedTacBreakable
-	raid._apply_damage(glass,30)
-	raid._apply_damage(fixture,30)
-	raid._apply_damage(emergency,1000)
+	raid._apply_damage(glass,300)
+	raid._apply_damage(fixture,300)
+	raid._apply_damage(emergency,10000)
 	await settle()
 	check(glass.broken and glass.get_node("CollisionShape3D").disabled,"glass loses its physical pane")
 	if not glass.navigation_link.is_empty(): check(glass.get_node(glass.navigation_link).enabled,"broken exterior glass enables its authored traversal")
@@ -175,7 +175,7 @@ func breakable_checks(breakables: Array[MedTacBreakable]) -> void:
 	check(not raid.entities["research-lab-entrance"].unlocked and not raid.entities["research-maintenance-entrance"].unlocked,"breakables cannot authorize restricted access")
 	var route:=routes[0]
 	route.set_blocked(true)
-	raid._apply_damage(route,100)
+	raid._apply_damage(route,1000)
 	await settle()
 	check(route.broken and route.get_node(route.navigation_link).enabled,"destroyed weak barricade opens its secondary traversal link")
 

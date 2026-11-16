@@ -16,8 +16,19 @@ static func apply_nonsolid(root: Node) -> int:
 			body.collision_layer = 0; count += 1
 	return count
 
+## Ransacked furniture stands open; actors collide with window guards (layer 2)
+## that bullets (layer 1) pass through.
+static func apply_decay_state(root: Node) -> void:
+	for node in root.find_children("*", "", true, false):
+		if node is SearchableFurniture and node.get_meta("ransacked", false) and not node.opened:
+			var panel := node.get_node_or_null("MovingPanel") as Node3D
+			if panel != null and node.container_config == null: node.panel_rest = panel.transform
+			node.set_open(true, false)
+		elif node is CharacterBody3D: node.collision_mask |= 2
+
 func configure(seed_value: int) -> void:
 	apply_nonsolid(get_parent())
+	apply_decay_state(get_parent())
 	if configured and layout_seed==seed_value: return
 	layout_seed=seed_value
 	configured=true

@@ -1,4 +1,4 @@
-﻿extends SceneTree
+extends SceneTree
 
 const PATH := "res://.godot/restart_probe_armory.json"
 func _initialize() -> void:
@@ -13,6 +13,8 @@ func _initialize() -> void:
 		for suffix in ["", ".bak"]:
 			if FileAccess.file_exists(PATH + suffix): DirAccess.remove_absolute(PATH + suffix)
 		passed = store.load_profile()
+		for entry in store.profile.stash:
+			if entry.id == "carrier_single": entry.state.plates[0].state.wear = 23.5
 		var state := ArmoryInstance.fresh("bolt_action_sniper", catalog.items)
 		var mag := ArmoryInstance.fresh("barret_magazine", catalog.items)
 		mag.rounds = 4
@@ -27,6 +29,9 @@ func _initialize() -> void:
 		for entry in store.profile.stash:
 			if entry.id == "bolt_action_sniper":
 				found = entry.state.magazine.state.rounds == 4 and entry.state.attachments.optic.id == "sniper_scope"
-		passed = passed and found
+		var plate_found := false
+		for entry in store.profile.stash:
+			if entry.id == "carrier_single": plate_found = entry.state.plates[0].state.wear == 23.5
+		passed = passed and found and plate_found
 		print("RESTART READ: ", passed)
 	quit(0 if passed else 1)

@@ -27,3 +27,9 @@ func trace(world: World3D, origin: Vector3, direction: Vector3, distance: float,
 static func headshot(target: Node3D, point: Vector3) -> bool:
 	var eye: float = target.eye_position().y if target is RaidPlayer else target.global_position.y + 1.62
 	return point.y >= eye - 0.18
+
+static func torso_hit(target: Node3D, point: Vector3) -> bool:
+	var collision: CollisionShape3D = target.get_node("CollisionShape3D")
+	var height: float = collision.shape.size.y if collision.shape is BoxShape3D else collision.shape.height
+	var lower := collision.global_position.y - height * 0.5
+	return not headshot(target, point) and point.y >= lower + height * 0.45

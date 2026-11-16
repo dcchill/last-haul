@@ -4,6 +4,7 @@ extends Resource
 @export var id: String = ""
 @export var display_name: String = ""
 @export var slot: String = "chestplate"
+@export_range(0, 3) var plate_slots: int = 0
 @export var points: float = 0.0
 @export var toughness: float = 0.0
 @export var max_durability: int = 80

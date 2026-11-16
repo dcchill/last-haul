@@ -3,6 +3,11 @@
 		{
 			"building": "lab1",
 			"floor": 1,
+			"name": "Facilities storage fire damage"
+		},
+		{
+			"building": "lab1",
+			"floor": 1,
 			"name": "Atrium garden"
 		},
 		{
@@ -23,12 +28,22 @@
 		{
 			"building": "lab1",
 			"floor": 4,
+			"name": "Lab 1 Research roof failure"
+		},
+		{
+			"building": "lab1",
+			"floor": 4,
 			"name": "Lab 1 Research level 4 circulation"
 		},
 		{
 			"building": "lab1",
 			"floor": 5,
 			"name": "Lab 1 Research roof access"
+		},
+		{
+			"building": "lab2",
+			"floor": 1,
+			"name": "Linen and laundry fire damage"
 		},
 		{
 			"building": "lab2",
@@ -48,12 +63,22 @@
 		{
 			"building": "lab2",
 			"floor": 4,
+			"name": "Lab 2 Clinical roof failure"
+		},
+		{
+			"building": "lab2",
+			"floor": 4,
 			"name": "Lab 2 Clinical level 4 circulation"
 		},
 		{
 			"building": "lab2",
 			"floor": 5,
 			"name": "Lab 2 Clinical roof access"
+		},
+		{
+			"building": "distribution_wing",
+			"floor": 1,
+			"name": "Warehouse break room fire damage"
 		},
 		{
 			"building": "distribution_wing",
@@ -149,7 +174,10 @@
 				"e:046:0",
 				"e:048:1",
 				"m:personal_bag",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2",
+				"e:012:3",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -175,7 +203,9 @@
 				"m:nurse_desk",
 				"e:048:1",
 				"e:034:2",
-				"e:042:1"
+				"e:042:1",
+				"e:042:1",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -227,7 +257,9 @@
 				"p:office_chair",
 				"m:security_locker",
 				"e:095:1",
-				"e:116:0"
+				"e:116:0",
+				"e:012:1",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -255,7 +287,9 @@
 				"m:pallet_jack",
 				"m:shipping_crate",
 				"m:cardboard_box",
-				"m:wrapped_pallet"
+				"m:wrapped_pallet",
+				"e:012:1",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -278,34 +312,40 @@
 				"s:-18:door"
 			],
 			"equipment": [
-				"e:058:2",
-				"e:042:2",
 				"e:058:0",
 				"e:042:1",
 				"e:058:2",
+				"e:042:1",
+				"e:058:2",
+				"e:042:1",
+				"e:058:2",
+				"e:042:1",
+				"e:058:0",
 				"e:042:2",
-				"e:058:0",
-				"e:042:1",
-				"e:058:0",
-				"e:042:1",
-				"e:058:0",
-				"e:042:1",
-				"e:058:0",
-				"e:042:1",
 				"e:058:0",
 				"e:042:1",
 				"e:058:0",
 				"e:042:2",
 				"e:058:2",
+				"e:042:1",
+				"e:058:2",
 				"e:042:2",
 				"e:058:0",
+				"e:042:1",
+				"e:058:2",
 				"e:042:1",
 				"e:058:0",
 				"e:042:1",
 				"m:filing_cabinet",
 				"e:043:0",
 				"e:044:1",
-				"e:060:0"
+				"e:060:0",
+				"e:012:1",
+				"e:020:1",
+				"e:013:2",
+				"e:013:1",
+				"m:cardboard_box",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 3,
@@ -333,7 +373,9 @@
 				"e:044:1",
 				"e:048:0",
 				"e:057:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"m:cardboard_box",
+				"e:012:3"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -360,7 +402,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -387,7 +430,9 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:1",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -416,7 +461,9 @@
 				"m:filing_cabinet",
 				"e:045:1",
 				"e:045:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:012:1",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -439,27 +486,31 @@
 			],
 			"equipment": [
 				"m:break_table",
-				"e:042:2",
-				"e:042:1",
-				"m:break_table",
-				"e:042:2",
-				"e:042:1",
-				"m:break_table",
-				"e:042:1",
-				"e:042:1",
-				"m:break_table",
-				"e:042:2",
-				"e:042:2",
-				"m:break_table",
 				"e:042:1",
 				"e:042:1",
 				"m:break_table",
 				"e:042:2",
 				"e:042:1",
 				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
 				"e:042:1",
 				"e:042:1",
-				"e:057:1"
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
+				"e:057:1",
+				"m:cardboard_box",
+				"e:020:1",
+				"m:cardboard_box",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -482,6 +533,12 @@
 			],
 			"equipment": [
 				"m:break_table",
+				"e:042:2",
+				"e:042:2",
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
 				"e:042:1",
 				"e:042:1",
 				"m:break_table",
@@ -490,13 +547,10 @@
 				"m:break_table",
 				"e:042:2",
 				"e:042:1",
-				"m:break_table",
-				"e:042:2",
-				"e:042:2",
-				"m:break_table",
-				"e:042:2",
-				"e:042:1",
-				"e:057:1"
+				"e:057:1",
+				"e:013:0",
+				"e:020:1",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -525,9 +579,12 @@
 				"e:054:1",
 				"m:break_table",
 				"e:047:2",
-				"e:047:2",
+				"e:047:1",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:1",
+				"m:cardboard_box",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -554,7 +611,9 @@
 				"m:shipping_crate",
 				"e:172:0",
 				"m:cardboard_box",
-				"m:storage_table"
+				"m:storage_table",
+				"e:013:2",
+				"e:090:3"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -583,7 +642,9 @@
 				"m:pallet_jack",
 				"m:shipping_crate",
 				"m:cardboard_box",
-				"m:wrapped_pallet"
+				"m:wrapped_pallet",
+				"e:013:1",
+				"e:012:3"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -609,7 +670,10 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:091:0",
-				"e:091:1"
+				"e:091:1",
+				"e:013:1",
+				"m:cardboard_box",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -636,7 +700,9 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:0",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -659,13 +725,13 @@
 			],
 			"equipment": [
 				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"m:break_table",
 				"e:042:2",
 				"e:042:1",
 				"m:break_table",
-				"e:042:1",
-				"e:042:1",
-				"m:break_table",
-				"e:042:1",
+				"e:042:2",
 				"e:042:1",
 				"e:057:1"
 			],
@@ -693,7 +759,9 @@
 				"e:048:3",
 				"e:129:1",
 				"e:125:2",
-				"e:180:2"
+				"e:180:2",
+				"e:012:3",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -721,7 +789,9 @@
 				"m:med_cabinet",
 				"e:176:1",
 				"m:sharps_bin",
-				"m:supply_cart"
+				"m:supply_cart",
+				"m:cardboard_box",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -749,7 +819,9 @@
 				"e:189:0",
 				"m:storage_table",
 				"m:terminal",
-				"e:094:1"
+				"e:094:1",
+				"e:020:1",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -776,7 +848,11 @@
 				"m:shipping_crate",
 				"e:172:0",
 				"m:cardboard_box",
-				"m:storage_table"
+				"m:storage_table",
+				"e:012:3",
+				"e:012:0",
+				"e:020:1",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -803,7 +879,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -854,7 +931,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -878,7 +956,8 @@
 			"equipment": [
 				"m:electrical_panel",
 				"e:082:0",
-				"e:085:1"
+				"e:085:1",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -910,7 +989,13 @@
 				"m:storage_table",
 				"m:exam_chair",
 				"e:175:1",
-				"e:048:1"
+				"e:048:1",
+				"e:013:1",
+				"e:013:1",
+				"e:013:0",
+				"e:013:0",
+				"e:013:2",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -941,20 +1026,26 @@
 				"e:054:1",
 				"m:break_table",
 				"e:047:0",
-				"e:047:0",
-				"m:break_table",
-				"e:047:2",
 				"e:047:2",
 				"m:break_table",
 				"e:047:0",
-				"e:047:2",
-				"m:break_table",
-				"e:047:2",
 				"e:047:0",
+				"m:break_table",
+				"e:047:1",
+				"e:047:1",
+				"m:break_table",
+				"e:047:0",
+				"e:047:2",
 				"e:057:0",
 				"m:trash_bin",
 				"e:191:2",
-				"e:048:3"
+				"e:048:3",
+				"m:cardboard_box",
+				"e:013:1",
+				"e:012:3",
+				"e:012:3",
+				"e:012:3",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -1008,7 +1099,9 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:0",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -1034,7 +1127,8 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:091:0",
-				"e:091:1"
+				"e:091:1",
+				"e:012:3"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -1062,7 +1156,10 @@
 				"m:med_cabinet",
 				"m:medicine_fridge",
 				"m:nurse_desk",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:013:1",
+				"e:013:2",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -1089,7 +1186,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -1141,7 +1239,8 @@
 				"p:office_chair",
 				"m:security_locker",
 				"e:095:1",
-				"e:116:0"
+				"e:116:0",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -1165,7 +1264,8 @@
 			"equipment": [
 				"m:air_handler",
 				"e:082:0",
-				"e:073:1"
+				"e:073:1",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -1192,7 +1292,8 @@
 				"m:wash_station",
 				"m:eyewash",
 				"e:108:0",
-				"e:108:1"
+				"e:108:1",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -1219,7 +1320,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1246,7 +1348,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1273,7 +1376,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -1297,19 +1401,20 @@
 			"equipment": [
 				"e:058:0",
 				"e:042:1",
-				"e:058:0",
-				"e:042:2",
-				"e:058:0",
+				"e:058:2",
 				"e:042:1",
+				"e:058:2",
+				"e:042:2",
 				"e:058:0",
 				"e:042:1",
 				"m:filing_cabinet",
 				"e:043:0",
 				"e:044:1",
-				"e:060:0"
+				"e:060:0",
+				"e:020:1"
 			],
 			"floor": 2,
-			"loose": 1,
+			"loose": 0,
 			"name": "Technical workstations",
 			"rect": [
 				-40.0,
@@ -1351,7 +1456,8 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1392,7 +1498,8 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:012:3"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1472,7 +1579,8 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1499,7 +1607,8 @@
 				"m:clean_workbench",
 				"m:analyzer",
 				"m:tool_drawers",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:020:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1530,7 +1639,8 @@
 				"m:ultra_freezer",
 				"m:specimen_cooler",
 				"e:104:1",
-				"m:storage_table"
+				"m:storage_table",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1559,7 +1669,8 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:177:0",
-				"e:071:0"
+				"e:071:0",
+				"e:012:1"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -1587,7 +1698,8 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:020:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1614,7 +1726,8 @@
 				"m:shipping_crate",
 				"e:172:0",
 				"m:cardboard_box",
-				"m:storage_table"
+				"m:storage_table",
+				"e:013:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1641,7 +1754,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -1668,10 +1782,11 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:3"
 			],
 			"floor": 2,
-			"loose": 0,
+			"loose": 1,
 			"name": "Data analysis office",
 			"rect": [
 				-28.0,
@@ -1705,7 +1820,9 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:012:3",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1747,7 +1864,8 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1776,7 +1894,8 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:177:0",
-				"e:071:0"
+				"e:071:0",
+				"e:013:0"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -1803,10 +1922,12 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:0",
+				"e:012:3"
 			],
 			"floor": 2,
-			"loose": 1,
+			"loose": 0,
 			"name": "Lab manager's office",
 			"rect": [
 				26.0,
@@ -1883,7 +2004,8 @@
 				"m:clean_workbench",
 				"m:analyzer",
 				"m:tool_drawers",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:012:3"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1939,7 +2061,10 @@
 				"e:074:1",
 				"e:073:2",
 				"m:tool_drawers",
-				"m:packing_table"
+				"m:packing_table",
+				"m:cardboard_box",
+				"m:cardboard_box",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -1971,7 +2096,10 @@
 				"e:074:1",
 				"e:073:2",
 				"m:tool_drawers",
-				"m:packing_table"
+				"m:packing_table",
+				"e:013:1",
+				"e:013:1",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -2024,9 +2152,9 @@
 				"e:058:2",
 				"e:042:1",
 				"e:058:0",
-				"e:042:2",
-				"e:058:2",
 				"e:042:1",
+				"e:058:0",
+				"e:042:2",
 				"e:058:2",
 				"m:filing_cabinet",
 				"e:043:0",
@@ -2096,7 +2224,8 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -2123,7 +2252,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -2231,10 +2361,13 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:2",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 3,
-			"loose": 1,
+			"loose": 0,
 			"name": "Research office west one",
 			"rect": [
 				-40.0,
@@ -2258,10 +2391,12 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:3",
+				"e:153:0"
 			],
 			"floor": 3,
-			"loose": 1,
+			"loose": 0,
 			"name": "Research office west two",
 			"rect": [
 				-40.0,
@@ -2286,7 +2421,9 @@
 				"e:114:2",
 				"m:security_locker",
 				"e:111:1",
-				"e:122:1"
+				"e:122:1",
+				"e:147:0",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2314,7 +2451,10 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:2",
+				"e:153:1",
+				"e:145:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2342,7 +2482,10 @@
 				"m:eyewash",
 				"m:staff_locker",
 				"e:108:0",
-				"e:108:1"
+				"e:108:1",
+				"e:147:2",
+				"e:147:3",
+				"e:153:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2384,7 +2527,12 @@
 				"m:biosafety_cabinet",
 				"m:ultra_freezer",
 				"m:specimen_cooler",
-				"e:199:0"
+				"e:199:0",
+				"e:013:1",
+				"e:147:0",
+				"e:147:3",
+				"e:153:2",
+				"e:145:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2411,7 +2559,9 @@
 				"p:office_chair",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:3",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2453,7 +2603,9 @@
 				"m:biosafety_cabinet",
 				"m:ultra_freezer",
 				"m:specimen_cooler",
-				"e:199:0"
+				"e:199:0",
+				"e:147:1",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2480,7 +2632,10 @@
 				"p:office_chair",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:0",
+				"e:153:1",
+				"e:145:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2515,7 +2670,9 @@
 				"e:199:0",
 				"m:ultra_freezer",
 				"m:ultra_freezer",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:2",
+				"e:153:1"
 			],
 			"floor": 3,
 			"loose": 2,
@@ -2542,10 +2699,12 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:2",
+				"e:153:2"
 			],
 			"floor": 3,
-			"loose": 1,
+			"loose": 0,
 			"name": "Research office east",
 			"rect": [
 				30.0,
@@ -2569,7 +2728,10 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:3",
+				"e:153:1",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2596,7 +2758,9 @@
 				"m:clean_workbench",
 				"m:analyzer",
 				"m:tool_drawers",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2623,7 +2787,10 @@
 				"m:shipping_crate",
 				"e:172:0",
 				"m:cardboard_box",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:3",
+				"e:147:1",
+				"e:153:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2684,7 +2851,9 @@
 				"m:biosafety_cabinet",
 				"m:ultra_freezer",
 				"m:specimen_cooler",
-				"e:199:0"
+				"e:199:0",
+				"e:147:2",
+				"e:145:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2711,7 +2880,10 @@
 				"m:clean_workbench",
 				"m:analyzer",
 				"m:tool_drawers",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:0",
+				"e:147:3",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2736,7 +2908,9 @@
 			"equipment": [
 				"e:111:0",
 				"e:122:0",
-				"e:180:1"
+				"e:180:1",
+				"e:147:0",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2766,7 +2940,8 @@
 				"m:lab_fridge",
 				"m:specimen_cooler",
 				"e:104:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2793,7 +2968,10 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:2",
+				"e:147:0",
+				"e:153:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2821,7 +2999,9 @@
 				"e:189:0",
 				"m:storage_table",
 				"m:terminal",
-				"e:094:1"
+				"e:094:1",
+				"e:147:0",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -2847,7 +3027,10 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:091:0",
-				"e:091:1"
+				"e:091:1",
+				"e:147:2",
+				"e:147:2",
+				"e:153:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2926,7 +3109,10 @@
 				"e:114:2",
 				"m:security_locker",
 				"e:111:1",
-				"e:122:1"
+				"e:122:1",
+				"e:147:0",
+				"e:147:1",
+				"e:153:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2950,7 +3136,8 @@
 			"equipment": [
 				"m:electrical_panel",
 				"e:082:1",
-				"e:085:1"
+				"e:085:1",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -2989,7 +3176,9 @@
 				"m:biosafety_cabinet",
 				"m:ultra_freezer",
 				"m:specimen_cooler",
-				"e:199:0"
+				"e:199:0",
+				"e:013:0",
+				"e:147:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -3019,7 +3208,11 @@
 				"m:roll_cage",
 				"m:roll_cage",
 				"m:storage_table",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:012:3",
+				"e:147:2",
+				"e:147:1",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -3046,7 +3239,9 @@
 				"m:tool_drawers",
 				"e:108:0",
 				"e:108:1",
-				"m:sharps_bin"
+				"m:sharps_bin",
+				"e:147:2",
+				"e:145:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -3085,7 +3280,9 @@
 				"m:specimen_cooler",
 				"m:tool_drawers",
 				"m:lab_fridge",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:0",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -3112,7 +3309,8 @@
 				"m:clean_workbench",
 				"m:analyzer",
 				"m:tool_drawers",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -3151,7 +3349,10 @@
 				"m:specimen_cooler",
 				"m:tool_drawers",
 				"m:lab_fridge",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:0",
+				"e:147:1",
+				"e:153:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -3230,7 +3431,10 @@
 				"e:114:2",
 				"m:security_locker",
 				"e:111:1",
-				"e:122:1"
+				"e:122:1",
+				"e:147:0",
+				"e:147:3",
+				"e:145:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -3254,7 +3458,8 @@
 			"equipment": [
 				"m:air_handler",
 				"e:082:1",
-				"e:073:1"
+				"e:073:1",
+				"e:147:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -3283,7 +3488,9 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:3",
+				"e:147:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3312,7 +3519,10 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:3",
+				"e:153:0",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3341,7 +3551,9 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:3",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3370,7 +3582,9 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:3",
+				"e:153:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3419,7 +3633,11 @@
 				"m:specimen_cooler",
 				"e:110:2",
 				"e:199:0",
-				"e:199:2"
+				"e:199:2",
+				"e:147:2",
+				"e:147:3",
+				"e:153:0",
+				"e:145:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3449,7 +3667,9 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"e:110:2",
-				"e:199:0"
+				"e:199:0",
+				"e:147:2",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3476,7 +3696,10 @@
 				"m:monitor_cart",
 				"e:124:1",
 				"m:filing_cabinet",
-				"e:188:2"
+				"e:188:2",
+				"e:147:0",
+				"e:147:2",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3507,7 +3730,10 @@
 				"m:ultra_freezer",
 				"m:specimen_cooler",
 				"e:199:2",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:3",
+				"e:147:2",
+				"e:153:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3539,7 +3765,11 @@
 				"m:filing_cabinet",
 				"e:199:2",
 				"e:185:0",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:147:1",
+				"e:153:0",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3569,7 +3799,11 @@
 				"e:189:0",
 				"m:storage_table",
 				"m:terminal",
-				"e:094:1"
+				"e:094:1",
+				"e:147:3",
+				"e:147:1",
+				"e:153:1",
+				"e:145:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3595,7 +3829,10 @@
 				"e:061:1",
 				"m:tool_drawers",
 				"e:188:0",
-				"m:work_cart"
+				"m:work_cart",
+				"e:147:3",
+				"e:147:1",
+				"e:145:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3621,7 +3858,10 @@
 				"e:179:1",
 				"e:085:1",
 				"m:instrument_bench",
-				"m:work_cart"
+				"m:work_cart",
+				"e:147:2",
+				"e:147:0",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3648,7 +3888,10 @@
 				"m:shipping_crate",
 				"e:172:0",
 				"m:cardboard_box",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:147:2",
+				"e:145:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3675,18 +3918,19 @@
 				"e:042:1",
 				"m:break_table",
 				"e:042:1",
-				"e:042:2",
+				"e:042:1",
 				"m:break_table",
 				"e:042:1",
-				"e:042:2",
+				"e:042:1",
 				"m:break_table",
 				"e:042:1",
-				"e:042:2",
+				"e:042:1",
 				"m:break_table",
-				"e:042:2",
-				"e:042:2",
+				"e:042:1",
+				"e:042:1",
 				"e:057:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3738,7 +3982,9 @@
 				"e:090:1",
 				"e:090:3",
 				"m:filing_cabinet",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:2",
+				"e:147:3"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3765,7 +4011,9 @@
 				"e:046:1",
 				"e:057:1",
 				"e:052:2",
-				"e:053:0"
+				"e:053:0",
+				"e:147:3",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3790,24 +4038,27 @@
 			"equipment": [
 				"m:break_table",
 				"e:042:1",
-				"e:042:1",
-				"m:break_table",
-				"e:042:2",
 				"e:042:2",
 				"m:break_table",
 				"e:042:1",
 				"e:042:1",
 				"m:break_table",
 				"e:042:1",
-				"e:042:2",
-				"m:break_table",
 				"e:042:1",
-				"e:042:2",
 				"m:break_table",
 				"e:042:2",
+				"e:042:1",
+				"m:break_table",
 				"e:042:2",
+				"e:042:1",
+				"m:break_table",
+				"e:042:2",
+				"e:042:1",
 				"e:057:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:2",
+				"e:147:0",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3836,7 +4087,11 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:2",
+				"e:147:1",
+				"e:153:2",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -3915,7 +4170,9 @@
 				"e:114:2",
 				"m:security_locker",
 				"e:111:1",
-				"e:122:1"
+				"e:122:1",
+				"e:147:0",
+				"e:147:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3939,7 +4196,9 @@
 			"equipment": [
 				"m:electrical_panel",
 				"e:082:1",
-				"e:085:1"
+				"e:085:1",
+				"e:147:2",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -3971,7 +4230,10 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:3",
+				"e:153:1",
+				"e:145:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -4008,7 +4270,10 @@
 				"p:office_chair",
 				"p:office_desk",
 				"m:terminal",
-				"p:office_chair"
+				"p:office_chair",
+				"e:147:3",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -4035,7 +4300,9 @@
 				"m:eyewash",
 				"m:staff_locker",
 				"e:108:0",
-				"e:108:1"
+				"e:108:1",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -4065,7 +4332,9 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"e:110:2",
-				"e:199:0"
+				"e:199:0",
+				"e:147:2",
+				"e:153:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -4089,7 +4358,10 @@
 			"equipment": [
 				"e:090:1",
 				"m:filing_cabinet",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:2",
+				"e:147:0",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -4118,10 +4390,13 @@
 				"e:053:0",
 				"e:054:1",
 				"m:break_table",
-				"e:047:1",
-				"e:047:1",
+				"e:047:2",
+				"e:047:2",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:0",
+				"e:147:1",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -4201,7 +4476,10 @@
 				"m:security_locker",
 				"e:095:1",
 				"m:weapon_crate",
-				"e:116:0"
+				"e:116:0",
+				"e:147:1",
+				"e:147:0",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -4227,7 +4505,8 @@
 				"e:179:1",
 				"e:085:1",
 				"m:instrument_bench",
-				"m:work_cart"
+				"m:work_cart",
+				"e:147:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -4262,7 +4541,8 @@
 				"e:101:1",
 				"m:med_cabinet",
 				"e:175:0",
-				"e:099:0"
+				"e:099:0",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4290,7 +4570,8 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"m:sharps_bin",
-				"m:supply_cart"
+				"m:supply_cart",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4318,7 +4599,8 @@
 				"e:034:2",
 				"m:personal_bag",
 				"e:042:1",
-				"e:042:2"
+				"e:042:1",
+				"e:012:3"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4344,20 +4626,21 @@
 				"e:047:1",
 				"e:047:1",
 				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
-				"e:047:1",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
+				"e:047:0",
 				"e:046:0",
 				"e:048:1",
 				"m:personal_bag",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4411,7 +4694,8 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"m:sharps_bin",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4465,7 +4749,8 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"m:sharps_bin",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4545,9 +4830,10 @@
 				"e:053:0",
 				"e:054:1",
 				"m:break_table",
-				"e:047:1",
+				"e:047:2",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4574,7 +4860,9 @@
 				"m:iv_stand",
 				"e:101:1",
 				"m:med_cabinet",
-				"e:099:0"
+				"e:099:0",
+				"e:013:0",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4600,7 +4888,8 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"m:med_cabinet",
-				"e:099:0"
+				"e:099:0",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4626,7 +4915,8 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"m:med_cabinet",
-				"e:099:0"
+				"e:099:0",
+				"e:012:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4653,7 +4943,9 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"m:privacy_screen",
-				"e:099:0"
+				"e:099:0",
+				"m:cardboard_box",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4734,7 +5026,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4762,7 +5055,8 @@
 				"m:filing_cabinet",
 				"e:045:1",
 				"e:045:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4818,7 +5112,8 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:roll_cage",
-				"m:roll_cage"
+				"m:roll_cage",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -4845,6 +5140,7 @@
 				"m:roll_cage",
 				"m:pallet_jack",
 				"m:shipping_crate",
+				"m:cardboard_box",
 				"m:cardboard_box"
 			],
 			"floor": 1,
@@ -4874,7 +5170,8 @@
 				"e:044:1",
 				"m:trash_bin",
 				"e:118:1",
-				"e:095:1"
+				"e:095:1",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -4902,7 +5199,9 @@
 				"p:office_chair",
 				"m:med_cabinet",
 				"m:filing_cabinet",
-				"m:supply_cart"
+				"m:supply_cart",
+				"m:cardboard_box",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4929,7 +5228,9 @@
 				"m:med_cabinet",
 				"m:medicine_fridge",
 				"m:clean_workbench",
-				"m:supply_cart"
+				"m:supply_cart",
+				"m:cardboard_box",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -4955,7 +5256,8 @@
 				"e:045:1",
 				"m:med_cabinet",
 				"e:175:0",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -4982,7 +5284,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -5009,7 +5312,10 @@
 				"m:med_cabinet",
 				"m:medicine_fridge",
 				"m:nurse_desk",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:012:1",
+				"e:013:2",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -5036,7 +5342,9 @@
 				"e:108:1",
 				"e:108:2",
 				"m:mop_bucket",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:3",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -5065,7 +5373,10 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"m:cardboard_box",
+				"e:013:2",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -5089,7 +5400,8 @@
 			"equipment": [
 				"m:electrical_panel",
 				"e:082:0",
-				"e:085:1"
+				"e:085:1",
+				"e:012:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -5115,7 +5427,8 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"m:med_cabinet",
-				"e:099:0"
+				"e:099:0",
+				"e:012:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5331,7 +5644,8 @@
 				"m:iv_stand",
 				"m:personal_bag",
 				"e:047:0",
-				"e:099:0"
+				"e:099:0",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5651,7 +5965,8 @@
 				"m:staff_locker",
 				"m:staff_locker",
 				"e:047:1",
-				"m:shower"
+				"m:shower",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -5703,7 +6018,8 @@
 				"e:108:1",
 				"e:108:2",
 				"m:mop_bucket",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -5729,7 +6045,8 @@
 				"e:045:1",
 				"m:med_cabinet",
 				"m:medicine_fridge",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -5765,7 +6082,8 @@
 				"e:048:2",
 				"e:057:0",
 				"m:personal_bag",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5794,7 +6112,8 @@
 				"m:pallet_jack",
 				"m:shipping_crate",
 				"m:cardboard_box",
-				"m:wrapped_pallet"
+				"m:wrapped_pallet",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5822,7 +6141,8 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:roll_cage",
-				"m:roll_cage"
+				"m:roll_cage",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -5849,7 +6169,9 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"m:cardboard_box",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5878,7 +6200,8 @@
 				"m:medicine_fridge",
 				"m:clean_workbench",
 				"e:175:2",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:020:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5960,7 +6283,8 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:012:3"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -5988,10 +6312,11 @@
 				"e:053:0",
 				"e:054:1",
 				"m:break_table",
-				"e:047:2",
+				"e:047:0",
 				"e:047:1",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -6021,7 +6346,8 @@
 				"m:filing_cabinet",
 				"e:045:1",
 				"e:045:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -6076,7 +6402,8 @@
 				"m:specimen_cooler",
 				"m:tool_drawers",
 				"m:lab_fridge",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6106,7 +6433,9 @@
 				"m:specimen_cooler",
 				"m:tool_drawers",
 				"m:lab_fridge",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:0",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6136,7 +6465,10 @@
 				"m:specimen_cooler",
 				"m:tool_drawers",
 				"m:lab_fridge",
-				"m:specimen_cooler"
+				"m:specimen_cooler",
+				"e:147:3",
+				"e:147:0",
+				"e:145:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6163,7 +6495,9 @@
 				"m:terminal",
 				"e:095:1",
 				"m:weapon_crate",
-				"e:111:2"
+				"e:111:2",
+				"e:147:2",
+				"e:147:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6195,10 +6529,13 @@
 				"m:filing_cabinet",
 				"e:043:0",
 				"e:044:1",
-				"e:060:0"
+				"e:060:0",
+				"e:147:1",
+				"e:147:1",
+				"e:153:1"
 			],
 			"floor": 3,
-			"loose": 0,
+			"loose": 1,
 			"name": "Research administration",
 			"rect": [
 				1.0,
@@ -6222,10 +6559,14 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:0",
+				"e:147:2",
+				"e:153:2",
+				"e:145:2"
 			],
 			"floor": 3,
-			"loose": 1,
+			"loose": 0,
 			"name": "Trial coordinator office",
 			"rect": [
 				14.0,
@@ -6249,7 +6590,9 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:1",
+				"e:153:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6277,7 +6620,9 @@
 				"m:medicine_fridge",
 				"e:177:2",
 				"e:104:0",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:0",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6303,7 +6648,9 @@
 				"e:045:1",
 				"m:med_cabinet",
 				"m:nurse_desk",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:2",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6330,7 +6677,10 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:3",
+				"e:147:1",
+				"e:145:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6357,7 +6707,9 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:3",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6384,7 +6736,9 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6414,7 +6768,9 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:2",
+				"e:147:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6440,7 +6796,10 @@
 				"m:terminal",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:1",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6469,7 +6828,10 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:153:1",
+				"e:145:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6498,7 +6860,10 @@
 				"m:wash_station",
 				"m:specimen_cooler",
 				"m:tool_drawers",
-				"m:lab_fridge"
+				"m:lab_fridge",
+				"e:147:0",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6527,7 +6892,10 @@
 				"m:filing_cabinet",
 				"e:045:1",
 				"e:045:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:0",
+				"e:147:2",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 2,
@@ -6558,7 +6926,10 @@
 				"e:175:2",
 				"e:097:0",
 				"m:wheel_chair",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:147:2",
+				"e:145:0"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6584,7 +6955,9 @@
 				"m:terminal",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:1",
+				"e:147:0"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6614,7 +6987,9 @@
 				"m:lab_fridge",
 				"m:specimen_cooler",
 				"e:104:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:153:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6644,7 +7019,8 @@
 				"e:189:0",
 				"m:storage_table",
 				"m:terminal",
-				"e:094:1"
+				"e:094:1",
+				"e:147:2"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6672,7 +7048,9 @@
 				"p:office_chair",
 				"m:med_cabinet",
 				"m:filing_cabinet",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:2",
+				"e:145:1"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6727,7 +7105,9 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:147:3"
 			],
 			"floor": 3,
 			"loose": 1,
@@ -6753,7 +7133,8 @@
 				"e:045:1",
 				"m:med_cabinet",
 				"e:175:0",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6780,7 +7161,9 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:2",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:147:1",
+				"e:147:1"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6805,7 +7188,10 @@
 				"m:air_handler",
 				"e:082:1",
 				"e:085:1",
-				"e:073:1"
+				"e:073:1",
+				"e:147:1",
+				"e:147:2",
+				"e:153:2"
 			],
 			"floor": 3,
 			"loose": 0,
@@ -6832,7 +7218,9 @@
 				"m:iv_stand",
 				"e:101:2",
 				"m:med_cabinet",
-				"e:099:2"
+				"e:099:2",
+				"e:147:1",
+				"e:153:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -6859,7 +7247,9 @@
 				"m:iv_stand",
 				"e:101:2",
 				"m:med_cabinet",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -6902,7 +7292,10 @@
 				"e:101:2",
 				"m:med_cabinet",
 				"e:175:2",
-				"e:099:2"
+				"e:099:2",
+				"e:147:2",
+				"e:153:2",
+				"e:145:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -6928,7 +7321,9 @@
 				"m:terminal",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:0",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -6958,7 +7353,10 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"e:110:2",
-				"e:199:0"
+				"e:199:0",
+				"e:147:2",
+				"e:153:0",
+				"e:145:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -6988,7 +7386,9 @@
 				"m:monitor_cart",
 				"m:iv_stand",
 				"e:110:2",
-				"e:199:0"
+				"e:199:0",
+				"e:147:0",
+				"e:145:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7015,7 +7415,9 @@
 				"m:iv_stand",
 				"e:101:2",
 				"m:med_cabinet",
-				"e:099:2"
+				"e:099:2",
+				"e:147:3",
+				"e:147:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7042,7 +7444,9 @@
 				"m:iv_stand",
 				"e:101:2",
 				"m:med_cabinet",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:147:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7068,7 +7472,10 @@
 				"m:staff_locker",
 				"m:staff_locker",
 				"e:047:1",
-				"e:109:0"
+				"e:109:0",
+				"e:147:3",
+				"e:147:3",
+				"e:153:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7096,7 +7503,8 @@
 				"m:medicine_fridge",
 				"e:177:2",
 				"e:104:0",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7128,7 +7536,9 @@
 				"e:045:1",
 				"e:045:1",
 				"m:storage_table",
-				"e:185:0"
+				"e:185:0",
+				"e:147:2",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 2,
@@ -7156,7 +7566,10 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:153:2",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7182,7 +7595,10 @@
 				"m:staff_locker",
 				"m:staff_locker",
 				"e:047:1",
-				"m:shower"
+				"m:shower",
+				"e:147:0",
+				"e:147:2",
+				"e:145:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7214,7 +7630,9 @@
 				"m:iv_stand",
 				"m:med_cabinet",
 				"m:medical_bag",
-				"e:099:2"
+				"e:099:2",
+				"e:147:0",
+				"e:147:3"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7243,7 +7661,11 @@
 				"e:044:2",
 				"m:trash_bin",
 				"e:049:0",
-				"e:050:1"
+				"e:050:1",
+				"e:147:3",
+				"e:147:0",
+				"e:153:0",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7269,7 +7691,9 @@
 				"e:179:1",
 				"e:085:1",
 				"m:instrument_bench",
-				"m:work_cart"
+				"m:work_cart",
+				"e:147:0",
+				"e:147:1"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7296,7 +7720,10 @@
 				"m:eyewash",
 				"m:staff_locker",
 				"e:108:0",
-				"e:108:1"
+				"e:108:1",
+				"e:147:1",
+				"e:153:0",
+				"e:145:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7322,7 +7749,9 @@
 				"m:staff_locker",
 				"m:staff_locker",
 				"e:047:1",
-				"e:109:0"
+				"e:109:0",
+				"e:147:0",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7349,7 +7778,9 @@
 				"p:office_chair",
 				"m:monitor_cart",
 				"e:124:1",
-				"m:filing_cabinet"
+				"m:filing_cabinet",
+				"e:147:3",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7379,7 +7810,10 @@
 				"e:177:2",
 				"e:104:0",
 				"e:175:2",
-				"m:supply_cart"
+				"m:supply_cart",
+				"e:147:2",
+				"e:153:1",
+				"e:145:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7407,7 +7841,8 @@
 				"m:lab_fridge",
 				"m:specimen_cooler",
 				"e:104:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7462,7 +7897,10 @@
 				"e:172:0",
 				"m:cardboard_box",
 				"m:work_cart",
-				"m:storage_table"
+				"m:storage_table",
+				"e:147:1",
+				"e:147:0",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7491,7 +7929,10 @@
 				"e:048:0",
 				"e:057:1",
 				"m:filing_cabinet",
-				"e:184:1"
+				"e:184:1",
+				"e:147:0",
+				"e:147:0",
+				"e:153:0"
 			],
 			"floor": 4,
 			"loose": 1,
@@ -7522,7 +7963,9 @@
 				"e:045:1",
 				"e:045:1",
 				"m:storage_table",
-				"e:185:0"
+				"e:185:0",
+				"e:147:3",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 2,
@@ -7548,7 +7991,9 @@
 				"e:179:1",
 				"e:085:1",
 				"m:instrument_bench",
-				"m:work_cart"
+				"m:work_cart",
+				"e:147:1",
+				"e:153:2"
 			],
 			"floor": 4,
 			"loose": 0,
@@ -7577,7 +8022,9 @@
 				"m:cold_chain_crate",
 				"m:medicine_fridge",
 				"e:192:1",
-				"m:pallet_jack"
+				"m:pallet_jack",
+				"m:cardboard_box",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -7605,7 +8052,9 @@
 				"m:tool_drawers",
 				"e:179:0",
 				"m:work_cart",
-				"e:063:1"
+				"e:063:1",
+				"e:013:1",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -7633,7 +8082,8 @@
 				"m:tool_drawers",
 				"e:179:0",
 				"m:work_cart",
-				"m:forklift"
+				"m:forklift",
+				"e:020:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -7688,7 +8138,10 @@
 				"e:047:0",
 				"e:047:0",
 				"m:filing_cabinet",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:1",
+				"e:012:3",
+				"e:013:0"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -7714,7 +8167,8 @@
 				"m:staff_locker",
 				"m:staff_locker",
 				"e:047:1",
-				"m:shower"
+				"m:shower",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -7740,7 +8194,8 @@
 				"m:toilet",
 				"m:toilet",
 				"m:wash_station",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -7769,9 +8224,11 @@
 				"e:054:1",
 				"m:break_table",
 				"e:047:2",
-				"e:047:2",
+				"e:047:1",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -7799,7 +8256,8 @@
 				"m:med_cabinet",
 				"e:176:1",
 				"m:sharps_bin",
-				"m:supply_cart"
+				"m:supply_cart",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 1,
@@ -7822,19 +8280,20 @@
 			],
 			"equipment": [
 				"e:058:0",
-				"e:042:1",
-				"e:058:0",
+				"e:042:2",
+				"e:058:2",
 				"e:042:1",
 				"e:058:0",
 				"e:042:1",
 				"e:058:0",
 				"e:058:0",
 				"e:042:2",
-				"e:058:2",
+				"e:058:0",
 				"e:042:1",
-				"m:filing_cabinet",
 				"e:044:1",
-				"e:060:0"
+				"e:060:0",
+				"e:020:1",
+				"m:cardboard_box"
 			],
 			"floor": 2,
 			"loose": 2,
@@ -7846,7 +8305,7 @@
 				9.0
 			],
 			"role": "openoffice",
-			"sources": 1,
+			"sources": 0,
 			"tier": 2
 		},
 		{
@@ -7863,7 +8322,8 @@
 				"m:filing_cabinet",
 				"e:045:1",
 				"e:045:1",
-				"m:storage_table"
+				"m:storage_table",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -7893,7 +8353,8 @@
 				"e:189:0",
 				"m:storage_table",
 				"m:terminal",
-				"e:094:1"
+				"e:094:1",
+				"e:013:1"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -7945,7 +8406,8 @@
 				"m:security_locker",
 				"e:095:1",
 				"m:ammo_box",
-				"e:116:0"
+				"e:116:0",
+				"e:012:3"
 			],
 			"floor": 2,
 			"loose": 0,
@@ -7972,7 +8434,8 @@
 				"p:office_chair",
 				"m:filing_cabinet",
 				"e:044:1",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:012:0"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -7996,9 +8459,6 @@
 			"equipment": [
 				"m:break_table",
 				"e:042:1",
-				"e:042:1",
-				"m:break_table",
-				"e:042:1",
 				"e:042:2",
 				"m:break_table",
 				"e:042:1",
@@ -8006,7 +8466,12 @@
 				"m:break_table",
 				"e:042:1",
 				"e:042:1",
-				"e:057:1"
+				"m:break_table",
+				"e:042:1",
+				"e:042:2",
+				"e:057:1",
+				"e:012:0",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -8034,10 +8499,11 @@
 				"e:053:0",
 				"e:054:1",
 				"m:break_table",
-				"e:047:0",
+				"e:047:2",
 				"e:047:1",
 				"e:057:0",
-				"m:trash_bin"
+				"m:trash_bin",
+				"e:013:2"
 			],
 			"floor": 2,
 			"loose": 1,
@@ -8065,7 +8531,11 @@
 				"m:cold_chain_crate",
 				"m:medicine_fridge",
 				"e:192:1",
-				"m:pallet_jack"
+				"m:pallet_jack",
+				"e:020:1",
+				"e:012:3",
+				"e:013:0",
+				"e:012:3"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -8092,7 +8562,9 @@
 				"m:tool_drawers",
 				"e:179:0",
 				"m:work_cart",
-				"m:forklift"
+				"m:forklift",
+				"m:cardboard_box",
+				"m:cardboard_box"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -8122,7 +8594,9 @@
 				"m:security_locker",
 				"e:095:1",
 				"m:ammo_box",
-				"e:116:0"
+				"e:116:0",
+				"e:013:0",
+				"e:012:1"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -8151,7 +8625,9 @@
 				"e:045:1",
 				"m:tool_drawers",
 				"e:177:0",
-				"e:071:0"
+				"e:071:0",
+				"e:013:0",
+				"e:013:2"
 			],
 			"floor": 1,
 			"loose": 0,
@@ -8179,7 +8655,8 @@
 				"m:pallet_jack",
 				"m:shipping_crate",
 				"m:cardboard_box",
-				"m:wrapped_pallet"
+				"m:wrapped_pallet",
+				"e:012:1"
 			],
 			"floor": 1,
 			"loose": 1,

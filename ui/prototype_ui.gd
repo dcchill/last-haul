@@ -195,7 +195,18 @@ func _item_details(entry: Dictionary) -> String:
 		return "%d rounds loaded\nNext first: %s" % [int(data.get("rounds", 0)), ", ".join(data.get("ammo", []))]
 	if kind == "armor":
 		var armor: ArmorDef = app.catalog.definitions[entry.id]
-		return "%s · %.0f armor · %.0f toughness\nDurability %d / %d" % [armor.slot, armor.points, armor.toughness, maxi(0, armor.max_durability - int(data.get("wear", 0))), armor.max_durability]
+		if armor.plate_slots == 0: return "Cosmetic helmet"
+		var lines: Array[String] = ["%d plate slots; empty slots provide no protection" % armor.plate_slots]
+		var cost := 0.0
+		for slot in range(data.plates.size()):
+			var plate: Dictionary = data.plates[slot]
+			lines.append("Slot %d: %s" % [slot + 1, "Empty" if plate.is_empty() else app.catalog.items[plate.id].display_name + " - " + _item_details(plate)])
+			if not plate.is_empty(): cost += app.catalog.definitions[plate.id].movement_cost
+		lines.append("Movement -%.0f%%; torso and melee protection" % (minf(cost, 0.09) * 100))
+		return "\n".join(lines)
+	if kind == "plate":
+		var plate: PlateDef = app.catalog.definitions[entry.id]
+		return "%.0f%% reduction; %.1f / %.0f absorption remaining; movement -%.0f%%" % [plate.reduction * 100, plate.capacity - float(data.wear), plate.capacity, plate.movement_cost * 100]
 	return "%d carried" % int(entry.quantity)
 
 func _close_inventory() -> void:
@@ -207,7 +218,7 @@ func show_practice() -> void:
 	_text("PRACTICE ARMORY", 30)
 	_text("All equipment is available here. Practice items never enter your stash.")
 	var picker := OptionButton.new()
-	var kinds := ["weapon", "ammo", "magazine", "attachment", "armor", "grenade", "mount", "unused models"]
+	var kinds := ["weapon", "ammo", "magazine", "attachment", "armor", "plate", "grenade", "mount", "unused models"]
 	for kind in kinds:
 		picker.add_item(kind.capitalize())
 	picker.select(maxi(0, kinds.find(practice_filter)))
@@ -432,6 +443,10 @@ func _confirm_reset_character() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
+		if event.physical_keycode == KEY_X and app.raid != null:
+			app.raid.cancel_plate_change(app.profile.profile.player_id)
+			get_viewport().set_input_as_handled()
+			return
 		if event.physical_keycode == KEY_F8 and app.raid != null:
 			show_notice("Visual treatment ON" if app.raid.signal_decay.toggle_comparison() else "Visual treatment OFF (F8 compares)")
 			get_viewport().set_input_as_handled()
@@ -480,6 +495,7 @@ func _process(_delta: float) -> void:
 	var prompt: String = app.raid.interaction_prompt(app.raid.player.interaction_id())
 	if participant.extracting:
 		prompt = "EXTRACTING %.1fs" % participant.extraction_left
+	if not participant.pending_plate.is_empty(): prompt += "\nCHANGING PLATE %.1fs [X cancel]" % maxf(0, (participant.pending_plate.end - app.raid.gameplay_tick) * 0.05)
 	var bar := ""
 	for index in range(9):
 		var entry := participant.entry_for(participant.quickbar[index])
@@ -489,7 +505,7 @@ func _process(_delta: float) -> void:
 	var clock_display := "PRACTICE / infection disabled" if app.raid.practice else "TIME TO TURN %02d:%02d%s" % [int(seconds / 60.0), seconds % 60, " / TURNING IMMINENT" if seconds <= 60 else " / INFECTION ADVANCING" if seconds <= 120 else ""]
 	var map_name: String = app.raid.map_definition.display_name if app.raid.map_definition != null else "PRACTICE" if app.raid.practice else "DEPOT TEST FIXTURE"
 	objective = app.raid.compass_text(app.profile.profile.player_id) if not app.raid.practice else objective
-	hud.text = clock_display + "\nLAST HAUL / " + map_name + "\nHP %d/20 · ARMOR %.0f · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), participant.armor.points(), ammo, objective, prompt, bar]
+	hud.text = clock_display + "\nLAST HAUL / " + map_name + "\nHP %d/%d · ARMOR %s · %s\n%s\n%s\n\n%s\nWASD · Shift sprint · Ctrl crouch · Space jump · LMB fire · RMB aim/use\nR reload · Hold T customize · I inventory · G impact / Alt+G smoke · Esc pause" % [ceili(participant.health), RaidParticipant.MAX_HEALTH, participant.armor.summary(), ammo, objective, prompt, bar]
 	hud.add_theme_font_size_override("font_size", 15)
 	crosshair.visible = app.raid.player.aim_blend < 0.7
 

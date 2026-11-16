@@ -8,7 +8,12 @@ static func fresh(id: String, items: Dictionary) -> Dictionary:
 	match items[id].kind:
 		"weapon": state.merge({"rounds": 0, "magazine": {}, "attachments": {}})
 		"magazine": state.rounds = 0
-		"armor": state.wear = 0
+		"armor":
+			if items[id].definition.plate_slots > 0:
+				state.plates = []
+				for slot in range(items[id].definition.plate_slots): state.plates.append({})
+			else: state.wear = 0
+		"plate": state.wear = 0.0
 	return state
 
 static func whole(value: Variant) -> bool:
@@ -57,7 +62,11 @@ static func valid(id: String, state: Variant, catalog: Catalog) -> bool:
 			var feed := ArmoryContent.magazine_feed(id)
 			if not feed.is_empty() and (not whole(state.get("rounds")) or state.rounds > int(feed.capacity)):
 				return false
+		"plate":
+			return Ammunition.valid_state({"id": id, "state": state}, catalog.items)
 		"armor":
+			if catalog.definitions[id].plate_slots > 0:
+				return PlateInventory.valid_carrier(state, catalog.definitions[id], catalog.items, 0)
 			if not whole(state.get("wear")) or state.wear > catalog.definitions[id].max_durability:
 				return false
 	return true
@@ -70,4 +79,6 @@ static func ids(state: Dictionary) -> Array[String]:
 		result.append_array(ids(state.magazine.state))
 	for entry in state.get("attachments", {}).values():
 		result.append_array(ids(entry.state))
+	for entry in state.get("plates", []):
+		if not entry.is_empty(): result.append_array(ids(entry.state))
 	return result

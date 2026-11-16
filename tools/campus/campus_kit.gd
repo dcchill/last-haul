@@ -23,6 +23,8 @@ var item_defs: Dictionary = {}
 var usage: Dictionary = {}
 var rng := RandomNumberGenerator.new()
 var dresser: RefCounted
+var decayer: RefCounted
+var window_states: Dictionary = {}
 var door_serial := 0
 var glass_serial := 0
 var light_serial := 0
@@ -58,6 +60,7 @@ func setup() -> void:
 	catalog.load_all()
 	item_defs = catalog.items
 	dresser = load("res://tools/campus/campus_dressing.gd").new()
+	decayer = load("res://tools/campus/campus_decay.gd").new()
 
 func begin(title: String, raid := false) -> Node3D:
 	var result := super.begin(title, raid)
@@ -207,6 +210,7 @@ func make_source(parent: Node3D, spec: String, at: Vector3, yaw: float, opts := 
 	if ransack and not node.locked and node.guaranteed_items.is_empty() and not node.keycard_candidate:
 		node.starts_empty = true
 		if node.container_config == null: node.loot_table = null
+		decayer.ransacked(self, node, parent)
 	node.set_meta("campus_equipment", spec); node.set_meta("bounds", bounds)
 	node.set_meta("loot_tier", source_tier); node.set_meta("campus_building", building_id); node.set_meta("campus_floor", floor_index)
 	node.set_meta("campus_room", parent.get_meta("room_purpose", "")); node.set_meta("supported_by", "floor")
@@ -572,6 +576,11 @@ func facade(parent: Node3D, bounds: Rect2, style: String, party: Array, extra_cu
 			var center := Vector3(bounds.get_center().x, -.1, c) if h else Vector3(c, -.1, bounds.get_center().y)
 			box(node, center + outward * .2, Vector3(length + .5, .36, .14) if h else Vector3(.14, .36, length + .5), "stone" if style == "curtain" else "panel" if style == "ribbon" else "concrete", false)
 
+func room_role_at(probe: Vector2) -> String:
+	for spec: Dictionary in floor_rooms:
+		if (spec.rect as Rect2).grow(.01).has_point(probe): return spec.role
+	return "corridor"
+
 func window_role(probe: Vector2) -> bool:
 	for spec: Dictionary in floor_rooms:
 		if (spec.rect as Rect2).grow(.01).has_point(probe): return spec.role in WINDOWED
@@ -587,15 +596,14 @@ func facade_bay(node: Node3D, h: bool, c: float, a: float, b: float, style: Stri
 		var head: float = {"curtain": 3.55, "ribbon": 2.6, "office": 2.5}[style]
 		wall_box(node, h, c, a, b, 0, sill, skin, .3)
 		wall_box(node, h, c, a, b, head, top, skin, .3)
-		var broken := rng.randf() < (.22 if floor_index < 3 else .14)
-		if broken:
-			var mid := (a + b) * .5
-			var shape := BoxShape3D.new(); shape.size = Vector3(b - a, head - sill, .06) if h else Vector3(.06, head - sill, b - a)
-			collider(node, Vector3(mid, (sill + head) * .5, c) if h else Vector3(c, (sill + head) * .5, mid), shape, "glass")
-			# Shards remain in the frame; the opening is still guarded for safety.
-			wall_box(node, h, c, a, a + (b - a) * .3, sill, sill + .35, "glass", .04, false)
-		else: wall_box(node, h, c, a, b, sill, head, "glass", .06)
+		var mid := (a + b) * .5
+		var role := room_role_at(Vector2(mid, c - outward.z * .5) if h else Vector2(c - outward.x * .5, mid))
+		var state: String = decayer.window(self, node, h, c, a, b, sill, head, outward, role)
+		var id := "%s/%d" % [building_id, floor_index]
+		if not window_states.has(id): window_states[id] = {}
+		window_states[id][state] = int(window_states[id].get(state, 0)) + 1
 		wall_box(node, h, c, a - .04, a + .04, sill, head, "steel", .34, false)
+	decayer.facade_base(self, node, h, c, a, b, outward)
 	if style == "curtain" and (int(a / 4.8) + floor_index) % 4 == 0 and windowed:
 		# Stepped stone frames break the curtain wall into staggered boxes.
 		var mid := (a + b) * .5
@@ -777,18 +785,10 @@ func plan_room(parent: Node3D, spec: Dictionary) -> Node3D:
 	return node
 
 func weather_room(rc: Dictionary) -> void:
-	var node: Node3D = rc.node
-	var decay := .25 + floor_index * .12
-	for i in 2:
-		var side := -1 if i == 0 else 1
-		if rng.randf() < decay:
-			box(node, Vector3(side * (rc.hw + .14), rng.randf_range(.5, 2.4), rng.randf_range(-rc.hd + .6, rc.hd - .6)), Vector3(.02, rng.randf_range(.4, 1.1), rng.randf_range(.6, 1.6)), "contamination" if rng.randf() < .5 else "rust", false)
-	papers(node, Vector3.ZERO, Vector2(rc.hw * .7, rc.hd * .7), rng.randi_range(1, 4) if rc.role not in ["restroom", "riser"] else 0)
-	if rng.randf() < .35:
-		flat(node, Vector3(rng.randf_range(-rc.hw * .6, rc.hw * .6), .011, rng.randf_range(-rc.hd * .6, rc.hd * .6)), Vector3(rng.randf_range(.8, 1.8), .004, rng.randf_range(.6, 1.4)), "contamination", rng.randf() * TAU)
+	decayer.room(self, rc)
 	for i in 2:
 		var marker := Vector3((-1 if i == 0 else 1) * (rc.hw - .9), .1, rng.randf_range(-rc.hd * .4, rc.hd * .4))
-		cover_marker(node, marker, 0.0 if i == 0 else PI)
+		cover_marker(rc.node, marker, 0.0 if i == 0 else PI)
 
 # ---------------------------------------------------------------- floors
 
@@ -796,7 +796,8 @@ func ceiling(parent: Node3D, bounds: Rect2, holes: Array[Rect2]) -> void:
 	var node := section("Ceiling", Vector3.ZERO, parent)
 	var cut: Array[Rect2] = []
 	cut.append_array(holes)
-	for i in int(bounds.get_area() / 160.0):
+	var decay_profile: Dictionary = decayer.profile(building_id, floor_index)
+	for i in int(bounds.get_area() / 160.0 * (.5 + decay_profile.wet + decay_profile.scav * .4)):
 		var at := Vector2(rng.randf_range(bounds.position.x + 2, bounds.end.x - 3), rng.randf_range(bounds.position.y + 2, bounds.end.y - 3))
 		var tile := Rect2(snappedf(at.x, .5), snappedf(at.y, .5), 1.0 if rng.randf() < .6 else 1.5, .5 if rng.randf() < .5 else 1.0)
 		var clear := true
@@ -807,6 +808,12 @@ func ceiling(parent: Node3D, bounds: Rect2, holes: Array[Rect2]) -> void:
 		# Fallen tiles lie below the missing panels; exposed services hang through.
 		flat(node, Vector3(tile.get_center().x + rng.randf_range(-.4, .4), .02, tile.get_center().y + rng.randf_range(-.4, .4)), Vector3(.5, .02, .5), "ceiling", rng.randf() * TAU)
 		box(node, Vector3(tile.get_center().x, CEIL + .25, tile.get_center().y), Vector3(.05, .5, .05), "rubber", false)
+		if rng.randf() < .4:
+			# A duct or cable loom sags through the gap, kept above head height.
+			var sag := section("SaggingService%d" % serial, Vector3(tile.get_center().x, CEIL - .15, tile.get_center().y), node)
+			sag.rotation = Vector3(rng.randf_range(-.35, .35), rng.randf() * TAU, rng.randf_range(-.2, .2))
+			box(sag, Vector3.ZERO, Vector3(.45, .3, 1.6) if rng.randf() < .5 else Vector3(.08, .08, 2.2), "steel" if rng.randf() < .5 else "rubber", false)
+		if rng.randf() < .2: flat(node, Vector3(tile.get_center().x + .3, .03, tile.get_center().y - .2), Vector3(1.0, .06, .3), "steel", rng.randf() * TAU)
 	var pieces: Array[PackedVector2Array] = [polygon(bounds)]
 	for hole in cut:
 		var next: Array[PackedVector2Array] = []
@@ -886,6 +893,9 @@ func build_floor(level: Dictionary) -> Node3D:
 	for core: Dictionary in plan.cores:
 		if core.kind == "stair": ceiling_holes.append((core.rect as Rect2).grow(.1))
 	if plan.has("atrium"): ceiling_holes.append(plan.atrium)
+	if plan.has("roof_failure") and floor_index == plan.levels.size():
+		ceiling_holes.append(plan.roof_failure)
+		roof_failure_below(floor_node, plan.roof_failure)
 	ceiling(floor_node, bounds, ceiling_holes)
 	t0 = lap("ceiling", t0)
 	corridors(floor_node, level)
@@ -895,7 +905,19 @@ func build_floor(level: Dictionary) -> Node3D:
 		var patrol: Array[Vector3] = []
 		for p: Vector2 in spec[2]: patrol.append(world_transform(floor_node) * Vector3(p.x, .1, p.y))
 		encounter_specs.append({"kind": spec[0], "building": building_id, "floor": floor_index, "at": world_transform(floor_node) * Vector3(spec[1].x, .1, spec[1].y), "patrol": patrol})
+	decayer.flush_litter(self, floor_node)
 	return floor_node
+
+## Rain through the failed roof: puddles, fallen tiles, rubble and water marks.
+func roof_failure_below(parent: Node3D, r: Rect2) -> void:
+	var node := section("RoofFailureDamage", Vector3(r.get_center().x, 0, r.get_center().y), parent)
+	for i in 3: place(node, "e:152:%d" % (i % 4), Vector3(rng.randf_range(-1, 1), 0, rng.randf_range(-1, 1)), rng.randf() * TAU, false)
+	for i in 8: flat(node, Vector3(rng.randf_range(-r.size.x * .5, r.size.x * .5), .03, rng.randf_range(-r.size.y * .5, r.size.y * .5)), Vector3(rng.randf_range(.3, .9), rng.randf_range(.04, .16), rng.randf_range(.3, .8)), "concrete" if i % 2 else "ceiling", rng.randf() * TAU)
+	decayer.grime(self, node, Vector3(0, .15, 0), Vector3.UP, "water_stain", r.size * 1.6)
+	decayer.grime(self, node, Vector3(0, CEIL - .05, 0), Vector3.DOWN, "mould", r.size * 2.0, 0.0, .3)
+	place(node, "e:153:1", Vector3(r.size.x * .3, 0, -r.size.y * .3), 0.0, false)
+	var rain := DistrictAtmosphere.emitter("rain", 30); rain.position = Vector3(0, 3.6, 0); add(node, rain)
+	area_log.append({"name": plan.title + " roof failure", "building": building_id, "floor": floor_index})
 
 func corridors(parent: Node3D, level: Dictionary) -> void:
 	var node := section("Circulation", Vector3.ZERO, parent)
@@ -916,6 +938,7 @@ func corridors(parent: Node3D, level: Dictionary) -> void:
 				light(node, Vector3(at.x, CEIL - .12, at.y), (n + i) % 3 == 0, 9.0)
 			cover_marker(node, Vector3(a.x, .1, a.y))
 			dresser.corridor_clutter(self, node, a, b, route.get("width", 3.0))
+			decayer.corridor(self, node, a, b, route.get("width", 3.0))
 	area_log.append({"name": "%s level %d circulation" % [plan.title, floor_index], "building": building_id, "floor": floor_index})
 
 func atrium(parent: Node3D, r: Rect2) -> void:
@@ -940,7 +963,14 @@ func build_roof() -> void:
 	for core: Dictionary in plan.cores:
 		if core.kind == "stair" and int(core.top) > plan.levels.size(): holes.append(stair_hole(core))
 	if plan.has("atrium"): holes.append(plan.atrium)
+	if plan.has("roof_failure"): holes.append(plan.roof_failure)
 	foundation(node, bounds, 0, holes, "concrete")
+	if plan.has("roof_failure"):
+		# Collapsed roof deck: bent sheets at the edge, guarded so nobody falls through.
+		var r: Rect2 = plan.roof_failure
+		decayer.guard(self, node, Vector3(r.get_center().x, .05, r.get_center().y), Vector3(r.size.x, .1, r.size.y))
+		for i in 4: flat(node, Vector3(r.get_center().x + rng.randf_range(-r.size.x * .5, r.size.x * .5), .1, r.position.y - .4 if i % 2 else r.end.y + .4), Vector3(1.4, .06, .8), "rust", rng.randf_range(-.4, .4))
+		var drip := DistrictAtmosphere.emitter("rain", 24); drip.position = Vector3(r.get_center().x, 4, r.get_center().y); add(node, drip)
 	for side in [[Vector3(bounds.get_center().x, .55, bounds.position.y), Vector3(bounds.size.x, 1.1, .3)], [Vector3(bounds.get_center().x, .55, bounds.end.y), Vector3(bounds.size.x, 1.1, .3)], [Vector3(bounds.position.x, .55, bounds.get_center().y), Vector3(.3, 1.1, bounds.size.y)], [Vector3(bounds.end.x, .55, bounds.get_center().y), Vector3(.3, 1.1, bounds.size.y)]]:
 		box(node, side[0], side[1], "stone" if plan.style == "curtain" else "panel")
 	for core: Dictionary in plan.cores:
